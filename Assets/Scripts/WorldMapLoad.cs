@@ -14,7 +14,7 @@ public class WorldMapLoad  : MonoBehaviour
 
         provinces["North"] = new List<Province>
         {
-        new Province (1, "Independent", "PlayersNation", 10000)
+        new Province (1, "Enemy1", "PlayersNation", 6000)
         };
         provinces["West"] = new List<Province>
         {
@@ -23,11 +23,15 @@ public class WorldMapLoad  : MonoBehaviour
 
         provinces["East"] = new List<Province>
         {
-        new Province (3, "Enemy", "EnemyNation", 5000)
+        new Province (3, "Enemy2", "EnemyNation", 5000)
+        };
+        provinces["South"] = new List<Province>
+        {
+        new Province (4, "Player", "EnemyNation", 7000)
         };
 
         // This is just temp till we do character creation.
         playerName = "Player";
-        enemyName = "Enemy";
+        enemyName = "Enemy1";
     }
 }

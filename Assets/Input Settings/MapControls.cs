@@ -70,6 +70,34 @@ public partial class @MapControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Keyboard"",
+            ""id"": ""f7093d06-0cf1-422f-a696-cdccdc99ad6d"",
+            ""actions"": [
+                {
+                    ""name"": ""Spacebar"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e535b77-2ff5-4aef-936c-787ab2ab0d87"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f6fbcf16-a1f0-48b0-9db9-7b230e74506b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Spacebar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -78,6 +106,9 @@ public partial class @MapControls : IInputActionCollection2, IDisposable
         m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
         m_Mouse_LeftClick = m_Mouse.FindAction("Left Click", throwIfNotFound: true);
         m_Mouse_RightClick = m_Mouse.FindAction("Right Click", throwIfNotFound: true);
+        // Keyboard
+        m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
+        m_Keyboard_Spacebar = m_Keyboard.FindAction("Spacebar", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -174,9 +205,46 @@ public partial class @MapControls : IInputActionCollection2, IDisposable
         }
     }
     public MouseActions @Mouse => new MouseActions(this);
+
+    // Keyboard
+    private readonly InputActionMap m_Keyboard;
+    private IKeyboardActions m_KeyboardActionsCallbackInterface;
+    private readonly InputAction m_Keyboard_Spacebar;
+    public struct KeyboardActions
+    {
+        private @MapControls m_Wrapper;
+        public KeyboardActions(@MapControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Spacebar => m_Wrapper.m_Keyboard_Spacebar;
+        public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KeyboardActions set) { return set.Get(); }
+        public void SetCallbacks(IKeyboardActions instance)
+        {
+            if (m_Wrapper.m_KeyboardActionsCallbackInterface != null)
+            {
+                @Spacebar.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnSpacebar;
+                @Spacebar.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnSpacebar;
+                @Spacebar.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnSpacebar;
+            }
+            m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Spacebar.started += instance.OnSpacebar;
+                @Spacebar.performed += instance.OnSpacebar;
+                @Spacebar.canceled += instance.OnSpacebar;
+            }
+        }
+    }
+    public KeyboardActions @Keyboard => new KeyboardActions(this);
     public interface IMouseActions
     {
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
+    }
+    public interface IKeyboardActions
+    {
+        void OnSpacebar(InputAction.CallbackContext context);
     }
 }

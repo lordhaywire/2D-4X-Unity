@@ -9,11 +9,8 @@ public class UIProvincePanel : MonoBehaviour
     public static TextMeshProUGUI provinceNameText;
     public static TextMeshProUGUI provincePopulationText;
 
-    /*private void Awake()
-    {
-        provincePanel = this.gameObject;
-    }*/
-    private void Start()
+
+    private void Awake()
     {
         provinceOwnerText = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         provinceNameText = this.transform.GetChild(1).GetComponent<TextMeshProUGUI>();

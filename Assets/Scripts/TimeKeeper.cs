@@ -46,7 +46,7 @@ public class TimeKeeper : MonoBehaviour
 
     private void Clock() // Used to calculate sec, min and hours
     {
-        seconds += Time.deltaTime * ticks; // multiply time between fixed update by tick.  When this breaks turn it to fixedDeltaTime.  You have booby trapped yourself, you fool!
+        seconds += Time.fixedDeltaTime * ticks; // multiply time between fixed update by tick.
 
         // We probably could get rid of seconds, but just in case we need it later.
 

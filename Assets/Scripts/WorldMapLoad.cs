@@ -20,33 +20,20 @@ public class WorldMapLoad : MonoBehaviour
     // Initialize Army List.
     public static List<Army> armies = new();
 
-    // Array of county names.
-    public new string[] name =
-    {
-        "Cowlitz Washington",
-        "Portland Oregon",
-        "Tillamook Oregon",
-        "Douglas Oregon",
-        "Wasco Oregon",
-        "Harney Oregon",
-        "Umatilla Oregon",
-    };
-
-
     private void Awake()
     {
         // Provinces added to Provinces Dictionary.
-        counties[name[0]] = new County(0, null, "Enemy1", "PlayersNation", 6000);
-        counties[name[1]] = new County(1, null, "Player", "PlayersNation", 10000);
-        counties[name[2]] = new County(2, null, "Player", "EnemyNation", 5000);
-        counties[name[3]] = new County(3, null, "Enemy1", "EnemyNation", 7000);
-        counties[name[4]] = new County(4, null, "Enemy1", "EnemyNation", 1000);
-        counties[name[5]] = new County(5, null, "Enemy1", "EnemyNation", 2000);
-        counties[name[6]] = new County(6, null, "Enemy1", "EnemyNation", 3000);
+        counties[Arrays.name[0]] = new County(0, null, "Enemy1", "PlayersNation", 6000);
+        counties[Arrays.name[1]] = new County(1, null, "Player", "PlayersNation", 10000);
+        counties[Arrays.name[2]] = new County(2, null, "Player", "EnemyNation", 5000);
+        counties[Arrays.name[3]] = new County(3, null, "Enemy1", "EnemyNation", 7000);
+        counties[Arrays.name[4]] = new County(4, null, "Enemy1", "EnemyNation", 1000);
+        counties[Arrays.name[5]] = new County(5, null, "Enemy1", "EnemyNation", 2000);
+        counties[Arrays.name[6]] = new County(6, null, "Enemy1", "EnemyNation", 3000);
 
         for (int i = 0; i < counties.Count; ++i)
         {
-            counties[name[i]].countyCenterGameObject = countyListGameObject.transform.GetChild(i).GetChild(0).gameObject;
+            counties[Arrays.name[i]].countyCenterGameObject = countyListGameObject.transform.GetChild(i).GetChild(0).gameObject;
         }
 
 

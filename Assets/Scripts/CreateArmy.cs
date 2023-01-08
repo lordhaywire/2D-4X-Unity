@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class CreateArmy : MonoBehaviour
@@ -8,41 +9,33 @@ public class CreateArmy : MonoBehaviour
     //private int numberOfArmies = 0; // This is the current number of armies spawned by the player.
     public void CreateArmyButton()
     {
+        // This is so we can only create the army in our own counties.
         if (WorldMapLoad.counties[SelectCounty.currentlySelectedProvince].ownerName == WorldMapLoad.playerName)
         {
             var armyNumber = WorldMapLoad.armies.Count;
-            var newArmy = new Army(null, null, false, "Player", "Fuck Stick" + armyNumber, Random.Range(1, 1001));
+            var newArmyList = new Army(null, null, null, null,false, false, "Player", "Fuck Stick" + armyNumber, Random.Range(1, 1001));
 
-            // Armies added to Armies list
-            //WorldMapLoad.armies.Add(new Army(null, null, false, "Player", "Fuck Stick" + numberOfArmies, Random.Range(1, 1001)));
+            WorldMapLoad.armies.Add(newArmyList);
 
-            WorldMapLoad.armies.Add(newArmy);
-
-            // Instantiate and assign to Army list.
-            //WorldMapLoad.armies[numberOfArmies].gameObject = Instantiate(unitPrefab, WorldMapLoad.counties[SelectCounty.currentlySelectedProvince].countyCenterGameObject.transform.position,
-            //   Quaternion.identity); // Spawn the token, put it in a location and stop is rotation
-
-            newArmy.gameObject = Instantiate(unitPrefab, WorldMapLoad.counties[SelectCounty.currentlySelectedProvince].countyCenterGameObject.transform.position,
+            newArmyList.gameObject = Instantiate(unitPrefab, WorldMapLoad.counties[SelectCounty.currentlySelectedProvince].countyCenterGameObject.transform.position,
               Quaternion.identity);
+            Debug.Log("New Army Game Object: " + newArmyList.gameObject);
             // Change name of GameObject in the inspector
-            //WorldMapLoad.armies[numberOfArmies].gameObject.name = numberOfArmies.ToString();
-            newArmy.gameObject.name = armyNumber.ToString();
-
-
+            newArmyList.gameObject.name = armyNumber.ToString();
 
             // Move GameObject to army list in Inspector.
-            //WorldMapLoad.armies[numberOfArmies].gameObject.transform.parent = armyListGameObject.transform;
-            newArmy.gameObject.transform.parent = armyListGameObject.transform;
+            newArmyList.gameObject.transform.parent = armyListGameObject.transform;
+
+            newArmyList.armyTimerCanvasGameObject = newArmyList.gameObject.transform.GetChild(0).gameObject;
+            newArmyList.armyTimerText = newArmyList.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
 
             // Change the Army Info Panel to have the new army info from list.
-            UIArmyPanel.armyOwnerText.text = newArmy.owner; //WorldMapLoad.armies[numberOfArmies].owner;
-            UIArmyPanel.armyNameText.text = newArmy.name; //WorldMapLoad.armies[numberOfArmies].name;
-            UIArmyPanel.armySizeText.text = newArmy.size.ToString(); //WorldMapLoad.armies[numberOfArmies].size.ToString();
+            UIArmyPanel.armyOwnerText.text = newArmyList.owner; //WorldMapLoad.armies[numberOfArmies].owner;
+            UIArmyPanel.armyNameText.text = newArmyList.name; //WorldMapLoad.armies[numberOfArmies].name;
+            UIArmyPanel.armySizeText.text = newArmyList.size.ToString(); //WorldMapLoad.armies[numberOfArmies].size.ToString();
 
             WorldMapLoad.armyInfoPanel.SetActive(true);
             WorldMapLoad.countyInfoPanel.SetActive(false);
-
-            //numberOfArmies++;
         }
         else
         {

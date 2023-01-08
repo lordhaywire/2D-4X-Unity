@@ -11,9 +11,9 @@ public class TimeKeeper : MonoBehaviour
     private MapControls mapControls;
     private int modifiedTimeScale; // Getter Setter / Property
 
-    private float seconds;
-    private int mins;
-    private int hours;
+    public static float foreverCounter; // This will eventually need to be reset.  I think.  It depends on if we run out of numbers.
+    public static float minutes;
+    public static int hours;
     private int days = 0;
 
     private int oldTimeSpeed;
@@ -46,19 +46,20 @@ public class TimeKeeper : MonoBehaviour
 
     private void Clock() // Used to calculate sec, min and hours
     {
-        seconds += Time.fixedDeltaTime * ticks; // multiply time between fixed update by tick.
+        minutes += Time.fixedDeltaTime * ticks; // multiply time between fixed update by tick.
+        foreverCounter += Time.fixedDeltaTime * ticks;
 
         // We probably could get rid of seconds, but just in case we need it later.
-
+        /*
         if (seconds >= 60) // 60 sec = 1 min
         {
             seconds = 0;
             mins += 1;
         }
-
-        if (mins >= 60) //60 min = 1 hr
+        */
+        if (minutes >= 60) //60 min = 1 hr
         {
-            mins = 0;
+            minutes = 0;
             hours += 1;
         }
 
@@ -67,9 +68,11 @@ public class TimeKeeper : MonoBehaviour
             hours = 0;
             days += 1;
         }
-        dayAndTimeText.text = "Day " + days + " " + string.Format("{0:00}:{1:00}", hours, mins);
-        
-        //Debug.Log("Time: " + string.Format("{0:00}:{1:00}", hours, mins));
+        // To show Days, hours and minutes.
+        dayAndTimeText.text = "Day " + days + " " + string.Format("{0:00}:{1:00}", hours, minutes);
+
+
+        // Count Down
     }
 
     public void TimeSpeedx0()

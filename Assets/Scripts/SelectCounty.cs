@@ -3,7 +3,8 @@ using UnityEngine.EventSystems;
 
 public class SelectCounty : MonoBehaviour, IPointerClickHandler
 {
-    public static bool isArmySelected;
+    private ArmyMovement armyMovement;
+    //public static bool isArmySelected;
     public static string currentlySelectedProvince;
     public float speed;
 
@@ -38,9 +39,10 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Right)
         {
 
-            if (isArmySelected == true)
+            if (WorldMapLoad.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].isArmySelected == true)
             {
-
+                Debug.Log("Name of right clicked county: " + name);
+                WorldMapLoad.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].startTimer = true;
             }
             else
             {

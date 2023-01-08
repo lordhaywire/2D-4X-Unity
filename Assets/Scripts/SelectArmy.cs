@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SelectArmy : MonoBehaviour, IPointerClickHandler
 {
-
+    public static string currentlySelectedArmyName;
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -16,7 +15,8 @@ public class SelectArmy : MonoBehaviour, IPointerClickHandler
             UIArmyPanel.armyNameText.text = "Name: " + WorldMapLoad.armies[int.Parse(name)].name;
             UIArmyPanel.armySizeText.text = "Size: " + WorldMapLoad.armies[int.Parse(name)].size.ToString();
 
-            SelectCounty.isArmySelected = true;
+            WorldMapLoad.armies[int.Parse(name)].isArmySelected = true;
+            currentlySelectedArmyName = name;
 
             Debug.Log("Name of Army: " + name);
         }

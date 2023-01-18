@@ -3,14 +3,10 @@ using UnityEngine.EventSystems;
 
 public class SelectCounty : MonoBehaviour, IPointerClickHandler
 {
-    private ArmyMovement armyMovement;
-    //public static bool isArmySelected;
     public static string currentlySelectedProvince;
-    public float speed;
-
-    //private bool rightClick = false;
-    //private Vector2 velocity = Vector2.zero;
-    public float smoothTime = 0.3f;
+    public static bool tryingToMoveAnArmy;
+    //public float speed;
+    //public float smoothTime = 0.3f;
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -34,20 +30,28 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
                 UIProvincePanel.countyPopulationText.text = "Population: Unknown";
             }
             Debug.Log("Name of Province: " + name);
+
+            tryingToMoveAnArmy = false;
         }
 
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-
-            if (WorldMapLoad.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].isArmySelected == true)
+            if(tryingToMoveAnArmy == true)
             {
-                Debug.Log("Name of right clicked county: " + name);
-                WorldMapLoad.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].startTimer = true;
+                if (WorldMapLoad.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].isArmySelected == true)
+                {
+                    Debug.Log("Name of right clicked county: " + name);
+                    WorldMapLoad.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].startTimer = true;
+                }
+                else
+                {
+                    Debug.Log("No army is selected.");
+
+                }
             }
             else
             {
-                Debug.Log("No army is selected.");
-
+                Debug.Log("Nothing is selected so right click does shit.");
             }
 
 

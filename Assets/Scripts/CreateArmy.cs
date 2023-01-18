@@ -30,9 +30,9 @@ public class CreateArmy : MonoBehaviour
             newArmyList.armyTimerText = newArmyList.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
 
             // Change the Army Info Panel to have the new army info from list.
-            UIArmyPanel.armyOwnerText.text = newArmyList.owner; //WorldMapLoad.armies[numberOfArmies].owner;
-            UIArmyPanel.armyNameText.text = newArmyList.name; //WorldMapLoad.armies[numberOfArmies].name;
-            UIArmyPanel.armySizeText.text = newArmyList.size.ToString(); //WorldMapLoad.armies[numberOfArmies].size.ToString();
+            UIArmyPanel.armyOwnerText.text = "Owner: " + newArmyList.owner; //WorldMapLoad.armies[numberOfArmies].owner;
+            UIArmyPanel.armyNameText.text = "Name: " + newArmyList.name; //WorldMapLoad.armies[numberOfArmies].name;
+            UIArmyPanel.armySizeText.text = "Size: " + newArmyList.size.ToString(); //WorldMapLoad.armies[numberOfArmies].size.ToString();
 
             WorldMapLoad.armyInfoPanel.SetActive(true);
             WorldMapLoad.countyInfoPanel.SetActive(false);

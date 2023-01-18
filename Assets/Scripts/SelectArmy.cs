@@ -17,8 +17,9 @@ public class SelectArmy : MonoBehaviour, IPointerClickHandler
 
             WorldMapLoad.armies[int.Parse(name)].isArmySelected = true;
             currentlySelectedArmyName = name;
+            SelectCounty.tryingToMoveAnArmy = true;
 
-            Debug.Log("Name of Army: " + name);
+            //Debug.Log("Name of Army: " + name);
         }
 
         if (eventData.button == PointerEventData.InputButton.Right)

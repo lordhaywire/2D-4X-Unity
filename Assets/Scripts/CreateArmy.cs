@@ -10,16 +10,16 @@ public class CreateArmy : MonoBehaviour
     public void CreateArmyButton()
     {
         // This is so we can only create the army in our own counties.
-        if (WorldMapLoad.counties[SelectCounty.currentlySelectedProvince].ownerName == WorldMapLoad.playerName)
+        if (WorldMapLoad.counties[SelectCounty.currentlySelectedCounty].ownerName == WorldMapLoad.playerName)
         {
             var armyNumber = WorldMapLoad.armies.Count;
-            var newArmyList = new Army(null, null, null, null,false, false, "Player", "Fuck Stick" + armyNumber, Random.Range(1, 1001));
+            var newArmyList = new Army(null, null, null, null, null,false, false,false, "Player", "Fuck Stick" + armyNumber, Random.Range(1, 1001));
 
             WorldMapLoad.armies.Add(newArmyList);
 
-            newArmyList.gameObject = Instantiate(unitPrefab, WorldMapLoad.counties[SelectCounty.currentlySelectedProvince].countyCenterGameObject.transform.position,
+            newArmyList.gameObject = Instantiate(unitPrefab, WorldMapLoad.counties[SelectCounty.currentlySelectedCounty].countyCenterGameObject.transform.position,
               Quaternion.identity);
-            Debug.Log("New Army Game Object: " + newArmyList.gameObject);
+            //Debug.Log("New Army Game Object: " + newArmyList.gameObject);
             // Change name of GameObject in the inspector
             newArmyList.gameObject.name = armyNumber.ToString();
 
@@ -28,6 +28,13 @@ public class CreateArmy : MonoBehaviour
 
             newArmyList.armyTimerCanvasGameObject = newArmyList.gameObject.transform.GetChild(0).gameObject;
             newArmyList.armyTimerText = newArmyList.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+
+            // Store the current location name of the army.
+            newArmyList.currentLocation = SelectCounty.currentlySelectedCounty;
+            Debug.Log("Current Location: " + newArmyList.currentLocation);
+
+            // Sets the army Destination to its current location.
+            newArmyList.armyDestination = SelectCounty.currentlySelectedCounty;
 
             // Change the Army Info Panel to have the new army info from list.
             UIArmyPanel.armyOwnerText.text = "Owner: " + newArmyList.owner; //WorldMapLoad.armies[numberOfArmies].owner;

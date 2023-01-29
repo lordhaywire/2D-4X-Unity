@@ -3,8 +3,9 @@ using UnityEngine.EventSystems;
 
 public class SelectCounty : MonoBehaviour, IPointerClickHandler
 {
-    public static string currentlySelectedProvince;
+    public static string currentlySelectedCounty;
     public static bool tryingToMoveAnArmy;
+    //public static string armyDestination;
     //public float speed;
     //public float smoothTime = 0.3f;
 
@@ -15,8 +16,8 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             WorldMapLoad.countyInfoPanel.SetActive(true);
             WorldMapLoad.armyInfoPanel.SetActive(false);
 
-            currentlySelectedProvince = name;
-            Debug.Log("Currently Selected Province: " + currentlySelectedProvince);
+            currentlySelectedCounty = name;
+            Debug.Log("Currently Selected Province: " + currentlySelectedCounty);
 
             UIProvincePanel.countyOwnerText.text = "Owner: " + WorldMapLoad.counties[name].ownerName;
             UIProvincePanel.countyNameText.text = "Province: " + name;
@@ -40,8 +41,12 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             {
                 if (WorldMapLoad.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].isArmySelected == true)
                 {
-                    Debug.Log("Name of right clicked county: " + name);
-                    WorldMapLoad.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].startTimer = true;
+                    if(WorldMapLoad.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].isCountingDown == false)
+                    {
+                        WorldMapLoad.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].armyDestination = name;
+                        Debug.Log("Name of right clicked county: " + WorldMapLoad.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].armyDestination);
+                        WorldMapLoad.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].startTimer = true;
+                    }
                 }
                 else
                 {

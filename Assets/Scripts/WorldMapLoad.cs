@@ -20,23 +20,24 @@ public class WorldMapLoad : MonoBehaviour
     // Initialize Army List.
     public static List<Army> armies = new();
 
+
+
     private void Awake()
     {
         // Provinces added to Provinces Dictionary.
-        counties[Arrays.name[0]] = new County(0, null, "Enemy1", "PlayersNation", 6000);
-        counties[Arrays.name[1]] = new County(1, null, "Player", "PlayersNation", 10000);
-        counties[Arrays.name[2]] = new County(2, null, "Player", "EnemyNation", 5000);
-        counties[Arrays.name[3]] = new County(3, null, "Enemy1", "EnemyNation", 7000);
-        counties[Arrays.name[4]] = new County(4, null, "Enemy1", "EnemyNation", 1000);
-        counties[Arrays.name[5]] = new County(5, null, "Enemy1", "EnemyNation", 2000);
-        counties[Arrays.name[6]] = new County(6, null, "Enemy1", "EnemyNation", 3000);
+        counties[Arrays.name[0]] = new County(0, null, null, "Enemy1", "PlayersNation", 6000);
+        counties[Arrays.name[1]] = new County(1, null, null, "Player", "PlayersNation", 10000);
+        counties[Arrays.name[2]] = new County(2, null, null, "Player", "EnemyNation", 5000);
+        counties[Arrays.name[3]] = new County(3, null, null, "Enemy1", "EnemyNation", 7000);
+        counties[Arrays.name[4]] = new County(4, null, null, "Enemy1", "EnemyNation", 1000);
+        counties[Arrays.name[5]] = new County(5, null, null, "Enemy1", "EnemyNation", 2000);
+        counties[Arrays.name[6]] = new County(6, null, null, "Enemy1", "EnemyNation", 3000);
 
+        // Get game object for center of county and assign to correct county in list.
         for (int i = 0; i < counties.Count; ++i)
         {
             counties[Arrays.name[i]].countyCenterGameObject = countyListGameObject.transform.GetChild(i).GetChild(0).gameObject;
         }
-
-
 
         // This is just temp till we do character creation.
         playerName = "Player";

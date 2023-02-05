@@ -424,3 +424,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43be38303752e0c4189f75bcf7bde3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTimeToDestinationSet: 0

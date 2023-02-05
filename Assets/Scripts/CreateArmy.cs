@@ -13,7 +13,7 @@ public class CreateArmy : MonoBehaviour
         if (WorldMapLoad.counties[SelectCounty.currentlySelectedCounty].ownerName == WorldMapLoad.playerName)
         {
             var armyNumber = WorldMapLoad.armies.Count;
-            var newArmyList = new Army(null, null, null, null, null,false, false,false, "Player", "Fuck Stick" + armyNumber, Random.Range(1, 1001));
+            var newArmyList = new Army(null, null, null, null, null, null,false, false,false, "Player", "Fuck Stick" + armyNumber, Random.Range(1, 1001));
 
             WorldMapLoad.armies.Add(newArmyList);
 
@@ -23,12 +23,20 @@ public class CreateArmy : MonoBehaviour
             // Change name of GameObject in the inspector
             newArmyList.gameObject.name = armyNumber.ToString();
 
+            // This just sets it to it's basic starting color.
+            newArmyList.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+
             // Move GameObject to army list in Inspector.
             newArmyList.gameObject.transform.parent = armyListGameObject.transform;
 
+            // This is for the text box above the army's gameObject in the game.
             newArmyList.armyTimerCanvasGameObject = newArmyList.gameObject.transform.GetChild(0).gameObject;
             newArmyList.armyTimerText = newArmyList.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
 
+            // This is the ArmyMovement script attached to the gameObject as a component.
+            newArmyList.armyMovement = newArmyList.gameObject.GetComponent<ArmyMovement>();
+            Debug.Log("Army Movement Script? " + newArmyList.armyMovement);
+            
             // Store the current location name of the army.
             newArmyList.currentLocation = SelectCounty.currentlySelectedCounty;
             Debug.Log("Current Location: " + newArmyList.currentLocation);

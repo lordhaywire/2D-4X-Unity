@@ -1,3 +1,4 @@
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,9 +16,13 @@ public class SelectArmy : MonoBehaviour, IPointerClickHandler
             UIArmyPanel.armyNameText.text = "Name: " + WorldMapLoad.armies[int.Parse(name)].name;
             UIArmyPanel.armySizeText.text = "Size: " + WorldMapLoad.armies[int.Parse(name)].size.ToString();
 
-            WorldMapLoad.armies[int.Parse(name)].isArmySelected = true;
+            // Store old color for later usage.
+            //WorldMapLoad.armies[int.Parse(name)].color = WorldMapLoad.armies[int.Parse(name)].gameObject.GetComponent<SpriteRenderer>().color;
+            //WorldMapLoad.armies[int.Parse(name)].gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
             currentlySelectedArmyName = name;
-            SelectCounty.tryingToMoveAnArmy = true;
+
+            WorldMapLoad.armies[int.Parse(name)].IsArmySelected = true;
+            SelectCounty.hasAnArmyBeenSelected = true; // How does it know which county to make this true on.
 
             //Debug.Log("Name of Army: " + name);
         }

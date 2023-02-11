@@ -38,18 +38,20 @@ public class CreateArmy : MonoBehaviour
             Debug.Log("Army Movement Script? " + newArmyList.armyMovement);
             
             // Store the current location name of the army.
-            newArmyList.currentLocation = SelectCounty.currentlySelectedCounty;
-            Debug.Log("Current Location: " + newArmyList.currentLocation);
+            newArmyList.location = SelectCounty.currentlySelectedCounty;
+            Debug.Log("Current Location: " + newArmyList.location);
 
             // Sets the army Destination to its current location.
             newArmyList.armyDestination = SelectCounty.currentlySelectedCounty;
 
             // Change the Army Info Panel to have the new army info from list.
+            WorldMapLoad.armyInfoPanel.SetActive(true);
+
             UIArmyPanel.armyOwnerText.text = "Owner: " + newArmyList.owner; //WorldMapLoad.armies[numberOfArmies].owner;
             UIArmyPanel.armyNameText.text = "Name: " + newArmyList.name; //WorldMapLoad.armies[numberOfArmies].name;
             UIArmyPanel.armySizeText.text = "Size: " + newArmyList.size.ToString(); //WorldMapLoad.armies[numberOfArmies].size.ToString();
 
-            WorldMapLoad.armyInfoPanel.SetActive(true);
+
             WorldMapLoad.countyInfoPanel.SetActive(false);
         }
         else

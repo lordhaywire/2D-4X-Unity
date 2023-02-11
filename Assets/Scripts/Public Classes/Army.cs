@@ -6,7 +6,7 @@ public class Army
     public GameObject gameObject;
     public GameObject armyTimerCanvasGameObject;
     public ArmyMovement armyMovement;
-    public string currentLocation;
+    public string location;
     public string armyDestination;
     public TextMeshProUGUI armyTimerText;
     public bool isArmySelected;
@@ -42,13 +42,13 @@ public class Army
         }
     }
 
-    public Army(GameObject newGameObject, GameObject newArmyTimerCanvasGameObject, ArmyMovement newArmyMovement, string newCurrentLocation, string newArmyDestination,
+    public Army(GameObject newGameObject, GameObject newArmyTimerCanvasGameObject, ArmyMovement newArmyMovement, string newLocation, string newArmyDestination,
         TextMeshProUGUI newArmyTimerText, bool newIsArmySelected, bool newStartTimer, bool newIsCountingDown, string newOwner, string newName, int newSize)
     {
         gameObject = newGameObject;
         armyTimerCanvasGameObject = newArmyTimerCanvasGameObject;
         armyMovement = newArmyMovement;
-        currentLocation = newCurrentLocation;
+        location = newLocation;
         armyDestination = newArmyDestination;
         armyTimerText = newArmyTimerText;
         IsArmySelected = newIsArmySelected;

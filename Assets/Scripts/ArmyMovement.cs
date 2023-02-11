@@ -57,10 +57,10 @@ public class ArmyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Debug.Log("Army Current Location: " + WorldMapLoad.armies[int.Parse(name)].currentLocation);
+        //Debug.Log("Army Current Location: " + WorldMapLoad.armies[int.Parse(name)].location);
         // There has to be better fucking way to do this so that it is not in FixedUpdate.
         // This checks to make sure the army isn't in the selected county already.
-        if (WorldMapLoad.armies[int.Parse(name)].currentLocation != WorldMapLoad.armies[int.Parse(name)].armyDestination)
+        if (WorldMapLoad.armies[int.Parse(name)].location != WorldMapLoad.armies[int.Parse(name)].armyDestination)
         {
             if (WorldMapLoad.armies[int.Parse(name)].startTimer == true)
             {
@@ -73,7 +73,7 @@ public class ArmyMovement : MonoBehaviour
             }
         }
         // Cancels the move if the player right clicks on the county the army is already in.
-        if(WorldMapLoad.armies[int.Parse(name)].startTimer == true && WorldMapLoad.armies[int.Parse(name)].currentLocation == 
+        if(WorldMapLoad.armies[int.Parse(name)].startTimer == true && WorldMapLoad.armies[int.Parse(name)].location == 
             WorldMapLoad.armies[int.Parse(name)].armyDestination)
         {
             StopTimer();  
@@ -154,7 +154,7 @@ public class ArmyMovement : MonoBehaviour
         // The army is close enough so we don't have to wait for that minscule amount of movement.
         if(distance < closeEnough)
         {
-            WorldMapLoad.armies[int.Parse(name)].currentLocation = WorldMapLoad.armies[int.Parse(name)].armyDestination;
+            WorldMapLoad.armies[int.Parse(name)].location = WorldMapLoad.armies[int.Parse(name)].armyDestination;
             //Debug.Log("Is Time to Destination Set: " + isTimeToDestinationSet);
             move = false;
             isTimeToDestinationSet = false;

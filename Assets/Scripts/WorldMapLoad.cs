@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class WorldMapLoad : MonoBehaviour
 {
+    public static bool canSeeCountyInfo = true;
+
     [SerializeField] private GameObject countyListGameObject; // This is the gameObject that all the counties are under in the inspector.
     [SerializeField] private string countyInfoPanelName;
     [SerializeField] private string armyPanelName;
@@ -24,10 +27,14 @@ public class WorldMapLoad : MonoBehaviour
     // Initialize County Population Dictionary List.
     public static Dictionary<string, List<CountyPopulation>> countyPopulationDictionary = new();
 
+    // Array for countyName creation.
+
+    private string[] maleNames;
+    private string[] femaleNames;
+    private string[] lastNames;
+
     // Initialize Heroes/Leader List.
     public static List<Hero> heroes = new();
-
-
 
     // Initialize Army List.
     public static List<Army> armies = new();
@@ -43,35 +50,28 @@ public class WorldMapLoad : MonoBehaviour
         counties[Arrays.countyName[5]] = new County(5, false, null, null, "Enemy1", "EnemyNation", 2000);
         counties[Arrays.countyName[6]] = new County(6, false, null, null, "Enemy1", "EnemyNation", 3000);
 
-        /*
-        countyPopulationDictionary[Arrays.countyName[0]] = new List<CountyPopulation>();
-        countyPopulationDictionary[Arrays.countyName[0]].Add(new CountyPopulation(null, null, false));
-        countyPopulationDictionary[Arrays.countyName[0]][0].lastName = "First One";
-        Debug.Log("0Last Name: " + countyPopulationDictionary[Arrays.countyName[0]][0].lastName);
-        countyPopulationDictionary[Arrays.countyName[0]].Add(new CountyPopulation(null, null, false));
-        countyPopulationDictionary[Arrays.countyName[0]][1].lastName = "Seconds One";
-        Debug.Log("1Last Name: " + countyPopulationDictionary[Arrays.countyName[0]][1].lastName);
-        */
         // Create various county specific data.
         
         for (int countyIndex = 0; countyIndex < counties.Count; countyIndex++)
         {
-            string name = Arrays.countyName[countyIndex];
-            countyPopulationDictionary[name] = new List<CountyPopulation>();
+            string countyName = Arrays.countyName[countyIndex];
+            countyPopulationDictionary[countyName] = new List<CountyPopulation>();
 
             // Get game object for center of county and assign to correct county in list.
-            counties[name].countyCenterGameObject = 
+            counties[countyName].countyCenterGameObject = 
                 countyListGameObject.transform.GetChild(countyIndex).GetChild(0).gameObject;
 
-            if (counties[name].isCapital == true)
+            if (counties[countyName].isCapital == true)
             {
                 int totalPopulation = 10;
-                GeneratePopulation(name,totalPopulation);
+                GeneratePopulation(countyName,totalPopulation);
+                counties[countyName].population = totalPopulation;
             }
             else
             {
                 int totalPopulation = Random.Range(3, 9);
-                GeneratePopulation(name,totalPopulation);
+                GeneratePopulation(countyName,totalPopulation);
+                counties[countyName].population = totalPopulation;
             }
         }
 
@@ -81,39 +81,58 @@ public class WorldMapLoad : MonoBehaviour
 
         // This is set up this way so it can be a static variable.
         countyInfoPanel = uICanvas.transform.GetChild(1).gameObject;
-        Debug.Log("County Info Panel: " + countyInfoPanel);
         armyInfoPanel = uICanvas.transform.GetChild(2).gameObject;
-        Debug.Log("Army Info Panel: " + armyInfoPanel);
 
-        /*
-        countyInfoPanel = GameObject.Find(countyInfoPanelName);
-        countyInfoPanel.SetActive(false);
-        armyInfoPanel = GameObject.Find(armyPanelName);
-        armyInfoPanel.SetActive(false);
-        */
         // Leader getting added - This is just temp till we do character creation.
         heroes.Add(new Hero("Lord", "Haywire", Arrays.countyName[1],  null));
 
-        Debug.Log("Leader Name: " + heroes[0].firstName + " " + heroes[0].lastName);
-
-        //Debug.Log("Test County Population Name Portland: " +
-        //    countyPopulationDictionary["Portland Oregon"][6].lastName);
     }
 
-    private void GeneratePopulation(string name, int totalPopulation)
-    {   
+    private void GeneratePopulation(string countyName, int totalPopulation)
+    {
+        lastNames = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Lists", "Last Names.txt"));
+        femaleNames = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Lists", "Female Names.txt"));
+        maleNames = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Lists", "Male Names.txt"));
+
         for (int populationIndex = 0; populationIndex < totalPopulation; populationIndex++)
         {
-            Debug.Log("Population Index: " + populationIndex);
-            Debug.Log("Name Variable: " + name);
+            //Debug.Log("County Name Variable: " + countyName);
 
-            countyPopulationDictionary[name].Add(new CountyPopulation(null, null, false));
+            // This adds to the Dictionary List a new person.
+            countyPopulationDictionary[countyName].Add(new CountyPopulation(null, null, false, 0));
 
-            int randomIndex = Random.Range(0, Arrays.lastName.Length);
-            countyPopulationDictionary[name][populationIndex].lastName =
-                Arrays.lastName[randomIndex];
-            Debug.Log("Random Name? " +
-                countyPopulationDictionary[name][populationIndex].lastName);
+            // Generates Persons Last Name
+            int randomLastNameNumber = Random.Range(0, lastNames.Length);
+            countyPopulationDictionary[countyName][populationIndex].lastName =
+                lastNames[randomLastNameNumber];
+
+            // Determine the persons sex and first name
+            int randomSexNumber = Random.Range(0, 2);
+            int randomFemaleNameNumber = Random.Range(0, femaleNames.Length);
+            int randomMaleNameNumber = Random.Range(0, maleNames.Length);
+            if (randomSexNumber == 0)
+            {
+                countyPopulationDictionary[countyName][populationIndex].isMale = true;
+                countyPopulationDictionary[countyName][populationIndex].firstName =
+                    maleNames[randomMaleNameNumber];
+            }
+            else
+            {
+                countyPopulationDictionary[countyName][populationIndex].isMale = false;
+                countyPopulationDictionary[countyName][populationIndex].firstName =
+                    femaleNames[randomFemaleNameNumber];
+            }
+
+            int randomAgeNumber = Random.Range(18, 61);
+            countyPopulationDictionary[countyName][populationIndex].age = randomAgeNumber;
+
+            /*
+            Debug.Log("Random Person " +
+                countyPopulationDictionary[countyName][populationIndex].isMale + " " + 
+                countyPopulationDictionary[countyName][populationIndex].firstName + " " +
+                countyPopulationDictionary[countyName][populationIndex].lastName + " Age: " +
+                countyPopulationDictionary[countyName][populationIndex].age);
+            */
         }
     }
 }

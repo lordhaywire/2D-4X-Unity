@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -32,11 +31,12 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             }
             else
             {
-                Debug.Log("No army has been selected so this is not clearing the selected army variable.");
+                //Debug.Log("No army has been selected so this is not clearing the selected army variable.");
             }
 
             // This is just some temp bullshit to not allow you to look at counties you don't own.
-            if (WorldMapLoad.playerName == WorldMapLoad.counties[name].ownerName)
+            if (WorldMapLoad.playerName == 
+                WorldMapLoad.counties[name].ownerName || WorldMapLoad.canSeeCountyInfo == true)
             {
                 UICountyPanel.countyPopulationText.text = "Population: " + WorldMapLoad.counties[name].population.ToString();
             }
@@ -44,7 +44,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             {
                 UICountyPanel.countyPopulationText.text = "Population: Unknown";
             }
-            Debug.Log("Name of Province: " + name);
+            //Debug.Log("Name of Province: " + name);
 
             hasAnArmyBeenSelected = false; // Why the fuck is this here, if it is already being checked above?
         }
@@ -138,7 +138,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             else
             {
                 UICountyPanel.heroInfoList.SetActive(false);
-                Debug.Log("There is no hero in this county.");
+                //Debug.Log("There is no hero in this county.");
             }
         }
     }

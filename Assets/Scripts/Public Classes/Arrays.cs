@@ -13,4 +13,15 @@ public class Arrays : MonoBehaviour
         "Harney Oregon",
         "Umatilla Oregon",
     };
+
+    public static string[] factionName =
+    {
+        "Faction1",
+        "The Shit Birds",
+        "Faction2",
+        "Faction3",
+        "Faction4",
+        "Faction5",
+        "Faction6",
+    };
 }

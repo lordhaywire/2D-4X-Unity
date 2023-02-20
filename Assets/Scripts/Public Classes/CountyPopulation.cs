@@ -7,7 +7,10 @@ public class CountyPopulation
     public bool isMale;
     public int age;
 
-    public CountyPopulation(string newFirstName, string newLastName, bool newIsMale, int newAge)
+    public string activity;
+
+    public CountyPopulation(string newFirstName, string newLastName, bool newIsMale, 
+        int newAge, string newActivity)
     {
         firstName = newFirstName;
         lastName = newLastName;
@@ -15,5 +18,6 @@ public class CountyPopulation
         isMale = newIsMale;
         age = newAge;
 
+        activity = newActivity;
     }
 }

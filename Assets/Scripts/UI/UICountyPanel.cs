@@ -14,8 +14,8 @@ public class UICountyPanel : MonoBehaviour
         heroInfoList = transform.GetChild(4).GetChild(0).gameObject;
         armyInfoList = transform.GetChild(4).GetChild(1).gameObject;
 
-        countyOwnerText = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        countyNameText = this.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        countyPopulationText = this.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        countyOwnerText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        countyNameText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        countyPopulationText = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
     }
 }

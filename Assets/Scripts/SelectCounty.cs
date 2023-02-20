@@ -22,13 +22,13 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             UICountyPanel.countyNameText.text = "County: " + name;
 
             Debug.Log("County Faction Name: " + WorldMapLoad.counties[name].factionName);
-            if (WorldMapLoad.counties[name].factionName == 
+            if (WorldMapLoad.counties[name].factionName ==
                 WorldMapLoad.playerFaction || WorldMapLoad.canSeeCountyInfo == true)
             {
                 //Debug.Log("County Faction Name: " + WorldMapLoad.counties[name].factionName);
                 CheckForHeroes(); // Check to see if this county has any heroes in it.
             }
-            
+
             CheckForArmies(); // Check to see if this county has any armies in it.
 
             // If an army has been selected and we left click on a county it clears the army of being selected.
@@ -44,10 +44,11 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             }
 
             // This is just some temp bullshit to not allow you to look at counties you don't own.
-            if (WorldMapLoad.playerFaction == 
+            if (WorldMapLoad.playerFaction ==
                 WorldMapLoad.counties[name].factionName || WorldMapLoad.canSeeCountyInfo == true)
             {
-                UICountyPanel.countyPopulationText.text = "Population: " + WorldMapLoad.counties[name].population.ToString();
+                UICountyPanel.countyPopulationText.text =
+                    "Population: " + WorldMapLoad.counties[name].population.ToString();
             }
             else
             {
@@ -100,7 +101,6 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         }
 
     }
-
     private void CheckForArmies()
     {
         if (WorldMapLoad.armies.Count != 0)

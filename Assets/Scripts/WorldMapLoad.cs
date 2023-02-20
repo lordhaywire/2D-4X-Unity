@@ -21,7 +21,7 @@ public class WorldMapLoad : MonoBehaviour
     // Initialize County Dictionary.
     public static Dictionary<string, County> counties = new();
 
-    public static List<CountyPopulation> testList = new();
+    //public static List<CountyPopulation> testList = new();
 
     // Initialize County Population Dictionary List.
     public static Dictionary<string, List<CountyPopulation>> countyPopulationDictionary = new();
@@ -80,21 +80,20 @@ public class WorldMapLoad : MonoBehaviour
 
             if (counties[countyName].isCapital == true)
             {
-                int totalPopulation = 10;
+                int normalPopulation = 10;
                 GenerateLeaders(factionName, countyIndex);
-                GeneratePopulation(countyName, totalPopulation);
-                counties[countyName].population = totalPopulation;
+                GeneratePopulation(countyName, normalPopulation);
+                counties[countyName].population = normalPopulation;
             }
             else
             {
-                int totalPopulation = Random.Range(3, 9);
+                int normalPopulation = Random.Range(3, 9);
                 GenerateLeaders(factionName, countyIndex);
-                GeneratePopulation(countyName, totalPopulation);
-                counties[countyName].population = totalPopulation;
+                GeneratePopulation(countyName, normalPopulation);
+                counties[countyName].population = normalPopulation;
             }
         }
     }
-
 
     private void Start()
     {
@@ -139,9 +138,11 @@ public class WorldMapLoad : MonoBehaviour
             int randomAgeNumber = Random.Range(30, 61);
             factionHeroesDictionary[factionName][0].age = randomAgeNumber;
 
+
             Debug.Log("First Name: " + factionHeroesDictionary[factionName][0].firstName + " " +
-                factionHeroesDictionary[factionName][0].lastName + " County: " 
+                factionHeroesDictionary[factionName][0].lastName + " County: "
                 + factionHeroesDictionary[factionName][0].location);
+
         }
     }
     private void GeneratePopulation(string countyName, int totalPopulation)
@@ -149,7 +150,7 @@ public class WorldMapLoad : MonoBehaviour
         for (int populationIndex = 0; populationIndex < totalPopulation; populationIndex++)
         {
             // This adds to the Dictionary List a new person.
-            countyPopulationDictionary[countyName].Add(new CountyPopulation(null, null, false, 0));
+            countyPopulationDictionary[countyName].Add(new CountyPopulation(null, null, false, 0, null));
 
             // Generates Persons Last Name
             int randomLastNameNumber = Random.Range(0, lastNames.Length);
@@ -175,6 +176,10 @@ public class WorldMapLoad : MonoBehaviour
 
             int randomAgeNumber = Random.Range(18, 61);
             countyPopulationDictionary[countyName][populationIndex].age = randomAgeNumber;
+
+
+            Debug.Log("Name: " + countyPopulationDictionary[countyName][populationIndex].firstName + " " +
+            countyPopulationDictionary[countyName][populationIndex].lastName);
         }
     }
 }

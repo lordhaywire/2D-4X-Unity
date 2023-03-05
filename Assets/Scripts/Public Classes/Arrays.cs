@@ -20,15 +20,17 @@ public class Arrays : MonoBehaviour
         "Oregon",
     };
 
-
-    public static string[] factionName =
+    public static Color32[] colors =
     {
-        "Faction1",
-        "The Shit Birds",
-        "Faction2",
-        "Faction3",
-        "Faction4",
-        "Faction5",
-        "Faction6",
+        AllColors.salmon,
+        AllColors.darkSalmon,
+        AllColors.purple,
+        AllColors.darkPurple,
+        AllColors.lightBlue,
+        AllColors.blue,
+        AllColors.green,
+        AllColors.lightGreen,
+        AllColors.orange,
+        AllColors.burnt,
     };
 }

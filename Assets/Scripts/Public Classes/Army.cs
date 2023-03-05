@@ -16,7 +16,7 @@ public class Army
     public string name;
     public int size;
 
-    // This property currently just changes the color of the army so we know if it selected or not.
+    // This property currently just changes the color32 of the army so we know if it selected or not.
     public bool IsArmySelected
     {
         get

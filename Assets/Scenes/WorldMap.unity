@@ -668,6 +668,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e2dcc84bcf59f40ae744593f599d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heroInfoList: {fileID: 1658764054}
+  armyInfoList: {fileID: 187624964}
+  countyOwnerText: {fileID: 1917657219}
+  countyNameText: {fileID: 223208136}
+  countyPopulationText: {fileID: 259231820}
 --- !u!1 &187624964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1035,7 @@ GameObject:
   - component: {fileID: 259231820}
   - component: {fileID: 259231822}
   m_Layer: 5
-  m_Name: Population Text
+  m_Name: County Population Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3739,6 +3744,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ead976b2b9f81449dd408c55338ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  armyOwnerText: {fileID: 837560528}
+  armyNameText: {fileID: 317592559}
+  armySizeText: {fileID: 566740430}
 --- !u!1 &746868438
 GameObject:
   m_ObjectHideFlags: 0
@@ -3752,6 +3760,7 @@ GameObject:
   - component: {fileID: 746868444}
   - component: {fileID: 746868443}
   - component: {fileID: 746868442}
+  - component: {fileID: 746868445}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -3788,9 +3797,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalCapitolPop: 10
   countyListGameObject: {fileID: 249060077}
-  countyInfoPanelName: 
-  armyPanelName: 
   uICanvas: {fileID: 275133780}
+  canSeeCountyInfo: 1
+  countyInfoPanel: {fileID: 155121155}
+  armyInfoPanel: {fileID: 738409371}
+  playerFaction: 
+  factions:
+  - name: Faction1
+    color32:
+      serializedVersion: 2
+      rgba: 0
+  - name: The Shit Birds
+    color32:
+      serializedVersion: 2
+      rgba: 0
+  - name: Faction2
+    color32:
+      serializedVersion: 2
+      rgba: 0
+  - name: Faction3
+    color32:
+      serializedVersion: 2
+      rgba: 0
+  - name: Faction4
+    color32:
+      serializedVersion: 2
+      rgba: 0
+  - name: Faction5
+    color32:
+      serializedVersion: 2
+      rgba: 0
+  - name: Faction6
+    color32:
+      serializedVersion: 2
+      rgba: 0
 --- !u!114 &746868442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3831,6 +3871,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad046efcee8f49547864052b414811be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &746868445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746868438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab813026322736419b74aa9164fdf1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &786672417

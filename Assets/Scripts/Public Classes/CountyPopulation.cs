@@ -1,5 +1,5 @@
 
-public class Hero
+public class CountyPopulation
 {
     public string firstName;
     public string lastName;
@@ -7,10 +7,10 @@ public class Hero
     public bool isMale;
     public int age;
 
-    public string location;
     public string activity;
 
-    public Hero(string newFirstName, string newLastName, bool newIsMale, int newAge, string newLocation, string newActivity)
+    public CountyPopulation(string newFirstName, string newLastName, bool newIsMale, 
+        int newAge, string newActivity)
     {
         firstName = newFirstName;
         lastName = newLastName;
@@ -18,9 +18,6 @@ public class Hero
         isMale = newIsMale;
         age = newAge;
 
-        location = newLocation;
         activity = newActivity;
     }
 }
-
-

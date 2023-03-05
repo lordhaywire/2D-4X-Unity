@@ -10,7 +10,7 @@ public class CreateArmy : MonoBehaviour
     public void CreateArmyButton()
     {
         // This is so we can only create the army in our own counties.
-        if (WorldMapLoad.counties[SelectCounty.currentlySelectedCounty].ownerName == WorldMapLoad.playerName)
+        if (WorldMapLoad.counties[SelectCounty.currentlySelectedCounty].factionName == WorldMapLoad.playerFaction)
         {
             var armyNumber = WorldMapLoad.armies.Count;
             var newArmyList = new Army(null, null, null, null, null, null,false, false,false, "Player", "Fuck Stick" + armyNumber, Random.Range(1, 1001));

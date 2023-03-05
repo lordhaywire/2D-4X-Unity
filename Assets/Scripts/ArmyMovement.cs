@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
-
 
 public class ArmyMovement : MonoBehaviour
 {
@@ -57,7 +55,6 @@ public class ArmyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Debug.Log("Army Current Location: " + WorldMapLoad.armies[int.Parse(name)].location);
         // There has to be better fucking way to do this so that it is not in FixedUpdate.
         // This checks to make sure the army isn't in the selected county already.
         if (WorldMapLoad.armies[int.Parse(name)].location != WorldMapLoad.armies[int.Parse(name)].armyDestination)
@@ -67,7 +64,6 @@ public class ArmyMovement : MonoBehaviour
                 if (TimeKeeper.foreverTimer > lastCheckTime + 1) // Checking every "minute" (which is the 1 in the if statement).
                 {
                     ArmyTimer();
-                    //Debug.Log("Time Keeper Minutes is greater then Last Check Time");
                     lastCheckTime = TimeKeeper.foreverTimer;
                 }
             }

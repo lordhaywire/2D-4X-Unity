@@ -3,7 +3,7 @@ using UnityEngine;
 public class Arrays : MonoBehaviour
 {
     // Array of county names.
-    public static new string[] name =
+    public static string[] countyName =
     {
         "Cowlitz Washington",
         "Portland Oregon",
@@ -12,5 +12,16 @@ public class Arrays : MonoBehaviour
         "Wasco Oregon",
         "Harney Oregon",
         "Umatilla Oregon",
+    };
+
+    public static string[] factionName =
+    {
+        "Faction1",
+        "The Shit Birds",
+        "Faction2",
+        "Faction3",
+        "Faction4",
+        "Faction5",
+        "Faction6",
     };
 }

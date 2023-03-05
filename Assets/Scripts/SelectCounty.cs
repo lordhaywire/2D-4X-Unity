@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,13 +13,22 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             WorldMapLoad.countyInfoPanel.SetActive(true);
             WorldMapLoad.armyInfoPanel.SetActive(false);
 
+            UICountyPanel.heroInfoList.SetActive(false);
+
             currentlySelectedCounty = name;
             Debug.Log("Currently Selected County: " + currentlySelectedCounty);
 
-            UICountyPanel.countyOwnerText.text = "Owner: " + WorldMapLoad.counties[name].ownerName;
+            UICountyPanel.countyOwnerText.text = "Owner: " + WorldMapLoad.counties[name].factionName;
             UICountyPanel.countyNameText.text = "County: " + name;
 
-            CheckForHeroes(); // Check to see if this county has any heroes in it.
+            Debug.Log("County Faction Name: " + WorldMapLoad.counties[name].factionName);
+            if (WorldMapLoad.counties[name].factionName ==
+                WorldMapLoad.playerFaction || WorldMapLoad.canSeeCountyInfo == true)
+            {
+                //Debug.Log("County Faction Name: " + WorldMapLoad.counties[name].factionName);
+                CheckForHeroes(); // Check to see if this county has any heroes in it.
+            }
+
             CheckForArmies(); // Check to see if this county has any armies in it.
 
             // If an army has been selected and we left click on a county it clears the army of being selected.
@@ -32,19 +40,21 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             }
             else
             {
-                Debug.Log("No army has been selected so this is not clearing the selected army variable.");
+                //Debug.Log("No army has been selected so this is not clearing the selected army variable.");
             }
 
             // This is just some temp bullshit to not allow you to look at counties you don't own.
-            if (WorldMapLoad.playerName == WorldMapLoad.counties[name].ownerName)
+            if (WorldMapLoad.playerFaction ==
+                WorldMapLoad.counties[name].factionName || WorldMapLoad.canSeeCountyInfo == true)
             {
-                UICountyPanel.countyPopulationText.text = "Population: " + WorldMapLoad.counties[name].population.ToString();
+                UICountyPanel.countyPopulationText.text =
+                    "Population: " + WorldMapLoad.counties[name].population.ToString();
             }
             else
             {
                 UICountyPanel.countyPopulationText.text = "Population: Unknown";
             }
-            Debug.Log("Name of Province: " + name);
+            //Debug.Log("Name of Province: " + name);
 
             hasAnArmyBeenSelected = false; // Why the fuck is this here, if it is already being checked above?
         }
@@ -91,7 +101,6 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         }
 
     }
-
     private void CheckForArmies()
     {
         if (WorldMapLoad.armies.Count != 0)
@@ -117,28 +126,27 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
     private void CheckForHeroes()
     {
-        for (int i = 0; i < WorldMapLoad.heroes.Count; i++)
+        var countyFaction = WorldMapLoad.counties[name].factionName;
+        var localHeroes = WorldMapLoad.factionHeroesDictionary[countyFaction];
+        for (int i = 0; i < localHeroes.Count; i++)
         {
-            if (WorldMapLoad.heroes[i].location == name)
+            Debug.Log("Name: " + name);
+            if (localHeroes[i].location == name || WorldMapLoad.canSeeCountyInfo == true)
             {
                 UICountyPanel.heroInfoList.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
 
-                Debug.Log("Leader Button Text: " + UIVerticalHeroList.leaderButtonText);
-                if (WorldMapLoad.heroes[0].activity == null)
+                //Debug.Log("Leader Button Text: " + UIVerticalHeroList.leaderButtonText);
+                if (localHeroes[i].activity == null)
                 {
                     //Debug.Log("Leader Button Text: " + UIVerticalHeroList.leaderButtonText);
-                    UIVerticalHeroList.leaderButtonText.text = WorldMapLoad.heroes[0].firstName + " " + WorldMapLoad.heroes[0].lastName + ": Doing Nothing!";
+                    UIVerticalHeroList.leaderButtonText.text = localHeroes[i].firstName + " " + 
+                        localHeroes[i].lastName + ": Something is fucked up!";
                 }
                 else
                 {
                     UIVerticalHeroList.leaderButtonText.text =
-                        WorldMapLoad.heroes[0].firstName + " " + WorldMapLoad.heroes[0].lastName + ": " + WorldMapLoad.heroes[0].activity;
+                        localHeroes[i].firstName + " " + localHeroes[i].lastName + ": " + localHeroes[i].activity;
                 }
-            }
-            else
-            {
-                UICountyPanel.heroInfoList.SetActive(false);
-                Debug.Log("There is no hero in this county.");
             }
         }
     }

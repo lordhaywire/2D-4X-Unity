@@ -10,11 +10,11 @@ public class UIPopulationInfoPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        if (WorldMapLoad.countyPopulationDictionary[SelectCounty.currentlySelectedCounty] != null)
+        if (WorldMapLoad.Instance.countyPopulationDictionary[SelectCounty.currentlySelectedCounty] != null)
         {
-            var countyList = WorldMapLoad.countyPopulationDictionary[SelectCounty.currentlySelectedCounty];
+            var countyList = WorldMapLoad.Instance.countyPopulationDictionary[SelectCounty.currentlySelectedCounty];
             var factionList =
-                WorldMapLoad.factionHeroesDictionary[WorldMapLoad.counties[SelectCounty.currentlySelectedCounty].factionName];
+                WorldMapLoad.Instance.factionHeroesDictionary[WorldMapLoad.Instance.counties[SelectCounty.currentlySelectedCounty].faction.name];
             // This is for the leaders of each factions.
             for (int i = 0; i < factionList.Count; i++)
             {
@@ -22,7 +22,6 @@ public class UIPopulationInfoPanel : MonoBehaviour
                     (Instantiate(prefabHorizontalPopulationListText, parentPopulationListGroup.transform));
                 populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nameText.text =
                     factionList[i].firstName + " " + factionList[i].lastName;
-                Debug.Log("Faction List Name: " + factionList[i].firstName + " " + factionList[i].lastName);
                 populationListClones[i].GetComponent<UIHorizontalPopulationListText>().ageText.text =
                     factionList[i].age.ToString();
                 if (factionList[i].isMale == true)

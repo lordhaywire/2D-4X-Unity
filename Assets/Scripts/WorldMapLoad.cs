@@ -4,71 +4,94 @@ using UnityEngine;
 
 public class WorldMapLoad : MonoBehaviour
 {
+    public static WorldMapLoad Instance;
+
     [SerializeField] private int totalCapitolPop;
-    public static bool canSeeCountyInfo = true;
-
-    [SerializeField] private GameObject countyListGameObject; // This is the gameObject that all the counties are under in the inspector.
-    [SerializeField] private string countyInfoPanelName;
-    [SerializeField] private string armyPanelName;
-
+    [SerializeField] private GameObject countyListGameObject;
     [SerializeField] private GameObject uICanvas;
 
-    public static GameObject countyInfoPanel;
-    public static GameObject armyInfoPanel;
+    public bool canSeeCountyInfo = true;
+    public GameObject countyInfoPanel;
+    public GameObject armyInfoPanel;
 
     // This is just temp till we do character creation.
-    public static string playerFaction;
+    public string playerFaction;
 
     // Initialize County Dictionary.
-    public static Dictionary<string, County> counties = new();
-
-    //public static List<CountyPopulation> testList = new();
+    public Dictionary<string, County> counties = new();
 
     // Initialize County Population Dictionary List.
-    public static Dictionary<string, List<CountyPopulation>> countyPopulationDictionary = new();
+    public Dictionary<string, List<CountyPopulation>> countyPopulationDictionary = new();
 
     // Initialize County Heroes/Leader Dictionary List.
-    public static Dictionary<string, List<Hero>> factionHeroesDictionary = new();
+    public Dictionary<string, List<Hero>> factionHeroesDictionary = new();
+
+    // Initialize Army List.
+    public List<Army> armies = new();
+
+    // Initialize Factions list that will be used with the counties.
+    public List<Faction> factions = new();
 
     // Arrays for County Population generation.
     private string[] maleNames;
     private string[] femaleNames;
     private string[] lastNames;
 
-    // Initialize Heroes/Leader List.
-    //public static List<Hero> heroes = new();
-
-    // Initialize Army List.
-    public static List<Army> armies = new();
-
     private void Awake()
     {
-        // Counties added to counties Dictionary.
-        counties[Arrays.countyName[0]] = new County(0, true, null, null, Arrays.factionName[0], 0);
-        counties[Arrays.countyName[1]] = new County(1, true, null, null, Arrays.factionName[1], 0);
-        counties[Arrays.countyName[2]] = new County(2, false, null, null, Arrays.factionName[2], 0);
-        counties[Arrays.countyName[3]] = new County(3, false, null, null, Arrays.factionName[3], 0);
-        counties[Arrays.countyName[4]] = new County(4, false, null, null, Arrays.factionName[4], 0);
-        counties[Arrays.countyName[5]] = new County(5, false, null, null, Arrays.factionName[5], 0);
-        counties[Arrays.countyName[6]] = new County(6, false, null, null, Arrays.factionName[6], 0);
+        Instance = this;
 
+        GetNamesFromFile();
+
+        CreateCountiesDictionary();
+
+        // This is just temp till we do character creation.
+        playerFaction = factions[1].name;
+
+        // This is set up this way so it can be a static variable - This will be changed when we set up The Instance.
+        //countyInfoPanel = uICanvas.transform.GetChild(1).gameObject;
+        //armyInfoPanel = uICanvas.transform.GetChild(2).gameObject;
+
+        CreatePopulation();
+    }
+
+
+
+    private void Start()
+    {
+        // Get rid of extra variables.
+        lastNames = null;
+        femaleNames = null;
+        maleNames = null;
+    }
+
+    private void GetNamesFromFile()
+    {
         // Get names for population and leader generation.
         lastNames = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Lists", "Last Names.txt"));
         femaleNames = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Lists", "Female Names.txt"));
         maleNames = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "Lists", "Male Names.txt"));
+    }
 
-        // This is just temp till we do character creation.
-        playerFaction = Arrays.factionName[1];
+    private void CreateCountiesDictionary()
+    {
+        // Counties added to counties Dictionary.
+        counties[Arrays.countyName[0]] = new County(0, true, null, Color.clear, null, factions[0], Arrays.provinceName[0], 0);
+        counties[Arrays.countyName[1]] = new County(1, true, null, Color.clear, null, factions[1], Arrays.provinceName[1], 1);
+        counties[Arrays.countyName[2]] = new County(2, false, null, Color.clear, null, factions[2], Arrays.provinceName[1], 0);
+        counties[Arrays.countyName[3]] = new County(3, false, null, Color.clear, null, factions[3], Arrays.provinceName[1], 0);
+        counties[Arrays.countyName[4]] = new County(4, false, null, Color.clear, null, factions[4], Arrays.provinceName[1], 0);
+        counties[Arrays.countyName[5]] = new County(5, false, null, Color.clear, null, factions[5], Arrays.provinceName[1], 0);
+        counties[Arrays.countyName[6]] = new County(6, false, null, Color.clear, null, factions[6], Arrays.provinceName[1], 0);
+    }
 
-        // This is set up this way so it can be a static variable.
-        countyInfoPanel = uICanvas.transform.GetChild(1).gameObject;
-        armyInfoPanel = uICanvas.transform.GetChild(2).gameObject;
-
+    private void CreatePopulation()
+    {
         // Create various county specific data.
         for (int countyIndex = 0; countyIndex < counties.Count; countyIndex++)
         {
             string countyName = Arrays.countyName[countyIndex];
-            string factionName = Arrays.factionName[countyIndex];
+            string factionName = factions[countyIndex].name;
 
             // There should probably be some sort of null check in here?
             // Initilizes the List in the Dictionaries for Counties and Heroes.
@@ -94,14 +117,6 @@ public class WorldMapLoad : MonoBehaviour
                 counties[countyName].population = normalPopulation;
             }
         }
-    }
-
-    private void Start()
-    {
-        // Get rid of extra variables.
-        lastNames = null;
-        femaleNames = null;
-        maleNames = null;
     }
 
     private void GenerateLeaders(string factionName, int countyIndex)
@@ -139,11 +154,11 @@ public class WorldMapLoad : MonoBehaviour
             int randomAgeNumber = Random.Range(30, 61);
             factionHeroesDictionary[factionName][0].age = randomAgeNumber;
 
-
+            /*
             Debug.Log("First Name: " + factionHeroesDictionary[factionName][0].firstName + " " +
                 factionHeroesDictionary[factionName][0].lastName + " County: "
                 + factionHeroesDictionary[factionName][0].location);
-
+            */
         }
     }
     private void GeneratePopulation(string countyName, int totalPopulation)
@@ -178,9 +193,10 @@ public class WorldMapLoad : MonoBehaviour
             int randomAgeNumber = Random.Range(18, 61);
             countyPopulationDictionary[countyName][populationIndex].age = randomAgeNumber;
 
-
+            /*
             Debug.Log("Name: " + countyPopulationDictionary[countyName][populationIndex].firstName + " " +
             countyPopulationDictionary[countyName][populationIndex].lastName);
+            */
         }
     }
 }

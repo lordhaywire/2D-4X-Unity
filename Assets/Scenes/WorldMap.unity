@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 19502182}
   - component: {fileID: 19502184}
   m_Layer: 0
-  m_Name: Umatilla Oregon
+  m_Name: Umatilla
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -989,7 +989,7 @@ GameObject:
   m_Component:
   - component: {fileID: 249060078}
   m_Layer: 0
-  m_Name: ---County---
+  m_Name: ---Counties---
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1328,7 +1328,7 @@ GameObject:
   - component: {fileID: 285694184}
   - component: {fileID: 285694185}
   m_Layer: 0
-  m_Name: Tillamook Oregon
+  m_Name: Tillamook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3786,7 +3786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8c985dc8d71d648931e744aa792209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalCapitolPop: 20
+  totalCapitolPop: 10
   countyListGameObject: {fileID: 249060077}
   countyInfoPanelName: 
   armyPanelName: 
@@ -3820,7 +3820,7 @@ MonoBehaviour:
   dayAndTimeText: {fileID: 383357467}
   currentSpeedText: {fileID: 300843367}
   paused: {fileID: 1212449650}
-  ticks: 0
+  ticks: 100
 --- !u!114 &746868444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4273,7 +4273,7 @@ GameObject:
   - component: {fileID: 889005932}
   - component: {fileID: 889005934}
   m_Layer: 0
-  m_Name: Douglas Oregon
+  m_Name: Douglas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4514,7 +4514,7 @@ GameObject:
   - component: {fileID: 916023832}
   - component: {fileID: 916023833}
   m_Layer: 0
-  m_Name: Portland Oregon
+  m_Name: Portland
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5710,7 +5710,7 @@ GameObject:
   - component: {fileID: 1365887287}
   - component: {fileID: 1365887288}
   m_Layer: 0
-  m_Name: Wasco Oregon
+  m_Name: Wasco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6351,7 +6351,7 @@ GameObject:
   - component: {fileID: 1537027677}
   - component: {fileID: 1537027678}
   m_Layer: 0
-  m_Name: Cowlitz Washington
+  m_Name: Cowlitz
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7014,7 +7014,7 @@ GameObject:
   - component: {fileID: 1628319668}
   - component: {fileID: 1628319670}
   m_Layer: 0
-  m_Name: Harney Oregon
+  m_Name: Harney
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

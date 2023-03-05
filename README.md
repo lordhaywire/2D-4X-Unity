@@ -8,5 +8,6 @@ and [Youtube](https://www.youtube.com/@killedbydev) channels.
 ### Thanks to the following people:
 
 fooblaz
+
 thatguykeedo
 

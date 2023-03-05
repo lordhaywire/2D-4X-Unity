@@ -22,7 +22,6 @@ public class UIPopulationInfoPanel : MonoBehaviour
                     (Instantiate(prefabHorizontalPopulationListText, parentPopulationListGroup.transform));
                 populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nameText.text =
                     factionList[i].firstName + " " + factionList[i].lastName;
-                Debug.Log("Faction List Name: " + factionList[i].firstName + " " + factionList[i].lastName);
                 populationListClones[i].GetComponent<UIHorizontalPopulationListText>().ageText.text =
                     factionList[i].age.ToString();
                 if (factionList[i].isMale == true)

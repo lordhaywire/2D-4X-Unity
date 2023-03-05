@@ -12,9 +12,10 @@ public class UIPopulationInfoPanel : MonoBehaviour
     {
         if (WorldMapLoad.countyPopulationDictionary[SelectCounty.currentlySelectedCounty] != null)
         {
-            var county = WorldMapLoad.countyPopulationDictionary[SelectCounty.currentlySelectedCounty];
+            var countyList = WorldMapLoad.countyPopulationDictionary[SelectCounty.currentlySelectedCounty];
             var factionList =
                 WorldMapLoad.factionHeroesDictionary[WorldMapLoad.counties[SelectCounty.currentlySelectedCounty].factionName];
+            // This is for the leaders of each factions.
             for (int i = 0; i < factionList.Count; i++)
             {
                 populationListClones.Add
@@ -32,16 +33,19 @@ public class UIPopulationInfoPanel : MonoBehaviour
                 {
                     populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Female";
                 }
+                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().activityText.text = 
+                    factionList[i].activity;
             }
-            for (int i = populationListClones.Count; i < county.Count; i++)
+            // This is for the normal population in the county.
+            for (int i = populationListClones.Count; i < countyList.Count; i++)
             {
                 populationListClones.Add
                     (Instantiate(prefabHorizontalPopulationListText, parentPopulationListGroup.transform));
                 populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nameText.text =
-                    county[i].firstName + " " + county[i].lastName;
+                    countyList[i].firstName + " " + countyList[i].lastName;
                 populationListClones[i].GetComponent<UIHorizontalPopulationListText>().ageText.text =
-                    county[i].age.ToString();
-                if (county[i].isMale == true)
+                    countyList[i].age.ToString();
+                if (countyList[i].isMale == true)
                 {
                     populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Male";
                 }
@@ -49,6 +53,8 @@ public class UIPopulationInfoPanel : MonoBehaviour
                 {
                     populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Female";
                 }
+                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().activityText.text =
+                    countyList[i].activity;
             }
         }
         else

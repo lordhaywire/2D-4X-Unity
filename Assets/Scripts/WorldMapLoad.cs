@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WorldMapLoad : MonoBehaviour
 {
+    [SerializeField] private int totalCapitolPop;
     public static bool canSeeCountyInfo = true;
 
     [SerializeField] private GameObject countyListGameObject; // This is the gameObject that all the counties are under in the inspector.
@@ -80,7 +81,7 @@ public class WorldMapLoad : MonoBehaviour
 
             if (counties[countyName].isCapital == true)
             {
-                int normalPopulation = 10;
+                int normalPopulation = totalCapitolPop;
                 GenerateLeaders(factionName, countyIndex);
                 GeneratePopulation(countyName, normalPopulation);
                 counties[countyName].population = normalPopulation;
@@ -110,11 +111,11 @@ public class WorldMapLoad : MonoBehaviour
         // This will instead need to eventually check if this is a player faction vs an AI faction.
         if (playerFaction == factionName)
         {
-            factionHeroesDictionary[factionName].Add(new Hero("Lord", "Haywire", true, 30, Arrays.countyName[1], null));
+            factionHeroesDictionary[factionName].Add(new Hero("Lord", "Haywire", true, 30, Arrays.countyName[1], "Scavenging"));
         }
         else
         {
-            factionHeroesDictionary[factionName].Add(new Hero(null, null, false, 0, Arrays.countyName[countyIndex], null));
+            factionHeroesDictionary[factionName].Add(new Hero(null, null, false, 0, Arrays.countyName[countyIndex], "Scavenging"));
             int randomLastNameNumber = Random.Range(0, lastNames.Length);
             factionHeroesDictionary[factionName][0].lastName = lastNames[randomLastNameNumber];
 
@@ -150,7 +151,7 @@ public class WorldMapLoad : MonoBehaviour
         for (int populationIndex = 0; populationIndex < totalPopulation; populationIndex++)
         {
             // This adds to the Dictionary List a new person.
-            countyPopulationDictionary[countyName].Add(new CountyPopulation(null, null, false, 0, null));
+            countyPopulationDictionary[countyName].Add(new CountyPopulation(null, null, false, 0, "Scavenging"));
 
             // Generates Persons Last Name
             int randomLastNameNumber = Random.Range(0, lastNames.Length);

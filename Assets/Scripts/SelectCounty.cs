@@ -139,7 +139,8 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
                 if (localHeroes[i].activity == null)
                 {
                     //Debug.Log("Leader Button Text: " + UIVerticalHeroList.leaderButtonText);
-                    UIVerticalHeroList.leaderButtonText.text = localHeroes[i].firstName + " " + localHeroes[i].lastName + ": Doing Nothing!";
+                    UIVerticalHeroList.leaderButtonText.text = localHeroes[i].firstName + " " + 
+                        localHeroes[i].lastName + ": Something is fucked up!";
                 }
                 else
                 {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WorldMapLoad : MonoBehaviour
 {
-    public static WorldMapLoad Instance;
+    public static WorldMapLoad instance;
 
     [SerializeField] private int totalCapitolPop;
     [SerializeField] private GameObject countyListGameObject;
@@ -39,30 +39,33 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
 
         GetNamesFromFile();
+    }
 
+    private void Start()
+    {
         CreateCountiesDictionary();
 
         // This is just temp till we do character creation.
         playerFaction = factions[1].name;
 
-        // This is set up this way so it can be a static variable - This will be changed when we set up The Instance.
-        //countyInfoPanel = uICanvas.transform.GetChild(1).gameObject;
-        //armyInfoPanel = uICanvas.transform.GetChild(2).gameObject;
-
         CreatePopulation();
-    }
 
-
-
-    private void Start()
-    {
         // Get rid of extra variables.
         lastNames = null;
         femaleNames = null;
         maleNames = null;
+        /*
+        for (int i = 0; i < counties.Count; i++)
+        {
+            WorldMapLoad.instance.counties[Arrays.countyName[i]].spriteRenderer.color =
+            WorldMapLoad.instance.counties[Arrays.countyName[i]].faction.color32;
+        }
+        */
+
+        //CountyListCreator.instance.countiesList[0].gameObject.GetComponent<TestData>().fuckingWhatever = "Eat Shit";
     }
 
     private void GetNamesFromFile()
@@ -76,13 +79,13 @@ public class WorldMapLoad : MonoBehaviour
     private void CreateCountiesDictionary()
     {
         // Counties added to counties Dictionary.
-        counties[Arrays.countyName[0]] = new County(0, true, null, Color.clear, null, factions[0], Arrays.provinceName[0], 0);
-        counties[Arrays.countyName[1]] = new County(1, true, null, Color.clear, null, factions[1], Arrays.provinceName[1], 1);
-        counties[Arrays.countyName[2]] = new County(2, false, null, Color.clear, null, factions[2], Arrays.provinceName[1], 0);
-        counties[Arrays.countyName[3]] = new County(3, false, null, Color.clear, null, factions[3], Arrays.provinceName[1], 0);
-        counties[Arrays.countyName[4]] = new County(4, false, null, Color.clear, null, factions[4], Arrays.provinceName[1], 0);
-        counties[Arrays.countyName[5]] = new County(5, false, null, Color.clear, null, factions[5], Arrays.provinceName[1], 0);
-        counties[Arrays.countyName[6]] = new County(6, false, null, Color.clear, null, factions[6], Arrays.provinceName[1], 0);
+        counties[CountyListCreator.instance.countiesList[0].name] = new County(0, true, null, null, null, factions[1], Arrays.provinceName[0], 0);
+        counties[CountyListCreator.instance.countiesList[1].name] = new County(1, true, null, null, null, factions[0], Arrays.provinceName[1], 1);
+        counties[CountyListCreator.instance.countiesList[2].name] = new County(2, false, null, null, null, factions[2], Arrays.provinceName[1], 0);
+        counties[CountyListCreator.instance.countiesList[3].name] = new County(3, false, null, null, null, factions[3], Arrays.provinceName[1], 0);
+        counties[CountyListCreator.instance.countiesList[4].name] = new County(4, false, null, null, null, factions[4], Arrays.provinceName[1], 0);
+        counties[CountyListCreator.instance.countiesList[5].name] = new County(5, false, null, null, null, factions[5], Arrays.provinceName[1], 0);
+        counties[CountyListCreator.instance.countiesList[6].name] = new County(6, false, null, null, null, factions[6], Arrays.provinceName[1], 0);
     }
 
     private void CreatePopulation()
@@ -90,7 +93,7 @@ public class WorldMapLoad : MonoBehaviour
         // Create various county specific data.
         for (int countyIndex = 0; countyIndex < counties.Count; countyIndex++)
         {
-            string countyName = Arrays.countyName[countyIndex];
+            string countyName = CountyListCreator.instance.countiesList[countyIndex].name;
             string factionName = factions[countyIndex].name;
 
             // There should probably be some sort of null check in here?
@@ -126,11 +129,11 @@ public class WorldMapLoad : MonoBehaviour
         // This will instead need to eventually check if this is a player faction vs an AI faction.
         if (playerFaction == factionName)
         {
-            factionHeroesDictionary[factionName].Add(new Hero("Lord", "Haywire", true, 30, Arrays.countyName[1], "Scavenging"));
+            factionHeroesDictionary[factionName].Add(new Hero("Lord", "Haywire", true, 30, CountyListCreator.instance.countiesList[1].name, "Scavenging"));
         }
         else
         {
-            factionHeroesDictionary[factionName].Add(new Hero(null, null, false, 0, Arrays.countyName[countyIndex], "Scavenging"));
+            factionHeroesDictionary[factionName].Add(new Hero(null, null, false, 0, CountyListCreator.instance.countiesList[countyIndex].name, "Scavenging"));
             int randomLastNameNumber = Random.Range(0, lastNames.Length);
             factionHeroesDictionary[factionName][0].lastName = lastNames[randomLastNameNumber];
 

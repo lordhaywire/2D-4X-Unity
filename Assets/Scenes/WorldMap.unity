@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 19502183}
   - component: {fileID: 19502181}
   - component: {fileID: 19502182}
-  - component: {fileID: 19502184}
   m_Layer: 0
   m_Name: Umatilla
   m_TagString: Untagged
@@ -365,18 +364,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &19502184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 19502179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79adbe9dbdb388649a8e91489a5d1ade, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &20212083
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,6 +980,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 249060078}
+  - component: {fileID: 249060079}
   m_Layer: 0
   m_Name: ---Counties---
   m_TagString: Untagged
@@ -1022,6 +1010,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &249060079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249060077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcbddaeca17938f4bad9b3a56b904fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &259231818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,7 +1331,6 @@ GameObject:
   - component: {fileID: 285694182}
   - component: {fileID: 285694183}
   - component: {fileID: 285694184}
-  - component: {fileID: 285694185}
   m_Layer: 0
   m_Name: Tillamook
   m_TagString: Untagged
@@ -1642,18 +1641,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4783efaaa6305e04884094b94152ab4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &285694185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285694180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79adbe9dbdb388649a8e91489a5d1ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &300843365
@@ -3756,8 +3743,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 746868440}
-  - component: {fileID: 746868441}
   - component: {fileID: 746868444}
+  - component: {fileID: 746868441}
   - component: {fileID: 746868443}
   - component: {fileID: 746868442}
   - component: {fileID: 746868445}
@@ -3803,31 +3790,31 @@ MonoBehaviour:
   armyInfoPanel: {fileID: 738409371}
   playerFaction: 
   factions:
-  - name: Faction1
-    color32:
-      serializedVersion: 2
-      rgba: 0
   - name: The Shit Birds
     color32:
       serializedVersion: 2
       rgba: 0
-  - name: Faction2
+  - name: Faction 1
     color32:
       serializedVersion: 2
       rgba: 0
-  - name: Faction3
+  - name: Faction 2
     color32:
       serializedVersion: 2
       rgba: 0
-  - name: Faction4
+  - name: Faction 3
     color32:
       serializedVersion: 2
       rgba: 0
-  - name: Faction5
+  - name: Faction 4
     color32:
       serializedVersion: 2
       rgba: 0
-  - name: Faction6
+  - name: Faction 5
+    color32:
+      serializedVersion: 2
+      rgba: 0
+  - name: Faction 6
     color32:
       serializedVersion: 2
       rgba: 0
@@ -4323,7 +4310,6 @@ GameObject:
   - component: {fileID: 889005933}
   - component: {fileID: 889005931}
   - component: {fileID: 889005932}
-  - component: {fileID: 889005934}
   m_Layer: 0
   m_Name: Douglas
   m_TagString: Untagged
@@ -4540,18 +4526,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &889005934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889005929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79adbe9dbdb388649a8e91489a5d1ade, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &916023828
 GameObject:
   m_ObjectHideFlags: 0
@@ -4564,7 +4538,6 @@ GameObject:
   - component: {fileID: 916023830}
   - component: {fileID: 916023831}
   - component: {fileID: 916023832}
-  - component: {fileID: 916023833}
   m_Layer: 0
   m_Name: Portland
   m_TagString: Untagged
@@ -4795,18 +4768,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4783efaaa6305e04884094b94152ab4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &916023833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 916023828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79adbe9dbdb388649a8e91489a5d1ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &958003575
@@ -5760,7 +5721,6 @@ GameObject:
   - component: {fileID: 1365887285}
   - component: {fileID: 1365887286}
   - component: {fileID: 1365887287}
-  - component: {fileID: 1365887288}
   m_Layer: 0
   m_Name: Wasco
   m_TagString: Untagged
@@ -5998,18 +5958,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4783efaaa6305e04884094b94152ab4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1365887288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1365887283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79adbe9dbdb388649a8e91489a5d1ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1419772564
@@ -6401,7 +6349,6 @@ GameObject:
   - component: {fileID: 1537027675}
   - component: {fileID: 1537027676}
   - component: {fileID: 1537027677}
-  - component: {fileID: 1537027678}
   m_Layer: 0
   m_Name: Cowlitz
   m_TagString: Untagged
@@ -6651,18 +6598,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4783efaaa6305e04884094b94152ab4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1537027678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537027673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79adbe9dbdb388649a8e91489a5d1ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1550545363
@@ -7064,7 +6999,6 @@ GameObject:
   - component: {fileID: 1628319669}
   - component: {fileID: 1628319667}
   - component: {fileID: 1628319668}
-  - component: {fileID: 1628319670}
   m_Layer: 0
   m_Name: Harney
   m_TagString: Untagged
@@ -7263,18 +7197,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1628319670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628319665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79adbe9dbdb388649a8e91489a5d1ade, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1629445698
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,11 +10,11 @@ public class UIPopulationInfoPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        if (WorldMapLoad.Instance.countyPopulationDictionary[SelectCounty.currentlySelectedCounty] != null)
+        if (WorldMapLoad.instance.countyPopulationDictionary[SelectCounty.currentlySelectedCounty] != null)
         {
-            var countyList = WorldMapLoad.Instance.countyPopulationDictionary[SelectCounty.currentlySelectedCounty];
+            var countyList = WorldMapLoad.instance.countyPopulationDictionary[SelectCounty.currentlySelectedCounty];
             var factionList =
-                WorldMapLoad.Instance.factionHeroesDictionary[WorldMapLoad.Instance.counties[SelectCounty.currentlySelectedCounty].faction.name];
+                WorldMapLoad.instance.factionHeroesDictionary[WorldMapLoad.instance.counties[SelectCounty.currentlySelectedCounty].faction.name];
             // This is for the leaders of each factions.
             for (int i = 0; i < factionList.Count; i++)
             {

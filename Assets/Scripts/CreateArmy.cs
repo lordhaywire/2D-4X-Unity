@@ -10,14 +10,14 @@ public class CreateArmy : MonoBehaviour
     public void CreateArmyButton()
     {
         // This is so we can only create the army in our own counties.
-        if (WorldMapLoad.Instance.counties[SelectCounty.currentlySelectedCounty].faction.name == WorldMapLoad.Instance.playerFaction)
+        if (WorldMapLoad.instance.counties[SelectCounty.currentlySelectedCounty].faction.name == WorldMapLoad.instance.playerFaction)
         {
-            var armyNumber = WorldMapLoad.Instance.armies.Count;
+            var armyNumber = WorldMapLoad.instance.armies.Count;
             var newArmyList = new Army(null, null, null, null, null, null,false, false,false, "Player", "Fuck Stick" + armyNumber, Random.Range(1, 1001));
 
-            WorldMapLoad.Instance.armies.Add(newArmyList);
+            WorldMapLoad.instance.armies.Add(newArmyList);
 
-            newArmyList.gameObject = Instantiate(unitPrefab, WorldMapLoad.Instance.counties[SelectCounty.currentlySelectedCounty].countyCenterGameObject.transform.position,
+            newArmyList.gameObject = Instantiate(unitPrefab, WorldMapLoad.instance.counties[SelectCounty.currentlySelectedCounty].countyCenterGameObject.transform.position,
               Quaternion.identity);
             //Debug.Log("New Army Game Object: " + newArmyList.gameObject);
             // Change name of GameObject in the inspector
@@ -45,13 +45,13 @@ public class CreateArmy : MonoBehaviour
             newArmyList.armyDestination = SelectCounty.currentlySelectedCounty;
 
             // Change the Army Info Panel to have the new army info from list.
-            WorldMapLoad.Instance.armyInfoPanel.SetActive(true);
+            WorldMapLoad.instance.armyInfoPanel.SetActive(true);
 
             UIArmyPanel.instance.armyOwnerText.text = "Owner: " + newArmyList.owner; 
             UIArmyPanel.instance.armyNameText.text = "Name: " + newArmyList.name; 
             UIArmyPanel.instance.armySizeText.text = "Size: " + newArmyList.size.ToString();
 
-            WorldMapLoad.Instance.countyInfoPanel.SetActive(false);
+            WorldMapLoad.instance.countyInfoPanel.SetActive(false);
         }
         else
         {

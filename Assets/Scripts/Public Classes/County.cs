@@ -6,12 +6,12 @@ public class County
     public GameObject countyCenterGameObject;
     public SpriteRenderer spriteRenderer;
     public SelectCounty selectCounty; // We may be able to remove this.
-    public Faction faction;
+    public FactionNameAndColor faction;
     public string province;
     public int population;
 
     public County(int newCountyID, bool newIsCapital, GameObject newCountyCenterGameObject, SpriteRenderer newSpriteRendered,
-        SelectCounty newSelectCounty, Faction newFaction, string newProvince, int newPopulation)
+        SelectCounty newSelectCounty, FactionNameAndColor newFaction, string newProvince, int newPopulation)
     {
         countyID = newCountyID;
         isCapital = newIsCapital;

@@ -63,10 +63,10 @@ public class ArmyMovement : MonoBehaviour
         {
             if (WorldMapLoad.instance.armies[int.Parse(name)].startTimer == true)
             {
-                if (TimeKeeper.foreverTimer > lastCheckTime + 1) // Checking every "minute" (which is the 1 in the if statement).
+                if (TimeKeeper.instance.foreverTimer > lastCheckTime + 1) // Checking every "minute" (which is the 1 in the if statement).
                 {
                     ArmyTimer();
-                    lastCheckTime = TimeKeeper.foreverTimer;
+                    lastCheckTime = TimeKeeper.instance.foreverTimer;
                 }
             }
         }
@@ -91,9 +91,9 @@ public class ArmyMovement : MonoBehaviour
         if (isTimeToDestinationSet == false)
         {
             // This needs to be in the order of Days > Hours > Minutes so that the Getter setter works.
-            LocalHours = TimeKeeper.hours + hoursTillArrival;
-            LocalMinutes = TimeKeeper.minutes + minutesTillArrival;  //Cast from Float to Int.
-            localDays = TimeKeeper.days + daysTillArrival;
+            LocalHours = TimeKeeper.instance.hours + hoursTillArrival;
+            LocalMinutes = TimeKeeper.instance.minutes + minutesTillArrival;  //Cast from Float to Int.
+            localDays = TimeKeeper.instance.days + daysTillArrival;
             //Debug.Log("2st Local Hours: " + LocalHours);
             //Debug.Log("2st Local Minutes: " + LocalMinutes);
 
@@ -105,12 +105,14 @@ public class ArmyMovement : MonoBehaviour
             WorldMapLoad.instance.armies[int.Parse(name)].armyTimerCanvasGameObject.SetActive(true);
 
             // We can probably remove current time at some point, but right now for testing lets leave it.
+            // Double check if we can replace string.Format with just $.
             WorldMapLoad.instance.armies[int.Parse(name)].armyTimerText.text = string.Format("Time till arrival: Day " + localDays + " {0:00}:{1:00}" +
-                "\n Current Time: Day " + TimeKeeper.days + " {2:00}:{3:00}", LocalHours, LocalMinutes, TimeKeeper.hours, (int)Math.Round(TimeKeeper.minutes));
+                "\n Current Time: Day " + TimeKeeper.instance.days +
+                " {2:00}:{3:00}", LocalHours, LocalMinutes, TimeKeeper.instance.hours, (int)Math.Round(TimeKeeper.instance.minutes));
 
             //Debug.Log("TimeKeeper Minutes: " + TimeKeeper.minutes);
             // This still could be broken.
-            if (TimeKeeper.days == localDays && TimeKeeper.hours == LocalHours && TimeKeeper.minutes >= LocalMinutes) //  && LocalMinutes <= TimeKeeper.minutes + 1)
+            if (TimeKeeper.instance.days == localDays && TimeKeeper.instance.hours == LocalHours && TimeKeeper.instance.minutes >= LocalMinutes) //  && LocalMinutes <= TimeKeeper.minutes + 1)
             {
                 WorldMapLoad.instance.armies[int.Parse(name)].startTimer = false;
                 // This starts the movement for the army to move.

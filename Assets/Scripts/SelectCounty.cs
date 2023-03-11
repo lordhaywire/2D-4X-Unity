@@ -36,6 +36,15 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
         UICountyPanel.instance.heroInfoList.SetActive(false); // This was some bullshit.  This makes it so that onEnable
                                                      // resets the HeroInfoList.
+
+        if(WorldMapLoad.instance.playerFaction == WorldMapLoad.instance.counties[name].faction.name)
+        {
+            UIMusterArmyButton.instance.musterArmyButtonGameObject.SetActive(true);
+        }
+        else
+        {
+            UIMusterArmyButton.instance.musterArmyButtonGameObject.SetActive(false);
+        }
     }
 
     private void ArmyRightClickCounty()

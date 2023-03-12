@@ -10,7 +10,7 @@ public class WorldMapLoad : MonoBehaviour
     [SerializeField] private GameObject countyListGameObject;
     [SerializeField] private GameObject uICanvas;
 
-    public bool canSeeCountyInfo = true;
+    public bool canSeeCountyInfo;
     public GameObject countyInfoPanel;
     public GameObject armyInfoPanel;
 
@@ -41,6 +41,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Awake()
     {
+        canSeeCountyInfo = false;
         instance = this;
 
         GetNamesFromFile();
@@ -52,6 +53,7 @@ public class WorldMapLoad : MonoBehaviour
 
         // This is just temp till we do character creation.
         playerFaction = factionNameAndColors[0].name;
+        Debug.Log("Player Faction " + playerFaction);
 
         CreatePopulation();
 
@@ -79,7 +81,6 @@ public class WorldMapLoad : MonoBehaviour
         {
             factions[i].factionNameAndColor = factionNameAndColors[i];
         } 
-        
     }
 
     private void GetNamesFromFile()
@@ -93,13 +94,28 @@ public class WorldMapLoad : MonoBehaviour
     private void CreateCountiesDictionary()
     {
         // Counties added to counties Dictionary.
-        counties[CountyListCreator.instance.countiesList[0].name] = new County(0, true, null, null, null, factionNameAndColors[1], Arrays.provinceName[0], 0);
-        counties[CountyListCreator.instance.countiesList[1].name] = new County(1, true, null, null, null, factionNameAndColors[0], Arrays.provinceName[1], 1);
-        counties[CountyListCreator.instance.countiesList[2].name] = new County(2, false, null, null, null, factionNameAndColors[2], Arrays.provinceName[1], 0);
-        counties[CountyListCreator.instance.countiesList[3].name] = new County(3, false, null, null, null, factionNameAndColors[3], Arrays.provinceName[1], 0);
-        counties[CountyListCreator.instance.countiesList[4].name] = new County(4, false, null, null, null, factionNameAndColors[4], Arrays.provinceName[1], 0);
-        counties[CountyListCreator.instance.countiesList[5].name] = new County(5, false, null, null, null, factionNameAndColors[5], Arrays.provinceName[1], 0);
-        counties[CountyListCreator.instance.countiesList[6].name] = new County(6, false, null, null, null, factionNameAndColors[6], Arrays.provinceName[1], 0);
+        // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin
+        counties[CountyListCreator.instance.countiesList[0].name] = new County(
+            0, true, null, null, null, factionNameAndColors[1], 
+            Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0);
+        counties[CountyListCreator.instance.countiesList[1].name] = new County(
+            1, true, null, null, null, factionNameAndColors[0], 
+            Arrays.provinceName[1], "Ruin", "Forest", "Farm", 1);
+        counties[CountyListCreator.instance.countiesList[2].name] = new County(
+            2, false, null, null, null, factionNameAndColors[2], 
+            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0);
+        counties[CountyListCreator.instance.countiesList[3].name] = new County(
+            3, false, null, null, null, factionNameAndColors[3], 
+            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0);
+        counties[CountyListCreator.instance.countiesList[4].name] = new County(
+            4, false, null, null, null, factionNameAndColors[4], 
+            Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0);
+        counties[CountyListCreator.instance.countiesList[5].name] = new County(
+            5, false, null, null, null, factionNameAndColors[5], 
+            Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0);
+        counties[CountyListCreator.instance.countiesList[6].name] = new County(
+            6, false, null, null, null, factionNameAndColors[6], 
+            Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0);
     }
 
     private void CreatePopulation()

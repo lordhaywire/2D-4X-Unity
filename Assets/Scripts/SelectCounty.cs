@@ -35,9 +35,9 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         WorldMapLoad.instance.armyInfoPanel.SetActive(false);
 
         UICountyPanel.instance.heroInfoList.SetActive(false); // This was some bullshit.  This makes it so that onEnable
-                                                     // resets the HeroInfoList.
+                                                              // resets the HeroInfoList.
 
-        if(WorldMapLoad.instance.playerFaction == WorldMapLoad.instance.counties[name].faction.name)
+        if (WorldMapLoad.instance.playerFaction == WorldMapLoad.instance.counties[name].faction.name)
         {
             UIMusterArmyButton.instance.musterArmyButtonGameObject.SetActive(true);
         }
@@ -110,6 +110,9 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         UICountyPanel.instance.countyNameText.text = "County: " + name;
 
         // This is just some temp bullshit to not allow you to look at counties you don't own.
+        //Debug.Log("County Faction : " + WorldMapLoad.instance.counties[name].faction.name);
+        //Debug.Log("Player Faction : " + WorldMapLoad.instance.playerFaction);
+        //Debug.Log("Can See County Info? " + WorldMapLoad.instance.canSeeCountyInfo);
         if (WorldMapLoad.instance.counties[name].faction.name ==
             WorldMapLoad.instance.playerFaction || WorldMapLoad.instance.canSeeCountyInfo == true)
         {

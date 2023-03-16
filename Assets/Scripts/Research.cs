@@ -8,6 +8,7 @@ public class Research : MonoBehaviour
     public static Research instance;
     
     public GameObject researchItemPrefab;
+    public GameObject tier0Research;
     public GameObject tier1Research;
     public GameObject tier2Research;
     public GameObject tier3Research;
@@ -16,22 +17,33 @@ public class Research : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
-        GenerateResearchPanel(); 
+        instance = this;        
+    }
+    private void OnEnable()
+    {
+        TimeKeeper.instance.PauseandUnpause();
+        GenerateResearchPanel();
     }
 
+    private void OnDisable()
+    {
+        TimeKeeper.instance.PauseandUnpause();
+    }
     private void GenerateResearchPanel()
     {
         for (int i = 0; i < researchItems.Count; i++)
         {
             switch (researchItems[i].tier)
             {
+                case 0:
+                    var tier0item = Instantiate(researchItemPrefab, tier0Research.transform);
+                    tier0item.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = researchItems[i].researchName;
+                    break;
                 case 1:
                     var tier1item = Instantiate(researchItemPrefab, tier1Research.transform);
                     tier1item.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = researchItems[i].researchName;
                     break;
                 case 2:
-
                     var tier2item = Instantiate(researchItemPrefab, tier2Research.transform);
                     tier2item.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = researchItems[i].researchName;
                     break;
@@ -42,4 +54,6 @@ public class Research : MonoBehaviour
             }
         }
     }
+
+    
 }

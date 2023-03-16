@@ -8,7 +8,7 @@ public class UIVerticalHeroList : MonoBehaviour
 
     private void Awake()
     {
-        //leaderButtonGameObject = transform.GetChild(0).gameObject;
+        //leaderButtonGameObject = transform.GetChild(0).uIResearchItemPanelGameObject;
         leaderButtonText = GetComponentInChildren<TextMeshProUGUI>();
     }
 }

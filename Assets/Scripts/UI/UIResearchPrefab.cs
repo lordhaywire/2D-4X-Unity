@@ -1,9 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIResearchPrefab : MonoBehaviour
 {
-    public void OpenResearchItemPanelButton()
-    {
-        UIResearchItemPanel.instance.uIResearchItemPanelGameObject.SetActive(true);
-    }
+    public Toggle isResearchCompletedToggle;
 }

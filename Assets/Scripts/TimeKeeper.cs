@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class TimeKeeper : MonoBehaviour
 {
+    public static TimeKeeper instance;
     [SerializeField] private TextMeshProUGUI dayAndTimeText;
     [SerializeField] private TextMeshProUGUI currentSpeedText;
     [SerializeField] private GameObject paused;
@@ -11,21 +12,22 @@ public class TimeKeeper : MonoBehaviour
     private MapControls mapControls;
     private int modifiedTimeScale; // Getter Setter / Property
 
-    public static float foreverTimer; // This will eventually need to be reset.  I think.  It depends on if we run out of numbers.
-    public static float minutes;
-    public static int hours;
-    public static int days = 0;
+    public float foreverTimer; // This will eventually need to be reset.  I think.  It depends on if we run out of numbers.
+    public float minutes;
+    public int hours;
+    public int days = 0;
 
     private int oldTimeSpeed;
 
     private void Awake()
     {
+        instance = this;
         mapControls = new MapControls();  // This sets up a new control scheme for this script. This sentence doesn't mean anything to me.
         ModifiedTimeScale = 1;
     }
     private void Start()
     {
-        mapControls.Keyboard.Spacebar.started += _ => PauseWithSpacebar();
+        mapControls.Keyboard.Spacebar.started += _ => PauseandUnpause();
         oldTimeSpeed = 1;
     }
 
@@ -103,7 +105,7 @@ public class TimeKeeper : MonoBehaviour
         Debug.Log("Speedx8 - modifiedScale has changed to " + ModifiedTimeScale);
     }
 
-    private void PauseWithSpacebar()
+    public void PauseandUnpause()
     {
         
         if (ModifiedTimeScale > 0)
@@ -115,7 +117,6 @@ public class TimeKeeper : MonoBehaviour
         {
             ModifiedTimeScale = oldTimeSpeed;
         }
-        Debug.Log("Space bar was pressed.");
     }
     public int ModifiedTimeScale
     {

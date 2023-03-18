@@ -10,7 +10,7 @@ public class WorldMapLoad : MonoBehaviour
     [SerializeField] private GameObject countyListGameObject;
     [SerializeField] private GameObject uICanvas;
 
-    public bool canSeeCountyInfo = true;
+    public bool canSeeCountyInfo;
     public GameObject countyInfoPanel;
     public GameObject armyInfoPanel;
 
@@ -30,6 +30,8 @@ public class WorldMapLoad : MonoBehaviour
     public List<Army> armies = new();
 
     // Initialize Factions list that will be used with the counties.
+    public List<FactionNameAndColor> factionNameAndColors = new();
+
     public List<Faction> factions = new();
 
     // Arrays for County Population generation.
@@ -39,6 +41,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Awake()
     {
+        canSeeCountyInfo = false;
         instance = this;
 
         GetNamesFromFile();
@@ -49,23 +52,35 @@ public class WorldMapLoad : MonoBehaviour
         CreateCountiesDictionary();
 
         // This is just temp till we do character creation.
-        playerFaction = factions[1].name;
+        playerFaction = factionNameAndColors[0].name;
+        Debug.Log("Player Faction " + playerFaction);
 
         CreatePopulation();
+
+        AssignFactionNameAndColorToFaction();
+
+        FirstRunTopInfoBar();
 
         // Get rid of extra variables.
         lastNames = null;
         femaleNames = null;
         maleNames = null;
-        /*
-        for (int i = 0; i < counties.Count; i++)
-        {
-            WorldMapLoad.instance.counties[Arrays.countyName[i]].spriteRenderer.color =
-            WorldMapLoad.instance.counties[Arrays.countyName[i]].faction.color32;
-        }
-        */
+    }
 
-        //CountyListCreator.instance.countiesList[0].gameObject.GetComponent<TestData>().fuckingWhatever = "Eat Shit";
+    private void FirstRunTopInfoBar()
+    {
+        UITopInfoBar.instance.Influence = factions[0].influence;
+        UITopInfoBar.instance.Money = factions[0].money;
+        UITopInfoBar.instance.Food = factions[0].food;
+        UITopInfoBar.instance.Scrap = factions[0].scrap;
+    }
+
+    private void AssignFactionNameAndColorToFaction()
+    {
+        for (int i = 0; i < factions.Count; i++)
+        {
+            factions[i].factionNameAndColor = factionNameAndColors[i];
+        } 
     }
 
     private void GetNamesFromFile()
@@ -79,13 +94,28 @@ public class WorldMapLoad : MonoBehaviour
     private void CreateCountiesDictionary()
     {
         // Counties added to counties Dictionary.
-        counties[CountyListCreator.instance.countiesList[0].name] = new County(0, true, null, null, null, factions[1], Arrays.provinceName[0], 0);
-        counties[CountyListCreator.instance.countiesList[1].name] = new County(1, true, null, null, null, factions[0], Arrays.provinceName[1], 1);
-        counties[CountyListCreator.instance.countiesList[2].name] = new County(2, false, null, null, null, factions[2], Arrays.provinceName[1], 0);
-        counties[CountyListCreator.instance.countiesList[3].name] = new County(3, false, null, null, null, factions[3], Arrays.provinceName[1], 0);
-        counties[CountyListCreator.instance.countiesList[4].name] = new County(4, false, null, null, null, factions[4], Arrays.provinceName[1], 0);
-        counties[CountyListCreator.instance.countiesList[5].name] = new County(5, false, null, null, null, factions[5], Arrays.provinceName[1], 0);
-        counties[CountyListCreator.instance.countiesList[6].name] = new County(6, false, null, null, null, factions[6], Arrays.provinceName[1], 0);
+        // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin
+        counties[CountyListCreator.instance.countiesList[0].name] = new County(
+            0, true, null, null, null, factionNameAndColors[1], 
+            Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0);
+        counties[CountyListCreator.instance.countiesList[1].name] = new County(
+            1, true, null, null, null, factionNameAndColors[0], 
+            Arrays.provinceName[1], "Ruin", "Forest", "Farm", 1);
+        counties[CountyListCreator.instance.countiesList[2].name] = new County(
+            2, false, null, null, null, factionNameAndColors[2], 
+            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0);
+        counties[CountyListCreator.instance.countiesList[3].name] = new County(
+            3, false, null, null, null, factionNameAndColors[3], 
+            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0);
+        counties[CountyListCreator.instance.countiesList[4].name] = new County(
+            4, false, null, null, null, factionNameAndColors[4], 
+            Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0);
+        counties[CountyListCreator.instance.countiesList[5].name] = new County(
+            5, false, null, null, null, factionNameAndColors[5], 
+            Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0);
+        counties[CountyListCreator.instance.countiesList[6].name] = new County(
+            6, false, null, null, null, factionNameAndColors[6], 
+            Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0);
     }
 
     private void CreatePopulation()
@@ -94,7 +124,7 @@ public class WorldMapLoad : MonoBehaviour
         for (int countyIndex = 0; countyIndex < counties.Count; countyIndex++)
         {
             string countyName = CountyListCreator.instance.countiesList[countyIndex].name;
-            string factionName = factions[countyIndex].name;
+            string factionName = factionNameAndColors[countyIndex].name;
 
             // There should probably be some sort of null check in here?
             // Initilizes the List in the Dictionaries for Counties and Heroes.

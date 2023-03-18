@@ -19,7 +19,7 @@ public class CreateArmy : MonoBehaviour
 
             newArmyList.gameObject = Instantiate(unitPrefab, WorldMapLoad.instance.counties[SelectCounty.currentlySelectedCounty].countyCenterGameObject.transform.position,
               Quaternion.identity);
-            //Debug.Log("New Army Game Object: " + newArmyList.gameObject);
+            //Debug.Log("New Army Game Object: " + newArmyList.uIResearchItemPanelGameObject);
             // Change name of GameObject in the inspector
             newArmyList.gameObject.name = armyNumber.ToString();
 
@@ -29,11 +29,11 @@ public class CreateArmy : MonoBehaviour
             // Move GameObject to army list in Inspector.
             newArmyList.gameObject.transform.parent = armyListGameObject.transform;
 
-            // This is for the text box above the army's gameObject in the game.
+            // This is for the text box above the army's uIResearchItemPanelGameObject in the game.
             newArmyList.armyTimerCanvasGameObject = newArmyList.gameObject.transform.GetChild(0).gameObject;
             newArmyList.armyTimerText = newArmyList.gameObject.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
 
-            // This is the ArmyMovement script attached to the gameObject as a component.
+            // This is the ArmyMovement script attached to the uIResearchItemPanelGameObject as a component.
             newArmyList.armyMovement = newArmyList.gameObject.GetComponent<ArmyMovement>();
             Debug.Log("Army Movement Script? " + newArmyList.armyMovement);
             

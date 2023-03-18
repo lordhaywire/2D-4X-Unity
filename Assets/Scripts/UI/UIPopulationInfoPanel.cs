@@ -5,12 +5,14 @@ public class UIPopulationInfoPanel : MonoBehaviour
 {
     [SerializeField] private GameObject prefabHorizontalPopulationListText;
     [SerializeField] private GameObject parentPopulationListGroup;
+    [SerializeField] private GameObject populationInfoPanel;
 
     private readonly List<GameObject> populationListClones = new();
 
     private void OnEnable()
     {
         TimeKeeper.instance.PauseandUnpause();
+
         if (WorldMapLoad.instance.countyPopulationDictionary[SelectCounty.currentlySelectedCounty] != null)
         {
             var countyList = WorldMapLoad.instance.countyPopulationDictionary[SelectCounty.currentlySelectedCounty];
@@ -33,7 +35,7 @@ public class UIPopulationInfoPanel : MonoBehaviour
                 {
                     populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Female";
                 }
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().activityText.text = 
+                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().activityText.text =
                     factionList[i].activity;
             }
             // This is for the normal population in the county.

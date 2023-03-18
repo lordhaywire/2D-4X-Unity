@@ -112,9 +112,9 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         // This is just some temp bullshit to not allow you to look at counties you don't own.
         //Debug.Log("County Faction : " + WorldMapLoad.instance.counties[name].faction.name);
         //Debug.Log("Player Faction : " + WorldMapLoad.instance.playerFaction);
-        //Debug.Log("Can See County Info? " + WorldMapLoad.instance.canSeeCountyInfo);
+        //Debug.Log("Can See County Info? " + WorldMapLoad.instance.DevView);
         if (WorldMapLoad.instance.counties[name].faction.name ==
-            WorldMapLoad.instance.playerFaction || WorldMapLoad.instance.canSeeCountyInfo == true)
+            WorldMapLoad.instance.playerFaction || WorldMapLoad.instance.DevView == true)
         {
             CheckForHeroes(); // Check to see if this county has any heroes in it.
         }
@@ -123,7 +123,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
         // This is just some temp bullshit to not allow you to look at counties you don't own.
         if (WorldMapLoad.instance.playerFaction ==
-            WorldMapLoad.instance.counties[name].faction.name || WorldMapLoad.instance.canSeeCountyInfo == true)
+            WorldMapLoad.instance.counties[name].faction.name || WorldMapLoad.instance.DevView == true)
         {
             UICountyPanel.instance.countyPopulationText.text =
                 "Population: " + WorldMapLoad.instance.counties[name].population.ToString();
@@ -165,7 +165,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         for (int i = 0; i < localHeroes.Count; i++)
         {
             Debug.Log("Name: " + name);
-            if (localHeroes[i].location == name || WorldMapLoad.instance.canSeeCountyInfo == true)
+            if (localHeroes[i].location == name || WorldMapLoad.instance.DevView == true)
             {
                 UICountyPanel.instance.heroInfoList.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
 

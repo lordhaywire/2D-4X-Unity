@@ -10,12 +10,14 @@ public class WorldMapLoad : MonoBehaviour
     [SerializeField] private GameObject countyListGameObject;
     [SerializeField] private GameObject uICanvas;
 
-    public bool canSeeCountyInfo;
+    public bool DevView;
     public GameObject countyInfoPanel;
     public GameObject armyInfoPanel;
 
     // This is just temp till we do character creation.
     public string playerFaction;
+
+    public List<ResearchItem> researchItemsTier1 = new();
 
     // Initialize County Dictionary.
     public Dictionary<string, County> counties = new();
@@ -41,7 +43,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Awake()
     {
-        canSeeCountyInfo = false;
+        DevView = true;
         instance = this;
 
         GetNamesFromFile();
@@ -49,6 +51,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Start()
     {
+        CreateResearchList();
         CreateCountiesDictionary();
 
         // This is just temp till we do character creation.
@@ -65,6 +68,27 @@ public class WorldMapLoad : MonoBehaviour
         lastNames = null;
         femaleNames = null;
         maleNames = null;
+    }
+
+    private void CreateResearchList()
+    {
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Fisher's Shack", AllText.ResearchItemDescriptions.FISHERSSHACK, null, null, 1, true));
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Forester's Shack", AllText.ResearchItemDescriptions.FORESTERSSHACK, null, null, 1, true));
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Gardener's Shack", AllText.ResearchItemDescriptions.GARDENERSSHACK, null, null, 1, true));
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Researcher's Shack", AllText.ResearchItemDescriptions.RESEARCHSSHACK, null, null, 1, true));
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Scavenger's Shack", AllText.ResearchItemDescriptions.SCAVANGERSSHACK, null, null, 1, true));
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Stone Worker's Shack", AllText.ResearchItemDescriptions.STONEWORKERSSHACK, null, null, 1, true));
+
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Basic Tactics - Guns", AllText.ResearchItemDescriptions.BASICTACTICSGUNS, null, null, 1, false));
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Basic Tactics - Melee", AllText.ResearchItemDescriptions.BASICTACTICSMELEE, null, null, 1, false));
+
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Primative Melee Weaponsmith's Shack", AllText.ResearchItemDescriptions.PRIMATIVEMELEESMITHSHACK, null, null, 1, false));
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Primative Ranged Weaponsmith's Shack", AllText.ResearchItemDescriptions.PRIMATIVERANGEDSMITHSHACK, null, null, 1, false));
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Primative Gunsmith's Shack", AllText.ResearchItemDescriptions.PRIMATIVEGUNSMITHSHACK, null, null, 1, false));
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Primative Ammunition Smith's Shack", AllText.ResearchItemDescriptions.PRIMATIVEAMMOSHACK, null, null, 1, false));
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Primative Gun Ammunition Smith's Shack", AllText.ResearchItemDescriptions.PRIMATVEGUNAMMOSHACK, null, null, 1, false));
+
+        researchItemsTier1.Add(new ResearchItem(null, null, null, "Elitism", AllText.ResearchItemDescriptions.ELITISM, null, null, 1, false));
     }
 
     private void FirstRunTopInfoBar()

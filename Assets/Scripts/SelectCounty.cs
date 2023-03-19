@@ -40,10 +40,15 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         if (WorldMapLoad.instance.playerFaction == WorldMapLoad.instance.counties[name].faction.name)
         {
             UIMusterArmyButton.instance.musterArmyButtonGameObject.SetActive(true);
+            UIExpandBuildingsPanel.instance.expandBuildingButtonGameObject.SetActive(true);
+
+
+                    
         }
         else
         {
             UIMusterArmyButton.instance.musterArmyButtonGameObject.SetActive(false);
+            UIExpandBuildingsPanel.instance.expandBuildingButtonGameObject.SetActive(false);
         }
     }
 

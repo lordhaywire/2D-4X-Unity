@@ -40,7 +40,7 @@ public class ResearchTier1 : MonoBehaviour
         for(int i = 0;i < WorldMapLoad.instance.researchItemsTier1.Count; i++)
         {
             WorldMapLoad.instance.researchItemsTier1[i].researchNameText.text = WorldMapLoad.instance.researchItemsTier1[i].researchName;
-            if (WorldMapLoad.instance.researchItemsTier1[i].isDone == true)
+            if (WorldMapLoad.instance.researchItemsTier1[i].isResearchDone == true)
             {
                 WorldMapLoad.instance.researchItemsTier1[i].toggle.isOn = true;
             }

@@ -19,7 +19,7 @@ public class WorldMapLoad : MonoBehaviour
 
     public List<ResearchItem> researchItemsTier1 = new();
 
-    // Initialize County Dictionary.
+    // Initialize County Dictionary List.
     public Dictionary<string, County> counties = new();
 
     // Initialize County Population Dictionary List.
@@ -43,7 +43,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Awake()
     {
-        DevView = true;
+        DevView = false;
         instance = this;
 
         GetNamesFromFile();
@@ -51,7 +51,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Start()
     {
-        CreateResearchList();
+        CreateResearchandBuildingList();
         CreateCountiesDictionary();
 
         // This is just temp till we do character creation.
@@ -70,25 +70,51 @@ public class WorldMapLoad : MonoBehaviour
         maleNames = null;
     }
 
-    private void CreateResearchList()
+    private void CreateResearchandBuildingList()
     {
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Fisher's Shack", AllText.ResearchItemDescriptions.FISHERSSHACK, null, null, 1, true));
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Forester's Shack", AllText.ResearchItemDescriptions.FORESTERSSHACK, null, null, 1, true));
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Gardener's Shack", AllText.ResearchItemDescriptions.GARDENERSSHACK, null, null, 1, true));
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Researcher's Shack", AllText.ResearchItemDescriptions.RESEARCHSSHACK, null, null, 1, true));
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Scavenger's Shack", AllText.ResearchItemDescriptions.SCAVANGERSSHACK, null, null, 1, true));
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Stone Worker's Shack", AllText.ResearchItemDescriptions.STONEWORKERSSHACK, null, null, 1, true));
-
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Basic Tactics - Guns", AllText.ResearchItemDescriptions.BASICTACTICSGUNS, null, null, 1, false));
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Basic Tactics - Melee", AllText.ResearchItemDescriptions.BASICTACTICSMELEE, null, null, 1, false));
-
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Primative Melee Weaponsmith's Shack", AllText.ResearchItemDescriptions.PRIMATIVEMELEESMITHSHACK, null, null, 1, false));
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Primative Ranged Weaponsmith's Shack", AllText.ResearchItemDescriptions.PRIMATIVERANGEDSMITHSHACK, null, null, 1, false));
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Primative Gunsmith's Shack", AllText.ResearchItemDescriptions.PRIMATIVEGUNSMITHSHACK, null, null, 1, false));
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Primative Ammunition Smith's Shack", AllText.ResearchItemDescriptions.PRIMATIVEAMMOSHACK, null, null, 1, false));
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Primative Gun Ammunition Smith's Shack", AllText.ResearchItemDescriptions.PRIMATVEGUNAMMOSHACK, null, null, 1, false));
-
-        researchItemsTier1.Add(new ResearchItem(null, null, null, "Elitism", AllText.ResearchItemDescriptions.ELITISM, null, null, 1, false));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Fisher's Shack", AllText.ResearchItemDescriptions.FISHERSSHACK,
+            null, null, 1, true, true, false, 500, 14, 0, 5));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Forester's Shack", AllText.ResearchItemDescriptions.FORESTERSSHACK,
+            null, null, 1, true, true, false, 500, 14, 0, 5));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Gardener's Shack", AllText.ResearchItemDescriptions.GARDENERSSHACK,
+            null, null, 1, true, true, false, 500, 14, 0, 5));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Researcher's Shack", AllText.ResearchItemDescriptions.RESEARCHSSHACK,
+            null, null, 1, true, true, false, 500, 14, 0, 5));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Scavenger's Shack", AllText.ResearchItemDescriptions.SCAVANGERSSHACK,
+            null, null, 1, true, true, false, 500, 14, 0, 5));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Stone Worker's Shack", AllText.ResearchItemDescriptions.STONEWORKERSSHACK,
+            null, null, 1, true, true, false, 500, 14, 0, 5));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Basic Tactics - Guns", AllText.ResearchItemDescriptions.BASICTACTICSGUNS,
+            null, null, 1, false, false, false, 0, 0, 0, 0));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Basic Tactics - Melee", AllText.ResearchItemDescriptions.BASICTACTICSMELEE,
+            null, null, 1, false, false, false, 0, 0, 0, 0));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Primative Melee Weaponsmith's Shack", AllText.ResearchItemDescriptions.PRIMATIVEMELEESMITHSHACK,
+            null, null, 1, false, true, false, 500, 14, 0, 5));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Primative Ranged Weaponsmith's Shack", AllText.ResearchItemDescriptions.PRIMATIVERANGEDSMITHSHACK,
+            null, null, 1, false, true, false, 500, 14, 0, 5));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Primative Gunsmith's Shack", AllText.ResearchItemDescriptions.PRIMATIVEGUNSMITHSHACK,
+            null, null, 1, false, true, false, 500, 14, 0, 5));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Primative Ammunition Smith's Shack", AllText.ResearchItemDescriptions.PRIMATIVEAMMOSHACK,
+            null, null, 1, false, true, false, 500, 14, 0, 5));
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Primative Gun Ammunition Smith's Shack", AllText.ResearchItemDescriptions.PRIMATVEGUNAMMOSHACK,
+            null, null, 1, false, true, false, 500, 14, 0, 5));
+        // The isResearchDone should start out as false, just set to done as testing.
+        researchItemsTier1.Add(new ResearchItem(
+            null, null, null, "Elitism", AllText.ResearchItemDescriptions.ELITISM,
+            null, null, 1, true, false, false, 0, 0, 0, 0));
     }
 
     private void FirstRunTopInfoBar()
@@ -104,7 +130,7 @@ public class WorldMapLoad : MonoBehaviour
         for (int i = 0; i < factions.Count; i++)
         {
             factions[i].factionNameAndColor = factionNameAndColors[i];
-        } 
+        }
     }
 
     private void GetNamesFromFile()
@@ -120,25 +146,25 @@ public class WorldMapLoad : MonoBehaviour
         // Counties added to counties Dictionary.
         // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin
         counties[CountyListCreator.instance.countiesList[0].name] = new County(
-            0, true, null, null, null, factionNameAndColors[1], 
+            0, true, null, null, null, factionNameAndColors[1],
             Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0);
         counties[CountyListCreator.instance.countiesList[1].name] = new County(
-            1, true, null, null, null, factionNameAndColors[0], 
+            1, true, null, null, null, factionNameAndColors[0],
             Arrays.provinceName[1], "Ruin", "Forest", "Farm", 1);
         counties[CountyListCreator.instance.countiesList[2].name] = new County(
-            2, false, null, null, null, factionNameAndColors[2], 
+            2, false, null, null, null, factionNameAndColors[2],
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0);
         counties[CountyListCreator.instance.countiesList[3].name] = new County(
-            3, false, null, null, null, factionNameAndColors[3], 
+            3, false, null, null, null, factionNameAndColors[3],
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0);
         counties[CountyListCreator.instance.countiesList[4].name] = new County(
-            4, false, null, null, null, factionNameAndColors[4], 
+            4, false, null, null, null, factionNameAndColors[4],
             Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0);
         counties[CountyListCreator.instance.countiesList[5].name] = new County(
-            5, false, null, null, null, factionNameAndColors[5], 
+            5, false, null, null, null, factionNameAndColors[5],
             Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0);
         counties[CountyListCreator.instance.countiesList[6].name] = new County(
-            6, false, null, null, null, factionNameAndColors[6], 
+            6, false, null, null, null, factionNameAndColors[6],
             Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0);
     }
 

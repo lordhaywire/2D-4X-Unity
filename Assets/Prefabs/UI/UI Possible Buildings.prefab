@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 405758365417296910}
   - component: {fileID: 7853953709119652973}
   - component: {fileID: 7946139785294854428}
+  - component: {fileID: 5155117298429948475}
   m_Layer: 5
   m_Name: UI Possible Buildings
   m_TagString: Untagged
@@ -256,4 +257,28 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7853953709119652973}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5155117298429948475}
+        m_TargetAssemblyTypeName: UIPossibleBuildingButton, Assembly-CSharp
+        m_MethodName: PossibleBuildingButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5155117298429948475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7259660105327218338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c0cad1ed783524293c168bfbf5f9a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

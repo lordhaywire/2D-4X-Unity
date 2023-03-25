@@ -1,16 +1,39 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class UIPossibleBuildingsPanel : MonoBehaviour
 {
+    public static UIPossibleBuildingsPanel instance;
+
+    public GameObject buildingDescriptionPanel;
+    public int possibleBuildingButtonClicked;
+
+    public event Action PossibleBuildingButtonPressed;
+
+    public int PossibleBuildingButtonClicked
+    {
+        get 
+        { 
+            return possibleBuildingButtonClicked; 
+        }
+        set 
+        { 
+            possibleBuildingButtonClicked = value;
+            PossibleBuildingButtonPressed();
+        }
+    }
+
     [SerializeField] private GameObject possibleBuildingsPrefab;
     [SerializeField] private GameObject possibleBuildingsParent;
 
     private readonly List<GameObject> possibleBuildingClones = new();
 
-    private void OnEnable()
+    private void Awake() // This was OnEnable but that was causing it to instantiate every time it got opened.
     {
+        instance = this;
+        
         for (int i = 0; i < WorldMapLoad.instance.researchItemsTier1.Count; i++)
         {
             if (WorldMapLoad.instance.researchItemsTier1[i].isResearchDone && 
@@ -18,11 +41,11 @@ public class UIPossibleBuildingsPanel : MonoBehaviour
             {
                 possibleBuildingClones.Add(Instantiate(possibleBuildingsPrefab, possibleBuildingsParent.transform));
                 possibleBuildingClones[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
-                    WorldMapLoad.instance.researchItemsTier1[i].researchName;
+                    WorldMapLoad.instance.researchItemsTier1[i].possibleBuildings.name;
+                possibleBuildingClones[i].name = i.ToString();
             }
             
-        }
-            
+        }  
     }
 
     public void CloseButton()

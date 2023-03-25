@@ -8,7 +8,7 @@ public class UIResearchItem : MonoBehaviour
 
         var researchItem = WorldMapLoad.instance.researchItemsTier1[int.Parse(name)];
         UIResearchTitleDescriptionPanel.instance.title.text =
-            researchItem.researchName;
+            researchItem.name;
         UIResearchTitleDescriptionPanel.instance.description.text =
             researchItem.description;
         if(researchItem.prerequisite1 == null && researchItem.prerequisite1 == null)

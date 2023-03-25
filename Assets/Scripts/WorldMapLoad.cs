@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class WorldMapLoad : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class WorldMapLoad : MonoBehaviour
     public string playerFaction;
 
     public List<ResearchItem> researchItemsTier1 = new();
+
+    public List<PossibleBuilding> possibleBuildings = new();
+    public List<CurrentBuilding> currentBuildings = new();
 
     // Initialize County Dictionary List.
     public Dictionary<string, County> counties = new();
@@ -73,48 +77,80 @@ public class WorldMapLoad : MonoBehaviour
     private void CreateResearchandBuildingList()
     {
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Fisher's Shack", AllText.ResearchItemDescriptions.FISHERSSHACK,
-            null, null, 1, true, true, false, 500, 14, 0, 5));
+            null, null, null, AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK,
+            null, null, 1, true, true, null));
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Forester's Shack", AllText.ResearchItemDescriptions.FORESTERSSHACK,
-            null, null, 1, true, true, false, 500, 14, 0, 5));
+            null, null, null, AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK,
+            null, null, 1, true, true, null));
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Gardener's Shack", AllText.ResearchItemDescriptions.GARDENERSSHACK,
-            null, null, 1, true, true, false, 500, 14, 0, 5));
+            null, null, null, AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK,
+            null, null, 1, true, true, null));
+        /*
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Researcher's Shack", AllText.ResearchItemDescriptions.RESEARCHSSHACK,
-            null, null, 1, true, true, false, 500, 14, 0, 5));
+            null, null, null, AllText.BuildingName.RESEARCHSSHACK, AllText.Descriptions.RESEARCHSSHACK,
+            null, null, 1, true, true, null));
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Scavenger's Shack", AllText.ResearchItemDescriptions.SCAVANGERSSHACK,
-            null, null, 1, true, true, false, 500, 14, 0, 5));
+            null, null, null, AllText.BuildingName.SCAVANGERSSHACK, AllText.Descriptions.SCAVANGERSSHACK,
+            null, null, 1, true, true, null));
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Stone Worker's Shack", AllText.ResearchItemDescriptions.STONEWORKERSSHACK,
-            null, null, 1, true, true, false, 500, 14, 0, 5));
+            null, null, null, AllText.BuildingName.STONEWORKERSSHACK, AllText.Descriptions.STONEWORKERSSHACK,
+            null, null, 1, true, true, null));
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Basic Tactics - Guns", AllText.ResearchItemDescriptions.BASICTACTICSGUNS,
-            null, null, 1, false, false, false, 0, 0, 0, 0));
+            null, null, null, "Basic Tactics - Guns", AllText.Descriptions.BASICTACTICSGUNS,
+            null, null, 1, false, false, null));
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Basic Tactics - Melee", AllText.ResearchItemDescriptions.BASICTACTICSMELEE,
-            null, null, 1, false, false, false, 0, 0, 0, 0));
+            null, null, null, "Basic Tactics - Melee", AllText.Descriptions.BASICTACTICSMELEE,
+            null, null, 1, false, false, null));
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Primative Melee Weaponsmith's Shack", AllText.ResearchItemDescriptions.PRIMATIVEMELEESMITHSHACK,
-            null, null, 1, false, true, false, 500, 14, 0, 5));
+            null, null, null, AllText.BuildingName.PRIMATIVEMELEESMITHSHACK, AllText.Descriptions.PRIMATIVEMELEESMITHSHACK,
+            null, null, 1, true, false, null));
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Primative Ranged Weaponsmith's Shack", AllText.ResearchItemDescriptions.PRIMATIVERANGEDSMITHSHACK,
-            null, null, 1, false, true, false, 500, 14, 0, 5));
+            null, null, null, AllText.BuildingName.PRIMATIVERANGEDSMITHSHACK, AllText.Descriptions.PRIMATIVERANGEDSMITHSHACK,
+            null, null, 1, true, false, null));
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Primative Gunsmith's Shack", AllText.ResearchItemDescriptions.PRIMATIVEGUNSMITHSHACK,
-            null, null, 1, false, true, false, 500, 14, 0, 5));
+            null, null, null, AllText.BuildingName.PRIMATIVEGUNSMITHSHACK, AllText.Descriptions.PRIMATIVEGUNSMITHSHACK,
+            null, null, 1, true, false, null));
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Primative Ammunition Smith's Shack", AllText.ResearchItemDescriptions.PRIMATIVEAMMOSHACK,
-            null, null, 1, false, true, false, 500, 14, 0, 5));
+            null, null, null, AllText.BuildingName.PRIMATIVEAMMOSHACK, AllText.Descriptions.PRIMATIVEAMMOSHACK,
+            null, null, 1, true, false, null));
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Primative Gun Ammunition Smith's Shack", AllText.ResearchItemDescriptions.PRIMATVEGUNAMMOSHACK,
-            null, null, 1, false, true, false, 500, 14, 0, 5));
+            null, null, null, AllText.BuildingName.PRIMATVEGUNAMMOSHACK, AllText.Descriptions.PRIMATVEGUNAMMOSHACK,
+            null, null, 1, true, false, null));
+        */
         // The isResearchDone should start out as false, just set to done as testing.
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Elitism", AllText.ResearchItemDescriptions.ELITISM,
-            null, null, 1, true, false, false, 0, 0, 0, 0));
+            null, null, null, "Elitism", AllText.Descriptions.ELITISM,
+            null, null, 1, false, true, null));
+
+        possibleBuildings.Add(new PossibleBuilding(
+            AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK, 500, 7, 0, 5));
+        possibleBuildings.Add(new PossibleBuilding(
+            AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK, 500, 1, 0, 5));
+        possibleBuildings.Add(new PossibleBuilding(
+            AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK, 500, 7, 0, 5));
+        /*
+        possibleBuildings.Add(new PossibleBuilding(
+            AllText.BuildingName.RESEARCHSSHACK, AllText.Descriptions.RESEARCHSSHACK, 500, 7, 0, 5));
+        possibleBuildings.Add(new PossibleBuilding(
+            AllText.BuildingName.SCAVANGERSSHACK, AllText.Descriptions.SCAVANGERSSHACK, 500, 7, 0, 5));
+        possibleBuildings.Add(new PossibleBuilding(
+            AllText.BuildingName.STONEWORKERSSHACK, AllText.Descriptions.STONEWORKERSSHACK, 500, 7, 0, 5));
+        possibleBuildings.Add(new PossibleBuilding(
+            AllText.BuildingName.PRIMATIVEMELEESMITHSHACK, AllText.Descriptions.PRIMATIVEMELEESMITHSHACK, 500, 7, 0, 5));
+        possibleBuildings.Add(new PossibleBuilding(
+            AllText.BuildingName.PRIMATIVERANGEDSMITHSHACK, AllText.Descriptions.PRIMATIVERANGEDSMITHSHACK, 500, 7, 0, 5));
+        possibleBuildings.Add(new PossibleBuilding(
+            AllText.BuildingName.PRIMATIVEGUNSMITHSHACK, AllText.Descriptions.PRIMATIVEGUNSMITHSHACK, 500, 7, 0, 5));
+        possibleBuildings.Add(new PossibleBuilding(
+            AllText.BuildingName.PRIMATIVEAMMOSHACK, AllText.Descriptions.PRIMATIVEAMMOSHACK, 500, 7, 0, 5));
+        possibleBuildings.Add(new PossibleBuilding(
+            AllText.BuildingName.PRIMATVEGUNAMMOSHACK, AllText.Descriptions.PRIMATVEGUNAMMOSHACK, 500, 7, 0, 5));
+        */
+
+        researchItemsTier1[0].possibleBuildings = possibleBuildings[0];
+        researchItemsTier1[1].possibleBuildings = possibleBuildings[1];
+        researchItemsTier1[2].possibleBuildings = possibleBuildings[2];
+
     }
 
     private void FirstRunTopInfoBar()

@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class WorldMapLoad : MonoBehaviour
 {
     public static WorldMapLoad instance;
+    public string currentlySelectedCounty;
 
     [SerializeField] private int totalCapitolPop;
     [SerializeField] private GameObject countyListGameObject;
@@ -60,7 +61,6 @@ public class WorldMapLoad : MonoBehaviour
 
         // This is just temp till we do character creation.
         playerFaction = factionNameAndColors[0].name;
-        Debug.Log("Player Faction " + playerFaction);
 
         CreatePopulation();
 
@@ -90,7 +90,7 @@ public class WorldMapLoad : MonoBehaviour
             null, null, null, AllText.BuildingName.RESEARCHSSHACK, AllText.Descriptions.RESEARCHSSHACK,
             null, null, 1, true, true, null));
         researchItemsTier1.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.SCAVANGERSSHACK, AllText.Descriptions.SCAVANGERSSHACK,
+            null, null, null, AllText.BuildingName.SCAVENGERSSHACK, AllText.Descriptions.SCAVENGERSSHACK,
             null, null, 1, true, true, null));
         researchItemsTier1.Add(new ResearchItem(
             null, null, null, AllText.BuildingName.STONEWORKERSSHACK, AllText.Descriptions.STONEWORKERSSHACK,
@@ -116,6 +116,7 @@ public class WorldMapLoad : MonoBehaviour
         researchItemsTier1.Add(new ResearchItem(
             null, null, null, AllText.BuildingName.PRIMATVEGUNAMMOSHACK, AllText.Descriptions.PRIMATVEGUNAMMOSHACK,
             null, null, 1, true, false, null));
+        - Nationalism
         */
         // The isResearchDone should start out as false, just set to done as testing.
         researchItemsTier1.Add(new ResearchItem(
@@ -132,7 +133,7 @@ public class WorldMapLoad : MonoBehaviour
         possibleBuildings.Add(new PossibleBuilding(
             AllText.BuildingName.RESEARCHSSHACK, AllText.Descriptions.RESEARCHSSHACK, 500, 7, 0, 5));
         possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.SCAVANGERSSHACK, AllText.Descriptions.SCAVANGERSSHACK, 500, 7, 0, 5));
+            AllText.BuildingName.SCAVENGERSSHACK, AllText.Descriptions.SCAVENGERSSHACK, 500, 7, 0, 5));
         possibleBuildings.Add(new PossibleBuilding(
             AllText.BuildingName.STONEWORKERSSHACK, AllText.Descriptions.STONEWORKERSSHACK, 500, 7, 0, 5));
         possibleBuildings.Add(new PossibleBuilding(

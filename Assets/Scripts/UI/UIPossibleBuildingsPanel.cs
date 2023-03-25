@@ -8,19 +8,19 @@ public class UIPossibleBuildingsPanel : MonoBehaviour
     public static UIPossibleBuildingsPanel instance;
 
     public GameObject buildingDescriptionPanel;
-    public int possibleBuildingButtonClicked;
+    public int possibleBuildingNumber;
 
     public event Action PossibleBuildingButtonPressed;
 
-    public int PossibleBuildingButtonClicked
+    public int PossibleBuildingNumber
     {
         get 
         { 
-            return possibleBuildingButtonClicked; 
+            return possibleBuildingNumber; 
         }
         set 
         { 
-            possibleBuildingButtonClicked = value;
+            possibleBuildingNumber = value;
             PossibleBuildingButtonPressed();
         }
     }

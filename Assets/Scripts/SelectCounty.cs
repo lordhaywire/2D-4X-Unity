@@ -11,6 +11,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             currentlySelectedCounty = name;
+            WorldMapLoad.instance.currentlySelectedCounty = currentlySelectedCounty;
 
             PanelChanges();
 

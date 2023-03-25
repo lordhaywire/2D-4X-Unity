@@ -1,10 +1,11 @@
+using System;
 
-// We will eventually be adding resource costs as well.
 public class PossibleBuilding
 {
     public string name;
     public string description;
 
+    // We will eventually be adding resource costs as well.
     public int influenceCost;
     public int daysToBuild;
     public int currentEmployees;

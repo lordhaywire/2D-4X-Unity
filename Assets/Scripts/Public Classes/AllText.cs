@@ -6,7 +6,7 @@ public class AllText
         public const string FORESTERSSHACK = "Forester's Shack";
         public const string GARDENERSSHACK = "Gardener's Shack";
         public const string RESEARCHSSHACK = "Researcher's Shack";
-        public const string SCAVANGERSSHACK = "Scavanger's Shack";
+        public const string SCAVENGERSSHACK = "Scavenger's Shack";
         public const string STONEWORKERSSHACK = "Stoneworker's Shack";
         public const string PRIMATIVEMELEESMITHSHACK = "Primative Melee Weaponsmith's Shack";
         public const string PRIMATIVERANGEDSMITHSHACK = "Primative Ranged Weaponsmith's Shack";
@@ -20,7 +20,7 @@ public class AllText
         public const string FORESTERSSHACK = "This is a forester's shack.";
         public const string GARDENERSSHACK = "This is a gardener's shack.";
         public const string RESEARCHSSHACK = "This is a researcher's shack.";
-        public const string SCAVANGERSSHACK = "This is a scavanger's shack.";
+        public const string SCAVENGERSSHACK = "This is a scavenger's shack.";
         public const string STONEWORKERSSHACK = "This is a stone worker's shack.";
         public const string BASICTACTICSGUNS = "Basic tactics for gun combat.";
         public const string BASICTACTICSMELEE = "Basic tacits for melee combat.";

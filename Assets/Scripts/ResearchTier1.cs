@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +26,7 @@ public class ResearchTier1 : MonoBehaviour
 
     private void FirstRunResearch()
     {
+        // This goes through the research list and sets their Game Objects to the correct gameOjects and toggles.
         for (int i = 0; i < WorldMapLoad.instance.researchItemsTier1.Count; i++)
         {
             WorldMapLoad.instance.researchItemsTier1[i].gameObject = transform.GetChild(i).gameObject; // I don't think we need this.
@@ -39,7 +39,7 @@ public class ResearchTier1 : MonoBehaviour
     {
         for(int i = 0;i < WorldMapLoad.instance.researchItemsTier1.Count; i++)
         {
-            WorldMapLoad.instance.researchItemsTier1[i].researchNameText.text = WorldMapLoad.instance.researchItemsTier1[i].researchName;
+            WorldMapLoad.instance.researchItemsTier1[i].researchNameText.text = WorldMapLoad.instance.researchItemsTier1[i].name;
             if (WorldMapLoad.instance.researchItemsTier1[i].isResearchDone == true)
             {
                 WorldMapLoad.instance.researchItemsTier1[i].toggle.isOn = true;

@@ -2,14 +2,26 @@ using System;
 
 public class PossibleBuilding
 {
+    public event Action CurrentWorkersChanged;
+
     public string name;
     public string description;
 
     // We will eventually be adding resource costs as well.
     public int influenceCost;
     public int daysToBuild;
-    public int currentEmployees;
+    private int currentEmployees;
     public int maxEmployees;
+
+    public int CurrentWorkers
+    {
+        get { return currentEmployees; }
+        set
+        {
+            currentEmployees = value;
+            CurrentWorkersChanged?.Invoke();
+        }
+    }
 
     public PossibleBuilding(string name, string description, int influenceCost,
         int daysToBuild, int currentEmployees, int maxEmployees)
@@ -18,7 +30,7 @@ public class PossibleBuilding
         this.description = description;
         this.influenceCost = influenceCost;
         this.daysToBuild = daysToBuild;
-        this.currentEmployees = currentEmployees;
+        this.CurrentWorkers = currentEmployees;
         this.maxEmployees = maxEmployees;
     }
 }

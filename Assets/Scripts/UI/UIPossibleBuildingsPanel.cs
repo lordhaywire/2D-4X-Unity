@@ -8,7 +8,7 @@ public class UIPossibleBuildingsPanel : MonoBehaviour
     public static UIPossibleBuildingsPanel instance;
 
     public GameObject buildingDescriptionPanel;
-    public int possibleBuildingNumber;
+    private int possibleBuildingNumber;
 
     public event Action PossibleBuildingButtonPressed;
 

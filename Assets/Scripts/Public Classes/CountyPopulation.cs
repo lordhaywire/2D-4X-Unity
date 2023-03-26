@@ -7,17 +7,19 @@ public class CountyPopulation
     public bool isMale;
     public int age;
 
-    public string activity;
+    public string currentActivity;
+    public string nextActivity;
 
-    public CountyPopulation(string newFirstName, string newLastName, bool newIsMale, 
-        int newAge, string newActivity)
+    public CountyPopulation(string firstName, string lastName, bool isMale, 
+        int age, string currentActivity, string nextActivity)
     {
-        firstName = newFirstName;
-        lastName = newLastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
 
-        isMale = newIsMale;
-        age = newAge;
+        this.isMale = isMale;
+        this.age = age;
 
-        activity = newActivity;
+        this.currentActivity = currentActivity;
+        this.nextActivity = nextActivity;
     }
 }

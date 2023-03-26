@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class WorldMapLoad : MonoBehaviour
 {
@@ -52,6 +51,8 @@ public class WorldMapLoad : MonoBehaviour
         instance = this;
 
         GetNamesFromFile();
+
+
     }
 
     private void Start()
@@ -246,11 +247,12 @@ public class WorldMapLoad : MonoBehaviour
         // This will instead need to eventually check if this is a player faction vs an AI faction.
         if (playerFaction == factionName)
         {
-            factionHeroesDictionary[factionName].Add(new Hero("Lord", "Haywire", true, 30, CountyListCreator.instance.countiesList[1].name, "Scavenging"));
+            factionHeroesDictionary[factionName].Add(new Hero
+                ("Lord", "Haywire", true, 30, CountyListCreator.instance.countiesList[1].name, AllText.Jobs.IDLE, AllText.Jobs.IDLE));
         }
         else
         {
-            factionHeroesDictionary[factionName].Add(new Hero(null, null, false, 0, CountyListCreator.instance.countiesList[countyIndex].name, "Scavenging"));
+            factionHeroesDictionary[factionName].Add(new Hero(null, null, false, 0, CountyListCreator.instance.countiesList[countyIndex].name, AllText.Jobs.IDLE, AllText.Jobs.IDLE));
             int randomLastNameNumber = Random.Range(0, lastNames.Length);
             factionHeroesDictionary[factionName][0].lastName = lastNames[randomLastNameNumber];
 
@@ -286,7 +288,7 @@ public class WorldMapLoad : MonoBehaviour
         for (int populationIndex = 0; populationIndex < totalPopulation; populationIndex++)
         {
             // This adds to the Dictionary List a new person.
-            countyPopulationDictionary[countyName].Add(new CountyPopulation(null, null, false, 0, "Scavenging"));
+            countyPopulationDictionary[countyName].Add(new CountyPopulation(null, null, false, 0, AllText.Jobs.IDLE, AllText.Jobs.IDLE));
 
             // Generates Persons Last Name
             int randomLastNameNumber = Random.Range(0, lastNames.Length);

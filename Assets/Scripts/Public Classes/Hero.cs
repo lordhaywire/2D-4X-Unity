@@ -8,18 +8,21 @@ public class Hero
     public int age;
 
     public string location;
-    public string activity;
+    public string currentActivity;
+    public string nextActivity;
 
-    public Hero(string newFirstName, string newLastName, bool newIsMale, int newAge, string newLocation, string newActivity)
+
+    public Hero(string firstName, string lastName, bool isMale, int age, string location, string currentActivity, string nextActivity)
     {
-        firstName = newFirstName;
-        lastName = newLastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
 
-        isMale = newIsMale;
-        age = newAge;
+        this.isMale = isMale;
+        this.age = age;
 
-        location = newLocation;
-        activity = newActivity;
+        this.location = location;
+        this.currentActivity = currentActivity;
+        this.nextActivity = nextActivity;
     }
 }
 

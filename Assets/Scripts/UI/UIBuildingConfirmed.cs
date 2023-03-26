@@ -7,6 +7,6 @@ public class UIBuildingConfirmed : MonoBehaviour
 
     public void YesButton()
     {
-        BuildingConfirmed();
+        BuildingConfirmed?.Invoke();
     }
 }

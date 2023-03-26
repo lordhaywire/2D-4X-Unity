@@ -35,8 +35,10 @@ public class UIPopulationInfoPanel : MonoBehaviour
                 {
                     populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Female";
                 }
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().activityText.text =
-                    factionList[i].activity;
+                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().currentActivityText.text =
+                    factionList[i].currentActivity;
+                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nextActivityText.text =
+                    factionList[i].nextActivity;
             }
             // This is for the normal population in the county.
             for (int i = populationListClones.Count; i < countyList.Count; i++)
@@ -55,8 +57,10 @@ public class UIPopulationInfoPanel : MonoBehaviour
                 {
                     populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Female";
                 }
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().activityText.text =
-                    countyList[i].activity;
+                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().currentActivityText.text =
+                    countyList[i].currentActivity;
+                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nextActivityText.text =
+                    countyList[i].nextActivity;
             }
         }
         else

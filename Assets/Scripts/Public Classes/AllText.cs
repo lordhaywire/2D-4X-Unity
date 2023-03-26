@@ -1,5 +1,11 @@
 public class AllText
 {
+    public class Jobs
+    {
+        public const string IDLE = "Scavenging";
+        public const string BUILDING = "Building";
+    }
+    
     public class BuildingName
     {
         public const string FISHERSSHACK = "Fisher's Shack";

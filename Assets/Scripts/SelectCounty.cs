@@ -170,13 +170,13 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         var localHeroes = WorldMapLoad.instance.factionHeroesDictionary[countyFaction];
         for (int i = 0; i < localHeroes.Count; i++)
         {
-            Debug.Log("Name: " + name);
+            //Debug.Log("Name: " + name);
             if (localHeroes[i].location == name || WorldMapLoad.instance.DevView == true)
             {
                 UICountyPanel.instance.heroInfoList.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
 
                 //Debug.Log("Leader Button Text: " + UIVerticalHeroList.leaderButtonText);
-                if (localHeroes[i].activity == null)
+                if (localHeroes[i].currentActivity == null)
                 {
                     //Debug.Log("Leader Button Text: " + UIVerticalHeroList.leaderButtonText);
                     UIVerticalHeroList.leaderButtonText.text = localHeroes[i].firstName + " " +
@@ -185,7 +185,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
                 else
                 {
                     UIVerticalHeroList.leaderButtonText.text =
-                        localHeroes[i].firstName + " " + localHeroes[i].lastName + ": " + localHeroes[i].activity;
+                        localHeroes[i].firstName + " " + localHeroes[i].lastName + ": " + localHeroes[i].currentActivity;
                 }
             }
         }

@@ -11,13 +11,18 @@ public class UIPopulationInfoPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        TimeKeeper.instance.PauseandUnpause();
+        if(Time.timeScale != 0)
+        {
+            TimeKeeper.instance.PauseandUnpause();
+        }
+        
 
         if (WorldMapLoad.instance.countyPopulationDictionary[SelectCounty.currentlySelectedCounty] != null)
         {
             var countyList = WorldMapLoad.instance.countyPopulationDictionary[SelectCounty.currentlySelectedCounty];
             var factionList =
                 WorldMapLoad.instance.factionHeroesDictionary[WorldMapLoad.instance.counties[SelectCounty.currentlySelectedCounty].faction.name];
+            
             // This is for the leaders of each factionNameAndColors.
             for (int i = 0; i < factionList.Count; i++)
             {
@@ -68,12 +73,10 @@ public class UIPopulationInfoPanel : MonoBehaviour
             Debug.Log("The Currently Selected County is null, dipshit.");
         }
     }
-
     private void OnDisable()
     {
         TimeKeeper.instance.PauseandUnpause();
     }
-
     public void CloseButton()
     {
         for (int i = 0; i < populationListClones.Count; i++)

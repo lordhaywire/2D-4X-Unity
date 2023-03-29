@@ -6,6 +6,6 @@ public class UIPossibleBuildingButton : MonoBehaviour
     {
         UIPossibleBuildingsPanel.instance.buildingDescriptionPanel.SetActive(true);
         UIPossibleBuildingsPanel.instance.PossibleBuildingNumber = int.Parse(name);
-        Debug.Log("Possible Building Number: " + UIPossibleBuildingsPanel.instance.PossibleBuildingNumber);
+        //Debug.Log("Possible Building Number: " + UIPossibleBuildingsPanel.instance.PossibleBuildingNumber);
     }
 }

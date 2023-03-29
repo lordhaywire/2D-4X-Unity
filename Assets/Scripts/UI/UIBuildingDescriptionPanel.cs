@@ -21,9 +21,13 @@ public class UIBuildingDescriptionPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        TimeKeeper.instance.PauseandUnpause();
+        if(Time.timeScale != 0)
+        {
+            TimeKeeper.instance.PauseandUnpause();
+        }
+        
         UIPossibleBuildingsPanel.instance.PossibleBuildingButtonPressed += PanelRefresh;
-        Debug.Log("UI Possible Building Number: " + UIPossibleBuildingsPanel.instance.PossibleBuildingNumber);
+        //Debug.Log("UI Possible Building Number: " + UIPossibleBuildingsPanel.instance.PossibleBuildingNumber);
         for(int i = 0; i < WorldMapLoad.instance.possibleBuildings.Count; i++)
         {
             WorldMapLoad.instance.possibleBuildings[i].CurrentWorkersChanged += CurrentEmployeesRefresh;
@@ -54,7 +58,7 @@ public class UIBuildingDescriptionPanel : MonoBehaviour
         nameText.text = possibleBuilding.name;
         descriptionText.text = possibleBuilding.description;
 
-        moneyCostText.text = possibleBuilding.influenceCost.ToString();
+        moneyCostText.text = $"{possibleBuilding.influenceCost} Influence";
         //resourcesCostText.text = possibleBuilding. // We aren't using the resources part yet.
         timeText.text = possibleBuilding.daysToBuild.ToString();
 

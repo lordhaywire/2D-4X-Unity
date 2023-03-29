@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -11,10 +12,11 @@ public class UITopInfoBar : MonoBehaviour
     public TextMeshProUGUI scrapText;
 
     private int influence;
-    public int money;
-    public int food;
-    public int scrap;
+    private int money;
+    private int food;
+    private int scrap;
 
+    
     public int Influence
     {
         get
@@ -66,5 +68,11 @@ public class UITopInfoBar : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        WorldMapLoad.instance.factions[0].InfluenceChanged += UpdateInfluenceText;
+    }
+
+    private void UpdateInfluenceText()
+    {
+        influenceText.text = WorldMapLoad.instance.factions[WorldMapLoad.instance.playerFactionID].influence.ToString();
     }
 }

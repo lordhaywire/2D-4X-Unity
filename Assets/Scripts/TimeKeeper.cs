@@ -118,6 +118,8 @@ public class TimeKeeper : MonoBehaviour
             ModifiedTimeScale = oldTimeSpeed;
         }
     }
+
+    // Change this to an event, probably.
     public int ModifiedTimeScale
     {
         get

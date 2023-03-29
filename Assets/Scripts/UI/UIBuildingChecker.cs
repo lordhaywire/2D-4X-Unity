@@ -2,28 +2,39 @@ using UnityEngine;
 
 public class UIBuildingChecker : MonoBehaviour
 {
-    [SerializeField] private GameObject notEnoughEmployeesPanel;
+    [SerializeField] private GameObject notEnoughWorkersPanel;
 
+    public static UIBuildingChecker instance;
+
+    public bool enoughPopulation;
+    public int unemployed;
+    private void Awake()
+    {
+        instance = this;
+    }
     private void OnEnable()
     {
         for (int i = 0; i < WorldMapLoad.instance.possibleBuildings.Count; i++)
         {
-            WorldMapLoad.instance.possibleBuildings[i].CurrentWorkersChanged += CheckEnoughPopulation;
+            WorldMapLoad.instance.possibleBuildings[i].CurrentWorkersChanged += CheckEnoughUnemployed;
         }
-
     }
 
     private void OnDisable()
     {
         for (int i = 0; i < WorldMapLoad.instance.possibleBuildings.Count; i++)
         {
-            WorldMapLoad.instance.possibleBuildings[i].CurrentWorkersChanged -= CheckEnoughPopulation;
+            WorldMapLoad.instance.possibleBuildings[i].CurrentWorkersChanged -= CheckEnoughUnemployed;
         }
     }
 
-    private void CheckEnoughPopulation()
+    private void CheckEnoughUnemployed()
     {
+        // Check for Population.
         int unemployed = 0;
+        enoughPopulation = false;
+        
+
         for (int i = 0; i < WorldMapLoad.instance.countyPopulationDictionary[WorldMapLoad.instance.currentlySelectedCounty].Count; i++)
         {
             if (WorldMapLoad.instance.countyPopulationDictionary[WorldMapLoad.instance.currentlySelectedCounty][i].currentActivity
@@ -32,16 +43,15 @@ public class UIBuildingChecker : MonoBehaviour
                 unemployed++;
             }
         }
-        // This is dumb.  It needs to be fixed.  If there is nothing in the If part then why even have it?
         //Debug.Log("Unemployed: " + unemployed);
-        if(unemployed < WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
+        if (unemployed < WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
         {
-            notEnoughEmployeesPanel.SetActive(true);
+            notEnoughWorkersPanel.SetActive(true);
             WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers = unemployed;
         }
-        else
+        else if(WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers != 0)
         {
-            Debug.Log("Everything is beautiful in CheckEnoughPopulation()");
-        }
+            enoughPopulation = true;
+        } 
     }
 }

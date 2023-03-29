@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
 
 public class WorldMapLoad : MonoBehaviour
@@ -17,16 +18,18 @@ public class WorldMapLoad : MonoBehaviour
 
     // This is just temp till we do character creation.
     public string playerFaction;
+    public int playerFactionID;
 
     public List<ResearchItem> researchItemsTier1 = new();
 
     public List<PossibleBuilding> possibleBuildings = new();
+
     public List<CurrentBuilding> currentBuildings = new();
 
     // Initialize County Dictionary List.
     public Dictionary<string, County> counties = new();
 
-    // Initialize County Population Dictionary List.
+    // Initialize County Population Dictionary List, which is a Dictionary for each county that holds a list of their population.
     public Dictionary<string, List<CountyPopulation>> countyPopulationDictionary = new();
 
     // Initialize County Heroes/Leader Dictionary List.
@@ -52,7 +55,7 @@ public class WorldMapLoad : MonoBehaviour
 
         GetNamesFromFile();
 
-
+        UIBuildingConfirmed.instance.BuildingConfirmed += BuildCountyImprovement;
     }
 
     private void Start()
@@ -62,6 +65,7 @@ public class WorldMapLoad : MonoBehaviour
 
         // This is just temp till we do character creation.
         playerFaction = factionNameAndColors[0].name;
+        playerFactionID = 0;
 
         CreatePopulation();
 
@@ -75,6 +79,42 @@ public class WorldMapLoad : MonoBehaviour
         maleNames = null;
     }
 
+    private void BuildCountyImprovement()
+    {
+        DeductCostOfBuilding(); // Done for Influence costs only.
+        MoveBuildingToCurrentBuildingList(); // Not done at all.
+
+        SetNextDayJob();
+        
+    }
+
+    private void MoveBuildingToCurrentBuildingList()
+    {
+        possibleBuildings.Remove(possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber]);
+    }
+
+    private void DeductCostOfBuilding()
+    {
+        factions[0].Influence -= possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].influenceCost;
+    }
+
+    private void SetNextDayJob()
+    {
+        for(int i = 0; i < UIBuildingChecker.instance.unemployed; i++)
+        {
+            countyPopulationDictionary[currentlySelectedCounty][0].nextActivity = AllText.Jobs.BUILDING;
+        }
+
+    }
+
+
+
+    private void OnDisable()
+    {
+        UIBuildingConfirmed.instance.BuildingConfirmed -= SetNextDayJob;
+
+        UIBuildingConfirmed.instance.BuildingConfirmed -= MoveBuildingToCurrentBuildingList;
+    }
     private void CreateResearchandBuildingList()
     {
         researchItemsTier1.Add(new ResearchItem(
@@ -157,7 +197,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void FirstRunTopInfoBar()
     {
-        UITopInfoBar.instance.Influence = factions[0].influence;
+        UITopInfoBar.instance.Influence = factions[0].Influence;
         UITopInfoBar.instance.Money = factions[0].money;
         UITopInfoBar.instance.Food = factions[0].food;
         UITopInfoBar.instance.Scrap = factions[0].scrap;

@@ -56,8 +56,6 @@ public class CreateArmy : MonoBehaviour
         else
         {
             Debug.Log("You don't own this county, so you can't spawn armies here.");
-
-
         }
 
     }

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -14,23 +15,25 @@ public class County
     public string biomePrimary;
     public string biomeSecondary;
     public string biomeTertiary;
+    public int currentlyWorkingPopulation; // We could put this number on the county info panel.
     public int population;
 
-    public County(int newCountyID, bool newIsCapital, GameObject newCountyCenterGameObject, 
-        SpriteRenderer newSpriteRendered, SelectCounty newSelectCounty, FactionNameAndColor newFaction, 
-        string newProvince, string newBiomePrimary, string newBiomeSecondary, string newBiomeTertiary,
-        int newPopulation)
+    public County(int countyID, bool isCapital, GameObject countyCenterGameObject, 
+        SpriteRenderer spriteRendered, SelectCounty selectCounty, FactionNameAndColor faction, 
+        string province, string biomePrimary, string biomeSecondary, string biomeTertiary,
+        int currentlyWorkingPopulation, int population)
     {
-        countyID = newCountyID;
-        isCapital = newIsCapital;
-        countyCenterGameObject = newCountyCenterGameObject;
-        spriteRenderer = newSpriteRendered;
-        selectCounty = newSelectCounty;
-        faction = newFaction;
-        province = newProvince;
-        biomePrimary = newBiomePrimary;
-        biomeSecondary = newBiomeSecondary;
-        biomeTertiary = newBiomeTertiary;
-        population = newPopulation;
+        this.countyID = countyID;
+        this.isCapital = isCapital;
+        this.countyCenterGameObject = countyCenterGameObject;
+        this.spriteRenderer = spriteRendered;
+        this.selectCounty = selectCounty;
+        this.faction = faction;
+        this.province = province;
+        this.biomePrimary = biomePrimary;
+        this.biomeSecondary = biomeSecondary;
+        this.biomeTertiary = biomeTertiary;
+        this.currentlyWorkingPopulation = currentlyWorkingPopulation;
+        this.population = population;
     }
 }

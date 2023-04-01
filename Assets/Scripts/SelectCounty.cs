@@ -3,15 +3,13 @@ using UnityEngine.EventSystems;
 
 public class SelectCounty : MonoBehaviour, IPointerClickHandler
 {
-    public static string currentlySelectedCounty;
     public static bool hasAnArmyBeenSelected;
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            currentlySelectedCounty = name;
-            WorldMapLoad.instance.currentlySelectedCounty = currentlySelectedCounty;
+        { 
+            WorldMapLoad.instance.currentlySelectedCounty = name;
 
             PanelChanges();
 

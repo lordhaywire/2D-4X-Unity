@@ -30,8 +30,8 @@ public class UIBuildingChecker : MonoBehaviour
 
     private void CheckEnoughUnemployed()
     {
-        // Check for Population.
-        int unemployed = 0;
+        // Check for Population.  This doesn't include the leader.
+        unemployed = 0;
         enoughPopulation = false;
         
 

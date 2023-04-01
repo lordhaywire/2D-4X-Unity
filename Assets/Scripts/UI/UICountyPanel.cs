@@ -19,7 +19,7 @@ public class UICountyPanel : MonoBehaviour
     }
     public void PopulationButton()
     {
-        if (WorldMapLoad.instance.counties[SelectCounty.currentlySelectedCounty].faction.name ==
+        if (WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].faction.name ==
             WorldMapLoad.instance.playerFaction || WorldMapLoad.instance.DevView == true)
         {
             populationInfoPanel.SetActive(true);

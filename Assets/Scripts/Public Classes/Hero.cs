@@ -1,4 +1,3 @@
-
 public class Hero
 {
     public string firstName;

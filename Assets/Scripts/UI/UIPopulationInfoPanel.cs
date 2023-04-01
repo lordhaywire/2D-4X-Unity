@@ -17,15 +17,16 @@ public class UIPopulationInfoPanel : MonoBehaviour
         }
         
 
-        if (WorldMapLoad.instance.countyPopulationDictionary[SelectCounty.currentlySelectedCounty] != null)
+        if (WorldMapLoad.instance.countyPopulationDictionary[WorldMapLoad.instance.currentlySelectedCounty] != null)
         {
-            var countyList = WorldMapLoad.instance.countyPopulationDictionary[SelectCounty.currentlySelectedCounty];
+            var countyList = WorldMapLoad.instance.countyPopulationDictionary[WorldMapLoad.instance.currentlySelectedCounty];
             var factionList =
-                WorldMapLoad.instance.factionHeroesDictionary[WorldMapLoad.instance.counties[SelectCounty.currentlySelectedCounty].faction.name];
+                WorldMapLoad.instance.factionHeroesDictionary[WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].faction.name];
             
-            // This is for the leaders of each factionNameAndColors.
+            // This is for the leaders of each faction.
             for (int i = 0; i < factionList.Count; i++)
             {
+                //Debug.Log("List Index: " + i);
                 populationListClones.Add
                     (Instantiate(prefabHorizontalPopulationListText, parentPopulationListGroup.transform));
                 populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nameText.text =
@@ -46,25 +47,28 @@ public class UIPopulationInfoPanel : MonoBehaviour
                     factionList[i].nextActivity;
             }
             // This is for the normal population in the county.
-            for (int i = populationListClones.Count; i < countyList.Count; i++)
+            for (int i = 0; i < countyList.Count; i++) // populationListClones.Count
             {
+                int listIndex = i + factionList.Count;
+                //Debug.Log("List Index: " + listIndex);
+                //Debug.Log("County List Length: " + countyList.Count);
                 populationListClones.Add
                     (Instantiate(prefabHorizontalPopulationListText, parentPopulationListGroup.transform));
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nameText.text =
+                populationListClones[listIndex].GetComponent<UIHorizontalPopulationListText>().nameText.text =
                     countyList[i].firstName + " " + countyList[i].lastName;
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().ageText.text =
+                populationListClones[listIndex].GetComponent<UIHorizontalPopulationListText>().ageText.text =
                     countyList[i].age.ToString();
                 if (countyList[i].isMale == true)
                 {
-                    populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Male";
+                    populationListClones[listIndex].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Male";
                 }
                 else
                 {
-                    populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Female";
+                    populationListClones[listIndex].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Female";
                 }
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().currentActivityText.text =
+                populationListClones[listIndex].GetComponent<UIHorizontalPopulationListText>().currentActivityText.text =
                     countyList[i].currentActivity;
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nextActivityText.text =
+                populationListClones[listIndex].GetComponent<UIHorizontalPopulationListText>().nextActivityText.text =
                     countyList[i].nextActivity;
             }
         }

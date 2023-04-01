@@ -10,15 +10,15 @@ public class PossibleBuilding
     // We will eventually be adding resource costs as well.
     public int influenceCost;
     public int daysToBuild;
-    private int currentEmployees;
+    private int currentWorkers;
     public int maxEmployees;
 
     public int CurrentWorkers
     {
-        get { return currentEmployees; }
+        get { return currentWorkers; }
         set
         {
-            currentEmployees = value;
+            currentWorkers = value;
             CurrentWorkersChanged?.Invoke();
         }
     }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
 
 public class WorldMapLoad : MonoBehaviour
@@ -9,6 +8,8 @@ public class WorldMapLoad : MonoBehaviour
     public string currentlySelectedCounty;
 
     [SerializeField] private int totalCapitolPop;
+    [SerializeField] private int minimumCountyPop;
+    [SerializeField] private int maximumCountyPop;
     [SerializeField] private GameObject countyListGameObject;
     [SerializeField] private GameObject uICanvas;
 
@@ -50,16 +51,16 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Awake()
     {
-        DevView = false;
+        //DevView = false;
         instance = this;
 
         GetNamesFromFile();
-
-        UIBuildingConfirmed.instance.BuildingConfirmed += BuildCountyImprovement;
     }
 
     private void Start()
     {
+        UIBuildingConfirmed.instance.BuildingConfirmed += BuildCountyImprovement;
+
         CreateResearchandBuildingList();
         CreateCountiesDictionary();
 
@@ -81,16 +82,18 @@ public class WorldMapLoad : MonoBehaviour
 
     private void BuildCountyImprovement()
     {
-        DeductCostOfBuilding(); // Done for Influence costs only.
+        DeductCostOfBuilding(); // Done - for Influence costs only.
+        SetNextDayJob();
+
         MoveBuildingToCurrentBuildingList(); // Not done at all.
 
-        SetNextDayJob();
+        
         
     }
 
     private void MoveBuildingToCurrentBuildingList()
     {
-        possibleBuildings.Remove(possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber]);
+        //possibleBuildings.Remove(possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber]);
     }
 
     private void DeductCostOfBuilding()
@@ -100,11 +103,29 @@ public class WorldMapLoad : MonoBehaviour
 
     private void SetNextDayJob()
     {
-        for(int i = 0; i < UIBuildingChecker.instance.unemployed; i++)
+        // This is where we left off - I think if we could build 3 buildings we could run out of unemployeed workers and
+        // everythign would break.
+        int numberWorkers = 0;
+        for(int i = 0; i < countyPopulationDictionary[currentlySelectedCounty].Count; i++)
         {
-            countyPopulationDictionary[currentlySelectedCounty][0].nextActivity = AllText.Jobs.BUILDING;
+            if(countyPopulationDictionary[currentlySelectedCounty][i].nextActivity == AllText.Jobs.IDLE
+                && numberWorkers < possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
+            {
+                countyPopulationDictionary[currentlySelectedCounty][i].nextActivity = AllText.Jobs.BUILDING;
+                numberWorkers++;
+                counties[currentlySelectedCounty].currentlyWorkingPopulation++; // We could put this number on the county info panel.
+
+                Debug.Log("Currently Working Population: " + counties[currentlySelectedCounty].currentlyWorkingPopulation);
+                Debug.Log("First Name: " + countyPopulationDictionary[currentlySelectedCounty][i].firstName);
+                Debug.Log("Activity: " + countyPopulationDictionary[currentlySelectedCounty][i].nextActivity);
+            }
+            else
+            {
+                 Debug.Log("Set Next Day Job got to Else.");
+            }
         }
 
+        //possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers
     }
 
 
@@ -222,28 +243,28 @@ public class WorldMapLoad : MonoBehaviour
     private void CreateCountiesDictionary()
     {
         // Counties added to counties Dictionary.
-        // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin
+        // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin, River
         counties[CountyListCreator.instance.countiesList[0].name] = new County(
             0, true, null, null, null, factionNameAndColors[1],
-            Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0);
+            Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0);
         counties[CountyListCreator.instance.countiesList[1].name] = new County(
             1, true, null, null, null, factionNameAndColors[0],
-            Arrays.provinceName[1], "Ruin", "Forest", "Farm", 1);
+            Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 1);
         counties[CountyListCreator.instance.countiesList[2].name] = new County(
             2, false, null, null, null, factionNameAndColors[2],
-            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0);
+            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
         counties[CountyListCreator.instance.countiesList[3].name] = new County(
             3, false, null, null, null, factionNameAndColors[3],
-            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0);
+            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
         counties[CountyListCreator.instance.countiesList[4].name] = new County(
             4, false, null, null, null, factionNameAndColors[4],
-            Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0);
+            Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0, 0);
         counties[CountyListCreator.instance.countiesList[5].name] = new County(
             5, false, null, null, null, factionNameAndColors[5],
-            Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0);
+            Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0, 0);
         counties[CountyListCreator.instance.countiesList[6].name] = new County(
             6, false, null, null, null, factionNameAndColors[6],
-            Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0);
+            Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0, 0);
     }
 
     private void CreatePopulation()
@@ -265,17 +286,17 @@ public class WorldMapLoad : MonoBehaviour
 
             if (counties[countyName].isCapital == true)
             {
-                int normalPopulation = totalCapitolPop;
                 GenerateLeaders(factionName, countyIndex);
-                GeneratePopulation(countyName, normalPopulation);
-                counties[countyName].population = normalPopulation;
+                GeneratePopulation(countyName, totalCapitolPop);
+                counties[countyName].population = totalCapitolPop + 1; // At beginning of game every faction will always just have 1 hero.
             }
             else
             {
-                int normalPopulation = Random.Range(3, 9);
+                int normalPopulation = Random.Range(minimumCountyPop, maximumCountyPop);
                 GenerateLeaders(factionName, countyIndex);
                 GeneratePopulation(countyName, normalPopulation);
-                counties[countyName].population = normalPopulation;
+                counties[countyName].population = normalPopulation
+                    + 1; // At beginning of game every faction will always just have 1 hero.
             }
         }
     }
@@ -344,6 +365,7 @@ public class WorldMapLoad : MonoBehaviour
                 countyPopulationDictionary[countyName][populationIndex].isMale = true;
                 countyPopulationDictionary[countyName][populationIndex].firstName =
                     maleNames[randomMaleNameNumber];
+                
             }
             else
             {
@@ -355,10 +377,10 @@ public class WorldMapLoad : MonoBehaviour
             int randomAgeNumber = Random.Range(18, 61);
             countyPopulationDictionary[countyName][populationIndex].age = randomAgeNumber;
 
-            /*
-            Debug.Log("Name: " + countyPopulationDictionary[countyName][populationIndex].firstName + " " +
-            countyPopulationDictionary[countyName][populationIndex].lastName);
-            */
+            
+            //Debug.Log("Name: " + countyPopulationDictionary[countyName][populationIndex].firstName + " " +
+            //countyPopulationDictionary[countyName][populationIndex].lastName);
+            
         }
     }
 }

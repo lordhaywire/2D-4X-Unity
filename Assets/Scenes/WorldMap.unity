@@ -8536,9 +8536,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentlySelectedCounty: 
   totalCapitolPop: 3
+  minimumCountyPop: 3
+  maximumCountyPop: 8
   countyListGameObject: {fileID: 249060077}
   uICanvas: {fileID: 275133780}
-  DevView: 0
+  DevView: 1
   countyInfoPanel: {fileID: 155121155}
   armyInfoPanel: {fileID: 738409371}
   playerFaction: 
@@ -8579,7 +8581,7 @@ MonoBehaviour:
       color32:
         serializedVersion: 2
         rgba: 0
-    influence: 750
+    influence: 1000
     money: 0
     food: 1000
     scrap: 1000

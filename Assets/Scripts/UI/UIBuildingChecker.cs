@@ -44,12 +44,12 @@ public class UIBuildingChecker : MonoBehaviour
             }
         }
         //Debug.Log("Unemployed: " + unemployed);
-        if (unemployed < WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
+        if (unemployed < WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
         {
             notEnoughWorkersPanel.SetActive(true);
-            WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers = unemployed;
+            WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers = unemployed;
         }
-        else if(WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers != 0)
+        else if(WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers != 0)
         {
             enoughPopulation = true;
         } 

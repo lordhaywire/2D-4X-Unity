@@ -1,9 +1,11 @@
 using System;
+using UnityEngine;
 
 public class PossibleBuilding
 {
     public event Action CurrentWorkersChanged;
 
+    public GameObject gameObject;
     public string name;
     public string description;
 

@@ -19,7 +19,7 @@ public class ResearchItem
     public bool isBuilding;
     public bool isResearchDone;
 
-    public PossibleBuilding possibleBuildings;
+    public PossibleBuilding possibleBuildings; // Do we really need this in here?
 
     public ResearchItem(GameObject gameObject, Toggle toggle, TextMeshProUGUI researchNameText,
         string researchName, string description, string prerequisite1, string prerequisite2, int tier,

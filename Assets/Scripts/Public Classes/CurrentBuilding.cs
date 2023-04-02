@@ -1,7 +1,8 @@
-
+using UnityEngine;
 
 public class CurrentBuilding
 {
+    public GameObject gameObject;
     public string name;
     public string description;
 

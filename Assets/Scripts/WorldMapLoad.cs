@@ -83,22 +83,54 @@ public class WorldMapLoad : MonoBehaviour
     private void BuildCountyImprovement()
     {
         DeductCostOfBuilding(); // Done - for Influence costs only.
-        SetNextDayJob();
+        SetNextDayJob(); // Done
 
-        MoveBuildingToCurrentBuildingList(); // Not done at all.
-
-        
-        
+        MoveBuildingToCurrentBuildingList(); // Not done at all.  
     }
 
     private void MoveBuildingToCurrentBuildingList()
     {
-        //possibleBuildings.Remove(possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber]);
+        var possibleBuilding = possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
+
+        Debug.Log("Possible Building Number: " + UIBuildingsPanel.instance.PossibleBuildingNumber);
+
+        // Create the Current Building List and add one to the County so the County knows what it has built.
+        // I don't know what the fuck this is, but it works.  Thanks Visual Studio!
+        counties[currentlySelectedCounty].buildings = new List<CurrentBuilding>
+        {
+            new CurrentBuilding(
+            possibleBuilding.name, possibleBuilding.description, possibleBuilding.daysToBuild, possibleBuilding.CurrentWorkers,
+            possibleBuilding.maxEmployees, true, false)
+        };
+        Debug.Log("Current Building Length: " + counties[currentlySelectedCounty].buildings.Count);
+        Debug.Log("County Build Name: " + counties[currentlySelectedCounty].buildings[^1].name);
+
+        // Assigned the Possible Building UI game object to the current building list.
+        counties[currentlySelectedCounty].buildings[^1].gameObject = possibleBuilding.gameObject;
+
+        // Moving the possilbe building UI game object to the current building UI game object.
+        counties[currentlySelectedCounty].buildings[^1].gameObject.transform.SetParent(UICurrentBuildingsPanel.instance.currentBuildingsGroupGameObject.transform);
+
+        // Remove the building from the possible Building list.
+        possibleBuildings.Remove(possibleBuilding);
+
+        // Rename building to be the same as their possible building index.
+        for(int i = 0; i < UIBuildingsPanel.instance.possibleBuildingsGroupGameObject.transform.childCount; i++)
+        {
+            possibleBuildings[i].gameObject.name = i.ToString();
+        }
+
+        // Rename building to be the same as their current building index.
+        for (int i = 0; i < UICurrentBuildingsPanel.instance.currentBuildingsGroupGameObject.transform.childCount; i++)
+        {
+            counties[currentlySelectedCounty].buildings[i].gameObject.name = i.ToString();
+        }
+
     }
 
     private void DeductCostOfBuilding()
     {
-        factions[0].Influence -= possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].influenceCost;
+        factions[0].Influence -= possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].influenceCost;
     }
 
     private void SetNextDayJob()
@@ -109,26 +141,27 @@ public class WorldMapLoad : MonoBehaviour
         for(int i = 0; i < countyPopulationDictionary[currentlySelectedCounty].Count; i++)
         {
             if(countyPopulationDictionary[currentlySelectedCounty][i].nextActivity == AllText.Jobs.IDLE
-                && numberWorkers < possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
+                && numberWorkers < possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
             {
                 countyPopulationDictionary[currentlySelectedCounty][i].nextActivity = AllText.Jobs.BUILDING;
                 numberWorkers++;
                 counties[currentlySelectedCounty].currentlyWorkingPopulation++; // We could put this number on the county info panel.
-
+                /*
                 Debug.Log("Currently Working Population: " + counties[currentlySelectedCounty].currentlyWorkingPopulation);
                 Debug.Log("First Name: " + countyPopulationDictionary[currentlySelectedCounty][i].firstName);
                 Debug.Log("Activity: " + countyPopulationDictionary[currentlySelectedCounty][i].nextActivity);
-            }
-            else
-            {
-                 Debug.Log("Set Next Day Job got to Else.");
-            }
-        }
-
-        //possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers
+                */
     }
+    /*
+    else
+    {
+         Debug.Log("Set Next Day Job got to Else.");
+    }
+    */
+}
 
-
+        //possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers
+    }
 
     private void OnDisable()
     {
@@ -210,6 +243,7 @@ public class WorldMapLoad : MonoBehaviour
             AllText.BuildingName.PRIMATVEGUNAMMOSHACK, AllText.Descriptions.PRIMATVEGUNAMMOSHACK, 500, 7, 0, 5));
         */
 
+        // Do we really need this?
         researchItemsTier1[0].possibleBuildings = possibleBuildings[0];
         researchItemsTier1[1].possibleBuildings = possibleBuildings[1];
         researchItemsTier1[2].possibleBuildings = possibleBuildings[2];
@@ -231,7 +265,6 @@ public class WorldMapLoad : MonoBehaviour
             factions[i].factionNameAndColor = factionNameAndColors[i];
         }
     }
-
     private void GetNamesFromFile()
     {
         // Get names for population and leader generation.
@@ -246,25 +279,32 @@ public class WorldMapLoad : MonoBehaviour
         // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin, River
         counties[CountyListCreator.instance.countiesList[0].name] = new County(
             0, true, null, null, null, factionNameAndColors[1],
-            Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0);
+            Arrays.provinceName[0], "Coast", "Forest", "Ruin", null, 0, 0);
         counties[CountyListCreator.instance.countiesList[1].name] = new County(
             1, true, null, null, null, factionNameAndColors[0],
-            Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 1);
+            Arrays.provinceName[1], "Ruin", "Forest", "River", null, 0, 1);
         counties[CountyListCreator.instance.countiesList[2].name] = new County(
             2, false, null, null, null, factionNameAndColors[2],
-            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
+            Arrays.provinceName[1], "Coast", "Forest", "Mountain", null, 0, 0);
         counties[CountyListCreator.instance.countiesList[3].name] = new County(
             3, false, null, null, null, factionNameAndColors[3],
-            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
+            Arrays.provinceName[1], "Coast", "Forest", "Mountain", null, 0, 0);
         counties[CountyListCreator.instance.countiesList[4].name] = new County(
             4, false, null, null, null, factionNameAndColors[4],
-            Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0, 0);
+            Arrays.provinceName[1], "Mountain", "Forest", "Farm", null, 0, 0);
         counties[CountyListCreator.instance.countiesList[5].name] = new County(
             5, false, null, null, null, factionNameAndColors[5],
-            Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0, 0);
+            Arrays.provinceName[1], "Desert", "Mountain", "Forest", null, 0, 0);
         counties[CountyListCreator.instance.countiesList[6].name] = new County(
             6, false, null, null, null, factionNameAndColors[6],
-            Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0, 0);
+            Arrays.provinceName[1], "Mountain", "Desert", "Forest", null, 0, 0);
+        /*
+        // Create and add currentBuildings list to each county so each county knows what it has built.
+        for(int i = 0; i < counties.Count; i++)
+        {
+            counties[CountyListCreator.instance.countiesList[i].name].currentBuilding = new CurrentBuilding();
+        }
+        */
     }
 
     private void CreatePopulation()

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 817773485310245525}
   - component: {fileID: 8693372802239668095}
   m_Layer: 5
-  m_Name: Possible Building Text
+  m_Name: Building Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 7946139785294854428}
   - component: {fileID: 5155117298429948475}
   m_Layer: 5
-  m_Name: UI Possible Buildings
+  m_Name: UI Buildings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,8 +259,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5155117298429948475}
-        m_TargetAssemblyTypeName: UIPossibleBuildingButton, Assembly-CSharp
-        m_MethodName: PossibleBuildingButton
+        m_TargetAssemblyTypeName: UIBuildingButton, Assembly-CSharp
+        m_MethodName: BuildingButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

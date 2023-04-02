@@ -1,9 +1,9 @@
 using TMPro;
 using UnityEngine;
 
-public class UIBuildingDescriptionPanel : MonoBehaviour
+public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 {
-    public static UIBuildingDescriptionPanel instance;
+    public static UIPossibleBuildingDescriptionPanel instance;
 
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
@@ -26,8 +26,8 @@ public class UIBuildingDescriptionPanel : MonoBehaviour
             TimeKeeper.instance.PauseandUnpause();
         }
         
-        UIPossibleBuildingsPanel.instance.PossibleBuildingButtonPressed += PanelRefresh;
-        //Debug.Log("UI Possible Building Number: " + UIPossibleBuildingsPanel.instance.PossibleBuildingNumber);
+        UIBuildingsPanel.instance.PossibleBuildingButtonPressed += PanelRefresh;
+        //Debug.Log("UI Possible Building Number: " + UIBuildingsPanel.instance.PossibleBuildingNumber);
         for(int i = 0; i < WorldMapLoad.instance.possibleBuildings.Count; i++)
         {
             WorldMapLoad.instance.possibleBuildings[i].CurrentWorkersChanged += CurrentEmployeesRefresh;
@@ -38,7 +38,7 @@ public class UIBuildingDescriptionPanel : MonoBehaviour
     private void OnDisable()
     {
         TimeKeeper.instance.PauseandUnpause();
-        UIPossibleBuildingsPanel.instance.PossibleBuildingButtonPressed -= PanelRefresh;
+        UIBuildingsPanel.instance.PossibleBuildingButtonPressed -= PanelRefresh;
         for (int i = 0; i < WorldMapLoad.instance.possibleBuildings.Count; i++)
         {
             WorldMapLoad.instance.possibleBuildings[i].CurrentWorkersChanged -= CurrentEmployeesRefresh;
@@ -48,13 +48,13 @@ public class UIBuildingDescriptionPanel : MonoBehaviour
     private void CurrentEmployeesRefresh()
     {
         var possibleBuilding =
-            WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber];
+            WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
         currentEmployeesText.text = possibleBuilding.CurrentWorkers.ToString();
     }
     private void PanelRefresh()
     {
         var possibleBuilding =
-            WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber];
+            WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
         nameText.text = possibleBuilding.name;
         descriptionText.text = possibleBuilding.description;
 
@@ -68,34 +68,33 @@ public class UIBuildingDescriptionPanel : MonoBehaviour
         maxEmployeesText.text = possibleBuilding.maxEmployees.ToString();
 
         confirmBuildText.text = $"Are you sure you want to build {possibleBuilding.name}?";
-
     }
 
     public void MinusButton()
     {
-        WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers--;
-        Debug.Log("Current Workers: " + WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers);
-        if (WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers < 0)
+        WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers--;
+        Debug.Log("Current Workers: " + WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers);
+        if (WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers < 0)
         {
-            WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers = 0;
+            WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers = 0;
 
         }
     }
 
     public void PlusButton()
     {   
-        WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers++;
+        WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers++;
 
-        if (WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers > WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].maxEmployees)
+        if (WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers > WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].maxEmployees)
         {
-            WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers =
-                WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].maxEmployees;
+            WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers =
+                WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].maxEmployees;
         }
     }
 
     public void MaxButton()
     {     
-        WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers =
-            WorldMapLoad.instance.possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].maxEmployees;
+        WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers =
+            WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].maxEmployees;
     }
 }

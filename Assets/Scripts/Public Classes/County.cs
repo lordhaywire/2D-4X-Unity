@@ -1,5 +1,5 @@
 using System;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -15,13 +15,14 @@ public class County
     public string biomePrimary;
     public string biomeSecondary;
     public string biomeTertiary;
+    public List<CurrentBuilding> buildings;
     public int currentlyWorkingPopulation; // We could put this number on the county info panel.
     public int population;
 
     public County(int countyID, bool isCapital, GameObject countyCenterGameObject, 
         SpriteRenderer spriteRendered, SelectCounty selectCounty, FactionNameAndColor faction, 
         string province, string biomePrimary, string biomeSecondary, string biomeTertiary,
-        int currentlyWorkingPopulation, int population)
+        List<CurrentBuilding> buildings, int currentlyWorkingPopulation, int population)
     {
         this.countyID = countyID;
         this.isCapital = isCapital;
@@ -33,6 +34,7 @@ public class County
         this.biomePrimary = biomePrimary;
         this.biomeSecondary = biomeSecondary;
         this.biomeTertiary = biomeTertiary;
+        this.buildings = buildings;
         this.currentlyWorkingPopulation = currentlyWorkingPopulation;
         this.population = population;
     }

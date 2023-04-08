@@ -19,11 +19,9 @@ public class ResearchItem
     public bool isBuilding;
     public bool isResearchDone;
 
-    public PossibleBuilding possibleBuildings; // Do we really need this in here?
-
     public ResearchItem(GameObject gameObject, Toggle toggle, TextMeshProUGUI researchNameText,
         string researchName, string description, string prerequisite1, string prerequisite2, int tier,
-        bool isBuilding, bool isResearchDone, PossibleBuilding possibleBuildings)
+        bool isBuilding, bool isResearchDone)
     {
         this.gameObject = gameObject;
         this.toggle = toggle;
@@ -35,6 +33,5 @@ public class ResearchItem
         this.tier = tier;
         this.isBuilding = isBuilding;
         this.isResearchDone = isResearchDone;
-        this.possibleBuildings = possibleBuildings;
     }
 }

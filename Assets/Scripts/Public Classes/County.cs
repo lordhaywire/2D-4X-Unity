@@ -15,14 +15,15 @@ public class County
     public string biomePrimary;
     public string biomeSecondary;
     public string biomeTertiary;
-    public List<CurrentBuilding> buildings;
+    public List<PossibleBuilding> possibleBuildings;
+    public List<CurrentBuilding> currentBuildings;
     public int currentlyWorkingPopulation; // We could put this number on the county info panel.
     public int population;
 
     public County(int countyID, bool isCapital, GameObject countyCenterGameObject, 
         SpriteRenderer spriteRendered, SelectCounty selectCounty, FactionNameAndColor faction, 
         string province, string biomePrimary, string biomeSecondary, string biomeTertiary,
-        List<CurrentBuilding> buildings, int currentlyWorkingPopulation, int population)
+         int currentlyWorkingPopulation, int population)
     {
         this.countyID = countyID;
         this.isCapital = isCapital;
@@ -34,7 +35,8 @@ public class County
         this.biomePrimary = biomePrimary;
         this.biomeSecondary = biomeSecondary;
         this.biomeTertiary = biomeTertiary;
-        this.buildings = buildings;
+        possibleBuildings = new List<PossibleBuilding>(); // This initializes the list. It is not in the constructor. 
+        currentBuildings = new List<CurrentBuilding>(); // This initializes the list. It is not in the constructor. 
         this.currentlyWorkingPopulation = currentlyWorkingPopulation;
         this.population = population;
     }

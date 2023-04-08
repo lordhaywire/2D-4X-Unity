@@ -6,7 +6,10 @@ public class UICountyPanel : MonoBehaviour
     public static UICountyPanel instance;
 
     [SerializeField] private GameObject populationInfoPanel;
-    [SerializeField] private GameObject expandBuildingsPanel;
+    [SerializeField] private GameObject expandBuildingsPanelButton;
+
+    public bool buildingsPanelExpanded;
+
     public GameObject heroInfoList;
     public GameObject armyInfoList;
 
@@ -16,6 +19,7 @@ public class UICountyPanel : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        buildingsPanelExpanded = false;
     }
     public void PopulationButton()
     {

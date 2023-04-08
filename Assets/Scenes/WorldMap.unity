@@ -2343,8 +2343,8 @@ RectTransform:
   - {fileID: 958003576}
   - {fileID: 1462681377}
   - {fileID: 7085730}
-  - {fileID: 1531895325}
   - {fileID: 817069590}
+  - {fileID: 1531895325}
   - {fileID: 780018997}
   - {fileID: 361764198}
   m_Father: {fileID: 275133784}
@@ -2406,7 +2406,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   populationInfoPanel: {fileID: 2144487633}
-  expandBuildingsPanel: {fileID: 7085729}
+  expandBuildingsPanelButton: {fileID: 7085729}
+  buildingsPanelExpanded: 0
   heroInfoList: {fileID: 1658764054}
   armyInfoList: {fileID: 187624964}
   countyOwnerText: {fileID: 1917657219}
@@ -10388,7 +10389,6 @@ MonoBehaviour:
   armyInfoPanel: {fileID: 738409371}
   playerFaction: 
   playerFactionID: 0
-  researchItemsTier1: []
   factionNameAndColors:
   - name: The Shit Birds
     color32:
@@ -10424,6 +10424,7 @@ MonoBehaviour:
       color32:
         serializedVersion: 2
         rgba: 0
+    researchItems: []
     influence: 1000
     money: 0
     food: 1000
@@ -10433,6 +10434,7 @@ MonoBehaviour:
       color32:
         serializedVersion: 2
         rgba: 0
+    researchItems: []
     influence: 0
     money: 0
     food: 0
@@ -10442,6 +10444,7 @@ MonoBehaviour:
       color32:
         serializedVersion: 2
         rgba: 0
+    researchItems: []
     influence: 0
     money: 0
     food: 0
@@ -10451,6 +10454,7 @@ MonoBehaviour:
       color32:
         serializedVersion: 2
         rgba: 0
+    researchItems: []
     influence: 0
     money: 0
     food: 0
@@ -10460,6 +10464,7 @@ MonoBehaviour:
       color32:
         serializedVersion: 2
         rgba: 0
+    researchItems: []
     influence: 0
     money: 0
     food: 0
@@ -10469,6 +10474,7 @@ MonoBehaviour:
       color32:
         serializedVersion: 2
         rgba: 0
+    researchItems: []
     influence: 0
     money: 0
     food: 0
@@ -10478,6 +10484,7 @@ MonoBehaviour:
       color32:
         serializedVersion: 2
         rgba: 0
+    researchItems: []
     influence: 0
     money: 0
     food: 0
@@ -11266,6 +11273,7 @@ GameObject:
   - component: {fileID: 817069592}
   - component: {fileID: 817069591}
   - component: {fileID: 817069593}
+  - component: {fileID: 817069594}
   m_Layer: 5
   m_Name: Possible Buildings Panel
   m_TagString: Untagged
@@ -11280,7 +11288,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817069589}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11293,7 +11301,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 500, y: 0}
+  m_AnchoredPosition: {x: 500.00006, y: -0.00015258789}
   m_SizeDelta: {x: -200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &817069591
@@ -11350,6 +11358,19 @@ MonoBehaviour:
   possibleBuildingsGroupGameObject: {fileID: 1382777141}
   possibleBuildingsPrefab: {fileID: 7259660105327218338, guid: 0bc0fa073f2386146be8757317a0e290, type: 3}
   possibleBuildingsParent: {fileID: 1382777141}
+--- !u!114 &817069594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817069589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17226f731c8fcfb46abb6a1e1430a607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collapseBuildingButton: {fileID: 1024628627}
 --- !u!1 &817637573
 GameObject:
   m_ObjectHideFlags: 0
@@ -14964,7 +14985,7 @@ GameObject:
   - component: {fileID: 1024628630}
   - component: {fileID: 1024628629}
   m_Layer: 5
-  m_Name: Compress Buildings Button
+  m_Name: Collapse Buildings Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15075,6 +15096,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 817069593}
+        m_TargetAssemblyTypeName: UIBuildingsPanel, Assembly-CSharp
+        m_MethodName: CollapseButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

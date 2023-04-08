@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,6 +16,8 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
             FillCountyInfoPanel();
 
+            RefreshBuildingsPanels();
+
             DeselectArmyOnCountyLeftClick();
 
             //hasAnArmyBeenSelected = false; // Why the fuck is this here, if it is already being checked above?
@@ -25,7 +28,11 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         {
             ArmyRightClickCounty();
         }
+    }
 
+    private void RefreshBuildingsPanels()
+    {
+        //throw new NotImplementedException();
     }
 
     private void PanelChanges()
@@ -39,10 +46,11 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         if (WorldMapLoad.instance.playerFaction == WorldMapLoad.instance.counties[name].faction.name)
         {
             UIMusterArmyButton.instance.musterArmyButtonGameObject.SetActive(true);
-            UIExpandBuildingsPanel.instance.expandBuildingButtonGameObject.SetActive(true);
-
-
-                    
+            if (UICountyPanel.instance.buildingsPanelExpanded == false)
+            {
+                UIExpandBuildingsPanel.instance.expandBuildingButtonGameObject.SetActive(true);
+            }
+            //UIExpandBuildingsPanel.instance.expandBuildingButtonGameObject.SetActive(true);       
         }
         else
         {

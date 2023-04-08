@@ -14,17 +14,19 @@ public class UIBuildingChecker : MonoBehaviour
     }
     private void OnEnable()
     {
-        for (int i = 0; i < WorldMapLoad.instance.possibleBuildings.Count; i++)
+        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings;
+        for (int i = 0; i < possibleBuildings.Count; i++)
         {
-            WorldMapLoad.instance.possibleBuildings[i].CurrentWorkersChanged += CheckEnoughUnemployed;
+            possibleBuildings[i].CurrentWorkersChanged += CheckEnoughUnemployed;
         }
     }
 
     private void OnDisable()
     {
-        for (int i = 0; i < WorldMapLoad.instance.possibleBuildings.Count; i++)
+        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings;
+        for (int i = 0; i < possibleBuildings.Count; i++)
         {
-            WorldMapLoad.instance.possibleBuildings[i].CurrentWorkersChanged -= CheckEnoughUnemployed;
+            possibleBuildings[i].CurrentWorkersChanged -= CheckEnoughUnemployed;
         }
     }
 
@@ -33,7 +35,8 @@ public class UIBuildingChecker : MonoBehaviour
         // Check for Population.  This doesn't include the leader.
         unemployed = 0;
         enoughPopulation = false;
-        
+        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
+
 
         for (int i = 0; i < WorldMapLoad.instance.countyPopulationDictionary[WorldMapLoad.instance.currentlySelectedCounty].Count; i++)
         {
@@ -44,12 +47,12 @@ public class UIBuildingChecker : MonoBehaviour
             }
         }
         //Debug.Log("Unemployed: " + unemployed);
-        if (unemployed < WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
+        if (unemployed < possibleBuildings.CurrentWorkers)
         {
             notEnoughWorkersPanel.SetActive(true);
-            WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers = unemployed;
+            possibleBuildings.CurrentWorkers = unemployed;
         }
-        else if(WorldMapLoad.instance.possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers != 0)
+        else if(possibleBuildings.CurrentWorkers != 0)
         {
             enoughPopulation = true;
         } 

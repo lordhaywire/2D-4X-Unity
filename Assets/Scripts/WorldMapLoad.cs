@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class WorldMapLoad : MonoBehaviour
 {
@@ -21,11 +22,11 @@ public class WorldMapLoad : MonoBehaviour
     public string playerFaction;
     public int playerFactionID;
 
-    public List<ResearchItem> researchItemsTier1 = new();
+    //public List<ResearchItem> researchItems = new();
 
-    public List<PossibleBuilding> possibleBuildings = new();
+    //public List<PossibleBuilding> possibleBuildings = new();
 
-    public List<CurrentBuilding> currentBuildings = new();
+    //public List<CurrentBuilding> currentBuildings = new();
 
     // Initialize County Dictionary List.
     public Dictionary<string, County> counties = new();
@@ -61,8 +62,9 @@ public class WorldMapLoad : MonoBehaviour
     {
         UIBuildingConfirmed.instance.BuildingConfirmed += BuildCountyImprovement;
 
-        CreateResearchandBuildingList();
         CreateCountiesDictionary();
+
+        CreateResearchandBuildingList();
 
         // This is just temp till we do character creation.
         playerFaction = factionNameAndColors[0].name;
@@ -85,63 +87,68 @@ public class WorldMapLoad : MonoBehaviour
         DeductCostOfBuilding(); // Done - for Influence costs only.
         SetNextDayJob(); // Done
 
-        MoveBuildingToCurrentBuildingList(); // Not done at all.  
+        MoveBuildingToCurrentBuildingList(); // Bugged.
     }
 
     private void MoveBuildingToCurrentBuildingList()
     {
-        var possibleBuilding = possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
+        var possibleBuilding = counties[currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
 
         Debug.Log("Possible Building Number: " + UIBuildingsPanel.instance.PossibleBuildingNumber);
 
         // Create the Current Building List and add one to the County so the County knows what it has built.
         // I don't know what the fuck this is, but it works.  Thanks Visual Studio!
-        counties[currentlySelectedCounty].buildings = new List<CurrentBuilding>
+        counties[currentlySelectedCounty].currentBuildings.Add(new CurrentBuilding(possibleBuilding.name,
+            possibleBuilding.description, possibleBuilding.daysToBuild, possibleBuilding.CurrentWorkers,
+            possibleBuilding.maxEmployees, true, false));
+        /*researchItems.Add(new ResearchItem(
+            null, null, null, AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK,
+         * counties[currentlySelectedCounty].currentBuildings = new List<CurrentBuilding>
         {
             new CurrentBuilding(
             possibleBuilding.name, possibleBuilding.description, possibleBuilding.daysToBuild, possibleBuilding.CurrentWorkers,
             possibleBuilding.maxEmployees, true, false)
         };
-        Debug.Log("Current Building Length: " + counties[currentlySelectedCounty].buildings.Count);
-        Debug.Log("County Build Name: " + counties[currentlySelectedCounty].buildings[^1].name);
+        */
+        Debug.Log("Current Building Length: " + counties[currentlySelectedCounty].currentBuildings.Count);
+        Debug.Log("County Build Name: " + counties[currentlySelectedCounty].currentBuildings[^1].name);
 
         // Assigned the Possible Building UI game object to the current building list.
-        counties[currentlySelectedCounty].buildings[^1].gameObject = possibleBuilding.gameObject;
+        counties[currentlySelectedCounty].currentBuildings[^1].gameObject = possibleBuilding.gameObject;
 
         // Moving the possilbe building UI game object to the current building UI game object.
-        counties[currentlySelectedCounty].buildings[^1].gameObject.transform.SetParent(UICurrentBuildingsPanel.instance.currentBuildingsGroupGameObject.transform);
+        counties[currentlySelectedCounty].currentBuildings[^1].gameObject.transform.SetParent(UICurrentBuildingsPanel.instance.currentBuildingsGroupGameObject.transform);
 
         // Remove the building from the possible Building list.
-        possibleBuildings.Remove(possibleBuilding);
+        counties[currentlySelectedCounty].possibleBuildings.Remove(possibleBuilding);
 
         // Rename building to be the same as their possible building index.
-        for(int i = 0; i < UIBuildingsPanel.instance.possibleBuildingsGroupGameObject.transform.childCount; i++)
+        for (int i = 0; i < UIBuildingsPanel.instance.possibleBuildingsGroupGameObject.transform.childCount; i++)
         {
-            possibleBuildings[i].gameObject.name = i.ToString();
+            counties[currentlySelectedCounty].possibleBuildings[i].gameObject.name = i.ToString();
         }
 
         // Rename building to be the same as their current building index.
         for (int i = 0; i < UICurrentBuildingsPanel.instance.currentBuildingsGroupGameObject.transform.childCount; i++)
         {
-            counties[currentlySelectedCounty].buildings[i].gameObject.name = i.ToString();
+            counties[currentlySelectedCounty].currentBuildings[i].gameObject.name = i.ToString();
         }
-
     }
 
     private void DeductCostOfBuilding()
     {
-        factions[0].Influence -= possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].influenceCost;
+        factions[0].Influence -= counties[currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].influenceCost;
     }
 
     private void SetNextDayJob()
     {
-        // This is where we left off - I think if we could build 3 buildings we could run out of unemployeed workers and
-        // everythign would break.
+        // Build 3 currentBuildings we could run out of unemployeed workers and
+        // everything would break.
         int numberWorkers = 0;
-        for(int i = 0; i < countyPopulationDictionary[currentlySelectedCounty].Count; i++)
+        for (int i = 0; i < countyPopulationDictionary[currentlySelectedCounty].Count; i++)
         {
-            if(countyPopulationDictionary[currentlySelectedCounty][i].nextActivity == AllText.Jobs.IDLE
-                && numberWorkers < possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
+            if (countyPopulationDictionary[currentlySelectedCounty][i].nextActivity == AllText.Jobs.IDLE
+                && numberWorkers < counties[currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
             {
                 countyPopulationDictionary[currentlySelectedCounty][i].nextActivity = AllText.Jobs.BUILDING;
                 numberWorkers++;
@@ -151,16 +158,14 @@ public class WorldMapLoad : MonoBehaviour
                 Debug.Log("First Name: " + countyPopulationDictionary[currentlySelectedCounty][i].firstName);
                 Debug.Log("Activity: " + countyPopulationDictionary[currentlySelectedCounty][i].nextActivity);
                 */
-    }
-    /*
-    else
-    {
-         Debug.Log("Set Next Day Job got to Else.");
-    }
-    */
-}
-
-        //possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers
+            }
+            /*
+            else
+            {
+                 Debug.Log("Set Next Day Job got to Else.");
+            }
+            */
+        }
     }
 
     private void OnDisable()
@@ -171,59 +176,75 @@ public class WorldMapLoad : MonoBehaviour
     }
     private void CreateResearchandBuildingList()
     {
-        researchItemsTier1.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK,
-            null, null, 1, true, true, null));
-        researchItemsTier1.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK,
-            null, null, 1, true, true, null));
-        researchItemsTier1.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK,
-            null, null, 1, true, true, null));
+        // This is going to go through all of the factions and create a list of their research, which is currently all completed.
+        for (int i = 0; i < factions.Count; i++)
+        {
+            factions[i].researchItems.Add(new ResearchItem(
+                null, null, null, AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK,
+                null, null, 1, true, true));
+            factions[i].researchItems.Add(new ResearchItem(
+                null, null, null, AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK,
+                null, null, 1, true, true));
+            factions[i].researchItems.Add(new ResearchItem(
+                null, null, null, AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK,
+                null, null, 1, true, true));
+            // The isResearchDone should start out as false, just set to done as testing.
+            factions[i].researchItems.Add(new ResearchItem(
+                null, null, null, "Elitism", AllText.Descriptions.ELITISM,
+                null, null, 1, false, true));
+        }
         /*
-        researchItemsTier1.Add(new ResearchItem(
+        researchItems.Add(new ResearchItem(
             null, null, null, AllText.BuildingName.RESEARCHSSHACK, AllText.Descriptions.RESEARCHSSHACK,
             null, null, 1, true, true, null));
-        researchItemsTier1.Add(new ResearchItem(
+        researchItems.Add(new ResearchItem(
             null, null, null, AllText.BuildingName.SCAVENGERSSHACK, AllText.Descriptions.SCAVENGERSSHACK,
             null, null, 1, true, true, null));
-        researchItemsTier1.Add(new ResearchItem(
+        researchItems.Add(new ResearchItem(
             null, null, null, AllText.BuildingName.STONEWORKERSSHACK, AllText.Descriptions.STONEWORKERSSHACK,
             null, null, 1, true, true, null));
-        researchItemsTier1.Add(new ResearchItem(
+        researchItems.Add(new ResearchItem(
             null, null, null, "Basic Tactics - Guns", AllText.Descriptions.BASICTACTICSGUNS,
             null, null, 1, false, false, null));
-        researchItemsTier1.Add(new ResearchItem(
+        researchItems.Add(new ResearchItem(
             null, null, null, "Basic Tactics - Melee", AllText.Descriptions.BASICTACTICSMELEE,
             null, null, 1, false, false, null));
-        researchItemsTier1.Add(new ResearchItem(
+        researchItems.Add(new ResearchItem(
             null, null, null, AllText.BuildingName.PRIMATIVEMELEESMITHSHACK, AllText.Descriptions.PRIMATIVEMELEESMITHSHACK,
             null, null, 1, true, false, null));
-        researchItemsTier1.Add(new ResearchItem(
+        researchItems.Add(new ResearchItem(
             null, null, null, AllText.BuildingName.PRIMATIVERANGEDSMITHSHACK, AllText.Descriptions.PRIMATIVERANGEDSMITHSHACK,
             null, null, 1, true, false, null));
-        researchItemsTier1.Add(new ResearchItem(
+        researchItems.Add(new ResearchItem(
             null, null, null, AllText.BuildingName.PRIMATIVEGUNSMITHSHACK, AllText.Descriptions.PRIMATIVEGUNSMITHSHACK,
             null, null, 1, true, false, null));
-        researchItemsTier1.Add(new ResearchItem(
+        researchItems.Add(new ResearchItem(
             null, null, null, AllText.BuildingName.PRIMATIVEAMMOSHACK, AllText.Descriptions.PRIMATIVEAMMOSHACK,
             null, null, 1, true, false, null));
-        researchItemsTier1.Add(new ResearchItem(
+        researchItems.Add(new ResearchItem(
             null, null, null, AllText.BuildingName.PRIMATVEGUNAMMOSHACK, AllText.Descriptions.PRIMATVEGUNAMMOSHACK,
             null, null, 1, true, false, null));
-        - Nationalism
         */
-        // The isResearchDone should start out as false, just set to done as testing.
-        researchItemsTier1.Add(new ResearchItem(
-            null, null, null, "Elitism", AllText.Descriptions.ELITISM,
-            null, null, 1, false, true, null));
+        // Should we eventually just have all the buildings generated from the research list?
 
+        foreach (KeyValuePair<string, County> item in counties)
+        {
+            Debug.Log(item.Key + "   " + item.Value);
+            counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
+            AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK, 500, 7, 0, 5));
+            counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
+                AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK, 500, 1, 0, 5));
+            counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
+                AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK, 500, 7, 0, 5));
+        }
+        /* This is the part we will get rid of.
         possibleBuildings.Add(new PossibleBuilding(
             AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK, 500, 7, 0, 5));
         possibleBuildings.Add(new PossibleBuilding(
             AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK, 500, 1, 0, 5));
         possibleBuildings.Add(new PossibleBuilding(
             AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK, 500, 7, 0, 5));
+        */
         /*
         possibleBuildings.Add(new PossibleBuilding(
             AllText.BuildingName.RESEARCHSSHACK, AllText.Descriptions.RESEARCHSSHACK, 500, 7, 0, 5));
@@ -242,12 +263,12 @@ public class WorldMapLoad : MonoBehaviour
         possibleBuildings.Add(new PossibleBuilding(
             AllText.BuildingName.PRIMATVEGUNAMMOSHACK, AllText.Descriptions.PRIMATVEGUNAMMOSHACK, 500, 7, 0, 5));
         */
-
+        /*
         // Do we really need this?
-        researchItemsTier1[0].possibleBuildings = possibleBuildings[0];
-        researchItemsTier1[1].possibleBuildings = possibleBuildings[1];
-        researchItemsTier1[2].possibleBuildings = possibleBuildings[2];
-
+        researchItems[0].possibleBuildings = possibleBuildings[0];
+        researchItems[1].possibleBuildings = possibleBuildings[1];
+        researchItems[2].possibleBuildings = possibleBuildings[2];
+        */
     }
 
     private void FirstRunTopInfoBar()
@@ -279,25 +300,25 @@ public class WorldMapLoad : MonoBehaviour
         // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin, River
         counties[CountyListCreator.instance.countiesList[0].name] = new County(
             0, true, null, null, null, factionNameAndColors[1],
-            Arrays.provinceName[0], "Coast", "Forest", "Ruin", null, 0, 0);
+            Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0);
         counties[CountyListCreator.instance.countiesList[1].name] = new County(
             1, true, null, null, null, factionNameAndColors[0],
-            Arrays.provinceName[1], "Ruin", "Forest", "River", null, 0, 1);
+            Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 1);
         counties[CountyListCreator.instance.countiesList[2].name] = new County(
-            2, false, null, null, null, factionNameAndColors[2],
-            Arrays.provinceName[1], "Coast", "Forest", "Mountain", null, 0, 0);
+            2, false, null, null, null, factionNameAndColors[0], // Temporarily set to the player faction for testing.
+            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
         counties[CountyListCreator.instance.countiesList[3].name] = new County(
             3, false, null, null, null, factionNameAndColors[3],
-            Arrays.provinceName[1], "Coast", "Forest", "Mountain", null, 0, 0);
+            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
         counties[CountyListCreator.instance.countiesList[4].name] = new County(
             4, false, null, null, null, factionNameAndColors[4],
-            Arrays.provinceName[1], "Mountain", "Forest", "Farm", null, 0, 0);
+            Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0, 0);
         counties[CountyListCreator.instance.countiesList[5].name] = new County(
             5, false, null, null, null, factionNameAndColors[5],
-            Arrays.provinceName[1], "Desert", "Mountain", "Forest", null, 0, 0);
+            Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0, 0);
         counties[CountyListCreator.instance.countiesList[6].name] = new County(
             6, false, null, null, null, factionNameAndColors[6],
-            Arrays.provinceName[1], "Mountain", "Desert", "Forest", null, 0, 0);
+            Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0, 0);
         /*
         // Create and add currentBuildings list to each county so each county knows what it has built.
         for(int i = 0; i < counties.Count; i++)
@@ -405,7 +426,7 @@ public class WorldMapLoad : MonoBehaviour
                 countyPopulationDictionary[countyName][populationIndex].isMale = true;
                 countyPopulationDictionary[countyName][populationIndex].firstName =
                     maleNames[randomMaleNameNumber];
-                
+
             }
             else
             {
@@ -417,10 +438,10 @@ public class WorldMapLoad : MonoBehaviour
             int randomAgeNumber = Random.Range(18, 61);
             countyPopulationDictionary[countyName][populationIndex].age = randomAgeNumber;
 
-            
+
             //Debug.Log("Name: " + countyPopulationDictionary[countyName][populationIndex].firstName + " " +
             //countyPopulationDictionary[countyName][populationIndex].lastName);
-            
+
         }
     }
 }

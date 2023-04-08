@@ -6,7 +6,7 @@ public class UIResearchItem : MonoBehaviour
     {
         ResearchTier1.instance.researchTitleAndDescriptionPanel.SetActive(true);
 
-        var researchItem = WorldMapLoad.instance.researchItemsTier1[int.Parse(name)];
+        var researchItem = WorldMapLoad.instance.factions[WorldMapLoad.instance.playerFactionID].researchItems[int.Parse(name)];
         UIResearchTitleDescriptionPanel.instance.title.text =
             researchItem.name;
         UIResearchTitleDescriptionPanel.instance.description.text =

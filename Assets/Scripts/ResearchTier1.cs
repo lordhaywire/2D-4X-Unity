@@ -14,14 +14,15 @@ public class ResearchTier1 : MonoBehaviour
     }
 
     private void OnEnable()
-    {
-        TimeKeeper.instance.PauseandUnpause();
+    {    
+        TimeKeeper.instance.OnPanelEnable();
+
         UpdateResearchItemsTier1();
     }
 
     private void OnDisable()
     {
-        TimeKeeper.instance.PauseandUnpause();
+        TimeKeeper.instance.OnPanelDisable();  
     }
 
     private void FirstRunResearch()
@@ -39,7 +40,7 @@ public class ResearchTier1 : MonoBehaviour
     private void UpdateResearchItemsTier1()
     {
         var researchItems = WorldMapLoad.instance.factions[WorldMapLoad.instance.playerFactionID].researchItems;
-        for (int i = 0;i < researchItems.Count; i++)
+        for (int i = 0; i < researchItems.Count; i++)
         {
             researchItems[i].researchNameText.text = researchItems[i].name;
             if (researchItems[i].isResearchDone == true)
@@ -49,7 +50,7 @@ public class ResearchTier1 : MonoBehaviour
             else
             {
                 researchItems[i].toggle.isOn = false;
-            }           
+            }
         }
     }
 }

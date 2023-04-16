@@ -21,14 +21,14 @@ public class County
     public int population;
 
     public County(int countyID, bool isCapital, GameObject countyCenterGameObject, 
-        SpriteRenderer spriteRendered, SelectCounty selectCounty, FactionNameAndColor faction, 
+        SpriteRenderer spriteRenderer, SelectCounty selectCounty, FactionNameAndColor faction, 
         string province, string biomePrimary, string biomeSecondary, string biomeTertiary,
          int currentlyWorkingPopulation, int population)
     {
         this.countyID = countyID;
         this.isCapital = isCapital;
         this.countyCenterGameObject = countyCenterGameObject;
-        this.spriteRenderer = spriteRendered;
+        this.spriteRenderer = spriteRenderer;
         this.selectCounty = selectCounty;
         this.faction = faction;
         this.province = province;

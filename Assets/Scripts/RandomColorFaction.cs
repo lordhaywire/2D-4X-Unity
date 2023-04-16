@@ -19,11 +19,18 @@ public class RandomColorFaction : MonoBehaviour
         {
             int randomIndex = Random.Range(0, availableColors.Count);
             WorldMapLoad.instance.factionNameAndColors[i].color32 = availableColors[randomIndex];
-
-            // Assign the new faction color to the county.
-            CountyListCreator.instance.countiesList[i].gameObject.GetComponent<SpriteRenderer>().color =
-                WorldMapLoad.instance.factionNameAndColors[i].color32;
             availableColors.RemoveAt(randomIndex);
+        }
+
+        // Go through each county, assign their Sprite Renderer and their color.
+        foreach (KeyValuePair<string, County> item in WorldMapLoad.instance.counties)
+        {
+            //Debug.Log("Random Color Faction: " + item.Key + "   " + item.Value);
+            var county = WorldMapLoad.instance.counties[item.Key];
+            county.spriteRenderer =
+                CountyListCreator.instance.countiesList[county.countyID].gameObject.GetComponent<SpriteRenderer>();
+
+            county.spriteRenderer.color = county.faction.color32;
         }
     }
 }

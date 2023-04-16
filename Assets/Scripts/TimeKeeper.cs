@@ -9,7 +9,7 @@ public class TimeKeeper : MonoBehaviour
     [SerializeField] private GameObject paused;
     [SerializeField] private int ticks;
 
-    private MapControls mapControls;
+    public MapControls mapControls;
     private int modifiedTimeScale; // Getter Setter / Property
 
     public float foreverTimer; // This will eventually need to be reset.  I think.  It depends on if we run out of numbers.
@@ -17,13 +17,15 @@ public class TimeKeeper : MonoBehaviour
     public int hours;
     public int days = 0;
 
-    private int oldTimeSpeed;
+    public int oldTimeSpeed;
+    public bool isAlreadyPaused;
 
     private void Awake()
     {
         instance = this;
         mapControls = new MapControls();  // This sets up a new control scheme for this script. This sentence doesn't mean anything to me.
         ModifiedTimeScale = 1;
+        isAlreadyPaused = false;
     }
     private void Start()
     {
@@ -33,7 +35,7 @@ public class TimeKeeper : MonoBehaviour
 
     private void OnEnable()
     {
-        mapControls.Enable();   
+        mapControls.Enable();
     }
 
     private void OnDisable()
@@ -107,13 +109,38 @@ public class TimeKeeper : MonoBehaviour
 
     public void PauseandUnpause()
     {
-        
         if (ModifiedTimeScale > 0)
         {
             oldTimeSpeed = ModifiedTimeScale;
             ModifiedTimeScale = 0;
+            
         }
         else
+        {
+            ModifiedTimeScale = oldTimeSpeed;
+        }
+        Debug.Log($"Modified Time: {ModifiedTimeScale} and Old Time Speed: {oldTimeSpeed}.");
+    }
+
+    public void OnPanelEnable()
+    {
+        mapControls.Keyboard.Spacebar.Disable();
+        if (Time.timeScale != 0)
+        {
+            PauseandUnpause();
+            isAlreadyPaused = false;
+
+        }
+        else
+        {
+            isAlreadyPaused = true;
+        }
+    }
+
+    public void OnPanelDisable()
+    {
+        mapControls.Keyboard.Spacebar.Enable();
+        if (isAlreadyPaused == false)
         {
             ModifiedTimeScale = oldTimeSpeed;
         }

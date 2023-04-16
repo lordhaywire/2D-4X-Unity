@@ -229,7 +229,7 @@ public class WorldMapLoad : MonoBehaviour
 
         foreach (KeyValuePair<string, County> item in counties)
         {
-            Debug.Log(item.Key + "   " + item.Value);
+            //Debug.Log(item.Key + "   " + item.Value);
             counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
             AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK, 500, 7, 0, 5));
             counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
@@ -237,14 +237,7 @@ public class WorldMapLoad : MonoBehaviour
             counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
                 AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK, 500, 7, 0, 5));
         }
-        /* This is the part we will get rid of.
-        possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK, 500, 7, 0, 5));
-        possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK, 500, 1, 0, 5));
-        possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK, 500, 7, 0, 5));
-        */
+
         /*
         possibleBuildings.Add(new PossibleBuilding(
             AllText.BuildingName.RESEARCHSSHACK, AllText.Descriptions.RESEARCHSSHACK, 500, 7, 0, 5));

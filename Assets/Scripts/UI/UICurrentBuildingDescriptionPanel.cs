@@ -21,31 +21,25 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
 
     private void OnEnable()
     {
+        // Mayeb move this fucking ugly shit below the TimeKeeper thing.
         var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings;
 
-        if (Time.timeScale != 0)
-        {
-            TimeKeeper.instance.PauseandUnpause();
-        }
-        
+        TimeKeeper.instance.OnPanelEnable();
+
         UIBuildingsPanel.instance.PossibleBuildingButtonPressed += PanelRefresh;
         //Debug.Log("UI Possible Building Number: " + UIBuildingsPanel.instance.PossibleBuildingNumber);
         for(int i = 0; i < possibleBuildings.Count; i++)
         {
             possibleBuildings[i].CurrentWorkersChanged += CurrentEmployeesRefresh;
         }
-        
     }
 
     private void OnDisable()
     {
         var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings;
 
-        if (Time.timeScale != 0)
-        {
-            TimeKeeper.instance.PauseandUnpause();
-        }
-        
+        TimeKeeper.instance.OnPanelDisable();
+
         UIBuildingsPanel.instance.PossibleBuildingButtonPressed -= PanelRefresh;
         for (int i = 0; i < possibleBuildings.Count; i++)
         {

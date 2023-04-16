@@ -21,11 +21,8 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        if (Time.timeScale != 0)
-        {
-            TimeKeeper.instance.PauseandUnpause();
-        }
-        
+        TimeKeeper.instance.OnPanelEnable();
+
         UIBuildingsPanel.instance.PossibleBuildingButtonPressed += PanelRefresh;
         //Debug.Log("UI Possible Building Number: " + UIBuildingsPanel.instance.PossibleBuildingNumber);
         for(int i = 0; i < WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings.Count; i++)
@@ -35,11 +32,8 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
     }
 
     private void OnDisable()
-    { 
-        if (Time.timeScale != 0)
-        {
-            TimeKeeper.instance.PauseandUnpause();
-        }
+    {
+        TimeKeeper.instance.OnPanelEnable();
         UIBuildingsPanel.instance.PossibleBuildingButtonPressed -= PanelRefresh;
         for (int i = 0; i < WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings.Count; i++)
         {

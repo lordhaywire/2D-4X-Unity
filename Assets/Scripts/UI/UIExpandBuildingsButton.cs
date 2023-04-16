@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class UIExpandBuildingsPanel : MonoBehaviour
+public class UIExpandBuildingsButton : MonoBehaviour
 {
     // This should probably be called UIExpandBuildingsPanelButton or some shit.
     
-    public static UIExpandBuildingsPanel instance;
+    public static UIExpandBuildingsButton instance;
     public GameObject expandBuildingButtonGameObject;
 
     private void Awake()

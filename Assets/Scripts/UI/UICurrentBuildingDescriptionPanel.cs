@@ -7,12 +7,10 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
-    [SerializeField] private TextMeshProUGUI moneyCostText;
     [SerializeField] private TextMeshProUGUI resourcesCostText;
     [SerializeField] private TextMeshProUGUI timeText;
-    [SerializeField] private TextMeshProUGUI currentEmployeesText;
-    [SerializeField] private TextMeshProUGUI maxEmployeesText;
-    [SerializeField] private TextMeshProUGUI confirmBuildText;
+    [SerializeField] private TextMeshProUGUI currentWorkersText;
+    [SerializeField] private TextMeshProUGUI maxWorkersText;
 
     private void Awake()
     {
@@ -21,91 +19,92 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        // Mayeb move this fucking ugly shit below the TimeKeeper thing.
-        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings;
-
         TimeKeeper.instance.OnPanelEnable();
 
-        UIBuildingsPanel.instance.PossibleBuildingButtonPressed += PanelRefresh;
-        //Debug.Log("UI Possible Building Number: " + UIBuildingsPanel.instance.PossibleBuildingNumber);
-        for(int i = 0; i < possibleBuildings.Count; i++)
+        WorldMapLoad.instance.currentBuildingDescriptionPanelExpanded = true;
+
+        UICurrentBuildingsPanel.instance.CurrentBuildingButtonPressed += PanelRefresh;
+        /*
+        var currentBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings;
+        for(int i = 0; i < currentBuildings.Count; i++)
         {
-            possibleBuildings[i].CurrentWorkersChanged += CurrentEmployeesRefresh;
+            currentBuildings[i].CurrentWorkersChanged += CurrentEmployeesRefresh;
         }
+        */
     }
 
     private void OnDisable()
     {
-        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings;
-
         TimeKeeper.instance.OnPanelDisable();
 
-        UIBuildingsPanel.instance.PossibleBuildingButtonPressed -= PanelRefresh;
-        for (int i = 0; i < possibleBuildings.Count; i++)
+        UICurrentBuildingsPanel.instance.CurrentBuildingButtonPressed -= PanelRefresh;
+        /*
+        var currentBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings;
+        for (int i = 0; i < currentBuildings.Count; i++)
         {
-            possibleBuildings[i].CurrentWorkersChanged -= CurrentEmployeesRefresh;
+            currentBuildings[i].CurrentWorkersChanged -= CurrentEmployeesRefresh;
         }
+        */
     }
 
+    /*
     private void CurrentEmployeesRefresh()
     {
-        var possibleBuilding =
-            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
-        currentEmployeesText.text = possibleBuilding.CurrentWorkers.ToString();
-    }
+        var currentBuilding =
+            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.instance.CurrentBuildingNumber];
+        currentWorkersText.text = currentBuilding.currentWorkers.ToString();
+    }*/
     private void PanelRefresh()
-    {
-        var possibleBuildings =
-            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
-        nameText.text = possibleBuildings.name;
-        descriptionText.text = possibleBuildings.description;
+    { 
+        var currentBuildings =
+            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.instance.CurrentBuildingNumber];
+        nameText.text = currentBuildings.name;
+        descriptionText.text = currentBuildings.description;
+        timeText.text = currentBuildings.daysToBuild.ToString();
+        currentWorkersText.text = currentBuildings.currentWorkers.ToString();
+        maxWorkersText.text = currentBuildings.maxWorkers.ToString();
 
-        moneyCostText.text = $"{possibleBuildings.influenceCost} Influence";
-        //resourcesCostText.text = possibleBuildings. // We aren't using the resources part yet.
-        timeText.text = possibleBuildings.daysToBuild.ToString();
-
-        // Reset current employees to 0.
-        possibleBuildings.CurrentWorkers = 0;
-        currentEmployeesText.text = possibleBuildings.CurrentWorkers.ToString();
-        maxEmployeesText.text = possibleBuildings.maxEmployees.ToString();
-
-        confirmBuildText.text = $"Are you sure you want to build {possibleBuildings.name}?";
     }
 
+    /*
     public void MinusButton()
     {
-        var possibleBuildings =
-            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
+        var currentBuildings =
+            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.instance.PossibleBuildingNumber];
 
-        possibleBuildings.CurrentWorkers--;
-        Debug.Log("Current Workers: " + possibleBuildings.CurrentWorkers);
-        if (possibleBuildings.CurrentWorkers < 0)
+        currentBuildings.CurrentWorkers--;
+        Debug.Log("Current Workers: " + currentBuildings.CurrentWorkers);
+        if (currentBuildings.CurrentWorkers < 0)
         {
-            possibleBuildings.CurrentWorkers = 0;
+            currentBuildings.CurrentWorkers = 0;
 
         }
     }
+    */
 
+    /*
     public void PlusButton()
     {
-        var possibleBuildings =
-            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
+        var currentBuildings =
+            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.instance.PossibleBuildingNumber];
 
-        possibleBuildings.CurrentWorkers++;
+        currentBuildings.CurrentWorkers++;
 
-        if (possibleBuildings.CurrentWorkers > possibleBuildings.maxEmployees)
+        if (currentBuildings.CurrentWorkers > currentBuildings.maxWorkers)
         {
-            possibleBuildings.CurrentWorkers =
-                possibleBuildings.maxEmployees;
+            currentBuildings.CurrentWorkers =
+                currentBuildings.maxWorkers;
         }
     }
-
+    */
+    /*
     public void MaxButton()
     {
-        var possibleBuildings =
-            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
+        var currentBuildings =
+            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.instance.PossibleBuildingNumber];
 
-        possibleBuildings.CurrentWorkers =
-            possibleBuildings.maxEmployees;
+        currentBuildings.CurrentWorkers =
+            currentBuildings.maxWorkers;
     }
+    */
 }

@@ -13,7 +13,6 @@ public class UIPopulationInfoPanel : MonoBehaviour
     {
         TimeKeeper.instance.OnPanelEnable();
 
-
         if (WorldMapLoad.instance.countyPopulationDictionary[WorldMapLoad.instance.currentlySelectedCounty] != null)
         {
             var countyList = WorldMapLoad.instance.countyPopulationDictionary[WorldMapLoad.instance.currentlySelectedCounty];
@@ -23,7 +22,6 @@ public class UIPopulationInfoPanel : MonoBehaviour
             // This is for the leaders of each faction.
             for (int i = 0; i < factionList.Count; i++)
             {
-                //Debug.Log("List Index: " + i);
                 populationListClones.Add
                     (Instantiate(prefabHorizontalPopulationListText, parentPopulationListGroup.transform));
                 populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nameText.text =
@@ -44,7 +42,7 @@ public class UIPopulationInfoPanel : MonoBehaviour
                     factionList[i].nextActivity;
             }
             // This is for the normal population in the county.
-            for (int i = 0; i < countyList.Count; i++) // populationListClones.Count
+            for (int i = 0; i < countyList.Count; i++)
             {
                 int listIndex = i + factionList.Count;
                 //Debug.Log("List Index: " + listIndex);
@@ -66,7 +64,7 @@ public class UIPopulationInfoPanel : MonoBehaviour
                 populationListClones[listIndex].GetComponent<UIHorizontalPopulationListText>().currentActivityText.text =
                     countyList[i].currentActivity;
                 populationListClones[listIndex].GetComponent<UIHorizontalPopulationListText>().nextActivityText.text =
-                    countyList[i].nextActivity;
+                    $"{countyList[i].nextActivity} {countyList[i].nextBuilding}";
             }
         }
         else
@@ -76,7 +74,7 @@ public class UIPopulationInfoPanel : MonoBehaviour
     }
     private void OnDisable()
     {
-        TimeKeeper.instance.OnPanelEnable();
+        TimeKeeper.instance.OnPanelDisable();
     }
     public void CloseButton()
     {

@@ -4,16 +4,17 @@ public class UIBuildingButton : MonoBehaviour
 {
     public void BuildingButton()
     {
-        UIBuildingsPanel.instance.buildingDescriptionPanel.SetActive(true);
-        if(transform.parent == UIBuildingsPanel.instance.possibleBuildingsGroupGameObject.transform)
+        if(transform.parent == UIPossibleBuildingsPanel.instance.possibleBuildingsGroupGameObject.transform)
         {
             Debug.Log("Possible Building.");
-            UIBuildingsPanel.instance.PossibleBuildingNumber = int.Parse(name);
+            UIPossibleBuildingsPanel.instance.buildingDescriptionPanel.SetActive(true);
+            UIPossibleBuildingsPanel.instance.PossibleBuildingNumber = int.Parse(name);
         }
         else
         {
             Debug.Log("Current Building.");
-            UIBuildingsPanel.instance.CurrentBuildingNumber = int.Parse(name);
+            UICurrentBuildingsPanel.instance.buildingDescriptionPanel.SetActive(true);
+            UICurrentBuildingsPanel.instance.CurrentBuildingNumber = int.Parse(name);
         }
     }
 }

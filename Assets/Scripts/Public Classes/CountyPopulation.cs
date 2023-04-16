@@ -8,10 +8,12 @@ public class CountyPopulation
     public int age;
 
     public string currentActivity;
+    public string currentBuilding;
     public string nextActivity;
+    public string nextBuilding;
 
     public CountyPopulation(string firstName, string lastName, bool isMale, 
-        int age, string currentActivity, string nextActivity)
+        int age, string currentActivity, string currentBuilding, string nextActivity,  string nextBuilding)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,6 +22,8 @@ public class CountyPopulation
         this.age = age;
 
         this.currentActivity = currentActivity;
-        this.nextActivity = nextActivity;
+        this.currentBuilding = currentBuilding;
+        this.nextActivity = nextActivity;  
+        this.nextBuilding = nextBuilding;
     }
 }

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class WorldMapLoad : MonoBehaviour
 {
@@ -14,6 +13,8 @@ public class WorldMapLoad : MonoBehaviour
     [SerializeField] private GameObject countyListGameObject;
     [SerializeField] private GameObject uICanvas;
 
+    public bool currentBuildingDescriptionPanelExpanded;
+    public bool possibleBuildingDescriptionPanelExpanded;
     public bool DevView;
     public GameObject countyInfoPanel;
     public GameObject armyInfoPanel;
@@ -54,6 +55,8 @@ public class WorldMapLoad : MonoBehaviour
     {
         //DevView = false;
         instance = this;
+        currentBuildingDescriptionPanelExpanded = false;
+        possibleBuildingDescriptionPanelExpanded = false;
 
         GetNamesFromFile();
     }
@@ -85,31 +88,22 @@ public class WorldMapLoad : MonoBehaviour
     private void BuildCountyImprovement()
     {
         DeductCostOfBuilding(); // Done - for Influence costs only.
-        SetNextDayJob(); // Done
+        SetNextDayJob(); // Done - This needs to have the name of the building the person is working on.
 
         MoveBuildingToCurrentBuildingList(); // Bugged.
     }
 
     private void MoveBuildingToCurrentBuildingList()
     {
-        var possibleBuilding = counties[currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
+        var possibleBuilding = counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber];
 
-        Debug.Log("Possible Building Number: " + UIBuildingsPanel.instance.PossibleBuildingNumber);
+        Debug.Log("Possible Building Number: " + UIPossibleBuildingsPanel.instance.PossibleBuildingNumber);
 
         // Create the Current Building List and add one to the County so the County knows what it has built.
-        // I don't know what the fuck this is, but it works.  Thanks Visual Studio!
         counties[currentlySelectedCounty].currentBuildings.Add(new CurrentBuilding(possibleBuilding.name,
             possibleBuilding.description, possibleBuilding.daysToBuild, possibleBuilding.CurrentWorkers,
             possibleBuilding.maxEmployees, true, false));
-        /*researchItems.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK,
-         * counties[currentlySelectedCounty].currentBuildings = new List<CurrentBuilding>
-        {
-            new CurrentBuilding(
-            possibleBuilding.name, possibleBuilding.description, possibleBuilding.daysToBuild, possibleBuilding.CurrentWorkers,
-            possibleBuilding.maxEmployees, true, false)
-        };
-        */
+
         Debug.Log("Current Building Length: " + counties[currentlySelectedCounty].currentBuildings.Count);
         Debug.Log("County Build Name: " + counties[currentlySelectedCounty].currentBuildings[^1].name);
 
@@ -123,7 +117,7 @@ public class WorldMapLoad : MonoBehaviour
         counties[currentlySelectedCounty].possibleBuildings.Remove(possibleBuilding);
 
         // Rename building to be the same as their possible building index.
-        for (int i = 0; i < UIBuildingsPanel.instance.possibleBuildingsGroupGameObject.transform.childCount; i++)
+        for (int i = 0; i < UIPossibleBuildingsPanel.instance.possibleBuildingsGroupGameObject.transform.childCount; i++)
         {
             counties[currentlySelectedCounty].possibleBuildings[i].gameObject.name = i.ToString();
         }
@@ -137,22 +131,23 @@ public class WorldMapLoad : MonoBehaviour
 
     private void DeductCostOfBuilding()
     {
-        factions[0].Influence -= counties[currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].influenceCost;
+        factions[0].Influence -= counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].influenceCost;
     }
 
     private void SetNextDayJob()
     {
-        // Build 3 currentBuildings we could run out of unemployeed workers and
-        // everything would break.
         int numberWorkers = 0;
         for (int i = 0; i < countyPopulationDictionary[currentlySelectedCounty].Count; i++)
         {
             if (countyPopulationDictionary[currentlySelectedCounty][i].nextActivity == AllText.Jobs.IDLE
-                && numberWorkers < counties[currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
+                && numberWorkers < counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
             {
                 countyPopulationDictionary[currentlySelectedCounty][i].nextActivity = AllText.Jobs.BUILDING;
+                countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding =
+                    counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].name;
+                Debug.Log($"Name: {countyPopulationDictionary[currentlySelectedCounty][i].firstName} and job: {countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding}");
                 numberWorkers++;
-                counties[currentlySelectedCounty].currentlyWorkingPopulation++; // We could put this number on the county info panel.
+                counties[currentlySelectedCounty].currentlyWorkingPopulation++; // We need to put this number on the county info panel.
                 /*
                 Debug.Log("Currently Working Population: " + counties[currentlySelectedCounty].currentlyWorkingPopulation);
                 Debug.Log("First Name: " + countyPopulationDictionary[currentlySelectedCounty][i].firstName);
@@ -403,7 +398,7 @@ public class WorldMapLoad : MonoBehaviour
         for (int populationIndex = 0; populationIndex < totalPopulation; populationIndex++)
         {
             // This adds to the Dictionary List a new person.
-            countyPopulationDictionary[countyName].Add(new CountyPopulation(null, null, false, 0, AllText.Jobs.IDLE, AllText.Jobs.IDLE));
+            countyPopulationDictionary[countyName].Add(new CountyPopulation(null, null, false, 0, AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null));
 
             // Generates Persons Last Name
             int randomLastNameNumber = Random.Range(0, lastNames.Length);

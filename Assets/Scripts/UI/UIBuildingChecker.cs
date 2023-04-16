@@ -35,7 +35,7 @@ public class UIBuildingChecker : MonoBehaviour
         // Check for Population.  This doesn't include the leader.
         unemployed = 0;
         enoughPopulation = false;
-        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIBuildingsPanel.instance.PossibleBuildingNumber];
+        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber];
 
 
         for (int i = 0; i < WorldMapLoad.instance.countyPopulationDictionary[WorldMapLoad.instance.currentlySelectedCounty].Count; i++)

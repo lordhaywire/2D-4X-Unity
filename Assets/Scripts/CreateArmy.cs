@@ -10,14 +10,14 @@ public class CreateArmy : MonoBehaviour
     public void CreateArmyButton()
     {
         // This is so we can only create the army in our own counties.
-        if (WorldMapLoad.instance.counties[SelectCounty.currentlySelectedCounty].faction.name == WorldMapLoad.instance.playerFaction)
+        if (WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].faction.name == WorldMapLoad.instance.playerFaction)
         {
             var armyNumber = WorldMapLoad.instance.armies.Count;
             var newArmyList = new Army(null, null, null, null, null, null,false, false,false, "Player", "Fuck Stick" + armyNumber, Random.Range(1, 1001));
 
             WorldMapLoad.instance.armies.Add(newArmyList);
 
-            newArmyList.gameObject = Instantiate(unitPrefab, WorldMapLoad.instance.counties[SelectCounty.currentlySelectedCounty].countyCenterGameObject.transform.position,
+            newArmyList.gameObject = Instantiate(unitPrefab, WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].countyCenterGameObject.transform.position,
               Quaternion.identity);
             //Debug.Log("New Army Game Object: " + newArmyList.uIResearchItemPanelGameObject);
             // Change name of GameObject in the inspector
@@ -38,11 +38,11 @@ public class CreateArmy : MonoBehaviour
             Debug.Log("Army Movement Script? " + newArmyList.armyMovement);
             
             // Store the current location name of the army.
-            newArmyList.location = SelectCounty.currentlySelectedCounty;
+            newArmyList.location = WorldMapLoad.instance.currentlySelectedCounty;
             Debug.Log("Current Location: " + newArmyList.location);
 
             // Sets the army Destination to its current location.
-            newArmyList.armyDestination = SelectCounty.currentlySelectedCounty;
+            newArmyList.armyDestination = WorldMapLoad.instance.currentlySelectedCounty;
 
             // Change the Army Info Panel to have the new army info from list.
             WorldMapLoad.instance.armyInfoPanel.SetActive(true);
@@ -56,8 +56,6 @@ public class CreateArmy : MonoBehaviour
         else
         {
             Debug.Log("You don't own this county, so you can't spawn armies here.");
-
-
         }
 
     }

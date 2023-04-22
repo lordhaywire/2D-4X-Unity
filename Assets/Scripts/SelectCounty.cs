@@ -1,20 +1,24 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SelectCounty : MonoBehaviour, IPointerClickHandler
 {
-    public static string currentlySelectedCounty;
     public static bool hasAnArmyBeenSelected;
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            currentlySelectedCounty = name;
+            WorldMapLoad.instance.currentlySelectedCounty = name;
+
+            CloseBuildingDescriptionPanels();
 
             PanelChanges();
 
             FillCountyInfoPanel();
+
+            RefreshBuildingsPanels();
 
             DeselectArmyOnCountyLeftClick();
 
@@ -26,24 +30,59 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         {
             ArmyRightClickCounty();
         }
+    }
 
+    private void CloseBuildingDescriptionPanels()
+    {
+        if(WorldMapLoad.instance.currentBuildingDescriptionPanelExpanded == true)
+        {
+            UICurrentBuildingDescriptionPanel.instance.gameObject.SetActive(false);
+            WorldMapLoad.instance.possibleBuildingDescriptionPanelExpanded = false;
+        }
+        if(WorldMapLoad.instance.possibleBuildingDescriptionPanelExpanded == true)
+        {
+            UIPossibleBuildingDescriptionPanel.instance.gameObject.SetActive(false);
+            WorldMapLoad.instance.possibleBuildingDescriptionPanelExpanded = false;
+        }      
+    }
+
+    private void RefreshBuildingsPanels()
+    {
+        UIBuildingPanelsRefresher.instance.CurrentBuildingPanelsDestroyer();
+        UIBuildingPanelsRefresher.instance.CurrentBuildingPanelsRefresher();
+
+        UIBuildingPanelsRefresher.instance.PossibleBuildingsPanelsDestroyer();
+        UIBuildingPanelsRefresher.instance.PossibleBuildingPanelsRefresher();
     }
 
     private void PanelChanges()
     {
         WorldMapLoad.instance.countyInfoPanel.SetActive(true);
         WorldMapLoad.instance.armyInfoPanel.SetActive(false);
-
         UICountyPanel.instance.heroInfoList.SetActive(false); // This was some bullshit.  This makes it so that onEnable
                                                               // resets the HeroInfoList.
 
-        if (WorldMapLoad.instance.playerFaction == WorldMapLoad.instance.counties[name].faction.name)
+        if (WorldMapLoad.instance.playerFaction == WorldMapLoad.instance.counties[name].faction.name) // No DevView in this if statement
         {
             UIMusterArmyButton.instance.musterArmyButtonGameObject.SetActive(true);
+            if (UICountyPanel.instance.buildingsPanelExpanded == false)
+            {
+                UIExpandBuildingsButton.instance.expandBuildingButtonGameObject.SetActive(true);
+            }
         }
         else
         {
+            if (UICountyPanel.instance.buildingsPanelExpanded == true)
+            {
+                UIPossibleBuildingsPanel.instance.gameObject.SetActive(false);
+                UICurrentBuildingsPanel.instance.gameObject.SetActive(false);
+
+                
+            }
+
             UIMusterArmyButton.instance.musterArmyButtonGameObject.SetActive(false);
+            UIExpandBuildingsButton.instance.expandBuildingButtonGameObject.SetActive(false);
+            UICountyPanel.instance.buildingsPanelExpanded = false;
         }
     }
 
@@ -112,9 +151,9 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         // This is just some temp bullshit to not allow you to look at counties you don't own.
         //Debug.Log("County Faction : " + WorldMapLoad.instance.counties[name].faction.name);
         //Debug.Log("Player Faction : " + WorldMapLoad.instance.playerFaction);
-        //Debug.Log("Can See County Info? " + WorldMapLoad.instance.canSeeCountyInfo);
+        //Debug.Log("Can See County Info? " + WorldMapLoad.instance.DevView);
         if (WorldMapLoad.instance.counties[name].faction.name ==
-            WorldMapLoad.instance.playerFaction || WorldMapLoad.instance.canSeeCountyInfo == true)
+            WorldMapLoad.instance.playerFaction || WorldMapLoad.instance.DevView == true)
         {
             CheckForHeroes(); // Check to see if this county has any heroes in it.
         }
@@ -123,7 +162,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
         // This is just some temp bullshit to not allow you to look at counties you don't own.
         if (WorldMapLoad.instance.playerFaction ==
-            WorldMapLoad.instance.counties[name].faction.name || WorldMapLoad.instance.canSeeCountyInfo == true)
+            WorldMapLoad.instance.counties[name].faction.name || WorldMapLoad.instance.DevView == true)
         {
             UICountyPanel.instance.countyPopulationText.text =
                 "Population: " + WorldMapLoad.instance.counties[name].population.ToString();
@@ -164,13 +203,13 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         var localHeroes = WorldMapLoad.instance.factionHeroesDictionary[countyFaction];
         for (int i = 0; i < localHeroes.Count; i++)
         {
-            Debug.Log("Name: " + name);
-            if (localHeroes[i].location == name || WorldMapLoad.instance.canSeeCountyInfo == true)
+            //Debug.Log("Name: " + name);
+            if (localHeroes[i].location == name || WorldMapLoad.instance.DevView == true)
             {
                 UICountyPanel.instance.heroInfoList.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
 
                 //Debug.Log("Leader Button Text: " + UIVerticalHeroList.leaderButtonText);
-                if (localHeroes[i].activity == null)
+                if (localHeroes[i].currentActivity == null)
                 {
                     //Debug.Log("Leader Button Text: " + UIVerticalHeroList.leaderButtonText);
                     UIVerticalHeroList.leaderButtonText.text = localHeroes[i].firstName + " " +
@@ -179,7 +218,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
                 else
                 {
                     UIVerticalHeroList.leaderButtonText.text =
-                        localHeroes[i].firstName + " " + localHeroes[i].lastName + ": " + localHeroes[i].activity;
+                        localHeroes[i].firstName + " " + localHeroes[i].lastName + ": " + localHeroes[i].currentActivity;
                 }
             }
         }

@@ -1,12 +1,32 @@
 public class AllText
 {
-    public class ResearchItemDescriptions
+    public class Jobs
+    {
+        public const string IDLE = "Scavenging";
+        public const string BUILDING = "Building";
+    }
+    
+    public class BuildingName
+    {
+        public const string FISHERSSHACK = "Fisher's Shack";
+        public const string FORESTERSSHACK = "Forester's Shack";
+        public const string GARDENERSSHACK = "Gardener's Shack";
+        public const string RESEARCHSSHACK = "Researcher's Shack";
+        public const string SCAVENGERSSHACK = "Scavenger's Shack";
+        public const string STONEWORKERSSHACK = "Stoneworker's Shack";
+        public const string PRIMATIVEMELEESMITHSHACK = "Primative Melee Weaponsmith's Shack";
+        public const string PRIMATIVERANGEDSMITHSHACK = "Primative Ranged Weaponsmith's Shack";
+        public const string PRIMATIVEGUNSMITHSHACK = "Primative Gunsmith's Shack";
+        public const string PRIMATIVEAMMOSHACK = "Primative Ammosmith's Shack";
+        public const string PRIMATVEGUNAMMOSHACK = "Primative Gun Ammo Smith's Shack";
+    }
+    public class Descriptions
     {
         public const string FISHERSSHACK = "This is a fisher's shack.";
         public const string FORESTERSSHACK = "This is a forester's shack.";
         public const string GARDENERSSHACK = "This is a gardener's shack.";
         public const string RESEARCHSSHACK = "This is a researcher's shack.";
-        public const string SCAVANGERSSHACK = "This is a scavanger's shack.";
+        public const string SCAVENGERSSHACK = "This is a scavenger's shack.";
         public const string STONEWORKERSSHACK = "This is a stone worker's shack.";
         public const string BASICTACTICSGUNS = "Basic tactics for gun combat.";
         public const string BASICTACTICSMELEE = "Basic tacits for melee combat.";

@@ -5,6 +5,11 @@ public class UICountyPanel : MonoBehaviour
 {
     public static UICountyPanel instance;
 
+    [SerializeField] private GameObject populationInfoPanel;
+    [SerializeField] private GameObject expandBuildingsPanelButton;
+
+    public bool buildingsPanelExpanded;
+
     public GameObject heroInfoList;
     public GameObject armyInfoList;
 
@@ -14,5 +19,18 @@ public class UICountyPanel : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        buildingsPanelExpanded = false;
+    }
+    public void PopulationButton()
+    {
+        if (WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].faction.name ==
+            WorldMapLoad.instance.playerFaction || WorldMapLoad.instance.DevView == true)
+        {
+            populationInfoPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("You don't own this county, fuck brain.");
+        }
     }
 }

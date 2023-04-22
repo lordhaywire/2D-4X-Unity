@@ -6,5 +6,6 @@ public class UIHorizontalPopulationListText : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI ageText;
     public TextMeshProUGUI sexText;
-    public TextMeshProUGUI activityText;
+    public TextMeshProUGUI currentActivityText;
+    public TextMeshProUGUI nextActivityText;
 }

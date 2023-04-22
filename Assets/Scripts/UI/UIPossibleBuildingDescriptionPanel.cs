@@ -64,7 +64,7 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 
         moneyCostText.text = $"{possibleBuilding.influenceCost} Influence";
         //resourcesCostText.text = possibleBuilding. // We aren't using the resources part yet.
-        timeText.text = possibleBuilding.daysToBuild.ToString();
+        timeText.text = possibleBuilding.workCost.ToString();
 
         // Reset current employees to 0.
         possibleBuilding.CurrentWorkers = 0;

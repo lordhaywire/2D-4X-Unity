@@ -101,7 +101,7 @@ public class WorldMapLoad : MonoBehaviour
 
         // Create the Current Building List and add one to the County so the County knows what it has built.
         counties[currentlySelectedCounty].currentBuildings.Add(new CurrentBuilding(possibleBuilding.name,
-            possibleBuilding.description, possibleBuilding.daysToBuild, possibleBuilding.CurrentWorkers,
+            possibleBuilding.description, 0, possibleBuilding.workCost, possibleBuilding.CurrentWorkers,
             possibleBuilding.maxEmployees, true, false));
 
         Debug.Log("Current Building Length: " + counties[currentlySelectedCounty].currentBuildings.Count);
@@ -228,7 +228,7 @@ public class WorldMapLoad : MonoBehaviour
             counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
             AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK, 500, 7, 0, 5));
             counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
-                AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK, 500, 1, 0, 5));
+                AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK, 500, 2, 0, 5));
             counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
                 AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK, 500, 7, 0, 5));
         }

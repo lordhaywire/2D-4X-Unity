@@ -7,8 +7,8 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
-    [SerializeField] private TextMeshProUGUI resourcesCostText;
-    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI workCompletedText;
+    [SerializeField] private TextMeshProUGUI workCostText;
     [SerializeField] private TextMeshProUGUI currentWorkersText;
     [SerializeField] private TextMeshProUGUI maxWorkersText;
 
@@ -24,13 +24,6 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
         WorldMapLoad.instance.currentBuildingDescriptionPanelExpanded = true;
 
         UICurrentBuildingsPanel.instance.CurrentBuildingButtonPressed += PanelRefresh;
-        /*
-        var currentBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings;
-        for(int i = 0; i < currentBuildings.Count; i++)
-        {
-            currentBuildings[i].CurrentWorkersChanged += CurrentEmployeesRefresh;
-        }
-        */
     }
 
     private void OnDisable()
@@ -38,73 +31,18 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
         TimeKeeper.instance.OnPanelDisable();
 
         UICurrentBuildingsPanel.instance.CurrentBuildingButtonPressed -= PanelRefresh;
-        /*
-        var currentBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings;
-        for (int i = 0; i < currentBuildings.Count; i++)
-        {
-            currentBuildings[i].CurrentWorkersChanged -= CurrentEmployeesRefresh;
-        }
-        */
+
     }
 
-    /*
-    private void CurrentEmployeesRefresh()
-    {
-        var currentBuilding =
-            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.instance.CurrentBuildingNumber];
-        currentWorkersText.text = currentBuilding.currentWorkers.ToString();
-    }*/
     private void PanelRefresh()
     { 
         var currentBuildings =
             WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.instance.CurrentBuildingNumber];
         nameText.text = currentBuildings.name;
         descriptionText.text = currentBuildings.description;
-        timeText.text = currentBuildings.daysToBuild.ToString();
+        workCompletedText.text = currentBuildings.workCompleted.ToString();
+        workCostText.text = currentBuildings.workCost.ToString();
         currentWorkersText.text = currentBuildings.currentWorkers.ToString();
         maxWorkersText.text = currentBuildings.maxWorkers.ToString();
-
     }
-
-    /*
-    public void MinusButton()
-    {
-        var currentBuildings =
-            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.instance.PossibleBuildingNumber];
-
-        currentBuildings.CurrentWorkers--;
-        Debug.Log("Current Workers: " + currentBuildings.CurrentWorkers);
-        if (currentBuildings.CurrentWorkers < 0)
-        {
-            currentBuildings.CurrentWorkers = 0;
-
-        }
-    }
-    */
-
-    /*
-    public void PlusButton()
-    {
-        var currentBuildings =
-            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.instance.PossibleBuildingNumber];
-
-        currentBuildings.CurrentWorkers++;
-
-        if (currentBuildings.CurrentWorkers > currentBuildings.maxWorkers)
-        {
-            currentBuildings.CurrentWorkers =
-                currentBuildings.maxWorkers;
-        }
-    }
-    */
-    /*
-    public void MaxButton()
-    {
-        var currentBuildings =
-            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.instance.PossibleBuildingNumber];
-
-        currentBuildings.CurrentWorkers =
-            currentBuildings.maxWorkers;
-    }
-    */
 }

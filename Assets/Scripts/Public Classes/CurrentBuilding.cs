@@ -6,19 +6,21 @@ public class CurrentBuilding
     public string name;
     public string description;
 
-    public int daysToBuild;
+    public int workCompleted;
+    public int workCost;
     public int currentWorkers;
     public int maxWorkers;
 
     public bool isBeingBuilt;
     public bool isBuilt;
 
-    public CurrentBuilding(string name, string description, int daysToBuild, int currentWorkers,
+    public CurrentBuilding(string name, string description, int workCompleted, int workCost, int currentWorkers,
         int maxWorkers, bool isBeingBuilt, bool isBuilt)
     {
         this.name = name;
         this.description = description;
-        this.daysToBuild = daysToBuild;
+        this.workCompleted = workCompleted;
+        this.workCost = workCost;
         this.currentWorkers = currentWorkers;
         this.maxWorkers = maxWorkers;
         this.isBeingBuilt = isBeingBuilt;

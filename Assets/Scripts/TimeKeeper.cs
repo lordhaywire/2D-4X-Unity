@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TimeKeeper : MonoBehaviour
 {
-    public static TimeKeeper instance;
+    public static TimeKeeper Instance;
     [SerializeField] private TextMeshProUGUI dayAndTimeText;
     [SerializeField] private TextMeshProUGUI currentSpeedText;
     [SerializeField] private GameObject paused;
@@ -22,7 +22,7 @@ public class TimeKeeper : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         mapControls = new MapControls();  // This sets up a new control scheme for this script. This sentence doesn't mean anything to me.
         ModifiedTimeScale = 1;
         isAlreadyPaused = false;

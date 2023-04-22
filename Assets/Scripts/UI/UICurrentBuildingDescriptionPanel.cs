@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UICurrentBuildingDescriptionPanel : MonoBehaviour
 {
-    public static UICurrentBuildingDescriptionPanel instance;
+    public static UICurrentBuildingDescriptionPanel Instance;
 
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
@@ -14,30 +14,30 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     private void OnEnable()
     {
-        TimeKeeper.instance.OnPanelEnable();
+        TimeKeeper.Instance.OnPanelEnable();
 
-        WorldMapLoad.instance.currentBuildingDescriptionPanelExpanded = true;
+        WorldMapLoad.Instance.currentBuildingDescriptionPanelExpanded = true;
 
-        UICurrentBuildingsPanel.instance.CurrentBuildingButtonPressed += PanelRefresh;
+        UICurrentBuildingsPanel.Instance.CurrentBuildingButtonPressed += PanelRefresh;
     }
 
     private void OnDisable()
     {
-        TimeKeeper.instance.OnPanelDisable();
+        TimeKeeper.Instance.OnPanelDisable();
 
-        UICurrentBuildingsPanel.instance.CurrentBuildingButtonPressed -= PanelRefresh;
+        UICurrentBuildingsPanel.Instance.CurrentBuildingButtonPressed -= PanelRefresh;
 
     }
 
     private void PanelRefresh()
     { 
         var currentBuildings =
-            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.instance.CurrentBuildingNumber];
+            WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber];
         nameText.text = currentBuildings.name;
         descriptionText.text = currentBuildings.description;
         workCompletedText.text = currentBuildings.workCompleted.ToString();

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UIArmyPanel : MonoBehaviour
 {
-    public static UIArmyPanel instance;
+    public static UIArmyPanel Instance;
 
     public TextMeshProUGUI armyOwnerText;
     public TextMeshProUGUI armyNameText;
@@ -11,6 +11,6 @@ public class UIArmyPanel : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 }

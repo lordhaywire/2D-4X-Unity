@@ -4,31 +4,31 @@ using UnityEngine.UI;
 
 public class ResearchTier1 : MonoBehaviour
 {
-    public static ResearchTier1 instance;
+    public static ResearchTier1 Instance;
     public GameObject researchTitleAndDescriptionPanel;
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         FirstRunResearch();
     }
 
     private void OnEnable()
     {    
-        TimeKeeper.instance.OnPanelEnable();
+        TimeKeeper.Instance.OnPanelEnable();
 
         UpdateResearchItemsTier1();
     }
 
     private void OnDisable()
     {
-        TimeKeeper.instance.OnPanelDisable();  
+        TimeKeeper.Instance.OnPanelDisable();  
     }
 
     private void FirstRunResearch()
     {
         // This goes through the research list and sets their Game Objects to the correct gameOjects and toggles.
-        var researchItems = WorldMapLoad.instance.factions[WorldMapLoad.instance.playerFactionID].researchItems;
+        var researchItems = WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].researchItems;
         for (int i = 0; i < researchItems.Count; i++)
         {
             researchItems[i].gameObject = transform.GetChild(i).gameObject; // I don't think we need this.
@@ -39,7 +39,7 @@ public class ResearchTier1 : MonoBehaviour
     }
     private void UpdateResearchItemsTier1()
     {
-        var researchItems = WorldMapLoad.instance.factions[WorldMapLoad.instance.playerFactionID].researchItems;
+        var researchItems = WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].researchItems;
         for (int i = 0; i < researchItems.Count; i++)
         {
             researchItems[i].researchNameText.text = researchItems[i].name;

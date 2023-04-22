@@ -9450,7 +9450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentlySelectedCounty: 
-  totalCapitolPop: 3
+  totalCapitolPop: 4
   minimumCountyPop: 3
   maximumCountyPop: 8
   countyListGameObject: {fileID: 249060077}

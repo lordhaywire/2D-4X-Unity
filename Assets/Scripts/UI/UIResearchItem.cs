@@ -4,16 +4,16 @@ public class UIResearchItem : MonoBehaviour
 {
     public void UIResearchItemButton()
     {
-        ResearchTier1.instance.researchTitleAndDescriptionPanel.SetActive(true);
+        ResearchTier1.Instance.researchTitleAndDescriptionPanel.SetActive(true);
 
-        var researchItem = WorldMapLoad.instance.factions[WorldMapLoad.instance.playerFactionID].researchItems[int.Parse(name)];
-        UIResearchTitleDescriptionPanel.instance.title.text =
+        var researchItem = WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].researchItems[int.Parse(name)];
+        UIResearchTitleDescriptionPanel.Instance.title.text =
             researchItem.name;
-        UIResearchTitleDescriptionPanel.instance.description.text =
+        UIResearchTitleDescriptionPanel.Instance.description.text =
             researchItem.description;
         if(researchItem.prerequisite1 == null && researchItem.prerequisite1 == null)
         {
-            UIResearchTitleDescriptionPanel.instance.prerequisite.text = "None";
+            UIResearchTitleDescriptionPanel.Instance.prerequisite.text = "None";
         }
         else
         {

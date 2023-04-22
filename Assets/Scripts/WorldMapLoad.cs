@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WorldMapLoad : MonoBehaviour
 {
-    public static WorldMapLoad instance;
+    public static WorldMapLoad Instance;
     public string currentlySelectedCounty;
 
     [SerializeField] private int totalCapitolPop;
@@ -36,7 +36,7 @@ public class WorldMapLoad : MonoBehaviour
     public Dictionary<string, List<CountyPopulation>> countyPopulationDictionary = new();
 
     // Initialize County Heroes/Leader Dictionary List.
-    public Dictionary<string, List<Hero>> factionHeroesDictionary = new();
+    //public Dictionary<string, List<Hero>> factionHeroesDictionary = new();
 
     // Initialize Army List.
     public List<Army> armies = new();
@@ -53,8 +53,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Awake()
     {
-        //DevView = false;
-        instance = this;
+        Instance = this;
         currentBuildingDescriptionPanelExpanded = false;
         possibleBuildingDescriptionPanelExpanded = false;
 
@@ -63,7 +62,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Start()
     {
-        UIBuildingConfirmed.instance.BuildingConfirmed += BuildCountyImprovement;
+        UIBuildingConfirmed.Instance.BuildingConfirmed += BuildCountyImprovement;
 
         CreateCountiesDictionary();
 
@@ -95,9 +94,9 @@ public class WorldMapLoad : MonoBehaviour
 
     private void MoveBuildingToCurrentBuildingList()
     {
-        var possibleBuilding = counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber];
+        var possibleBuilding = counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
 
-        Debug.Log("Possible Building Number: " + UIPossibleBuildingsPanel.instance.PossibleBuildingNumber);
+        Debug.Log("Possible Building Number: " + UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber);
 
         // Create the Current Building List and add one to the County so the County knows what it has built.
         counties[currentlySelectedCounty].currentBuildings.Add(new CurrentBuilding(possibleBuilding.name,
@@ -111,19 +110,19 @@ public class WorldMapLoad : MonoBehaviour
         counties[currentlySelectedCounty].currentBuildings[^1].gameObject = possibleBuilding.gameObject;
 
         // Moving the possilbe building UI game object to the current building UI game object.
-        counties[currentlySelectedCounty].currentBuildings[^1].gameObject.transform.SetParent(UICurrentBuildingsPanel.instance.currentBuildingsGroupGameObject.transform);
+        counties[currentlySelectedCounty].currentBuildings[^1].gameObject.transform.SetParent(UICurrentBuildingsPanel.Instance.currentBuildingsGroupGameObject.transform);
 
         // Remove the building from the possible Building list.
         counties[currentlySelectedCounty].possibleBuildings.Remove(possibleBuilding);
 
         // Rename building to be the same as their possible building index.
-        for (int i = 0; i < UIPossibleBuildingsPanel.instance.possibleBuildingsGroupGameObject.transform.childCount; i++)
+        for (int i = 0; i < UIPossibleBuildingsPanel.Instance.possibleBuildingsGroupGameObject.transform.childCount; i++)
         {
             counties[currentlySelectedCounty].possibleBuildings[i].gameObject.name = i.ToString();
         }
 
         // Rename building to be the same as their current building index.
-        for (int i = 0; i < UICurrentBuildingsPanel.instance.currentBuildingsGroupGameObject.transform.childCount; i++)
+        for (int i = 0; i < UICurrentBuildingsPanel.Instance.currentBuildingsGroupGameObject.transform.childCount; i++)
         {
             counties[currentlySelectedCounty].currentBuildings[i].gameObject.name = i.ToString();
         }
@@ -131,7 +130,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void DeductCostOfBuilding()
     {
-        factions[0].Influence -= counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].influenceCost;
+        factions[0].Influence -= counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].influenceCost;
     }
 
     private void SetNextDayJob()
@@ -140,11 +139,11 @@ public class WorldMapLoad : MonoBehaviour
         for (int i = 0; i < countyPopulationDictionary[currentlySelectedCounty].Count; i++)
         {
             if (countyPopulationDictionary[currentlySelectedCounty][i].nextActivity == AllText.Jobs.IDLE
-                && numberWorkers < counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].CurrentWorkers)
+                && numberWorkers < counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].CurrentWorkers)
             {
                 countyPopulationDictionary[currentlySelectedCounty][i].nextActivity = AllText.Jobs.BUILDING;
                 countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding =
-                    counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber].name;
+                    counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].name;
                 Debug.Log($"Name: {countyPopulationDictionary[currentlySelectedCounty][i].firstName} and job: {countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding}");
                 numberWorkers++;
                 counties[currentlySelectedCounty].currentlyWorkingPopulation++; // We need to put this number on the county info panel.
@@ -165,9 +164,9 @@ public class WorldMapLoad : MonoBehaviour
 
     private void OnDisable()
     {
-        UIBuildingConfirmed.instance.BuildingConfirmed -= SetNextDayJob;
+        UIBuildingConfirmed.Instance.BuildingConfirmed -= SetNextDayJob;
 
-        UIBuildingConfirmed.instance.BuildingConfirmed -= MoveBuildingToCurrentBuildingList;
+        UIBuildingConfirmed.Instance.BuildingConfirmed -= MoveBuildingToCurrentBuildingList;
     }
     private void CreateResearchandBuildingList()
     {
@@ -261,10 +260,10 @@ public class WorldMapLoad : MonoBehaviour
 
     private void FirstRunTopInfoBar()
     {
-        UITopInfoBar.instance.Influence = factions[0].Influence;
-        UITopInfoBar.instance.Money = factions[0].money;
-        UITopInfoBar.instance.Food = factions[0].food;
-        UITopInfoBar.instance.Scrap = factions[0].scrap;
+        UITopInfoBar.Instance.Influence = factions[0].Influence;
+        UITopInfoBar.Instance.Money = factions[0].money;
+        UITopInfoBar.Instance.Food = factions[0].food;
+        UITopInfoBar.Instance.Scrap = factions[0].scrap;
     }
 
     private void AssignFactionNameAndColorToFaction()
@@ -286,32 +285,32 @@ public class WorldMapLoad : MonoBehaviour
     {
         // Counties added to counties Dictionary.
         // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin, River
-        counties[CountyListCreator.instance.countiesList[0].name] = new County(
+        counties[CountyListCreator.Instance.countiesList[0].name] = new County(
             0, true, null, null, null, factionNameAndColors[1],
             Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0);
-        counties[CountyListCreator.instance.countiesList[1].name] = new County(
+        counties[CountyListCreator.Instance.countiesList[1].name] = new County(
             1, true, null, null, null, factionNameAndColors[0],
             Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 1);
-        counties[CountyListCreator.instance.countiesList[2].name] = new County(
+        counties[CountyListCreator.Instance.countiesList[2].name] = new County(
             2, false, null, null, null, factionNameAndColors[0], // Temporarily set to the player faction for testing.
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
-        counties[CountyListCreator.instance.countiesList[3].name] = new County(
+        counties[CountyListCreator.Instance.countiesList[3].name] = new County(
             3, false, null, null, null, factionNameAndColors[3],
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
-        counties[CountyListCreator.instance.countiesList[4].name] = new County(
+        counties[CountyListCreator.Instance.countiesList[4].name] = new County(
             4, false, null, null, null, factionNameAndColors[4],
             Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0, 0);
-        counties[CountyListCreator.instance.countiesList[5].name] = new County(
+        counties[CountyListCreator.Instance.countiesList[5].name] = new County(
             5, false, null, null, null, factionNameAndColors[5],
             Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0, 0);
-        counties[CountyListCreator.instance.countiesList[6].name] = new County(
+        counties[CountyListCreator.Instance.countiesList[6].name] = new County(
             6, false, null, null, null, factionNameAndColors[6],
             Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0, 0);
         /*
         // Create and add currentBuildings list to each county so each county knows what it has built.
         for(int i = 0; i < counties.Count; i++)
         {
-            counties[CountyListCreator.instance.countiesList[i].name].currentBuilding = new CurrentBuilding();
+            counties[CountyListCreator.Instance.countiesList[i].name].currentBuilding = new CurrentBuilding();
         }
         */
     }
@@ -321,36 +320,88 @@ public class WorldMapLoad : MonoBehaviour
         // Create various county specific data.
         for (int countyIndex = 0; countyIndex < counties.Count; countyIndex++)
         {
-            string countyName = CountyListCreator.instance.countiesList[countyIndex].name;
-            string factionName = factionNameAndColors[countyIndex].name;
+            string countyName = CountyListCreator.Instance.countiesList[countyIndex].name;
+            //string factionName = factionNameAndColors[countyIndex].name;
 
             // There should probably be some sort of null check in here?
-            // Initilizes the List in the Dictionaries for Counties and Heroes.
+            // Initilizes the List in the Dictionaries for Counties.
             countyPopulationDictionary[countyName] = new List<CountyPopulation>();
-            factionHeroesDictionary[factionName] = new List<Hero>();
+            //factionHeroesDictionary[factionName] = new List<Hero>();
 
             // Get game object for center of county and assign to correct county in list.
+            // Why did we do that here?
             counties[countyName].countyCenterGameObject =
                 countyListGameObject.transform.GetChild(countyIndex).GetChild(0).gameObject;
 
             if (counties[countyName].isCapital == true)
             {
-                GenerateLeaders(factionName, countyIndex);
+                //GenerateLeaders(factionName, countyIndex);
                 GeneratePopulation(countyName, totalCapitolPop);
-                counties[countyName].population = totalCapitolPop + 1; // At beginning of game every faction will always just have 1 hero.
+                counties[countyName].population = totalCapitolPop;
             }
             else
             {
                 int normalPopulation = Random.Range(minimumCountyPop, maximumCountyPop);
-                GenerateLeaders(factionName, countyIndex);
+                //GenerateLeaders(factionName, countyIndex);
                 GeneratePopulation(countyName, normalPopulation);
-                counties[countyName].population = normalPopulation
-                    + 1; // At beginning of game every faction will always just have 1 hero.
+                counties[countyName].population = normalPopulation;
             }
         }
     }
 
-    private void GenerateLeaders(string factionName, int countyIndex)
+
+    private void GeneratePopulation(string countyName, int totalPopulation)
+    {
+        var countyPopulation = countyPopulationDictionary[countyName];
+        for (int i = 0; i < totalPopulation; i++)
+        {
+            
+            // This adds to the Dictionary List a new person.
+            countyPopulation.Add(new CountyPopulation(null, null, false, false, true, false, 0, AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null));
+
+            // Generates Persons Last Name
+            int randomLastNameNumber = Random.Range(0, lastNames.Length);
+            countyPopulation[i].lastName =
+                lastNames[randomLastNameNumber];
+
+            // Determine the persons sex and first name
+            int randomSexNumber = Random.Range(0, 2);
+            int randomFemaleNameNumber = Random.Range(0, femaleNames.Length);
+            int randomMaleNameNumber = Random.Range(0, maleNames.Length);
+            if (randomSexNumber == 0)
+            {
+                countyPopulation[i].isMale = true;
+                countyPopulation[i].firstName =
+                    maleNames[randomMaleNameNumber];
+
+            }
+            else
+            {
+                countyPopulation[i].isMale = false;
+                countyPopulation[i].firstName =
+                    femaleNames[randomFemaleNameNumber];
+            }
+
+            int randomAgeNumber = Random.Range(18, 61);
+            countyPopulation[i].age = randomAgeNumber;
+
+            if(i == 0)
+            {
+                countyPopulation[i].isFactionLeader = true;
+                countyPopulation[i].isHero = true;
+            }
+
+
+            Debug.Log("Name: " + countyPopulationDictionary[countyName][i].firstName + " " +
+            countyPopulationDictionary[countyName][i].lastName + " is Hero? " + 
+            countyPopulationDictionary[countyName][i].isHero);
+
+        }
+    }
+}
+
+/*  Removed for now because we merged the leaders into the County Population.
+ *     private void GenerateLeaders(string factionName, int countyIndex)
     {
         // Add Leaders to each faction.
         // This adds to the Heroes Dictionary List a new Leader.  It is jank because we want the leader in Portland to be me.
@@ -358,11 +409,11 @@ public class WorldMapLoad : MonoBehaviour
         if (playerFaction == factionName)
         {
             factionHeroesDictionary[factionName].Add(new Hero
-                ("Lord", "Haywire", true, 30, CountyListCreator.instance.countiesList[1].name, AllText.Jobs.IDLE, AllText.Jobs.IDLE));
+                ("Lord", "Haywire", true, 30, CountyListCreator.Instance.countiesList[1].name, AllText.Jobs.IDLE, AllText.Jobs.IDLE));
         }
         else
         {
-            factionHeroesDictionary[factionName].Add(new Hero(null, null, false, 0, CountyListCreator.instance.countiesList[countyIndex].name, AllText.Jobs.IDLE, AllText.Jobs.IDLE));
+            factionHeroesDictionary[factionName].Add(new Hero(null, null, false, 0, CountyListCreator.Instance.countiesList[countyIndex].name, AllText.Jobs.IDLE, AllText.Jobs.IDLE));
             int randomLastNameNumber = Random.Range(0, lastNames.Length);
             factionHeroesDictionary[factionName][0].lastName = lastNames[randomLastNameNumber];
 
@@ -390,46 +441,7 @@ public class WorldMapLoad : MonoBehaviour
             Debug.Log("First Name: " + factionHeroesDictionary[factionName][0].firstName + " " +
                 factionHeroesDictionary[factionName][0].lastName + " County: "
                 + factionHeroesDictionary[factionName][0].location);
-            */
+            
         }
     }
-    private void GeneratePopulation(string countyName, int totalPopulation)
-    {
-        for (int populationIndex = 0; populationIndex < totalPopulation; populationIndex++)
-        {
-            // This adds to the Dictionary List a new person.
-            countyPopulationDictionary[countyName].Add(new CountyPopulation(null, null, false, 0, AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null));
-
-            // Generates Persons Last Name
-            int randomLastNameNumber = Random.Range(0, lastNames.Length);
-            countyPopulationDictionary[countyName][populationIndex].lastName =
-                lastNames[randomLastNameNumber];
-
-            // Determine the persons sex and first name
-            int randomSexNumber = Random.Range(0, 2);
-            int randomFemaleNameNumber = Random.Range(0, femaleNames.Length);
-            int randomMaleNameNumber = Random.Range(0, maleNames.Length);
-            if (randomSexNumber == 0)
-            {
-                countyPopulationDictionary[countyName][populationIndex].isMale = true;
-                countyPopulationDictionary[countyName][populationIndex].firstName =
-                    maleNames[randomMaleNameNumber];
-
-            }
-            else
-            {
-                countyPopulationDictionary[countyName][populationIndex].isMale = false;
-                countyPopulationDictionary[countyName][populationIndex].firstName =
-                    femaleNames[randomFemaleNameNumber];
-            }
-
-            int randomAgeNumber = Random.Range(18, 61);
-            countyPopulationDictionary[countyName][populationIndex].age = randomAgeNumber;
-
-
-            //Debug.Log("Name: " + countyPopulationDictionary[countyName][populationIndex].firstName + " " +
-            //countyPopulationDictionary[countyName][populationIndex].lastName);
-
-        }
-    }
-}
+*/

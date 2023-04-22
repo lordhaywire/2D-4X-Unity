@@ -8,16 +8,16 @@ public class SelectArmy : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            WorldMapLoad.instance.armyInfoPanel.SetActive(true);
-            WorldMapLoad.instance.countyInfoPanel.SetActive(false);
+            WorldMapLoad.Instance.armyInfoPanel.SetActive(true);
+            WorldMapLoad.Instance.countyInfoPanel.SetActive(false);
 
-            UIArmyPanel.instance.armyOwnerText.text = "Owner: " + WorldMapLoad.instance.armies[int.Parse(name)].owner;
-            UIArmyPanel.instance.armyNameText.text = "Name: " + WorldMapLoad.instance.armies[int.Parse(name)].name;
-            UIArmyPanel.instance.armySizeText.text = "Size: " + WorldMapLoad.instance.armies[int.Parse(name)].size.ToString();
+            UIArmyPanel.Instance.armyOwnerText.text = "Owner: " + WorldMapLoad.Instance.armies[int.Parse(name)].owner;
+            UIArmyPanel.Instance.armyNameText.text = "Name: " + WorldMapLoad.Instance.armies[int.Parse(name)].name;
+            UIArmyPanel.Instance.armySizeText.text = "Size: " + WorldMapLoad.Instance.armies[int.Parse(name)].size.ToString();
 
             currentlySelectedArmyName = name;
 
-            WorldMapLoad.instance.armies[int.Parse(name)].IsArmySelected = true;
+            WorldMapLoad.Instance.armies[int.Parse(name)].IsArmySelected = true;
             SelectCounty.hasAnArmyBeenSelected = true; // How does it know which county to make this true on.
 
             //Debug.Log("Name of Army: " + name);

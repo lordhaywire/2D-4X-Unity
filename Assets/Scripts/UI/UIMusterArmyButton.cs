@@ -3,11 +3,11 @@ using UnityEngine.UI;
 
 public class UIMusterArmyButton : MonoBehaviour
 {
-    public static UIMusterArmyButton instance;
+    public static UIMusterArmyButton Instance;
     public GameObject musterArmyButtonGameObject;
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 }

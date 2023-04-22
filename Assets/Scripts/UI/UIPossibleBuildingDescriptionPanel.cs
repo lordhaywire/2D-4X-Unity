@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 {
-    public static UIPossibleBuildingDescriptionPanel instance;
+    public static UIPossibleBuildingDescriptionPanel Instance;
 
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
@@ -16,18 +16,18 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     private void OnEnable()
     {
-        TimeKeeper.instance.OnPanelEnable();
+        TimeKeeper.Instance.OnPanelEnable();
 
-        UIPossibleBuildingsPanel.instance.PossibleBuildingButtonPressed += PanelRefresh;
+        UIPossibleBuildingsPanel.Instance.PossibleBuildingButtonPressed += PanelRefresh;
 
-        WorldMapLoad.instance.possibleBuildingDescriptionPanelExpanded = true;
+        WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded = true;
 
-        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings;
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings;
 
         for (int i = 0; i < possibleBuildings.Count; i++)
         {
@@ -37,11 +37,11 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 
     private void OnDisable()
     {
-        TimeKeeper.instance.OnPanelDisable();
+        TimeKeeper.Instance.OnPanelDisable();
 
-        UIPossibleBuildingsPanel.instance.PossibleBuildingButtonPressed -= PanelRefresh;
+        UIPossibleBuildingsPanel.Instance.PossibleBuildingButtonPressed -= PanelRefresh;
 
-        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings;
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings;
 
         for (int i = 0; i < possibleBuildings.Count; i++)
         {
@@ -52,13 +52,13 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
     private void CurrentEmployeesRefresh()
     {
         var possibleBuilding =
-            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber];
+            WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
         currentEmployeesText.text = possibleBuilding.CurrentWorkers.ToString();
     }
     private void PanelRefresh()
     {
         var possibleBuilding =
-            WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber];
+            WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
         nameText.text = possibleBuilding.name;
         descriptionText.text = possibleBuilding.description;
 
@@ -76,7 +76,7 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 
     public void MinusButton()
     {
-        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber];
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
         possibleBuildings.CurrentWorkers--;
         Debug.Log("Current Workers: " + possibleBuildings.CurrentWorkers);
         if (possibleBuildings.CurrentWorkers < 0)
@@ -88,7 +88,7 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 
     public void PlusButton()
     {
-        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber];
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
 
         possibleBuildings.CurrentWorkers++;
 
@@ -101,7 +101,7 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 
     public void MaxButton()
     {
-        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.instance.PossibleBuildingNumber];
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
 
         possibleBuildings.CurrentWorkers =
             possibleBuildings.maxEmployees;

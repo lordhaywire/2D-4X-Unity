@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UICurrentBuildingsPanel : MonoBehaviour
 {
-    public static UICurrentBuildingsPanel instance;
+    public static UICurrentBuildingsPanel Instance;
 
     public GameObject buildingDescriptionPanel;
     public GameObject currentBuildingsGroupGameObject;
@@ -26,6 +26,6 @@ public class UICurrentBuildingsPanel : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 }

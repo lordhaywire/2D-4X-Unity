@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class UIBuildingConfirmed : MonoBehaviour
 {
-    public static UIBuildingConfirmed instance;
+    public static UIBuildingConfirmed Instance;
     public event Action BuildingConfirmed;
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     public void YesButton()

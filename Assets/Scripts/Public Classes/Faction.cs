@@ -9,6 +9,7 @@ public class Faction
     
     public FactionNameAndColor factionNameAndColor;
     public List<ResearchItem> researchItems;
+    public CountyPopulation factionLeader;
 
     [Header("Resources")]
     

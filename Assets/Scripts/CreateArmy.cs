@@ -10,14 +10,14 @@ public class CreateArmy : MonoBehaviour
     public void CreateArmyButton()
     {
         // This is so we can only create the army in our own counties.
-        if (WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].faction.name == WorldMapLoad.instance.playerFaction)
+        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.name == WorldMapLoad.Instance.playerFaction)
         {
-            var armyNumber = WorldMapLoad.instance.armies.Count;
+            var armyNumber = WorldMapLoad.Instance.armies.Count;
             var newArmyList = new Army(null, null, null, null, null, null,false, false,false, "Player", "Fuck Stick" + armyNumber, Random.Range(1, 1001));
 
-            WorldMapLoad.instance.armies.Add(newArmyList);
+            WorldMapLoad.Instance.armies.Add(newArmyList);
 
-            newArmyList.gameObject = Instantiate(unitPrefab, WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].countyCenterGameObject.transform.position,
+            newArmyList.gameObject = Instantiate(unitPrefab, WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].countyCenterGameObject.transform.position,
               Quaternion.identity);
             //Debug.Log("New Army Game Object: " + newArmyList.uIResearchItemPanelGameObject);
             // Change name of GameObject in the inspector
@@ -38,20 +38,20 @@ public class CreateArmy : MonoBehaviour
             Debug.Log("Army Movement Script? " + newArmyList.armyMovement);
             
             // Store the current location name of the army.
-            newArmyList.location = WorldMapLoad.instance.currentlySelectedCounty;
+            newArmyList.location = WorldMapLoad.Instance.currentlySelectedCounty;
             Debug.Log("Current Location: " + newArmyList.location);
 
             // Sets the army Destination to its current location.
-            newArmyList.armyDestination = WorldMapLoad.instance.currentlySelectedCounty;
+            newArmyList.armyDestination = WorldMapLoad.Instance.currentlySelectedCounty;
 
             // Change the Army Info Panel to have the new army info from list.
-            WorldMapLoad.instance.armyInfoPanel.SetActive(true);
+            WorldMapLoad.Instance.armyInfoPanel.SetActive(true);
 
-            UIArmyPanel.instance.armyOwnerText.text = "Owner: " + newArmyList.owner; 
-            UIArmyPanel.instance.armyNameText.text = "Name: " + newArmyList.name; 
-            UIArmyPanel.instance.armySizeText.text = "Size: " + newArmyList.size.ToString();
+            UIArmyPanel.Instance.armyOwnerText.text = "Owner: " + newArmyList.owner; 
+            UIArmyPanel.Instance.armyNameText.text = "Name: " + newArmyList.name; 
+            UIArmyPanel.Instance.armySizeText.text = "Size: " + newArmyList.size.ToString();
 
-            WorldMapLoad.instance.countyInfoPanel.SetActive(false);
+            WorldMapLoad.Instance.countyInfoPanel.SetActive(false);
         }
         else
         {

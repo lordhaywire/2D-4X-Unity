@@ -11,7 +11,7 @@ public class PossibleBuilding
 
     // We will eventually be adding resource costs as well.
     public int influenceCost;
-    public int daysToBuild;
+    public int workCost;
     private int currentWorkers;
     public int maxEmployees;
 
@@ -26,13 +26,13 @@ public class PossibleBuilding
     }
 
     public PossibleBuilding(string name, string description, int influenceCost,
-        int daysToBuild, int currentEmployees, int maxEmployees)
+        int workCost, int currentEmployees, int maxEmployees)
     {
         this.name = name;
         this.description = description;
         this.influenceCost = influenceCost;
-        this.daysToBuild = daysToBuild;
-        this.CurrentWorkers = currentEmployees;
+        this.workCost = workCost;
+        CurrentWorkers = currentEmployees;
         this.maxEmployees = maxEmployees;
     }
 }

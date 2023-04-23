@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UIResearchTitleDescriptionPanel : MonoBehaviour
 {
-    public static UIResearchTitleDescriptionPanel instance;
+    public static UIResearchTitleDescriptionPanel Instance;
 
     public TextMeshProUGUI title;
     public TextMeshProUGUI description;
@@ -11,6 +11,6 @@ public class UIResearchTitleDescriptionPanel : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 }

@@ -10,7 +10,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            WorldMapLoad.instance.currentlySelectedCounty = name;
+            WorldMapLoad.Instance.currentlySelectedCounty = name;
 
             CloseBuildingDescriptionPanels();
 
@@ -34,55 +34,54 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
     private void CloseBuildingDescriptionPanels()
     {
-        if(WorldMapLoad.instance.currentBuildingDescriptionPanelExpanded == true)
+        if (WorldMapLoad.Instance.currentBuildingDescriptionPanelExpanded == true)
         {
-            UICurrentBuildingDescriptionPanel.instance.gameObject.SetActive(false);
-            WorldMapLoad.instance.possibleBuildingDescriptionPanelExpanded = false;
+            UICurrentBuildingDescriptionPanel.Instance.gameObject.SetActive(false);
+            WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded = false;
         }
-        if(WorldMapLoad.instance.possibleBuildingDescriptionPanelExpanded == true)
+        if (WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded == true)
         {
-            UIPossibleBuildingDescriptionPanel.instance.gameObject.SetActive(false);
-            WorldMapLoad.instance.possibleBuildingDescriptionPanelExpanded = false;
-        }      
+            UIPossibleBuildingDescriptionPanel.Instance.gameObject.SetActive(false);
+            WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded = false;
+        }
     }
 
     private void RefreshBuildingsPanels()
     {
-        UIBuildingPanelsRefresher.instance.CurrentBuildingPanelsDestroyer();
-        UIBuildingPanelsRefresher.instance.CurrentBuildingPanelsRefresher();
+        UIBuildingPanelsRefresher.Instance.CurrentBuildingPanelsDestroyer();
+        UIBuildingPanelsRefresher.Instance.CurrentBuildingPanelsRefresher();
 
-        UIBuildingPanelsRefresher.instance.PossibleBuildingsPanelsDestroyer();
-        UIBuildingPanelsRefresher.instance.PossibleBuildingPanelsRefresher();
+        UIBuildingPanelsRefresher.Instance.PossibleBuildingsPanelsDestroyer();
+        UIBuildingPanelsRefresher.Instance.PossibleBuildingPanelsRefresher();
     }
 
     private void PanelChanges()
     {
-        WorldMapLoad.instance.countyInfoPanel.SetActive(true);
-        WorldMapLoad.instance.armyInfoPanel.SetActive(false);
-        UICountyPanel.instance.heroInfoList.SetActive(false); // This was some bullshit.  This makes it so that onEnable
+        WorldMapLoad.Instance.countyInfoPanel.SetActive(true);
+        WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
+        UICountyPanel.Instance.heroInfoList.SetActive(false); // This was some bullshit.  This makes it so that onEnable
                                                               // resets the HeroInfoList.
 
-        if (WorldMapLoad.instance.playerFaction == WorldMapLoad.instance.counties[name].faction.name) // No DevView in this if statement
+        if (WorldMapLoad.Instance.playerFaction == WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name
+            || WorldMapLoad.Instance.DevView == true)
         {
-            UIMusterArmyButton.instance.musterArmyButtonGameObject.SetActive(true);
-            if (UICountyPanel.instance.buildingsPanelExpanded == false)
+            UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(true);
+            if (UICountyPanel.Instance.buildingsPanelExpanded == false)
             {
-                UIExpandBuildingsButton.instance.expandBuildingButtonGameObject.SetActive(true);
+                UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(true);
             }
         }
         else
         {
-            if (UICountyPanel.instance.buildingsPanelExpanded == true)
+            if (UICountyPanel.Instance.buildingsPanelExpanded == true)
             {
-                UIPossibleBuildingsPanel.instance.gameObject.SetActive(false);
-                UICurrentBuildingsPanel.instance.gameObject.SetActive(false);
-
-                
+                UIPossibleBuildingsPanel.Instance.gameObject.SetActive(false);
+                UICurrentBuildingsPanel.Instance.gameObject.SetActive(false);
             }
 
-            UIMusterArmyButton.instance.musterArmyButtonGameObject.SetActive(false);
-            UIExpandBuildingsButton.instance.expandBuildingButtonGameObject.SetActive(false);
-            UICountyPanel.instance.buildingsPanelExpanded = false;
+            UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(false);
+            UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(false);
+            UICountyPanel.Instance.buildingsPanelExpanded = false;
         }
     }
 
@@ -91,7 +90,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         Debug.Log("Has an army been selected? " + hasAnArmyBeenSelected);
         if (hasAnArmyBeenSelected == true)
         {
-            var currentlySelectedArmy = WorldMapLoad.instance.armies[int.Parse(SelectArmy.currentlySelectedArmyName)];
+            var currentlySelectedArmy = WorldMapLoad.Instance.armies[int.Parse(SelectArmy.currentlySelectedArmyName)];
             Debug.Log("Is army selected? " + currentlySelectedArmy.IsArmySelected);
             if (currentlySelectedArmy.IsArmySelected == true)
             {
@@ -133,7 +132,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         // The if statement is needed if there just in case there are no armies created yet.
         if (hasAnArmyBeenSelected == true)
         {
-            WorldMapLoad.instance.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].IsArmySelected = false;
+            WorldMapLoad.Instance.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].IsArmySelected = false;
 
             hasAnArmyBeenSelected = false;
         }
@@ -145,15 +144,15 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
     private void FillCountyInfoPanel()
     {
-        UICountyPanel.instance.countyOwnerText.text = "Owner: " + WorldMapLoad.instance.counties[name].faction.name;
-        UICountyPanel.instance.countyNameText.text = "County: " + name;
+        UICountyPanel.Instance.countyOwnerText.text = "Owner: " + WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name;
+        UICountyPanel.Instance.countyNameText.text = "County: " + name;
 
         // This is just some temp bullshit to not allow you to look at counties you don't own.
-        //Debug.Log("County Faction : " + WorldMapLoad.instance.counties[name].faction.name);
-        //Debug.Log("Player Faction : " + WorldMapLoad.instance.playerFaction);
-        //Debug.Log("Can See County Info? " + WorldMapLoad.instance.DevView);
-        if (WorldMapLoad.instance.counties[name].faction.name ==
-            WorldMapLoad.instance.playerFaction || WorldMapLoad.instance.DevView == true)
+        //Debug.Log("County Faction : " + WorldMapLoad.Instance.counties[name].faction.name);
+        //Debug.Log("Player Faction : " + WorldMapLoad.Instance.playerFaction);
+        //Debug.Log("Can See County Info? " + WorldMapLoad.Instance.DevView);
+        if (WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name ==
+            WorldMapLoad.Instance.playerFaction || WorldMapLoad.Instance.DevView == true)
         {
             CheckForHeroes(); // Check to see if this county has any heroes in it.
         }
@@ -161,36 +160,36 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         CheckForArmies(); // Check to see if this county has any armies in it.
 
         // This is just some temp bullshit to not allow you to look at counties you don't own.
-        if (WorldMapLoad.instance.playerFaction ==
-            WorldMapLoad.instance.counties[name].faction.name || WorldMapLoad.instance.DevView == true)
+        if (WorldMapLoad.Instance.playerFaction ==
+            WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name || WorldMapLoad.Instance.DevView == true)
         {
-            UICountyPanel.instance.countyPopulationText.text =
-                "Population: " + WorldMapLoad.instance.counties[name].population.ToString();
+            UICountyPanel.Instance.countyPopulationText.text =
+                "Population: " + WorldMapLoad.Instance.counties[name].population.ToString();
         }
         else
         {
-            UICountyPanel.instance.countyPopulationText.text = "Population: Unknown";
+            UICountyPanel.Instance.countyPopulationText.text = "Population: Unknown";
         }
         //Debug.Log("Name of Province: " + name);
     }
 
     private void CheckForArmies()
     {
-        if (WorldMapLoad.instance.armies.Count != 0)
+        if (WorldMapLoad.Instance.armies.Count != 0)
         {
-            for (int i = 0; i < WorldMapLoad.instance.armies.Count; i++)
+            for (int i = 0; i < WorldMapLoad.Instance.armies.Count; i++)
             {
-                if (WorldMapLoad.instance.armies[i].location == name)
+                if (WorldMapLoad.Instance.armies[i].location == name)
                 {
-                    UICountyPanel.instance.armyInfoList.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
+                    UICountyPanel.Instance.armyInfoList.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
                     Debug.Log("Army Button Text: " + UIVerticalArmyList.armyButtonText);
 
                     UIVerticalArmyList.armyButtonText.text =
-                        WorldMapLoad.instance.armies[0].name + " " + ": " + WorldMapLoad.instance.armies[0].size;
+                        WorldMapLoad.Instance.armies[0].name + " " + ": " + WorldMapLoad.Instance.armies[0].size;
                 }
                 else
                 {
-                    UICountyPanel.instance.armyInfoList.SetActive(false);
+                    UICountyPanel.Instance.armyInfoList.SetActive(false);
                     Debug.Log("There is no armies in this county.");
                 }
             }
@@ -199,27 +198,28 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
     private void CheckForHeroes()
     {
-        var countyFaction = WorldMapLoad.instance.counties[name].faction.name;
-        var localHeroes = WorldMapLoad.instance.factionHeroesDictionary[countyFaction];
-        for (int i = 0; i < localHeroes.Count; i++)
+        var countyPopulation = WorldMapLoad.Instance.countyPopulationDictionary[name];
+        //var localHeroes = WorldMapLoad.Instance.factionHeroesDictionary[countyFaction];
+        for (int i = 0; i < countyPopulation.Count; i++)
         {
             //Debug.Log("Name: " + name);
-            if (localHeroes[i].location == name || WorldMapLoad.instance.DevView == true)
+            if (countyPopulation[i].isHero == true) // || WorldMapLoad.Instance.DevView == true)
             {
-                UICountyPanel.instance.heroInfoList.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
-
-                //Debug.Log("Leader Button Text: " + UIVerticalHeroList.leaderButtonText);
+                UICountyPanel.Instance.heroInfoList.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
+                UIVerticalHeroList.leaderButtonText.text =
+                    countyPopulation[i].firstName + " " + countyPopulation[i].lastName + ": " + countyPopulation[i].currentActivity;
+                /*
                 if (localHeroes[i].currentActivity == null)
                 {
-                    //Debug.Log("Leader Button Text: " + UIVerticalHeroList.leaderButtonText);
+
                     UIVerticalHeroList.leaderButtonText.text = localHeroes[i].firstName + " " +
                         localHeroes[i].lastName + ": Something is fucked up!";
                 }
                 else
-                {
-                    UIVerticalHeroList.leaderButtonText.text =
-                        localHeroes[i].firstName + " " + localHeroes[i].lastName + ": " + localHeroes[i].currentActivity;
-                }
+                */
+
+
+
             }
         }
     }

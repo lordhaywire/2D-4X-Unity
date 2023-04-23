@@ -7,7 +7,7 @@ public class GenerateCountyData : MonoBehaviour
 
     private void Start()
     {
-        WorldMapLoad.instance.counties[name] = county;
-        Debug.Log("County Primary Biome: " + WorldMapLoad.instance.counties[name].biomePrimary);
+        WorldMapLoad.Instance.counties[name] = county;
+        Debug.Log("County Primary Biome: " + WorldMapLoad.Instance.counties[name].biomePrimary);
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UICountyPanel : MonoBehaviour
 {
-    public static UICountyPanel instance;
+    public static UICountyPanel Instance;
 
     [SerializeField] private GameObject populationInfoPanel;
     [SerializeField] private GameObject expandBuildingsPanelButton;
@@ -18,13 +18,13 @@ public class UICountyPanel : MonoBehaviour
     public TextMeshProUGUI countyPopulationText;
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         buildingsPanelExpanded = false;
     }
     public void PopulationButton()
     {
-        if (WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].faction.name ==
-            WorldMapLoad.instance.playerFaction || WorldMapLoad.instance.DevView == true)
+        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.factionNameAndColor.name ==
+            WorldMapLoad.Instance.playerFaction || WorldMapLoad.Instance.DevView == true)
         {
             populationInfoPanel.SetActive(true);
         }

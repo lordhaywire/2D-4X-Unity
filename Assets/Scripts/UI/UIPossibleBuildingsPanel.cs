@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UIPossibleBuildingsPanel : MonoBehaviour
 {
-    public static UIPossibleBuildingsPanel instance;
+    public static UIPossibleBuildingsPanel Instance;
 
     public GameObject buildingDescriptionPanel;
     public GameObject possibleBuildingsGroupGameObject;
@@ -11,7 +11,6 @@ public class UIPossibleBuildingsPanel : MonoBehaviour
     private int possibleBuildingNumber;
 
     public event Action PossibleBuildingButtonPressed;
-
 
     public int PossibleBuildingNumber
     {
@@ -28,11 +27,11 @@ public class UIPossibleBuildingsPanel : MonoBehaviour
 
     private void OnEnable() // This needs to be triggered by an event or when another county is selected.
     {
-        instance = this;
-        UICountyPanel.instance.buildingsPanelExpanded = true;
+        Instance = this;
+        UICountyPanel.Instance.buildingsPanelExpanded = true;
     }
     public void CollapseButton()
     {
-        UICountyPanel.instance.buildingsPanelExpanded = false;
+        UICountyPanel.Instance.buildingsPanelExpanded = false;
     }
 }

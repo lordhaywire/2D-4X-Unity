@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UITopInfoBar : MonoBehaviour
 {
-    public static UITopInfoBar instance;
+    public static UITopInfoBar Instance;
 
     public TextMeshProUGUI influenceText;
     public TextMeshProUGUI moneyText;
@@ -66,12 +66,12 @@ public class UITopInfoBar : MonoBehaviour
     }
     private void Awake()
     {
-        instance = this;
-        WorldMapLoad.instance.factions[0].InfluenceChanged += UpdateInfluenceText;
+        Instance = this;
+        WorldMapLoad.Instance.factions[0].InfluenceChanged += UpdateInfluenceText;
     }
 
     private void UpdateInfluenceText()
     {
-        influenceText.text = WorldMapLoad.instance.factions[WorldMapLoad.instance.playerFactionID].influence.ToString();
+        influenceText.text = WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].influence.ToString();
     }
 }

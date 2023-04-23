@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIBuildingPanelsRefresher : MonoBehaviour
 {
-    public static UIBuildingPanelsRefresher instance;
+    public static UIBuildingPanelsRefresher Instance;
 
     [SerializeField] private GameObject currentBuildingsPrefab;
     [SerializeField] private GameObject currentBuildingsParent;
@@ -17,12 +17,12 @@ public class UIBuildingPanelsRefresher : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     public void CurrentBuildingPanelsRefresher()
     {
-        var currentBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].currentBuildings;
+        var currentBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].currentBuildings;
         for (int i = 0; i < currentBuildings.Count; i++)
         {
             currentBuildingClones.Add(Instantiate(currentBuildingsPrefab, currentBuildingsParent.transform));
@@ -43,7 +43,7 @@ public class UIBuildingPanelsRefresher : MonoBehaviour
     }
     public void PossibleBuildingPanelsRefresher()
     {
-        var possibleBuildings = WorldMapLoad.instance.counties[WorldMapLoad.instance.currentlySelectedCounty].possibleBuildings;
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings;
         for (int i = 0; i < possibleBuildings.Count; i++)
         {
             possibleBuildingClones.Add(Instantiate(possibleBuildingsPrefab, possibleBuildingsParent.transform));

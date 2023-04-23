@@ -1,9 +1,13 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class TimeKeeper : MonoBehaviour
 {
-    public static TimeKeeper instance;
+    public event Action DayStart;
+    public event Action WorkOver;
+
+    public static TimeKeeper Instance;
     [SerializeField] private TextMeshProUGUI dayAndTimeText;
     [SerializeField] private TextMeshProUGUI currentSpeedText;
     [SerializeField] private GameObject paused;
@@ -20,9 +24,30 @@ public class TimeKeeper : MonoBehaviour
     public int oldTimeSpeed;
     public bool isAlreadyPaused;
 
+    public int Hours
+    {
+        get { return hours; }
+        set
+        {
+            hours = value;
+
+            // This will not trigger on day zero.
+            if(hours == 0)
+            {
+                DayStart?.Invoke();
+                Debug.Log("Hour is ZERO!!!");
+            }
+
+            if(hours == 5)
+            {
+                WorkOver?.Invoke();
+            }
+        }
+    }
+
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         mapControls = new MapControls();  // This sets up a new control scheme for this script. This sentence doesn't mean anything to me.
         ModifiedTimeScale = 1;
         isAlreadyPaused = false;
@@ -48,28 +73,25 @@ public class TimeKeeper : MonoBehaviour
         Clock();
     }
 
-    private void Clock() // Used to calculate sec, min and hours
+    private void Clock() // Used to calculate sec, min and Hours
     {
         minutes += Time.fixedDeltaTime * ticks; // multiply time between fixed update by tick.
         foreverTimer += Time.fixedDeltaTime * ticks;
         //Debug.Log("Fixed Delta Time: " + Time.fixedDeltaTime);
 
-        if (minutes >= 60) //60 min = 1 hr
+        if (minutes >= 60) // 60 min = 1 hr
         {
             minutes = 0;
-            hours += 1;
+            Hours += 1;
         }
 
-        if (hours >= 24) //24 hr = 1 day
+        if (Hours >= 24) // 24 hr = 1 day
         {
-            hours = 0;
+            Hours = 0;
             days += 1;
         }
-        // To show Days, hours and minutes.
-        dayAndTimeText.text = "Day " + days + " " + string.Format("{0:00}:{1:00}", hours, minutes);
-
-
-        // Count Down
+        // To show Days, Hours and minutes.
+        dayAndTimeText.text = "Day " + days + " " + string.Format("{0:00}:{1:00}", Hours, minutes);
     }
 
     public void TimeSpeedx0()
@@ -113,13 +135,13 @@ public class TimeKeeper : MonoBehaviour
         {
             oldTimeSpeed = ModifiedTimeScale;
             ModifiedTimeScale = 0;
-            
+
         }
         else
         {
             ModifiedTimeScale = oldTimeSpeed;
         }
-        Debug.Log($"Modified Time: {ModifiedTimeScale} and Old Time Speed: {oldTimeSpeed}.");
+        //Debug.Log($"Modified Time: {ModifiedTimeScale} and Old Time Speed: {oldTimeSpeed}.");
     }
 
     public void OnPanelEnable()

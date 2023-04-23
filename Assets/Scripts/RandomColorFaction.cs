@@ -5,7 +5,8 @@ public class RandomColorFaction : MonoBehaviour
 {
     void Start()
     {
-        if (Arrays.colors.Length < WorldMapLoad.Instance.factionNameAndColors.Count)
+        var factionNameAndColors = WorldMapLoad.Instance.factionNameAndColors;
+        if (Arrays.colors.Length < factionNameAndColors.Count)
         {
             Debug.LogError("Not enough color options for all Sprite Renderers!");
             return;
@@ -15,10 +16,10 @@ public class RandomColorFaction : MonoBehaviour
         List<Color32> availableColors = new(Arrays.colors);
 
         // Loop through each factionNameAndColors and assign a random color32 from available options
-        for (int i = 0; i < WorldMapLoad.Instance.factionNameAndColors.Count; i++)
+        for (int i = 0; i < factionNameAndColors.Count; i++)
         {
             int randomIndex = Random.Range(0, availableColors.Count);
-            WorldMapLoad.Instance.factionNameAndColors[i].color32 = availableColors[randomIndex];
+            factionNameAndColors[i].color32 = availableColors[randomIndex];
             availableColors.RemoveAt(randomIndex);
         }
 
@@ -30,7 +31,14 @@ public class RandomColorFaction : MonoBehaviour
             county.spriteRenderer =
                 CountyListCreator.Instance.countiesList[county.countyID].gameObject.GetComponent<SpriteRenderer>();
 
-            county.spriteRenderer.color = county.faction.color32;
+            county.spriteRenderer.color = county.faction.factionNameAndColor.color32;
+        }
+
+        // Assign the faction's factionID
+        for(int i = 0; i < factionNameAndColors.Count; i++)
+        {
+            factionNameAndColors[i].factionID = i;
+            //Debug.Log("Faction ID: " + factionNameAndColors[i].factionID);
         }
     }
 }

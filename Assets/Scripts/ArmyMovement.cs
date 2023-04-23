@@ -9,8 +9,8 @@ public class ArmyMovement : MonoBehaviour
     private bool move;
 
     // Eventually this will be update depending on the distance to destination.
-    private readonly int minutesTillArrival = 10; // This is a temp aount of hours for testing.
-    private readonly int hoursTillArrival = 1; // This is a temp amount of hours.  
+    private readonly int minutesTillArrival = 10; // This is a temp aount of Hours for testing.
+    private readonly int hoursTillArrival = 1; // This is a temp amount of Hours.  
     private readonly int daysTillArrival = 1; // This is a temp amount of days.  
 
     private float lastCheckTime = 0;
@@ -91,7 +91,7 @@ public class ArmyMovement : MonoBehaviour
         if (isTimeToDestinationSet == false)
         {
             // This needs to be in the order of Days > Hours > Minutes so that the Getter setter works.
-            LocalHours = TimeKeeper.Instance.hours + hoursTillArrival;
+            LocalHours = TimeKeeper.Instance.Hours + hoursTillArrival;
             LocalMinutes = TimeKeeper.Instance.minutes + minutesTillArrival;  //Cast from Float to Int.
             localDays = TimeKeeper.Instance.days + daysTillArrival;
             //Debug.Log("2st Local Hours: " + LocalHours);
@@ -108,11 +108,11 @@ public class ArmyMovement : MonoBehaviour
             // Double check if we can replace string.Format with just $.
             WorldMapLoad.Instance.armies[int.Parse(name)].armyTimerText.text = string.Format("Time till arrival: Day " + localDays + " {0:00}:{1:00}" +
                 "\n Current Time: Day " + TimeKeeper.Instance.days +
-                " {2:00}:{3:00}", LocalHours, LocalMinutes, TimeKeeper.Instance.hours, (int)Math.Round(TimeKeeper.Instance.minutes));
+                " {2:00}:{3:00}", LocalHours, LocalMinutes, TimeKeeper.Instance.Hours, (int)Math.Round(TimeKeeper.Instance.minutes));
 
             //Debug.Log("TimeKeeper Minutes: " + TimeKeeper.minutes);
             // This still could be broken.
-            if (TimeKeeper.Instance.days == localDays && TimeKeeper.Instance.hours == LocalHours && TimeKeeper.Instance.minutes >= LocalMinutes) //  && LocalMinutes <= TimeKeeper.minutes + 1)
+            if (TimeKeeper.Instance.days == localDays && TimeKeeper.Instance.Hours == LocalHours && TimeKeeper.Instance.minutes >= LocalMinutes) //  && LocalMinutes <= TimeKeeper.minutes + 1)
             {
                 WorldMapLoad.Instance.armies[int.Parse(name)].startTimer = false;
                 // This starts the movement for the army to move.

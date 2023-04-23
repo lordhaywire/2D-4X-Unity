@@ -12,7 +12,6 @@ public class UIPossibleBuildingsPanel : MonoBehaviour
 
     public event Action PossibleBuildingButtonPressed;
 
-
     public int PossibleBuildingNumber
     {
         get

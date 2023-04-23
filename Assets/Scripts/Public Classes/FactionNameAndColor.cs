@@ -4,12 +4,14 @@ using UnityEngine;
 [Serializable] public class FactionNameAndColor
 
 {
+    public int factionID; // Not currently used....
     public string name;
     public Color32 color32;
 
-    public FactionNameAndColor(string newName, Color32 newColor32)
+    public FactionNameAndColor(int factionID, string name, Color32 color32)
     {
-        name = newName;
-        color32 = newColor32;
+        this.factionID = factionID;
+        this.name = name;
+        this.color32 = color32;
     }
 }

@@ -2,9 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResearchTier1 : MonoBehaviour
+public class Research : MonoBehaviour
 {
-    public static ResearchTier1 Instance;
+    public static Research Instance;
     public GameObject researchTitleAndDescriptionPanel;
 
     private void Awake()

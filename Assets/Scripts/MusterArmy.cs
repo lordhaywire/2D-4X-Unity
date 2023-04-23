@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class CreateArmy : MonoBehaviour
+public class MusterArmy : MonoBehaviour
 {
     [SerializeField] private GameObject unitPrefab;
     [SerializeField] private GameObject armyListGameObject;
@@ -10,7 +10,8 @@ public class CreateArmy : MonoBehaviour
     public void CreateArmyButton()
     {
         // This is so we can only create the army in our own counties.
-        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.name == WorldMapLoad.Instance.playerFaction)
+        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.factionNameAndColor.name
+            == WorldMapLoad.Instance.playerFaction)
         {
             var armyNumber = WorldMapLoad.Instance.armies.Count;
             var newArmyList = new Army(null, null, null, null, null, null,false, false,false, "Player", "Fuck Stick" + armyNumber, Random.Range(1, 1001));

@@ -62,7 +62,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         UICountyPanel.Instance.heroInfoList.SetActive(false); // This was some bullshit.  This makes it so that onEnable
                                                               // resets the HeroInfoList.
 
-        if (WorldMapLoad.Instance.playerFaction == WorldMapLoad.Instance.counties[name].faction.name
+        if (WorldMapLoad.Instance.playerFaction == WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name
             || WorldMapLoad.Instance.DevView == true)
         {
             UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(true);
@@ -144,14 +144,14 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
     private void FillCountyInfoPanel()
     {
-        UICountyPanel.Instance.countyOwnerText.text = "Owner: " + WorldMapLoad.Instance.counties[name].faction.name;
+        UICountyPanel.Instance.countyOwnerText.text = "Owner: " + WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name;
         UICountyPanel.Instance.countyNameText.text = "County: " + name;
 
         // This is just some temp bullshit to not allow you to look at counties you don't own.
         //Debug.Log("County Faction : " + WorldMapLoad.Instance.counties[name].faction.name);
         //Debug.Log("Player Faction : " + WorldMapLoad.Instance.playerFaction);
         //Debug.Log("Can See County Info? " + WorldMapLoad.Instance.DevView);
-        if (WorldMapLoad.Instance.counties[name].faction.name ==
+        if (WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name ==
             WorldMapLoad.Instance.playerFaction || WorldMapLoad.Instance.DevView == true)
         {
             CheckForHeroes(); // Check to see if this county has any heroes in it.
@@ -161,7 +161,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
         // This is just some temp bullshit to not allow you to look at counties you don't own.
         if (WorldMapLoad.Instance.playerFaction ==
-            WorldMapLoad.Instance.counties[name].faction.name || WorldMapLoad.Instance.DevView == true)
+            WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name || WorldMapLoad.Instance.DevView == true)
         {
             UICountyPanel.Instance.countyPopulationText.text =
                 "Population: " + WorldMapLoad.Instance.counties[name].population.ToString();

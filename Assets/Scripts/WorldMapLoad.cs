@@ -32,7 +32,7 @@ public class WorldMapLoad : MonoBehaviour
     // Initialize County Dictionary List.
     public Dictionary<string, County> counties = new();
 
-    // Initialize County Population Dictionary List, which is a Dictionary for each county that holds a list of their population.
+    // A Dictionary for each county that holds a list of their population.
     public Dictionary<string, List<CountyPopulation>> countyPopulationDictionary = new();
 
     // Initialize County Heroes/Leader Dictionary List.
@@ -87,9 +87,12 @@ public class WorldMapLoad : MonoBehaviour
     private void BuildCountyImprovement()
     {
         DeductCostOfBuilding(); // Done - for Influence costs only.
-        SetNextDayJob(); // Done - This needs to have the name of the building the person is working on.
-
-        MoveBuildingToCurrentBuildingList(); // Bugged.
+        MoveBuildingToCurrentBuildingList();
+        SetNextDayJob();   
+    }
+    private void DeductCostOfBuilding()
+    {
+        factions[0].Influence -= counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].influenceCost;
     }
 
     private void MoveBuildingToCurrentBuildingList()
@@ -97,6 +100,7 @@ public class WorldMapLoad : MonoBehaviour
         var possibleBuilding = counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
 
         Debug.Log("Possible Building Number: " + UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber);
+        Debug.Log("Current Building Number: " + UICurrentBuildingsPanel.Instance.CurrentBuildingNumber);
 
         // Create the Current Building List and add one to the County so the County knows what it has built.
         counties[currentlySelectedCounty].currentBuildings.Add(new CurrentBuilding(possibleBuilding.name,
@@ -128,10 +132,7 @@ public class WorldMapLoad : MonoBehaviour
         }
     }
 
-    private void DeductCostOfBuilding()
-    {
-        factions[0].Influence -= counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].influenceCost;
-    }
+
 
     private void SetNextDayJob()
     {
@@ -139,13 +140,14 @@ public class WorldMapLoad : MonoBehaviour
         for (int i = 0; i < countyPopulationDictionary[currentlySelectedCounty].Count; i++)
         {
             if (countyPopulationDictionary[currentlySelectedCounty][i].nextActivity == AllText.Jobs.IDLE
-                && numberWorkers < counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].CurrentWorkers)
+                && numberWorkers < 
+                counties[currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].currentWorkers)
             {
                 countyPopulationDictionary[currentlySelectedCounty][i].nextActivity = AllText.Jobs.BUILDING;
                 countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding =
-                    counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].name;
-                Debug.Log($"Name: {countyPopulationDictionary[currentlySelectedCounty][i].firstName} and job: {countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding}");
-                numberWorkers++;
+                    counties[currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber];
+                Debug.Log($"Name: {countyPopulationDictionary[currentlySelectedCounty][i].firstName} and job: {countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding.name}");
+                numberWorkers++; // Why is this incrementing when it should match the i in the for loop?
                 counties[currentlySelectedCounty].currentlyWorkingPopulation++; // We need to put this number on the county info panel.
                 /*
                 Debug.Log("Currently Working Population: " + counties[currentlySelectedCounty].currentlyWorkingPopulation);
@@ -153,12 +155,12 @@ public class WorldMapLoad : MonoBehaviour
                 Debug.Log("Activity: " + countyPopulationDictionary[currentlySelectedCounty][i].nextActivity);
                 */
             }
-            /*
+            
             else
             {
                  Debug.Log("Set Next Day Job got to Else.");
             }
-            */
+            
         }
     }
 
@@ -286,25 +288,25 @@ public class WorldMapLoad : MonoBehaviour
         // Counties added to counties Dictionary.
         // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin, River
         counties[CountyListCreator.Instance.countiesList[0].name] = new County(
-            0, true, null, null, null, factionNameAndColors[1],
+            0, true, null, null, factions[1],
             Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0);
         counties[CountyListCreator.Instance.countiesList[1].name] = new County(
-            1, true, null, null, null, factionNameAndColors[0],
+            1, true, null, null,  factions[0],
             Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 1);
         counties[CountyListCreator.Instance.countiesList[2].name] = new County(
-            2, false, null, null, null, factionNameAndColors[0], // Temporarily set to the player faction for testing.
+            2, false, null, null,  factions[0], // Temporarily set to the player faction for testing.
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
         counties[CountyListCreator.Instance.countiesList[3].name] = new County(
-            3, false, null, null, null, factionNameAndColors[3],
+            3, false, null, null, factions[2],
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
         counties[CountyListCreator.Instance.countiesList[4].name] = new County(
-            4, false, null, null, null, factionNameAndColors[4],
+            4, false, null, null, factions[3],
             Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0, 0);
         counties[CountyListCreator.Instance.countiesList[5].name] = new County(
-            5, false, null, null, null, factionNameAndColors[5],
+            5, false, null, null, factions[4],
             Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0, 0);
         counties[CountyListCreator.Instance.countiesList[6].name] = new County(
-            6, false, null, null, null, factionNameAndColors[6],
+            6, false, null, null, factions[5],
             Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0, 0);
         /*
         // Create and add currentBuildings list to each county so each county knows what it has built.
@@ -353,9 +355,9 @@ public class WorldMapLoad : MonoBehaviour
     private void GeneratePopulation(string countyName, int totalPopulation)
     {
         var countyPopulation = countyPopulationDictionary[countyName];
+
         for (int i = 0; i < totalPopulation; i++)
         {
-            
             // This adds to the Dictionary List a new person.
             countyPopulation.Add(new CountyPopulation(null, null, false, false, true, false, 0, AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null));
 
@@ -373,7 +375,6 @@ public class WorldMapLoad : MonoBehaviour
                 countyPopulation[i].isMale = true;
                 countyPopulation[i].firstName =
                     maleNames[randomMaleNameNumber];
-
             }
             else
             {
@@ -385,17 +386,26 @@ public class WorldMapLoad : MonoBehaviour
             int randomAgeNumber = Random.Range(18, 61);
             countyPopulation[i].age = randomAgeNumber;
 
-            if(i == 0)
+            if (counties[countyName].faction.factionLeader == null)
             {
-                countyPopulation[i].isFactionLeader = true;
-                countyPopulation[i].isHero = true;
+                if (i == 0)
+                {
+                    counties[countyName].faction.factionLeader = countyPopulation[i];
+                    countyPopulation[i].isFactionLeader = true;
+                    countyPopulation[i].isHero = true;
+                }
             }
-
+            /*
+            else
+            {
+                Debug.Log($"{countyName} already has a faction leader.");
+            }
+            
 
             Debug.Log("Name: " + countyPopulationDictionary[countyName][i].firstName + " " +
             countyPopulationDictionary[countyName][i].lastName + " is Hero? " + 
             countyPopulationDictionary[countyName][i].isHero);
-
+            */
         }
     }
 }

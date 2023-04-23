@@ -6,7 +6,7 @@ using UnityEngine;
 public class Faction
 {
     public event Action InfluenceChanged;
-    
+
     public FactionNameAndColor factionNameAndColor;
     public List<ResearchItem> researchItems;
     public CountyPopulation factionLeader;
@@ -29,11 +29,14 @@ public class Faction
     }
 
     // Is this better then saying variable = newVariable
-    public Faction(FactionNameAndColor factionNameAndColor, int influence, int money, int food, int scrap)
+    public Faction(FactionNameAndColor factionNameAndColor, CountyPopulation factionLeader, 
+        int influence, int money, int food, int scrap)
     {
         this.factionNameAndColor = factionNameAndColor;
         researchItems = new List<ResearchItem>();
-        this.Influence = influence;
+        this.factionLeader = factionLeader;
+
+        Influence = influence;
         this.money = money;
         this.food = food;
         this.scrap = scrap;

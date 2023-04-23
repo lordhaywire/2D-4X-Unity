@@ -18,7 +18,7 @@ public class UIPopulationInfoPanel : MonoBehaviour
             var countyList = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty];
             //var factionList =
             //    WorldMapLoad.Instance.factionHeroesDictionary[WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.name];
-            
+
             // This is for the leaders of each faction.
             /*
             for (int i = 0; i < factionList.Count; i++)
@@ -62,10 +62,29 @@ public class UIPopulationInfoPanel : MonoBehaviour
                 {
                     populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Female";
                 }
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().currentActivityText.text =
-                    countyList[i].currentActivity;
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nextActivityText.text =
-                    $"{countyList[i].nextActivity} {countyList[i].nextBuilding}";
+                // This makes it so the text box looks right.
+                if (countyList[i].currentBuilding == null)
+                {
+                    populationListClones[i].GetComponent<UIHorizontalPopulationListText>().currentActivityText.text =
+                                        $"{countyList[i].currentActivity}";
+                }
+                else
+                {
+                    populationListClones[i].GetComponent<UIHorizontalPopulationListText>().currentActivityText.text =
+                    $"{countyList[i].currentActivity} \n {countyList[i].currentBuilding.name}";
+                }
+                // This makes it so the text box looks right.
+                if (countyList[i].nextBuilding == null)
+                {
+                    populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nextActivityText.text =
+                    $"{countyList[i].nextActivity}";
+                }
+                else
+                {
+                    populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nextActivityText.text =
+                    $"{countyList[i].nextActivity} \n {countyList[i].nextBuilding.name}";
+                }
+
             }
         }
         else

@@ -11,12 +11,13 @@ public class CountyPopulation
     public int age;
 
     public string currentActivity;
-    public string currentBuilding;
+    public CurrentBuilding currentBuilding;
     public string nextActivity;
-    public string nextBuilding;
+    public CurrentBuilding nextBuilding;
 
     public CountyPopulation(string firstName, string lastName, bool isFactionLeader, bool isHero, bool isWorker,
-         bool isMale, int age, string currentActivity, string currentBuilding, string nextActivity,  string nextBuilding)
+         bool isMale, int age, string currentActivity, CurrentBuilding currentBuilding, string nextActivity, 
+         CurrentBuilding nextBuilding)
     {
         this.firstName = firstName;
         this.lastName = lastName;

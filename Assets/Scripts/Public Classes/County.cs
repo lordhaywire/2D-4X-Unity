@@ -9,19 +9,19 @@ public class County
     public bool isCapital;
     public GameObject countyCenterGameObject;
     public SpriteRenderer spriteRenderer;
-    public SelectCounty selectCounty; // We may be able to remove this.
-    public FactionNameAndColor faction;
+    //public SelectCounty selectCounty; // We may be able to remove this.
+    public Faction faction;
     public string province;
     public string biomePrimary;
     public string biomeSecondary;
     public string biomeTertiary;
     public List<PossibleBuilding> possibleBuildings;
     public List<CurrentBuilding> currentBuildings;
-    public int currentlyWorkingPopulation; // We could put this number on the county info panel.
+    public int currentlyWorkingPopulation; // We should put this number on the county info panel.
     public int population;
 
     public County(int countyID, bool isCapital, GameObject countyCenterGameObject, 
-        SpriteRenderer spriteRenderer, SelectCounty selectCounty, FactionNameAndColor faction, 
+        SpriteRenderer spriteRenderer,  Faction faction, 
         string province, string biomePrimary, string biomeSecondary, string biomeTertiary,
          int currentlyWorkingPopulation, int population)
     {
@@ -29,7 +29,7 @@ public class County
         this.isCapital = isCapital;
         this.countyCenterGameObject = countyCenterGameObject;
         this.spriteRenderer = spriteRenderer;
-        this.selectCounty = selectCounty;
+        //this.selectCounty = selectCounty;
         this.faction = faction;
         this.province = province;
         this.biomePrimary = biomePrimary;

@@ -7,21 +7,39 @@ public class Work : MonoBehaviour
     private void Start()
     {
         TimeKeeper.Instance.DayStart += AdjustPopulationActivity;
-        TimeKeeper.Instance.WorkOver += EndWorkForPopulation;
+        TimeKeeper.Instance.WorkDayOver += WorkDayOverForPopulation;
     }
 
     // End work for all of the world population!
-    private void EndWorkForPopulation()
+    private void WorkDayOverForPopulation()
     {
         // Go through all the counties and have people building add their work to the building.
         foreach (KeyValuePair<string, List<CountyPopulation>> item in WorldMapLoad.Instance.countyPopulationDictionary)
         {
             //Debug.Log(item.Key + " " + item.Value);
-            for (int i = 0; i < item.Value.Count; i++)
+            for (int pop = 0; pop < item.Value.Count; pop++)
             {
-                if (item.Value[i].currentActivity == AllText.Jobs.BUILDING)
+                if (item.Value[pop].currentActivity == AllText.Jobs.BUILDING)
                 {
-                    item.Value[i].currentBuilding.workCompleted++;
+                    item.Value[pop].currentBuilding.workCompleted++;
+                    // Checks to see if the building is completed.
+                    if(item.Value[pop].currentBuilding.workCompleted >= item.Value[pop].currentBuilding.workCost)
+                    {
+                        // This is having every population working on that building set that building as built.
+                        // So it is repeating the setting to true a bunch of times.  This is ineffecient code.
+                        // Some of the population will be working on different buildings too....
+                        item.Value[pop].currentBuilding.isBuilt = true;
+                        item.Value[pop].currentBuilding.gameObject.GetComponent<UIBuildingButton>().completedTextGameObject.SetActive(true);
+                    }
+                }
+            }
+            // Go through everyone in this county again and clear out their job if their building is done.
+            for (int popAgain = 0; popAgain < item.Value.Count; popAgain++)
+            {
+                if (item.Value[popAgain].currentBuilding != null && item.Value[popAgain].currentBuilding.isBuilt == true)
+                {
+                    item.Value[popAgain].nextActivity = AllText.Jobs.IDLE;
+                    item.Value[popAgain].nextBuilding = null;
                 }
             }
         }
@@ -35,10 +53,16 @@ public class Work : MonoBehaviour
             //Debug.Log(item.Key + " " + item.Value);
             for(int i = 0;  i < item.Value.Count; i++)
             {
-                //Debug.Log(item.Value[i].lastName);
+                //Debug.Log(item.Value[pop].lastName);
                 item.Value[i].currentActivity = item.Value[i].nextActivity;
                 item.Value[i].currentBuilding = item.Value[i].nextBuilding;
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        TimeKeeper.Instance.DayStart -= AdjustPopulationActivity;
+        TimeKeeper.Instance.WorkDayOver -= WorkDayOverForPopulation;
     }
 }

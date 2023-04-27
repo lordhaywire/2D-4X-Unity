@@ -12,6 +12,9 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentWorkersText;
     [SerializeField] private TextMeshProUGUI maxWorkersText;
 
+    [SerializeField] private GameObject workTillCompletedPanel;
+    [SerializeField] private GameObject employeesPanel;
+    [SerializeField] private GameObject completedPanel;
     private void Awake()
     {
         Instance = this;
@@ -31,7 +34,6 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
         TimeKeeper.Instance.OnPanelDisable();
 
         UICurrentBuildingsPanel.Instance.CurrentBuildingButtonPressed -= PanelRefresh;
-
     }
 
     private void PanelRefresh()
@@ -44,5 +46,18 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
         workCostText.text = currentBuildings.workCost.ToString();
         currentWorkersText.text = currentBuildings.currentWorkers.ToString();
         maxWorkersText.text = currentBuildings.maxWorkers.ToString();
+
+        if(currentBuildings.isBuilt == true)
+        {
+            workTillCompletedPanel.SetActive(false);
+            employeesPanel.SetActive(false);
+            completedPanel.SetActive(true);
+        }
+        else
+        {
+            workTillCompletedPanel.SetActive(true);
+            employeesPanel.SetActive(true);
+            completedPanel.SetActive(false);
+        }
     }
 }

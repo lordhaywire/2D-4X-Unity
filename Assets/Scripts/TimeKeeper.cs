@@ -5,7 +5,7 @@ using UnityEngine;
 public class TimeKeeper : MonoBehaviour
 {
     public event Action DayStart;
-    public event Action WorkOver;
+    public event Action WorkDayOver;
 
     public static TimeKeeper Instance;
     [SerializeField] private TextMeshProUGUI dayAndTimeText;
@@ -38,9 +38,9 @@ public class TimeKeeper : MonoBehaviour
                 Debug.Log("Hour is ZERO!!!");
             }
 
-            if(hours == 5)
+            if(hours == 17)
             {
-                WorkOver?.Invoke();
+                WorkDayOver?.Invoke();
             }
         }
     }

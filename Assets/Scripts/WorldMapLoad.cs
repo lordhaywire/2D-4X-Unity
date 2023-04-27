@@ -105,13 +105,14 @@ public class WorldMapLoad : MonoBehaviour
         // Create the Current Building List and add one to the County so the County knows what it has built.
         counties[currentlySelectedCounty].currentBuildings.Add(new CurrentBuilding(possibleBuilding.name,
             possibleBuilding.description, 0, possibleBuilding.workCost, possibleBuilding.CurrentWorkers,
-            possibleBuilding.maxEmployees, true, false));
+            possibleBuilding.maxEmployees, true, false, null));
 
         Debug.Log("Current Building Length: " + counties[currentlySelectedCounty].currentBuildings.Count);
         Debug.Log("County Build Name: " + counties[currentlySelectedCounty].currentBuildings[^1].name);
 
         // Assigned the Possible Building UI game object to the current building list.
         counties[currentlySelectedCounty].currentBuildings[^1].gameObject = possibleBuilding.gameObject;
+
 
         // Moving the possilbe building UI game object to the current building UI game object.
         counties[currentlySelectedCounty].currentBuildings[^1].gameObject.transform.SetParent(UICurrentBuildingsPanel.Instance.currentBuildingsGroupGameObject.transform);
@@ -139,6 +140,7 @@ public class WorldMapLoad : MonoBehaviour
         int numberWorkers = 0;
         for (int i = 0; i < countyPopulationDictionary[currentlySelectedCounty].Count; i++)
         {
+            //Debug.Log($"World Map Load Current Building Number: {UICurrentBuildingsPanel.Instance.CurrentBuildingNumber}");
             if (countyPopulationDictionary[currentlySelectedCounty][i].nextActivity == AllText.Jobs.IDLE
                 && numberWorkers < 
                 counties[currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].currentWorkers)
@@ -146,7 +148,8 @@ public class WorldMapLoad : MonoBehaviour
                 countyPopulationDictionary[currentlySelectedCounty][i].nextActivity = AllText.Jobs.BUILDING;
                 countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding =
                     counties[currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber];
-                Debug.Log($"Name: {countyPopulationDictionary[currentlySelectedCounty][i].firstName} and job: {countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding.name}");
+                Debug.Log($"Name: {countyPopulationDictionary[currentlySelectedCounty][i].firstName} and job: " +
+                    $"{countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding.name}");
                 numberWorkers++; // Why is this incrementing when it should match the i in the for loop?
                 counties[currentlySelectedCounty].currentlyWorkingPopulation++; // We need to put this number on the county info panel.
                 /*
@@ -155,11 +158,12 @@ public class WorldMapLoad : MonoBehaviour
                 Debug.Log("Activity: " + countyPopulationDictionary[currentlySelectedCounty][i].nextActivity);
                 */
             }
-            
+            /*
             else
             {
                  Debug.Log("Set Next Day Job got to Else.");
             }
+            */
             
         }
     }

@@ -13,9 +13,10 @@ public class CurrentBuilding
 
     public bool isBeingBuilt;
     public bool isBuilt;
+    public GameObject completedTextGameObject;
 
     public CurrentBuilding(string name, string description, int workCompleted, int workCost, int currentWorkers,
-        int maxWorkers, bool isBeingBuilt, bool isBuilt)
+        int maxWorkers, bool isBeingBuilt, bool isBuilt, GameObject completedTextGameObject)
     {
         this.name = name;
         this.description = description;
@@ -25,5 +26,6 @@ public class CurrentBuilding
         this.maxWorkers = maxWorkers;
         this.isBeingBuilt = isBeingBuilt;
         this.isBuilt = isBuilt;
+        this.completedTextGameObject = completedTextGameObject;
     }
 }

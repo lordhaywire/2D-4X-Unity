@@ -20,7 +20,8 @@ public class UICurrentBuildingsPanel : MonoBehaviour
         set
         {
             currentBuildingNumber = value;
-            CurrentBuildingButtonPressed?.Invoke();
+            //Debug.Log("UI Current Building Number: " + CurrentBuildingNumber);
+            CurrentBuildingButtonPressed?.Invoke(); // What is this doing?  Did we ever update this when we copied Possible Building?
         }
     }
 
@@ -28,4 +29,5 @@ public class UICurrentBuildingsPanel : MonoBehaviour
     {
         Instance = this;
     }
+
 }

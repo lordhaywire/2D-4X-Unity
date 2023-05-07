@@ -46,6 +46,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    // Is this supposed to be an event that UIBuildingPanelsRefresher subscribes to and refreshes when it is triggered?
     private void RefreshBuildingsPanels()
     {
         UIBuildingPanelsRefresher.Instance.CurrentBuildingPanelsDestroyer();

@@ -15,14 +15,14 @@ public class Research : MonoBehaviour
 
     private void OnEnable()
     {    
-        TimeKeeper.Instance.OnPanelEnable();
+        TimeKeeper.Instance.PauseTime();
 
         UpdateResearchItemsTier1();
     }
 
     private void OnDisable()
     {
-        TimeKeeper.Instance.OnPanelDisable();  
+        TimeKeeper.Instance.UnpauseTime();  
     }
 
     private void FirstRunResearch()

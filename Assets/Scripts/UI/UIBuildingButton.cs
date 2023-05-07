@@ -9,20 +9,6 @@ public class UIBuildingButton : MonoBehaviour
     {
         Instance = this;
     }
-    private void OnEnable()
-    {
-        UIBuildingConfirmed.Instance.BuildingConfirmed += UpdateCurrentBuildingNumber;
-    }
-
-    private void UpdateCurrentBuildingNumber()
-    {
-        UICurrentBuildingsPanel.Instance.CurrentBuildingNumber = int.Parse(name);
-    }
-
-    private void OnDisable()
-    {
-        UIBuildingConfirmed.Instance.BuildingConfirmed -= UpdateCurrentBuildingNumber;
-    }
 
     public void BuildingButton()
     {
@@ -38,9 +24,8 @@ public class UIBuildingButton : MonoBehaviour
             //Debug.Log("Current Building.");
             UICurrentBuildingsPanel.Instance.buildingDescriptionPanel.SetActive(true);
             UIPossibleBuildingsPanel.Instance.buildingDescriptionPanel.SetActive(false);
-            //Debug.Log("Name of thing: " + name);
+            Debug.Log("UIBuildingButton Current Building Number: " + name);
             UICurrentBuildingsPanel.Instance.CurrentBuildingNumber = int.Parse(name);
-
         }
     }
 }

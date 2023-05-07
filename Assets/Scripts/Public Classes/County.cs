@@ -9,7 +9,7 @@ public class County
     public bool isCapital;
     public GameObject countyCenterGameObject;
     public SpriteRenderer spriteRenderer;
-    //public SelectCounty selectCounty; // We may be able to remove this.
+
     public Faction faction;
     public string province;
     public string biomePrimary;

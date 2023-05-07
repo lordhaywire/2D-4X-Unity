@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,40 @@ public class Work : MonoBehaviour
 {
     private void Start()
     {
-        TimeKeeper.Instance.DayStart += AdjustPopulationActivity;
+        TimeKeeper.Instance.DayStart += DayStart;
         TimeKeeper.Instance.WorkDayOver += WorkDayOverForPopulation;
+    }
+
+    private void DayStart()
+    {
+        AdjustPopulationActivity();
+    }
+
+
+    // Adjust all of the world population!
+    private void AdjustPopulationActivity()
+    {
+        // Go through every county.
+        foreach (KeyValuePair<string, List<CountyPopulation>> item in WorldMapLoad.Instance.countyPopulationDictionary)
+        {
+            Debug.Log(item.Key + " " + item.Value);
+            // Go through this counties population.
+            for (int i = 0; i < item.Value.Count; i++)
+            {
+                //Debug.Log(item.Value[pop].lastName);
+                item.Value[i].currentActivity = item.Value[i].nextActivity;
+                item.Value[i].currentBuilding = item.Value[i].nextBuilding;
+
+                // Checks to see if the 
+                if (item.Value[i].leaderOfPeoplePerk == true && item.Value[i].isFactionLeader == true)
+                {
+                    WorldMapLoad.Instance.counties[item.Key].faction.Influence
+                        += WorldMapLoad.Instance.dailyInfluenceGain;
+                }
+            }
+
+
+        }
     }
 
     // End work for all of the world population!
@@ -23,7 +56,7 @@ public class Work : MonoBehaviour
                 {
                     item.Value[pop].currentBuilding.workCompleted++;
                     // Checks to see if the building is completed.
-                    if(item.Value[pop].currentBuilding.workCompleted >= item.Value[pop].currentBuilding.workCost)
+                    if (item.Value[pop].currentBuilding.workCompleted >= item.Value[pop].currentBuilding.workCost)
                     {
                         // This is having every population working on that building set that building as built.
                         // So it is repeating the setting to true a bunch of times.  This is ineffecient code.
@@ -45,20 +78,7 @@ public class Work : MonoBehaviour
         }
     }
 
-    // Adjust all of the world population!
-    private void AdjustPopulationActivity()
-    {
-        foreach (KeyValuePair<string, List<CountyPopulation>> item in WorldMapLoad.Instance.countyPopulationDictionary)
-        {
-            //Debug.Log(item.Key + " " + item.Value);
-            for(int i = 0;  i < item.Value.Count; i++)
-            {
-                //Debug.Log(item.Value[pop].lastName);
-                item.Value[i].currentActivity = item.Value[i].nextActivity;
-                item.Value[i].currentBuilding = item.Value[i].nextBuilding;
-            }
-        }
-    }
+
 
     private void OnDisable()
     {

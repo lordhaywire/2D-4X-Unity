@@ -200,27 +200,16 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
     private void CheckForHeroes()
     {
         var countyPopulation = WorldMapLoad.Instance.countyPopulationDictionary[name];
-        //var localHeroes = WorldMapLoad.Instance.factionHeroesDictionary[countyFaction];
+
         for (int i = 0; i < countyPopulation.Count; i++)
         {
             //Debug.Log("Name: " + name);
-            if (countyPopulation[i].isHero == true) // || WorldMapLoad.Instance.DevView == true)
+            if (countyPopulation[i].isHero == true)
             {
                 UICountyPanel.Instance.heroInfoList.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
-                UIVerticalHeroList.leaderButtonText.text =
+                UIVerticalHeroList.Instance.leaderButtonText.text =
                     countyPopulation[i].firstName + " " + countyPopulation[i].lastName + ": " + countyPopulation[i].currentActivity;
-                /*
-                if (localHeroes[i].currentActivity == null)
-                {
-
-                    UIVerticalHeroList.leaderButtonText.text = localHeroes[i].firstName + " " +
-                        localHeroes[i].lastName + ": Something is fucked up!";
-                }
-                else
-                */
-
-
-
+                UIVerticalHeroList.Instance.gameObject.name = countyPopulation[i].countyPopulationID.ToString();
             }
         }
     }

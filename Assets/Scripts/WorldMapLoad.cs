@@ -9,12 +9,15 @@ public class WorldMapLoad : MonoBehaviour
     
     public static WorldMapLoad Instance;
     public string currentlySelectedCounty;
+    public int currentlySelectedHero;
 
     //public int currentlySelectedBuilding;
 
     [SerializeField] private int totalCapitolPop;
     [SerializeField] private int minimumCountyPop;
     [SerializeField] private int maximumCountyPop;
+    
+
     [SerializeField] private GameObject countyListGameObject;
     [SerializeField] private GameObject uICanvas;
 
@@ -27,21 +30,13 @@ public class WorldMapLoad : MonoBehaviour
     // This is just temp till we do character creation.
     public string playerFaction;
     public int playerFactionID;
-
-    //public List<ResearchItem> researchItems = new();
-
-    //public List<PossibleBuilding> possibleBuildings = new();
-
-    //public List<CurrentBuilding> currentBuildings = new();
+    public int dailyInfluenceGain;
 
     // Initialize County Dictionary List.
     public Dictionary<string, County> counties = new();
 
     // A Dictionary for each county that holds a list of their population.
     public Dictionary<string, List<CountyPopulation>> countyPopulationDictionary = new();
-
-    // Initialize County Heroes/Leader Dictionary List.
-    //public Dictionary<string, List<Hero>> factionHeroesDictionary = new();
 
     // Initialize Army List.
     public List<Army> armies = new();
@@ -58,6 +53,8 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Awake()
     {
+        currentlySelectedHero = 57; // This is just a test number for when there is more then 1 hero.
+        
         Instance = this;
         currentBuildingDescriptionPanelExpanded = false;
         possibleBuildingDescriptionPanelExpanded = false;
@@ -351,7 +348,10 @@ public class WorldMapLoad : MonoBehaviour
         for (int i = 0; i < totalPopulation; i++)
         {
             // This adds to the Dictionary List a new person.
-            countyPopulation.Add(new CountyPopulation(null, null, false, false, true, false, 0, AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null));
+            countyPopulation.Add(new CountyPopulation(0, null, null, false, false, true, false, 0, false, 50, AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null));
+
+            // Assign the County Populations ID
+            countyPopulation[i].countyPopulationID = i;
 
             // Generates Persons Last Name
             int randomLastNameNumber = UnityEngine.Random.Range(0, lastNames.Length);
@@ -385,6 +385,7 @@ public class WorldMapLoad : MonoBehaviour
                     counties[countyName].faction.factionLeader = countyPopulation[i];
                     countyPopulation[i].isFactionLeader = true;
                     countyPopulation[i].isHero = true;
+                    countyPopulation[i].leaderOfPeoplePerk = true;
                 }
             }
             /*

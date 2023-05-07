@@ -21,7 +21,7 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        TimeKeeper.Instance.OnPanelEnable();
+        TimeKeeper.Instance.PauseTime();
 
         UIPossibleBuildingsPanel.Instance.PossibleBuildingButtonPressed += PanelRefresh;
 
@@ -32,20 +32,6 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
         for (int i = 0; i < possibleBuildings.Count; i++)
         {
             possibleBuildings[i].CurrentWorkersChanged += CurrentEmployeesRefresh;
-        }
-    }
-
-    private void OnDisable()
-    {
-        TimeKeeper.Instance.OnPanelDisable();
-
-        UIPossibleBuildingsPanel.Instance.PossibleBuildingButtonPressed -= PanelRefresh;
-
-        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings;
-
-        for (int i = 0; i < possibleBuildings.Count; i++)
-        {
-            possibleBuildings[i].CurrentWorkersChanged -= CurrentEmployeesRefresh;
         }
     }
 
@@ -105,5 +91,19 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 
         possibleBuildings.CurrentWorkers =
             possibleBuildings.maxEmployees;
+    }
+
+    private void OnDisable()
+    {
+        TimeKeeper.Instance.UnpauseTime();
+
+        UIPossibleBuildingsPanel.Instance.PossibleBuildingButtonPressed -= PanelRefresh;
+
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings;
+
+        for (int i = 0; i < possibleBuildings.Count; i++)
+        {
+            possibleBuildings[i].CurrentWorkersChanged -= CurrentEmployeesRefresh;
+        }
     }
 }

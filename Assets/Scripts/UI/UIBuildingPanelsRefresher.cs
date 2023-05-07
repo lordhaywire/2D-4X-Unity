@@ -19,28 +19,15 @@ public class UIBuildingPanelsRefresher : MonoBehaviour
     {
         Instance = this;
     }
-
-    public void CurrentBuildingPanelsRefresher()
+    private void OnEnable()
     {
-        var currentBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].currentBuildings;
-        for (int i = 0; i < currentBuildings.Count; i++)
-        {
-            currentBuildingClones.Add(Instantiate(currentBuildingsPrefab, currentBuildingsParent.transform));
-            currentBuildingClones[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
-                currentBuildings[i].name;
-            currentBuildingClones[i].name = i.ToString();
-            currentBuildings[i].gameObject = currentBuildingClones[i];
-        }
+        WorldMapLoad.Instance.RefreshBuildingPanels += PossibleBuildingsPanelsDestroyer;
+        WorldMapLoad.Instance.RefreshBuildingPanels += PossibleBuildingPanelsRefresher;
+
+        WorldMapLoad.Instance.RefreshBuildingPanels += CurrentBuildingPanelsDestroyer;
+        WorldMapLoad.Instance.RefreshBuildingPanels += CurrentBuildingPanelsRefresher;
     }
 
-    public void CurrentBuildingPanelsDestroyer()
-    {
-        for (int i = 0; i < currentBuildingClones.Count; i++)
-        {
-            Destroy(currentBuildingClones[i]);
-        }
-        currentBuildingClones.Clear();
-    }
     public void PossibleBuildingPanelsRefresher()
     {
         var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings;
@@ -61,5 +48,40 @@ public class UIBuildingPanelsRefresher : MonoBehaviour
             Destroy(possibleBuildingClones[i]);
         }
         possibleBuildingClones.Clear();
+    }
+    public void CurrentBuildingPanelsRefresher()
+    {
+        var currentBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].currentBuildings;
+        for (int i = 0; i < currentBuildings.Count; i++)
+        {
+            currentBuildingClones.Add(Instantiate(currentBuildingsPrefab, currentBuildingsParent.transform));
+            currentBuildingClones[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
+                currentBuildings[i].name;
+            currentBuildingClones[i].name = i.ToString();
+            currentBuildings[i].gameObject = currentBuildingClones[i];
+            if (currentBuildings[i].isBuilt == true)
+            {
+                currentBuildingClones[i].transform.GetChild(1).gameObject.SetActive(true);
+            }
+        }
+    }
+
+    public void CurrentBuildingPanelsDestroyer()
+    {
+        for (int i = 0; i < currentBuildingClones.Count; i++)
+        {
+            Destroy(currentBuildingClones[i]);
+        }
+        currentBuildingClones.Clear();
+    }
+
+
+    private void OnDisable()
+    {
+        WorldMapLoad.Instance.RefreshBuildingPanels -= PossibleBuildingsPanelsDestroyer;
+        WorldMapLoad.Instance.RefreshBuildingPanels -= PossibleBuildingPanelsRefresher;
+
+        WorldMapLoad.Instance.RefreshBuildingPanels -= CurrentBuildingPanelsDestroyer;
+        WorldMapLoad.Instance.RefreshBuildingPanels -= CurrentBuildingPanelsRefresher;
     }
 }

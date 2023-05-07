@@ -20,6 +20,7 @@ public class UICurrentBuildingsPanel : MonoBehaviour
         set
         {
             currentBuildingNumber = value;
+            //WorldMapLoad.Instance.currentlySelectedBuilding = currentBuildingNumber;
             //Debug.Log("UI Current Building Number: " + CurrentBuildingNumber);
             CurrentBuildingButtonPressed?.Invoke(); // What is this doing?  Did we ever update this when we copied Possible Building?
         }

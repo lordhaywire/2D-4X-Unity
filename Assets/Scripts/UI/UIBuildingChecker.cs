@@ -32,7 +32,7 @@ public class UIBuildingChecker : MonoBehaviour
 
     private void CheckEnoughUnemployed()
     {
-        // Check for Population.  This doesn't include the leader.
+        // Check for Population.
         unemployed = 0;
         enoughPopulation = false;
         var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
@@ -40,10 +40,11 @@ public class UIBuildingChecker : MonoBehaviour
 
         for (int i = 0; i < WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty].Count; i++)
         {
-            if (WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty][i].currentActivity
+            if (WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty][i].nextActivity
                 == AllText.Jobs.IDLE)
             {
-                unemployed++;
+                unemployed++; // Can we get rid of the incrementing?
+                Debug.Log("Unemployed: " + unemployed);
             }
         }
         //Debug.Log("Unemployed: " + unemployed);

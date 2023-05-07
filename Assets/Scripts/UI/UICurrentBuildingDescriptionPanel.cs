@@ -22,7 +22,7 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        TimeKeeper.Instance.OnPanelEnable();
+        TimeKeeper.Instance.PauseTime();
 
         WorldMapLoad.Instance.currentBuildingDescriptionPanelExpanded = true;
 
@@ -31,7 +31,7 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
 
     private void OnDisable()
     {
-        TimeKeeper.Instance.OnPanelDisable();
+        TimeKeeper.Instance.UnpauseTime();
 
         UICurrentBuildingsPanel.Instance.CurrentBuildingButtonPressed -= PanelRefresh;
     }

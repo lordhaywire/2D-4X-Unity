@@ -9504,7 +9504,7 @@ MonoBehaviour:
         serializedVersion: 2
         rgba: 0
     researchItems: []
-    influence: 1000
+    influence: 2000
     money: 0
     food: 1000
     scrap: 1000

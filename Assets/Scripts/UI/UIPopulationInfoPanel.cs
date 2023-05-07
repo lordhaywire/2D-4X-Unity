@@ -11,7 +11,7 @@ public class UIPopulationInfoPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        TimeKeeper.Instance.OnPanelEnable();
+        TimeKeeper.Instance.PauseTime();
 
         if (WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty] != null)
         {
@@ -94,7 +94,7 @@ public class UIPopulationInfoPanel : MonoBehaviour
     }
     private void OnDisable()
     {
-        TimeKeeper.Instance.OnPanelDisable();
+        TimeKeeper.Instance.UnpauseTime();
     }
     public void CloseButton()
     {

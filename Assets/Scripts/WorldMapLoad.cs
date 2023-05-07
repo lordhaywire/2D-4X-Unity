@@ -1,11 +1,16 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class WorldMapLoad : MonoBehaviour
 {
+    public event Action RefreshBuildingPanels;
+    
     public static WorldMapLoad Instance;
     public string currentlySelectedCounty;
+
+    //public int currentlySelectedBuilding;
 
     [SerializeField] private int totalCapitolPop;
     [SerializeField] private int minimumCountyPop;
@@ -86,61 +91,47 @@ public class WorldMapLoad : MonoBehaviour
 
     private void BuildCountyImprovement()
     {
-        DeductCostOfBuilding(); // Done - for Influence costs only.
+        DeductCostOfBuilding(); // Done for Influence costs only.
         MoveBuildingToCurrentBuildingList();
         SetNextDayJob();   
     }
     private void DeductCostOfBuilding()
     {
-        factions[0].Influence -= counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].influenceCost;
+        factions[playerFactionID].Influence -= counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].influenceCost;
     }
 
     private void MoveBuildingToCurrentBuildingList()
     {
         var possibleBuilding = counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
 
-        Debug.Log("Possible Building Number: " + UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber);
-        Debug.Log("Current Building Number: " + UICurrentBuildingsPanel.Instance.CurrentBuildingNumber);
+        //Debug.Log("Possible Building Number: " + UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber);
+        //Debug.Log("Move Building To Current Building List Current Building Number: " + UICurrentBuildingsPanel.Instance.CurrentBuildingNumber);
 
-        // Create the Current Building List and add one to the County so the County knows what it has built.
+        // Create the Current Building List and add list to the County so the County knows what it has built.
         counties[currentlySelectedCounty].currentBuildings.Add(new CurrentBuilding(possibleBuilding.name,
             possibleBuilding.description, 0, possibleBuilding.workCost, possibleBuilding.CurrentWorkers,
             possibleBuilding.maxEmployees, true, false, null));
 
-        Debug.Log("Current Building Length: " + counties[currentlySelectedCounty].currentBuildings.Count);
-        Debug.Log("County Build Name: " + counties[currentlySelectedCounty].currentBuildings[^1].name);
+        //Debug.Log("Current Building Length: " + counties[currentlySelectedCounty].currentBuildings.Count);
+        //Debug.Log("County Build Name: " + counties[currentlySelectedCounty].currentBuildings[^1].name);
 
-        // Assigned the Possible Building UI game object to the current building list.
-        counties[currentlySelectedCounty].currentBuildings[^1].gameObject = possibleBuilding.gameObject;
-
-
-        // Moving the possilbe building UI game object to the current building UI game object.
-        counties[currentlySelectedCounty].currentBuildings[^1].gameObject.transform.SetParent(UICurrentBuildingsPanel.Instance.currentBuildingsGroupGameObject.transform);
+        // This makes is so that the population gets the correct building to build.
+        UICurrentBuildingsPanel.Instance.CurrentBuildingNumber =
+            counties[currentlySelectedCounty].currentBuildings.Count - 1;
 
         // Remove the building from the possible Building list.
         counties[currentlySelectedCounty].possibleBuildings.Remove(possibleBuilding);
 
-        // Rename building to be the same as their possible building index.
-        for (int i = 0; i < UIPossibleBuildingsPanel.Instance.possibleBuildingsGroupGameObject.transform.childCount; i++)
-        {
-            counties[currentlySelectedCounty].possibleBuildings[i].gameObject.name = i.ToString();
-        }
-
-        // Rename building to be the same as their current building index.
-        for (int i = 0; i < UICurrentBuildingsPanel.Instance.currentBuildingsGroupGameObject.transform.childCount; i++)
-        {
-            counties[currentlySelectedCounty].currentBuildings[i].gameObject.name = i.ToString();
-        }
+        RefreshBuildingPanels?.Invoke();
     }
-
-
 
     private void SetNextDayJob()
     {
         int numberWorkers = 0;
+        Debug.Log($"UI Current Buildings Panel Current Building Number: {UICurrentBuildingsPanel.Instance.CurrentBuildingNumber}");
+        Debug.Log($"Current Workers: {counties[currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].currentWorkers}");
         for (int i = 0; i < countyPopulationDictionary[currentlySelectedCounty].Count; i++)
         {
-            //Debug.Log($"World Map Load Current Building Number: {UICurrentBuildingsPanel.Instance.CurrentBuildingNumber}");
             if (countyPopulationDictionary[currentlySelectedCounty][i].nextActivity == AllText.Jobs.IDLE
                 && numberWorkers < 
                 counties[currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].currentWorkers)
@@ -148,12 +139,15 @@ public class WorldMapLoad : MonoBehaviour
                 countyPopulationDictionary[currentlySelectedCounty][i].nextActivity = AllText.Jobs.BUILDING;
                 countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding =
                     counties[currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber];
+                /*
                 Debug.Log($"Name: {countyPopulationDictionary[currentlySelectedCounty][i].firstName} and job: " +
                     $"{countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding.name}");
+                */
                 numberWorkers++; // Why is this incrementing when it should match the i in the for loop?
                 counties[currentlySelectedCounty].currentlyWorkingPopulation++; // We need to put this number on the county info panel.
-                /*
+                
                 Debug.Log("Currently Working Population: " + counties[currentlySelectedCounty].currentlyWorkingPopulation);
+                /*
                 Debug.Log("First Name: " + countyPopulationDictionary[currentlySelectedCounty][i].firstName);
                 Debug.Log("Activity: " + countyPopulationDictionary[currentlySelectedCounty][i].nextActivity);
                 */
@@ -168,12 +162,6 @@ public class WorldMapLoad : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        UIBuildingConfirmed.Instance.BuildingConfirmed -= SetNextDayJob;
-
-        UIBuildingConfirmed.Instance.BuildingConfirmed -= MoveBuildingToCurrentBuildingList;
-    }
     private void CreateResearchandBuildingList()
     {
         // This is going to go through all of the factions and create a list of their research, which is currently all completed.
@@ -266,10 +254,10 @@ public class WorldMapLoad : MonoBehaviour
 
     private void FirstRunTopInfoBar()
     {
-        UITopInfoBar.Instance.Influence = factions[0].Influence;
-        UITopInfoBar.Instance.Money = factions[0].money;
-        UITopInfoBar.Instance.Food = factions[0].food;
-        UITopInfoBar.Instance.Scrap = factions[0].scrap;
+        UITopInfoBar.Instance.Influence = factions[playerFactionID].Influence;
+        UITopInfoBar.Instance.Money = factions[playerFactionID].money;
+        UITopInfoBar.Instance.Food = factions[playerFactionID].food;
+        UITopInfoBar.Instance.Scrap = factions[playerFactionID].scrap;
     }
 
     private void AssignFactionNameAndColorToFaction()
@@ -347,7 +335,7 @@ public class WorldMapLoad : MonoBehaviour
             }
             else
             {
-                int normalPopulation = Random.Range(minimumCountyPop, maximumCountyPop);
+                int normalPopulation = UnityEngine.Random.Range(minimumCountyPop, maximumCountyPop);
                 //GenerateLeaders(factionName, countyIndex);
                 GeneratePopulation(countyName, normalPopulation);
                 counties[countyName].population = normalPopulation;
@@ -366,14 +354,14 @@ public class WorldMapLoad : MonoBehaviour
             countyPopulation.Add(new CountyPopulation(null, null, false, false, true, false, 0, AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null));
 
             // Generates Persons Last Name
-            int randomLastNameNumber = Random.Range(0, lastNames.Length);
+            int randomLastNameNumber = UnityEngine.Random.Range(0, lastNames.Length);
             countyPopulation[i].lastName =
                 lastNames[randomLastNameNumber];
 
             // Determine the persons sex and first name
-            int randomSexNumber = Random.Range(0, 2);
-            int randomFemaleNameNumber = Random.Range(0, femaleNames.Length);
-            int randomMaleNameNumber = Random.Range(0, maleNames.Length);
+            int randomSexNumber = UnityEngine.Random.Range(0, 2);
+            int randomFemaleNameNumber = UnityEngine.Random.Range(0, femaleNames.Length);
+            int randomMaleNameNumber = UnityEngine.Random.Range(0, maleNames.Length);
             if (randomSexNumber == 0)
             {
                 countyPopulation[i].isMale = true;
@@ -387,7 +375,7 @@ public class WorldMapLoad : MonoBehaviour
                     femaleNames[randomFemaleNameNumber];
             }
 
-            int randomAgeNumber = Random.Range(18, 61);
+            int randomAgeNumber = UnityEngine.Random.Range(18, 61);
             countyPopulation[i].age = randomAgeNumber;
 
             if (counties[countyName].faction.factionLeader == null)
@@ -411,6 +399,10 @@ public class WorldMapLoad : MonoBehaviour
             countyPopulationDictionary[countyName][i].isHero);
             */
         }
+    }
+    private void OnDisable()
+    {
+        UIBuildingConfirmed.Instance.BuildingConfirmed -= BuildCountyImprovement;
     }
 }
 

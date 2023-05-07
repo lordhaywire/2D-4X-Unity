@@ -3,12 +3,15 @@ using UnityEngine;
 
 public class UIVerticalHeroList : MonoBehaviour
 {
-    //private GameObject leaderButtonGameObject; // This will be changed to an array when we are instantiating the buttons.
-    public static TextMeshProUGUI leaderButtonText; // This will be changed to an array when we are instantiating the buttons.
+    public static UIVerticalHeroList Instance;
+
+    //private GameObject leaderButtonGameObject; 
+    public TextMeshProUGUI leaderButtonText;
 
     private void Awake()
     {
-        //leaderButtonGameObject = transform.GetChild(0).uIResearchItemPanelGameObject;
+        Instance = this;
+        //leaderButtonGameObject = transform.gameObject;
         leaderButtonText = GetComponentInChildren<TextMeshProUGUI>();
     }
 }

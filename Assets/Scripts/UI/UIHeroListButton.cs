@@ -12,6 +12,8 @@ public class UIHeroListButton : MonoBehaviour
     public void HeroListButtonClicked()
     {
         Debug.Log("Game Object Name: " + gameObject.name);
-        WorldMapLoad.Instance.currentlySelectedHero = int.Parse(gameObject.name);
+        WorldMapLoad.Instance.currentlySelectedPopulation = int.Parse(gameObject.name);
+        WorldMapLoad.Instance.populationDescriptionPanelOpen = true;
+        WorldMapLoad.Instance.populationInfoPanelOpenedByHeroListClick = true;
     }
 }

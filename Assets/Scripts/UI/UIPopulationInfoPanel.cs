@@ -3,46 +3,28 @@ using UnityEngine;
 
 public class UIPopulationInfoPanel : MonoBehaviour
 {
+    public static UIPopulationInfoPanel Instance;
+
     [SerializeField] private GameObject prefabHorizontalPopulationListText;
     [SerializeField] private GameObject parentPopulationListGroup;
-    [SerializeField] private GameObject populationInfoPanel;
 
     private readonly List<GameObject> populationListClones = new();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void OnEnable()
     {
         TimeKeeper.Instance.PauseTime();
 
+        WorldMapLoad.Instance.populationInfoPanelOpen = true;
+
         if (WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty] != null)
         {
             var countyList = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty];
-            //var factionList =
-            //    WorldMapLoad.Instance.factionHeroesDictionary[WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.name];
 
-            // This is for the leaders of each faction.
-            /*
-            for (int i = 0; i < factionList.Count; i++)
-            {
-                populationListClones.Add
-                    (Instantiate(prefabHorizontalPopulationListText, parentPopulationListGroup.transform));
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nameText.text =
-                    factionList[i].firstName + " " + factionList[i].lastName;
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().ageText.text =
-                    factionList[i].age.ToString();
-                if (factionList[i].isMale == true)
-                {
-                    populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Male";
-                }
-                else
-                {
-                    populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Female";
-                }
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().currentActivityText.text =
-                    factionList[i].currentActivity;
-                populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nextActivityText.text =
-                    factionList[i].nextActivity;
-            }
-            */
             for (int i = 0; i < countyList.Count; i++)
             {
                 //int listIndex = i + factionList.Count;
@@ -50,6 +32,11 @@ public class UIPopulationInfoPanel : MonoBehaviour
                 //Debug.Log("County List Length: " + countyList.Count);
                 populationListClones.Add
                     (Instantiate(prefabHorizontalPopulationListText, parentPopulationListGroup.transform));
+
+                // Rename all the Game Objects in the list to the index for later clickablity.
+                populationListClones[i].name = i.ToString();
+
+                // Fill in the Game Object's text fields from the list.
                 populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nameText.text =
                     countyList[i].firstName + " " + countyList[i].lastName;
                 populationListClones[i].GetComponent<UIHorizontalPopulationListText>().ageText.text =

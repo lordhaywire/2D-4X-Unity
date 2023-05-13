@@ -6,13 +6,14 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 {
     public static bool hasAnArmyBeenSelected;
 
+    // Left Click
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             WorldMapLoad.Instance.currentlySelectedCounty = name;
 
-            CloseBuildingDescriptionPanels();
+            CloseDescriptionPanels();
 
             PanelChanges();
 
@@ -32,7 +33,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void CloseBuildingDescriptionPanels()
+    private void CloseDescriptionPanels()
     {
         if (WorldMapLoad.Instance.currentBuildingDescriptionPanelExpanded == true)
         {
@@ -44,6 +45,17 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             UIPossibleBuildingDescriptionPanel.Instance.gameObject.SetActive(false);
             WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded = false;
         }
+        if(WorldMapLoad.Instance.populationDescriptionPanelOpen == true)
+        {
+            UIPopulationDescriptionPanel.Instance.gameObject.SetActive(false);
+            WorldMapLoad.Instance.populationDescriptionPanelOpen = false;
+        }
+        if(WorldMapLoad.Instance.populationInfoPanelOpen == true)
+        {
+            UIPopulationInfoPanel.Instance.gameObject.SetActive(false);
+            WorldMapLoad.Instance.populationInfoPanelOpen = false;
+        }
+        
     }
 
     // Is this supposed to be an event that UIBuildingPanelsRefresher subscribes to and refreshes when it is triggered?

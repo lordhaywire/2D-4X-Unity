@@ -9,23 +9,32 @@ public class WorldMapLoad : MonoBehaviour
     
     public static WorldMapLoad Instance;
     public string currentlySelectedCounty;
-    public int currentlySelectedHero;
+    public int currentlySelectedPopulation;
 
     //public int currentlySelectedBuilding;
 
     [SerializeField] private int totalCapitolPop;
     [SerializeField] private int minimumCountyPop;
     [SerializeField] private int maximumCountyPop;
-    
 
+    [SerializeField] private GameObject countyInfoPanelGameObject;
     [SerializeField] private GameObject countyListGameObject;
     [SerializeField] private GameObject uICanvas;
 
     public bool currentBuildingDescriptionPanelExpanded;
     public bool possibleBuildingDescriptionPanelExpanded;
+    public bool populationDescriptionPanelOpen;
+    public bool populationInfoPanelOpen;
+    public bool populationInfoPanelOpenedByHeroListClick;
+
     public bool DevView;
+
     public GameObject countyInfoPanel;
     public GameObject armyInfoPanel;
+
+    public GameObject populationInfoPanel;
+    // Because the button that opens this is in a Prefab.
+    public GameObject populationDescriptionPanel;
 
     // This is just temp till we do character creation.
     public string playerFaction;
@@ -53,7 +62,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Awake()
     {
-        currentlySelectedHero = 57; // This is just a test number for when there is more then 1 hero.
+        currentlySelectedPopulation = 57; // This is just a test number for when there is more then 1 hero.
         
         Instance = this;
         currentBuildingDescriptionPanelExpanded = false;

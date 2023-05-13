@@ -16,14 +16,13 @@ public class Work : MonoBehaviour
         AdjustPopulationActivity();
     }
 
-
     // Adjust all of the world population!
     private void AdjustPopulationActivity()
     {
         // Go through every county.
         foreach (KeyValuePair<string, List<CountyPopulation>> item in WorldMapLoad.Instance.countyPopulationDictionary)
         {
-            Debug.Log(item.Key + " " + item.Value);
+            //Debug.Log(item.Key + " " + item.Value);
             // Go through this counties population.
             for (int i = 0; i < item.Value.Count; i++)
             {

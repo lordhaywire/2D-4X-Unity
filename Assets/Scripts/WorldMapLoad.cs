@@ -11,8 +11,6 @@ public class WorldMapLoad : MonoBehaviour
     public string currentlySelectedCounty;
     public int currentlySelectedPopulation;
 
-    //public int currentlySelectedBuilding;
-
     [SerializeField] private int totalCapitolPop;
     [SerializeField] private int minimumCountyPop;
     [SerializeField] private int maximumCountyPop;
@@ -33,13 +31,15 @@ public class WorldMapLoad : MonoBehaviour
     public GameObject armyInfoPanel;
 
     public GameObject populationInfoPanel;
+
     // Because the button that opens this is in a Prefab.
     public GameObject populationDescriptionPanel;
 
-    // This is just temp till we do character creation.
+    // This is just temp bullshit.
     public string playerFaction;
     public int playerFactionID;
     public int dailyInfluenceGain;
+    public int costOfHero;
 
     // Initialize County Dictionary List.
     public Dictionary<string, County> counties = new();
@@ -357,7 +357,7 @@ public class WorldMapLoad : MonoBehaviour
         for (int i = 0; i < totalPopulation; i++)
         {
             // This adds to the Dictionary List a new person.
-            countyPopulation.Add(new CountyPopulation(0, null, null, false, false, true, false, 0, false, 50, AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null));
+            countyPopulation.Add(new CountyPopulation(0, null, null, false, false, true, false, 0, false, 0, AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null));
 
             // Assign the County Populations ID
             countyPopulation[i].countyPopulationID = i;
@@ -397,17 +397,10 @@ public class WorldMapLoad : MonoBehaviour
                     countyPopulation[i].leaderOfPeoplePerk = true;
                 }
             }
-            /*
-            else
-            {
-                Debug.Log($"{countyName} already has a faction leader.");
-            }
             
-
-            Debug.Log("Name: " + countyPopulationDictionary[countyName][i].firstName + " " +
-            countyPopulationDictionary[countyName][i].lastName + " is Hero? " + 
-            countyPopulationDictionary[countyName][i].isHero);
-            */
+            // Generate random skill level for each population.
+            var randomConstructionSkill = UnityEngine.Random.Range(20, 81);
+            countyPopulation[i].constructionSkill = randomConstructionSkill;
         }
     }
     private void OnDisable()
@@ -415,49 +408,3 @@ public class WorldMapLoad : MonoBehaviour
         UIBuildingConfirmed.Instance.BuildingConfirmed -= BuildCountyImprovement;
     }
 }
-
-/*  Removed for now because we merged the leaders into the County Population.
- *     private void GenerateLeaders(string factionName, int countyIndex)
-    {
-        // Add Leaders to each faction.
-        // This adds to the Heroes Dictionary List a new Leader.  It is jank because we want the leader in Portland to be me.
-        // This will instead need to eventually check if this is a player faction vs an AI faction.
-        if (playerFaction == factionName)
-        {
-            factionHeroesDictionary[factionName].Add(new Hero
-                ("Lord", "Haywire", true, 30, CountyListCreator.Instance.countiesList[1].name, AllText.Jobs.IDLE, AllText.Jobs.IDLE));
-        }
-        else
-        {
-            factionHeroesDictionary[factionName].Add(new Hero(null, null, false, 0, CountyListCreator.Instance.countiesList[countyIndex].name, AllText.Jobs.IDLE, AllText.Jobs.IDLE));
-            int randomLastNameNumber = Random.Range(0, lastNames.Length);
-            factionHeroesDictionary[factionName][0].lastName = lastNames[randomLastNameNumber];
-
-            // Determine the persons sex and first name
-            int randomSexNumber = Random.Range(0, 2);
-            int randomFemaleNameNumber = Random.Range(0, femaleNames.Length);
-            int randomMaleNameNumber = Random.Range(0, maleNames.Length);
-            if (randomSexNumber == 0)
-            {
-                factionHeroesDictionary[factionName][0].isMale = true;
-                factionHeroesDictionary[factionName][0].firstName =
-                    maleNames[randomMaleNameNumber];
-            }
-            else
-            {
-                factionHeroesDictionary[factionName][0].isMale = false;
-                factionHeroesDictionary[factionName][0].firstName =
-                    femaleNames[randomFemaleNameNumber];
-            }
-
-            int randomAgeNumber = Random.Range(30, 61);
-            factionHeroesDictionary[factionName][0].age = randomAgeNumber;
-
-            /*
-            Debug.Log("First Name: " + factionHeroesDictionary[factionName][0].firstName + " " +
-                factionHeroesDictionary[factionName][0].lastName + " County: "
-                + factionHeroesDictionary[factionName][0].location);
-            
-        }
-    }
-*/

@@ -37,4 +37,9 @@ public class AllText
         public const string PRIMATVEGUNAMMOSHACK = "This is a shack for gun ammo, such as bullets.";
         public const string ELITISM = "Some people think they are better then others.";
     }
+
+    public class UIText
+    {
+        public const string AREYOUSUREHERO = "Are you sure you want to recruit";
+    }
 }

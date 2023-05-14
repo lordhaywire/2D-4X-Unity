@@ -82,8 +82,11 @@ public class UIPopulationInfoPanel : MonoBehaviour
     private void OnDisable()
     {
         TimeKeeper.Instance.UnpauseTime();
+
+        DestroyPopulation();
     }
-    public void CloseButton()
+
+    private void DestroyPopulation()
     {
         for (int i = 0; i < populationListClones.Count; i++)
         {

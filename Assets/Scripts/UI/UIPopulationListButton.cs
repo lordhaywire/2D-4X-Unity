@@ -15,6 +15,5 @@ public class UIPopulationListButton : MonoBehaviour
         WorldMapLoad.Instance.populationDescriptionPanel.SetActive(true);
         WorldMapLoad.Instance.populationDescriptionPanelOpen = true;
         WorldMapLoad.Instance.currentlySelectedPopulation = int.Parse(gameObject.name);
-        
     }
 }

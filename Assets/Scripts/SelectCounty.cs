@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -72,7 +73,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
     {
         WorldMapLoad.Instance.countyInfoPanel.SetActive(true);
         WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
-        UICountyPanel.Instance.heroInfoList.SetActive(false); // This was some bullshit.  This makes it so that onEnable
+        UICountyPanel.Instance.heroScrollView.SetActive(false); // This was some bullshit.  This makes it so that onEnable
                                                               // resets the HeroInfoList.
 
         if (WorldMapLoad.Instance.playerFaction == WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name
@@ -194,7 +195,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             {
                 if (WorldMapLoad.Instance.armies[i].location == name)
                 {
-                    UICountyPanel.Instance.armyInfoList.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
+                    UICountyPanel.Instance.armyScrollView.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
                     Debug.Log("Army Button Text: " + UIVerticalArmyList.armyButtonText);
 
                     UIVerticalArmyList.armyButtonText.text =
@@ -202,7 +203,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
                 }
                 else
                 {
-                    UICountyPanel.Instance.armyInfoList.SetActive(false);
+                    UICountyPanel.Instance.armyScrollView.SetActive(false);
                     Debug.Log("There is no armies in this county.");
                 }
             }
@@ -212,17 +213,26 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
     private void CheckForHeroes()
     {
         var countyPopulation = WorldMapLoad.Instance.countyPopulationDictionary[name];
+        int numberOfHeros = 0;
 
         for (int i = 0; i < countyPopulation.Count; i++)
         {
             //Debug.Log("Name: " + name);
+            // This is going to need to turn off the Hero Scroll View at some point.
             if (countyPopulation[i].isHero == true)
             {
-                UICountyPanel.Instance.heroInfoList.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
-                UIVerticalHeroList.Instance.leaderButtonText.text =
-                    countyPopulation[i].firstName + " " + countyPopulation[i].lastName + ": " + countyPopulation[i].currentActivity;
-                UIVerticalHeroList.Instance.gameObject.name = countyPopulation[i].countyPopulationID.ToString();
+                numberOfHeros++;
             }
         }
+
+        if(numberOfHeros > 0 )
+        {
+            UICountyPanel.Instance.heroScrollView.SetActive(true);
+        }
+        else
+        {
+            UICountyPanel.Instance.heroScrollView.SetActive(false);
+        }
+
     }
 }

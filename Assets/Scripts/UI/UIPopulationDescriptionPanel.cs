@@ -12,6 +12,7 @@ public class UIPopulationDescriptionPanel : MonoBehaviour
     public TextMeshProUGUI constructionSkillText;
 
     public GameObject leaderOfPeoplePerkGameObject;
+    public GameObject notEnoughResourcesPanel;
 
     private void Awake()
     {
@@ -56,8 +57,6 @@ public class UIPopulationDescriptionPanel : MonoBehaviour
 
         PanelRefesh();
     }
-
-
     private void OnDisable()
     {
         TimeKeeper.Instance.UnpauseTime();

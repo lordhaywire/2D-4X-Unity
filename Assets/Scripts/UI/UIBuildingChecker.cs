@@ -21,15 +21,6 @@ public class UIBuildingChecker : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings;
-        for (int i = 0; i < possibleBuildings.Count; i++)
-        {
-            possibleBuildings[i].CurrentWorkersChanged -= CheckEnoughUnemployed;
-        }
-    }
-
     private void CheckEnoughUnemployed()
     {
         // Check for Population.
@@ -57,5 +48,14 @@ public class UIBuildingChecker : MonoBehaviour
         {
             enoughPopulation = true;
         } 
+    }
+
+    private void OnDisable()
+    {
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings;
+        for (int i = 0; i < possibleBuildings.Count; i++)
+        {
+            possibleBuildings[i].CurrentWorkersChanged -= CheckEnoughUnemployed;
+        }
     }
 }

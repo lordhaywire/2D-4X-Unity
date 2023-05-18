@@ -40,7 +40,7 @@ public class UIHeroScrollView : MonoBehaviour
             }
             else
             {
-                Debug.Log("Not a Hero.");
+                //Debug.Log("Not a Hero.");
             }
         }
     }

@@ -7,7 +7,7 @@ public class MusterArmy : MonoBehaviour
     [SerializeField] private GameObject armyListGameObject;
 
     //private int numberOfArmies = 0; // This is the current number of armies spawned by the player.
-    public void CreateArmyButton()
+    public void MusterArmyButton()
     {
         // This is so we can only create the army in our own counties.
         if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.factionNameAndColor.name

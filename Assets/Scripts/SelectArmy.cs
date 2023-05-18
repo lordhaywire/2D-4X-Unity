@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 
 public class SelectArmy : MonoBehaviour, IPointerClickHandler
 {
+    // This public static string seems like a disaster in the works.  I think we should move this to WorldMapLoad.
     public static string currentlySelectedArmyName;
     public void OnPointerClick(PointerEventData eventData)
     {

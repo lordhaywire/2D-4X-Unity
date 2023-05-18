@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -28,9 +26,25 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             // We probably can delete this, but should do some more testing.
         }
 
+        // Right Click
         if (eventData.button == PointerEventData.InputButton.Right)
         {
+            WorldMapLoad.Instance.selectedHerosDestination = name;
             ArmyRightClickCounty();
+            HeroRightClickCounty();
+        }
+    }
+
+    private void HeroRightClickCounty()
+    {
+        
+        if(WorldMapLoad.Instance.currentlySelectedHero != null)
+        {
+            WorldMapLoad.Instance.currentlySelectedHero.GetComponent<HeroMovement>().StartHeroMovement();
+        }
+        else
+        {
+            Debug.Log("Currently Selected Hero is null.");
         }
     }
 

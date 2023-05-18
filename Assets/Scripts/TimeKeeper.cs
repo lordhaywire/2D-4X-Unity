@@ -35,7 +35,7 @@ public class TimeKeeper : MonoBehaviour
             if (hours == 0)
             {
                 DayStart?.Invoke();
-                Debug.Log("Hour is ZERO!!!");
+                //Debug.Log("Hour is ZERO!!!");
             }
 
             if (hours == 17)

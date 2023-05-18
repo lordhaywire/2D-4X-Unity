@@ -10,6 +10,8 @@ public class WorldMapLoad : MonoBehaviour
     public static WorldMapLoad Instance;
     public string currentlySelectedCounty;
     public int currentlySelectedPopulation;
+    public GameObject currentlySelectedHero;
+    public string selectedHerosDestination;
 
     [SerializeField] private int totalCapitolPop;
     [SerializeField] private int minimumCountyPop;
@@ -286,25 +288,25 @@ public class WorldMapLoad : MonoBehaviour
         // Counties added to counties Dictionary.
         // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin, River
         counties[CountyListCreator.Instance.countiesList[0].name] = new County(
-            0, true, null, null, factions[1],
+            0, true, null, null, null, factions[1],
             Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0);
         counties[CountyListCreator.Instance.countiesList[1].name] = new County(
-            1, true, null, null,  factions[0],
+            1, true, null, null, null,  factions[0],
             Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 1);
         counties[CountyListCreator.Instance.countiesList[2].name] = new County(
-            2, false, null, null,  factions[0], // Temporarily set to the player faction for testing.
+            2, false, null, null,null,  factions[0], // Temporarily set to the player faction for testing.
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
         counties[CountyListCreator.Instance.countiesList[3].name] = new County(
-            3, false, null, null, factions[2],
+            3, false, null, null, null, factions[2],
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
         counties[CountyListCreator.Instance.countiesList[4].name] = new County(
-            4, false, null, null, factions[3],
+            4, false, null, null, null, factions[3],
             Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0, 0);
         counties[CountyListCreator.Instance.countiesList[5].name] = new County(
-            5, false, null, null, factions[4],
+            5, false, null, null, null, factions[4],
             Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0, 0);
         counties[CountyListCreator.Instance.countiesList[6].name] = new County(
-            6, false, null, null, factions[5],
+            6, false, null, null, null, factions[5],
             Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0, 0);
         /*
         // Create and add currentBuildings list to each county so each county knows what it has built.
@@ -332,6 +334,7 @@ public class WorldMapLoad : MonoBehaviour
             // Why did we do that here?
             counties[countyName].countyCenterGameObject =
                 countyListGameObject.transform.GetChild(countyIndex).GetChild(0).gameObject;
+            counties[countyName].heroSpawnGameObject = countyListGameObject.transform.GetChild(countyIndex).GetChild(1).gameObject;
 
             if (counties[countyName].isCapital == true)
             {

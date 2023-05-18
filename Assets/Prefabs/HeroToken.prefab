@@ -194,6 +194,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -287,11 +288,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5666813678520692906}
   - component: {fileID: 5666813678520692907}
-  - component: {fileID: 5666813678520692900}
   - component: {fileID: 5666813678520692901}
-  - component: {fileID: 7732680177897842710}
+  - component: {fileID: 1939168428307916755}
+  - component: {fileID: 5062811573372759088}
   m_Layer: 0
-  m_Name: Army
+  m_Name: HeroToken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,7 +312,7 @@ Transform:
   m_Children:
   - {fileID: 1101061001}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5666813678520692907
 SpriteRenderer:
@@ -365,18 +366,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5666813678520692900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5666813678520692905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2cd526edfe26524f914a4596f6cde03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &5666813678520692901
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -412,7 +401,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &7732680177897842710
+--- !u!114 &1939168428307916755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -421,7 +410,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5666813678520692905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43be38303752e0c4189f75bcf7bde3fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 24f5a8c0c62e54549a3f008578e0583f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5062811573372759088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5666813678520692905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 516556c52ffaf8947bb8dc4022c89ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isTimeToDestinationSet: 0

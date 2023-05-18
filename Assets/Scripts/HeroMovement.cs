@@ -1,8 +1,12 @@
 using System;
 using UnityEngine;
 
-public class ArmyMovement : MonoBehaviour
+public class HeroMovement : MonoBehaviour
 {
+    public static HeroMovement Instance;
+
+    public string tokenLocation;
+
     private float localMinutes;
     private int localHours;
     private int localDays;
@@ -55,17 +59,30 @@ public class ArmyMovement : MonoBehaviour
         }
     }
 
+    public void StartHeroMovement()
+    {
+        var heroToken = WorldMapLoad.Instance.currentlySelectedHero;
+        if (heroToken.GetComponent<HeroMovement>().tokenLocation != WorldMapLoad.Instance.selectedHerosDestination)
+        {
+            HeroTimer();
+        }
+        else
+        {
+            Debug.Log("The hero is already in that County.");
+        }
+    }
     private void FixedUpdate()
     {
-        // There has to be better fucking way to do this so that it is not in FixedUpdate. I don't think there is.
+        // There has to be better fucking way to do this so that it is not in FixedUpdate.  I don't think there is.
         // This checks to make sure the army isn't in the selected county already.
+        /*
         if (WorldMapLoad.Instance.armies[int.Parse(name)].location != WorldMapLoad.Instance.armies[int.Parse(name)].armyDestination)
         {
             if (WorldMapLoad.Instance.armies[int.Parse(name)].startTimer == true)
             {
                 if (TimeKeeper.Instance.foreverTimer > lastCheckTime + 1) // Checking every "minute" (which is the 1 in the if statement).
                 {
-                    ArmyTimer();
+                    HeroTimer();
                     lastCheckTime = TimeKeeper.Instance.foreverTimer;
                 }
             }
@@ -83,9 +100,10 @@ public class ArmyMovement : MonoBehaviour
         {
             Move();
         }
+        */
     }
 
-    private void ArmyTimer()
+    private void HeroTimer()
     {
 
         if (isTimeToDestinationSet == false)

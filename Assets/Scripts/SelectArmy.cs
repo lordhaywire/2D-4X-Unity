@@ -12,16 +12,16 @@ public class SelectArmy : MonoBehaviour, IPointerClickHandler
             WorldMapLoad.Instance.armyInfoPanel.SetActive(true);
             WorldMapLoad.Instance.countyInfoPanel.SetActive(false);
 
-            UIArmyPanel.Instance.armyOwnerText.text = "Owner: " + WorldMapLoad.Instance.armies[int.Parse(name)].owner;
-            UIArmyPanel.Instance.armyNameText.text = "Name: " + WorldMapLoad.Instance.armies[int.Parse(name)].name;
-            UIArmyPanel.Instance.armySizeText.text = "Size: " + WorldMapLoad.Instance.armies[int.Parse(name)].size.ToString();
+            UIArmyPanel.Instance.armyOwnerText.text = "Owner: " + WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].owner;
+            UIArmyPanel.Instance.armyNameText.text = "Name: " + WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].name;
+            UIArmyPanel.Instance.armySizeText.text = "Size: " + WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].size.ToString();
 
             currentlySelectedArmyName = name;
 
-            WorldMapLoad.Instance.armies[int.Parse(name)].IsArmySelected = true;
+            WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].IsSelected = true;
             SelectCounty.hasAnArmyBeenSelected = true; // How does it know which county to make this true on.
 
-            //Debug.Log("Name of Army: " + name);
+            //Debug.Log("Name of SpawnedArmy: " + name);
         }
 
         if (eventData.button == PointerEventData.InputButton.Right)

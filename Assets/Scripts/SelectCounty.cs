@@ -118,15 +118,15 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         Debug.Log("Has an army been selected? " + hasAnArmyBeenSelected);
         if (hasAnArmyBeenSelected == true)
         {
-            var currentlySelectedArmy = WorldMapLoad.Instance.armies[int.Parse(SelectArmy.currentlySelectedArmyName)];
-            Debug.Log("Is army selected? " + currentlySelectedArmy.IsArmySelected);
-            if (currentlySelectedArmy.IsArmySelected == true)
+            var currentlySelectedArmy = WorldMapLoad.Instance.spawnedArmies[int.Parse(SelectArmy.currentlySelectedArmyName)];
+            Debug.Log("Is army selected? " + currentlySelectedArmy.IsSelected);
+            if (currentlySelectedArmy.IsSelected == true)
             {
                 Debug.Log("Is Counting Down? " + currentlySelectedArmy.isCountingDown);
                 if (currentlySelectedArmy.isCountingDown == false)
                 {
-                    currentlySelectedArmy.armyDestination = name;
-                    Debug.Log("Name of right clicked county: " + currentlySelectedArmy.armyDestination);
+                    currentlySelectedArmy.destination = name;
+                    Debug.Log("Name of right clicked county: " + currentlySelectedArmy.destination);
                     currentlySelectedArmy.startTimer = true;
                 }
                 // This resets everything so the army can start counting down to move again.
@@ -135,10 +135,10 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
                     Debug.Log("Movement has been reset.");
                     currentlySelectedArmy.startTimer = false;
                     currentlySelectedArmy.isCountingDown = false;
-                    currentlySelectedArmy.armyDestination = name;
+                    currentlySelectedArmy.destination = name;
                     currentlySelectedArmy.armyMovement.isTimeToDestinationSet = false;
 
-                    currentlySelectedArmy.armyTimerCanvasGameObject.SetActive(false);
+                    currentlySelectedArmy.timerCanvasGameObject.SetActive(false);
                 }
             }
             else
@@ -157,10 +157,10 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
     private void DeselectArmyOnCountyLeftClick()
     {
         // If an army has been selected and we left click on a county it clears the army of being selected.
-        // The if statement is needed if there just in case there are no armies created yet.
+        // The if statement is needed if there just in case there are no spawnedArmies created yet.
         if (hasAnArmyBeenSelected == true)
         {
-            WorldMapLoad.Instance.armies[int.Parse(SelectArmy.currentlySelectedArmyName)].IsArmySelected = false;
+            WorldMapLoad.Instance.spawnedArmies[int.Parse(SelectArmy.currentlySelectedArmyName)].IsSelected = false;
 
             hasAnArmyBeenSelected = false;
         }
@@ -185,7 +185,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             CheckForHeroes(); // Check to see if this county has any heroes in it.
         }
 
-        CheckForArmies(); // Check to see if this county has any armies in it.
+        CheckForArmies(); // Check to see if this county has any spawnedArmies in it.
 
         // This is just some temp bullshit to not allow you to look at counties you don't own.
         if (WorldMapLoad.Instance.playerFaction ==
@@ -203,17 +203,17 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
     private void CheckForArmies()
     {
-        if (WorldMapLoad.Instance.armies.Count != 0)
+        if (WorldMapLoad.Instance.spawnedArmies.Count != 0)
         {
-            for (int i = 0; i < WorldMapLoad.Instance.armies.Count; i++)
+            for (int i = 0; i < WorldMapLoad.Instance.spawnedArmies.Count; i++)
             {
-                if (WorldMapLoad.Instance.armies[i].location == name)
+                if (WorldMapLoad.Instance.spawnedArmies[i].location == name)
                 {
                     UICountyPanel.Instance.armyScrollView.SetActive(true); // This sets the vertical gameobject group that is the list of heroes to active.
                     Debug.Log("Army Button Text: " + UIVerticalArmyList.armyButtonText);
 
                     UIVerticalArmyList.armyButtonText.text =
-                        WorldMapLoad.Instance.armies[0].name + " " + ": " + WorldMapLoad.Instance.armies[0].size;
+                        WorldMapLoad.Instance.spawnedArmies[0].name + " " + ": " + WorldMapLoad.Instance.spawnedArmies[0].size;
                 }
                 else
                 {

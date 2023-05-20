@@ -8,7 +8,7 @@ public class County
     public int countyID; // This isn't used yet, and if it never is then we need to get rid of it.
     public bool isCapital;
     public GameObject countyCenterGameObject;
-    public GameObject heroSpawnGameObject;
+    public GameObject heroSpawnLocation;
     public SpriteRenderer spriteRenderer;
 
     public Faction faction;
@@ -29,7 +29,7 @@ public class County
         this.countyID = countyID;
         this.isCapital = isCapital;
         this.countyCenterGameObject = countyCenterGameObject;
-        this.heroSpawnGameObject = heroSpawnGameObject;
+        this.heroSpawnLocation = heroSpawnGameObject;
         this.spriteRenderer = spriteRenderer;
         //this.selectCounty = selectCounty;
         this.faction = faction;

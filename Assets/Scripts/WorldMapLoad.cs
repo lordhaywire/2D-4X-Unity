@@ -6,7 +6,7 @@ using UnityEngine;
 public class WorldMapLoad : MonoBehaviour
 {
     public event Action RefreshBuildingPanels;
-    
+
     public static WorldMapLoad Instance;
     public string currentlySelectedCounty;
     public int currentlySelectedPopulation;
@@ -49,8 +49,11 @@ public class WorldMapLoad : MonoBehaviour
     // A Dictionary for each county that holds a list of their population.
     public Dictionary<string, List<CountyPopulation>> countyPopulationDictionary = new();
 
-    // Initialize Army List.
-    public List<Army> armies = new();
+    // Initialize army list of spawned spawnedArmies.
+    public List<SpawnedArmy> spawnedArmies = new();
+
+    // Initialize army list of spawned heroes.
+    public List<Hero> heroes = new();
 
     // Initialize Factions list that will be used with the counties.
     public List<FactionNameAndColor> factionNameAndColors = new();
@@ -65,7 +68,7 @@ public class WorldMapLoad : MonoBehaviour
     private void Awake()
     {
         currentlySelectedPopulation = 57; // This is just a test number for when there is more then 1 hero.
-        
+
         Instance = this;
         currentBuildingDescriptionPanelExpanded = false;
         possibleBuildingDescriptionPanelExpanded = false;
@@ -77,6 +80,8 @@ public class WorldMapLoad : MonoBehaviour
     {
         UIBuildingConfirmed.Instance.BuildingConfirmed += BuildCountyImprovement;
 
+        AssignFactionNameAndColorToFaction();
+
         CreateCountiesDictionary();
 
         CreateResearchandBuildingList();
@@ -86,8 +91,6 @@ public class WorldMapLoad : MonoBehaviour
         playerFactionID = 0;
 
         CreatePopulation();
-
-        AssignFactionNameAndColorToFaction();
 
         FirstRunTopInfoBar();
 
@@ -101,7 +104,7 @@ public class WorldMapLoad : MonoBehaviour
     {
         DeductCostOfBuilding(); // Done for Influence costs only.
         MoveBuildingToCurrentBuildingList();
-        SetNextDayJob();   
+        SetNextDayJob();
     }
     private void DeductCostOfBuilding()
     {
@@ -141,7 +144,7 @@ public class WorldMapLoad : MonoBehaviour
         for (int i = 0; i < countyPopulationDictionary[currentlySelectedCounty].Count; i++)
         {
             if (countyPopulationDictionary[currentlySelectedCounty][i].nextActivity == AllText.Jobs.IDLE
-                && numberWorkers < 
+                && numberWorkers <
                 counties[currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].currentWorkers)
             {
                 countyPopulationDictionary[currentlySelectedCounty][i].nextActivity = AllText.Jobs.BUILDING;
@@ -153,7 +156,7 @@ public class WorldMapLoad : MonoBehaviour
                 */
                 numberWorkers++; // Why is this incrementing when it should match the i in the for loop?
                 counties[currentlySelectedCounty].currentlyWorkingPopulation++; // We need to put this number on the county info panel.
-                
+
                 Debug.Log("Currently Working Population: " + counties[currentlySelectedCounty].currentlyWorkingPopulation);
                 /*
                 Debug.Log("First Name: " + countyPopulationDictionary[currentlySelectedCounty][i].firstName);
@@ -166,7 +169,7 @@ public class WorldMapLoad : MonoBehaviour
                  Debug.Log("Set Next Day Job got to Else.");
             }
             */
-            
+
         }
     }
 
@@ -273,6 +276,7 @@ public class WorldMapLoad : MonoBehaviour
         for (int i = 0; i < factions.Count; i++)
         {
             factions[i].factionNameAndColor = factionNameAndColors[i];
+            //Debug.Log("Faction Names: " + factions[i].factionNameAndColor.name);
         }
     }
     private void GetNamesFromFile()
@@ -285,16 +289,17 @@ public class WorldMapLoad : MonoBehaviour
 
     private void CreateCountiesDictionary()
     {
+        // Why aren't these counties.Add or why is counyPopulation below countyPopulation.Add instead of = new.
         // Counties added to counties Dictionary.
         // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin, River
         counties[CountyListCreator.Instance.countiesList[0].name] = new County(
             0, true, null, null, null, factions[1],
             Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0);
         counties[CountyListCreator.Instance.countiesList[1].name] = new County(
-            1, true, null, null, null,  factions[0],
+            1, true, null, null, null, factions[0],
             Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 1);
         counties[CountyListCreator.Instance.countiesList[2].name] = new County(
-            2, false, null, null,null,  factions[0], // Temporarily set to the player faction for testing.
+            2, false, null, null, null, factions[0], // Temporarily set to the player faction for testing.
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
         counties[CountyListCreator.Instance.countiesList[3].name] = new County(
             3, false, null, null, null, factions[2],
@@ -334,7 +339,7 @@ public class WorldMapLoad : MonoBehaviour
             // Why did we do that here?
             counties[countyName].countyCenterGameObject =
                 countyListGameObject.transform.GetChild(countyIndex).GetChild(0).gameObject;
-            counties[countyName].heroSpawnGameObject = countyListGameObject.transform.GetChild(countyIndex).GetChild(1).gameObject;
+            counties[countyName].heroSpawnLocation = countyListGameObject.transform.GetChild(countyIndex).GetChild(1).gameObject;
 
             if (counties[countyName].isCapital == true)
             {
@@ -398,9 +403,18 @@ public class WorldMapLoad : MonoBehaviour
                     countyPopulation[i].isFactionLeader = true;
                     countyPopulation[i].isHero = true;
                     countyPopulation[i].leaderOfPeoplePerk = true;
+                    //Debug.Log("Faction Name: " + counties[countyName].faction.factionNameAndColor.name);
+                    if (counties[countyName].faction.factionNameAndColor.name == playerFaction)
+                    {
+                        //Debug.Log("Heroes List Count : " + heroes.Count);
+                        heroes.Add(new Hero(null, null, playerFaction, 
+                            $"{countyPopulation[i].firstName} {countyPopulation[i].lastName}", i,
+                            i, countyName, false,null, null, null, false, false));
+                        //Debug.Log("Heroes List Count2 : " + heroes.Count);
+                    }
                 }
             }
-            
+
             // Generate random skill level for each population.
             var randomConstructionSkill = UnityEngine.Random.Range(20, 81);
             countyPopulation[i].constructionSkill = randomConstructionSkill;

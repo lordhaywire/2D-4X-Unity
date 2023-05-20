@@ -9,11 +9,25 @@ public class UIHeroSpawnToggle : MonoBehaviour
     public void HeroSpawn()
     {
         heroSpawnToggle.isOn = true;
-        var heroToken = Instantiate(heroPrefab, 
-            WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].heroSpawnGameObject.transform.position, Quaternion.identity);
-        heroToken.gameObject.transform.parent = HeroHierarchyList.Instance.gameObject.transform;
-        heroToken.GetComponent<HeroMovement>().tokenLocation = WorldMapLoad.Instance.currentlySelectedCounty;
 
-        //heroToken.name = 0.ToString();
+        var heroListIndex = gameObject.transform.parent.name;
+        Debug.Log("Hero Index List: " + heroListIndex);
+        var spawnedHeroToken = Instantiate(heroPrefab,
+            WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].heroSpawnLocation.transform.position, 
+            Quaternion.identity);
+        //WorldMapLoad.Instance.heroes[int.Parse(heroListIndex)]
+
+        //
+
+
+
+
+
+        
+        //spawnedHeroToken.gameObject.transform.parent = HeroHierarchyList.Instance.gameObject.transform;
+        //
+        //spawnedHeroToken.GetComponent<HeroMovement>().tokenLocation = WorldMapLoad.Instance.currentlySelectedCounty;
+
+        //spawnedHeroToken.name = 0.ToString();
     }
 }

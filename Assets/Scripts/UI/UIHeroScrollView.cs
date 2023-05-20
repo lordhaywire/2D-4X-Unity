@@ -24,6 +24,26 @@ public class UIHeroScrollView : MonoBehaviour
 
     public void RefreshPanel()
     {
+        var heroes = WorldMapLoad.Instance.heroes;
+        int numberOfHeroes = 0;
+        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.factionNameAndColor.name
+            == WorldMapLoad.Instance.playerFaction)
+        {
+            for (int i = 0; i < WorldMapLoad.Instance.heroes.Count; i++)
+            {
+                if (heroes[i].location == WorldMapLoad.Instance.currentlySelectedCounty)
+                {
+                    heroListClones.Add(Instantiate(prefabHeroButton, parentHeroListGroup.transform));
+                    heroListClones[numberOfHeroes].name = heroes[i].heroIndex.ToString();
+
+                    heroListClones[numberOfHeroes].GetComponent<UIHeroListButton>().leaderButtonText.text =
+                        heroes[i].name.ToString();
+                    numberOfHeroes++;
+                }
+            }
+
+        }
+        /*
         var population = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty];
         Debug.Log("Population Count " + population.Count);
         int numberOfHeroes = 0;
@@ -31,9 +51,10 @@ public class UIHeroScrollView : MonoBehaviour
         {
             if (population[i].isHero == true)
             {
-
                 heroListClones.Add(Instantiate(prefabHeroButton, parentHeroListGroup.transform));
-                heroListClones[numberOfHeroes].name = numberOfHeroes.ToString();
+                Debug.Log("Heroes List Count Minus 1 " + (WorldMapLoad.Instance.heroes.Count - 1).ToString());
+                heroListClones[numberOfHeroes].name = (WorldMapLoad.Instance.heroes.Count - 1).ToString();
+                Debug.Log("Hero Game Object Name: " + heroListClones[numberOfHeroes].name);
                 heroListClones[numberOfHeroes].GetComponent<UIHeroListButton>().leaderButtonText.text =
                 $"{population[i].firstName} {population[i].lastName}";
                 numberOfHeroes++;
@@ -43,6 +64,7 @@ public class UIHeroScrollView : MonoBehaviour
                 //Debug.Log("Not a Hero.");
             }
         }
+        */
     }
 
     public void DestoryPanel()

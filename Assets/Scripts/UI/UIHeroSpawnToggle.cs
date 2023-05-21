@@ -6,7 +6,7 @@ public class UIHeroSpawnToggle : MonoBehaviour
     public GameObject heroPrefab;
     public Toggle heroSpawnToggle;
 
-    public void HeroSpawn()
+    public void SpawnHero()
     {
         heroSpawnToggle.isOn = true;
 
@@ -15,19 +15,23 @@ public class UIHeroSpawnToggle : MonoBehaviour
         var spawnedHeroToken = Instantiate(heroPrefab,
             WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].heroSpawnLocation.transform.position, 
             Quaternion.identity);
-        //WorldMapLoad.Instance.heroes[int.Parse(heroListIndex)]
 
-        //
+        spawnedHeroToken.name = heroListIndex;
+        // Move the game object to the Hero list in the hierarchy.
+        spawnedHeroToken.transform.parent = HeroHierarchyList.Instance.gameObject.transform;
 
+        spawnedHeroToken.GetComponent<SpriteRenderer>().color = Color.yellow;
 
+        WorldMapLoad.Instance.heroes[int.Parse(heroListIndex)].gameObject = spawnedHeroToken;
 
+        WorldMapLoad.Instance.heroes[int.Parse(heroListIndex)].IsSelected = true;
 
+        // Set the hero as already selected.
+        WorldMapLoad.Instance.currentlySelectedHero = spawnedHeroToken;
 
-        
-        //spawnedHeroToken.gameObject.transform.parent = HeroHierarchyList.Instance.gameObject.transform;
-        //
-        //spawnedHeroToken.GetComponent<HeroMovement>().tokenLocation = WorldMapLoad.Instance.currentlySelectedCounty;
+        WorldMapLoad.Instance.heroes[int.Parse(heroListIndex)].heroMovement = spawnedHeroToken.GetComponent<HeroMovement>();
 
-        //spawnedHeroToken.name = 0.ToString();
+        WorldMapLoad.Instance.heroes[int.Parse(heroListIndex)].location 
+            = WorldMapLoad.Instance.currentlySelectedCounty;
     }
 }

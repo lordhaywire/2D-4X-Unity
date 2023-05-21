@@ -43,28 +43,6 @@ public class UIHeroScrollView : MonoBehaviour
             }
 
         }
-        /*
-        var population = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty];
-        Debug.Log("Population Count " + population.Count);
-        int numberOfHeroes = 0;
-        for (int i = 0; i < population.Count; i++)
-        {
-            if (population[i].isHero == true)
-            {
-                heroListClones.Add(Instantiate(prefabHeroButton, parentHeroListGroup.transform));
-                Debug.Log("Heroes List Count Minus 1 " + (WorldMapLoad.Instance.heroes.Count - 1).ToString());
-                heroListClones[numberOfHeroes].name = (WorldMapLoad.Instance.heroes.Count - 1).ToString();
-                Debug.Log("Hero Game Object Name: " + heroListClones[numberOfHeroes].name);
-                heroListClones[numberOfHeroes].GetComponent<UIHeroListButton>().leaderButtonText.text =
-                $"{population[i].firstName} {population[i].lastName}";
-                numberOfHeroes++;
-            }
-            else
-            {
-                //Debug.Log("Not a Hero.");
-            }
-        }
-        */
     }
 
     public void DestoryPanel()

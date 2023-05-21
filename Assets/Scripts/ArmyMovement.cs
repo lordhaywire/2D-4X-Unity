@@ -102,7 +102,8 @@ public class ArmyMovement : MonoBehaviour
         else
         {
             WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].isCountingDown = true;
-            WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].timerCanvasGameObject.SetActive(true);
+            // This is turned off just for testing.
+            //WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].timerCanvasGameObject.SetActive(true);
 
             // We can probably remove current time at some point, but right now for testing lets leave it.
             // Double check if we can replace string.Format with just $.

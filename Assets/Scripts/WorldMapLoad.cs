@@ -11,7 +11,7 @@ public class WorldMapLoad : MonoBehaviour
     public string currentlySelectedCounty;
     public int currentlySelectedPopulation;
     public GameObject currentlySelectedHero;
-    public string selectedHerosDestination;
+    //public string selectedHeroDestination;
 
     [SerializeField] private int totalCapitolPop;
     [SerializeField] private int minimumCountyPop;
@@ -409,7 +409,7 @@ public class WorldMapLoad : MonoBehaviour
                         //Debug.Log("Heroes List Count : " + heroes.Count);
                         heroes.Add(new Hero(null, null, playerFaction, 
                             $"{countyPopulation[i].firstName} {countyPopulation[i].lastName}", i,
-                            i, countyName, false,null, null, null, false, false));
+                            i, countyName, false, null, false, false));
                         //Debug.Log("Heroes List Count2 : " + heroes.Count);
                     }
                 }

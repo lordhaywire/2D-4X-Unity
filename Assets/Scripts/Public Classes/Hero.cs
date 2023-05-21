@@ -4,8 +4,8 @@ using UnityEngine;
 public class Hero
 {
     public GameObject gameObject;
-    public HeroMovement heroMovement;
-
+    public HeroMovement heroMovement; // We might be able to get rid of this because we are assigning the gameobject
+                                      // to currentlySelectedHero;
     public string owner;
     public string name;
     public int heroIndex;
@@ -14,8 +14,6 @@ public class Hero
     public string destination;
     public bool isSelected;
 
-    public GameObject timerCanvasGameObject;
-    public TextMeshProUGUI timerText;
     public bool startTimer;
     public bool isCountingDown;
 
@@ -47,10 +45,9 @@ public class Hero
 
     public Hero(GameObject gameObject, HeroMovement heroMovement, string owner,
         string name, int heroIndex, int countyPopulationIndex, string location, bool IsSelected, string destination, 
-        GameObject timerCanvasGameObject, TextMeshProUGUI timerText, bool startTimer, bool isCountingDown)
+        bool startTimer, bool isCountingDown)
     {
         this.gameObject = gameObject;
-        this.timerCanvasGameObject = timerCanvasGameObject;
         this.heroMovement = heroMovement;
 
         this.owner = owner;
@@ -61,7 +58,6 @@ public class Hero
         this.destination = destination;
         this.IsSelected = IsSelected;
 
-        this.timerText = timerText;
         this.startTimer = startTimer;
         this.isCountingDown = isCountingDown;
     }

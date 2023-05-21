@@ -8,7 +8,7 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.310DEAF1" = "WorldMapLoad"
+	"last_search.310DEAF1" = "Muster Army.c"
 	"OpenInspectorPreview.310DEAF1" = "0"
 	"currentGroup.310DEAF1" = "asset"
 }
@@ -62,7 +62,11 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"W"
+	"Wop"
 	""
+	"WOr"
+	"Mu"
 ]
 searchItemFavorites = [
 ]

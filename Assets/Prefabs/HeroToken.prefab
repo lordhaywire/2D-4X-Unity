@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 1462039741831691105}
   - component: {fileID: 7880476175783187428}
   m_Layer: 5
-  m_Name: Army Timer Canvas
+  m_Name: Hero Timer Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -425,4 +425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 516556c52ffaf8947bb8dc4022c89ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerCanvasGameObject: {fileID: 1101061000}
+  timerText: {fileID: 228796798}
   isTimeToDestinationSet: 0

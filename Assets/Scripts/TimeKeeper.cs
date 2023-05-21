@@ -56,7 +56,7 @@ public class TimeKeeper : MonoBehaviour
             modifiedTimeScale = value;
             Time.timeScale = modifiedTimeScale;
             currentSpeedText.text = "Speed: " + modifiedTimeScale;
-            Debug.Log($"ModifiedScale has changed to {modifiedTimeScale}");
+            //Debug.Log($"ModifiedScale has changed to {modifiedTimeScale}");
             if (modifiedTimeScale == 0)
             {
                 paused.SetActive(true);
@@ -151,7 +151,7 @@ public class TimeKeeper : MonoBehaviour
 
     public void PauseTime()
     {
-        Debug.Log("Pause Time!");
+        //Debug.Log("Pause Time!");
         mapControls.Keyboard.Spacebar.Disable();
         numberOfThingsPaused++;
         if (ModifiedTimeScale != 0)
@@ -163,7 +163,7 @@ public class TimeKeeper : MonoBehaviour
 
     public void UnpauseTime()
     {
-        Debug.Log("Unpause Time!");
+        //Debug.Log("Unpause Time!");
         mapControls.Keyboard.Spacebar.Enable();
 
         numberOfThingsPaused--;

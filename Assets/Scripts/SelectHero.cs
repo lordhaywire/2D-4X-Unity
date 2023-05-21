@@ -7,13 +7,22 @@ public class SelectHero : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            WorldMapLoad.Instance.currentlySelectedHero = gameObject;
-            Debug.Log("Currently Selected Hero: " + WorldMapLoad.Instance.currentlySelectedHero);
+            if (WorldMapLoad.Instance.heroes[int.Parse(name)].heroMovement.move == false)
+            {
+                WorldMapLoad.Instance.currentlySelectedHero = gameObject;
+                Debug.Log("Hero Game Object Name: " + name);
+                WorldMapLoad.Instance.heroes[int.Parse(name)].IsSelected = true;
+                //Debug.Log("Currently Selected Hero: " + WorldMapLoad.Instance.currentlySelectedHero);
+            }
+            else
+            {
+                Debug.Log("Hero is moving.");
+            }
         }
 
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log("You have right clicked on an hero.");
+            Debug.Log("You have right clicked on a hero.");
         }
     }
 }

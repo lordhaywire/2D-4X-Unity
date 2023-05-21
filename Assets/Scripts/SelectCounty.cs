@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -20,6 +21,8 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
             RefreshBuildingsPanels();
 
+            DeselectHeroOnCountyClick();
+
             DeselectArmyOnCountyLeftClick();
 
             //hasAnArmyBeenSelected = false; // Why the fuck is this here, if it is already being checked above?
@@ -29,18 +32,32 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         // Right Click
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            WorldMapLoad.Instance.selectedHerosDestination = name;
-            ArmyRightClickCounty();
-            HeroRightClickCounty();
+            Debug.Log("County Name: " + name);
+            
+            if (WorldMapLoad.Instance.currentlySelectedHero != null)
+            {
+                WorldMapLoad.Instance.heroes[int.Parse(WorldMapLoad.Instance.currentlySelectedHero.name)].destination 
+                    = name;
+                Debug.Log("Right Clicked on a county while a hero is selected.");
+                HeroRightClickCounty();
+            }
+            /*
+             // Army movement isn't going to work because of this.
+            {
+                ArmyRightClickCounty();
+            }
+            */
+
+
         }
     }
 
-    private void HeroRightClickCounty()
+    private void DeselectHeroOnCountyClick()
     {
-        
-        if(WorldMapLoad.Instance.currentlySelectedHero != null)
+        if (WorldMapLoad.Instance.currentlySelectedHero != null)
         {
-            WorldMapLoad.Instance.currentlySelectedHero.GetComponent<HeroMovement>().StartHeroMovement();
+            WorldMapLoad.Instance.heroes[int.Parse(WorldMapLoad.Instance.currentlySelectedHero.name)].IsSelected = false;
+            WorldMapLoad.Instance.currentlySelectedHero = null;
         }
         else
         {
@@ -48,69 +65,18 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void CloseDescriptionPanels()
+    private void HeroRightClickCounty()
     {
-        if (WorldMapLoad.Instance.currentBuildingDescriptionPanelExpanded == true)
-        {
-            UICurrentBuildingDescriptionPanel.Instance.gameObject.SetActive(false);
-            WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded = false;
-        }
-        if (WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded == true)
-        {
-            UIPossibleBuildingDescriptionPanel.Instance.gameObject.SetActive(false);
-            WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded = false;
-        }
-        if(WorldMapLoad.Instance.populationDescriptionPanelOpen == true)
-        {
-            UIPopulationDescriptionPanel.Instance.gameObject.SetActive(false);
-            WorldMapLoad.Instance.populationDescriptionPanelOpen = false;
-        }
-        if(WorldMapLoad.Instance.populationInfoPanelOpen == true)
-        {
-            UIPopulationInfoPanel.Instance.gameObject.SetActive(false);
-            WorldMapLoad.Instance.populationInfoPanelOpen = false;
-        }
-        
-    }
 
-    // Is this supposed to be an event that UIBuildingPanelsRefresher subscribes to and refreshes when it is triggered?
-    private void RefreshBuildingsPanels()
-    {
-        UIBuildingPanelsRefresher.Instance.CurrentBuildingPanelsDestroyer();
-        UIBuildingPanelsRefresher.Instance.CurrentBuildingPanelsRefresher();
-
-        UIBuildingPanelsRefresher.Instance.PossibleBuildingsPanelsDestroyer();
-        UIBuildingPanelsRefresher.Instance.PossibleBuildingPanelsRefresher();
-    }
-
-    private void PanelChanges()
-    {
-        WorldMapLoad.Instance.countyInfoPanel.SetActive(true);
-        WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
-        UICountyPanel.Instance.heroScrollView.SetActive(false); // This was some bullshit.  This makes it so that onEnable
-                                                              // resets the HeroInfoList.
-
-        if (WorldMapLoad.Instance.playerFaction == WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name
-            || WorldMapLoad.Instance.DevView == true)
+        if (WorldMapLoad.Instance.currentlySelectedHero != null)
         {
-            UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(true);
-            if (UICountyPanel.Instance.buildingsPanelExpanded == false)
-            {
-                UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(true);
-            }
+            WorldMapLoad.Instance.currentlySelectedHero.GetComponent<HeroMovement>().StartHeroMovement();
         }
         else
         {
-            if (UICountyPanel.Instance.buildingsPanelExpanded == true)
-            {
-                UIPossibleBuildingsPanel.Instance.gameObject.SetActive(false);
-                UICurrentBuildingsPanel.Instance.gameObject.SetActive(false);
-            }
-
-            UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(false);
-            UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(false);
-            UICountyPanel.Instance.buildingsPanelExpanded = false;
+            Debug.Log("Currently Selected Hero is null.");
         }
+
     }
 
     private void ArmyRightClickCounty()
@@ -153,6 +119,73 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         }
 
     }
+
+    private void CloseDescriptionPanels()
+    {
+        if (WorldMapLoad.Instance.currentBuildingDescriptionPanelExpanded == true)
+        {
+            UICurrentBuildingDescriptionPanel.Instance.gameObject.SetActive(false);
+            WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded = false;
+        }
+        if (WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded == true)
+        {
+            UIPossibleBuildingDescriptionPanel.Instance.gameObject.SetActive(false);
+            WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded = false;
+        }
+        if (WorldMapLoad.Instance.populationDescriptionPanelOpen == true)
+        {
+            UIPopulationDescriptionPanel.Instance.gameObject.SetActive(false);
+            WorldMapLoad.Instance.populationDescriptionPanelOpen = false;
+        }
+        if (WorldMapLoad.Instance.populationInfoPanelOpen == true)
+        {
+            UIPopulationInfoPanel.Instance.gameObject.SetActive(false);
+            WorldMapLoad.Instance.populationInfoPanelOpen = false;
+        }
+
+    }
+
+    // Is this supposed to be an event that UIBuildingPanelsRefresher subscribes to and refreshes when it is triggered?
+    private void RefreshBuildingsPanels()
+    {
+        UIBuildingPanelsRefresher.Instance.CurrentBuildingPanelsDestroyer();
+        UIBuildingPanelsRefresher.Instance.CurrentBuildingPanelsRefresher();
+
+        UIBuildingPanelsRefresher.Instance.PossibleBuildingsPanelsDestroyer();
+        UIBuildingPanelsRefresher.Instance.PossibleBuildingPanelsRefresher();
+    }
+
+    private void PanelChanges()
+    {
+        WorldMapLoad.Instance.countyInfoPanel.SetActive(true);
+        WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
+        UICountyPanel.Instance.heroScrollView.SetActive(false); // This was some bullshit.  This makes it so that onEnable
+                                                                // resets the HeroInfoList.
+
+        if (WorldMapLoad.Instance.playerFaction == WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name
+            || WorldMapLoad.Instance.DevView == true)
+        {
+            UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(true);
+            if (UICountyPanel.Instance.buildingsPanelExpanded == false)
+            {
+                UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            if (UICountyPanel.Instance.buildingsPanelExpanded == true)
+            {
+                UIPossibleBuildingsPanel.Instance.gameObject.SetActive(false);
+                UICurrentBuildingsPanel.Instance.gameObject.SetActive(false);
+            }
+
+            UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(false);
+            UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(false);
+            UICountyPanel.Instance.buildingsPanelExpanded = false;
+        }
+    }
+
+
 
     private void DeselectArmyOnCountyLeftClick()
     {
@@ -239,7 +272,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             }
         }
 
-        if(numberOfHeros > 0 )
+        if (numberOfHeros > 0)
         {
             UICountyPanel.Instance.heroScrollView.SetActive(true);
         }

@@ -529,7 +529,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8405641824231697391}
         m_TargetAssemblyTypeName: UIHeroSpawnToggle, Assembly-CSharp
-        m_MethodName: HeroSpawn
+        m_MethodName: SpawnHero
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -552,6 +552,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2834c04220542349a9bae3609e94190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroListGameObject: {fileID: 0}
   heroPrefab: {fileID: 5666813678520692905, guid: 01902f293a8e3814291e6350f2fdb408, type: 3}
   heroSpawnToggle: {fileID: 6660077323132066875}

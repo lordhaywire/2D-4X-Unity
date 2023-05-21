@@ -21,7 +21,8 @@ public class UIHeroListButton : MonoBehaviour
     {
         Debug.Log("Game Object Name: " + gameObject.name);
         WorldMapLoad.Instance.populationDescriptionPanel.SetActive(true);
-        WorldMapLoad.Instance.currentlySelectedPopulation = int.Parse(gameObject.name);
+        WorldMapLoad.Instance.currentlySelectedPopulation = 
+            WorldMapLoad.Instance.heroes[int.Parse(gameObject.name)].countyPopulationIndex;
         WorldMapLoad.Instance.populationDescriptionPanelOpen = true;
         WorldMapLoad.Instance.populationInfoPanelOpenedByHeroListClick = true;
     }

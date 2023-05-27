@@ -10,6 +10,11 @@ public class SelectHero : MonoBehaviour, IPointerClickHandler
             if (WorldMapLoad.Instance.heroes[int.Parse(name)].heroMovement.move == false)
             {
                 WorldMapLoad.Instance.currentlySelectedHero = gameObject;
+
+                WorldMapLoad.Instance.heroInfoPanel.SetActive(true);
+                WorldMapLoad.Instance.countyInfoPanel.SetActive(false);
+                WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
+
                 Debug.Log("Hero Game Object Name: " + name);
                 WorldMapLoad.Instance.heroes[int.Parse(name)].IsSelected = true;
                 //Debug.Log("Currently Selected Hero: " + WorldMapLoad.Instance.currentlySelectedHero);

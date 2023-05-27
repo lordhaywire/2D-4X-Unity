@@ -50,6 +50,7 @@ public class UIPopulationDescriptionPanel : MonoBehaviour
         }
     }
 
+    // I hate this.
     IEnumerator AfterWaitForOneFrame()
     {
         yield return null;

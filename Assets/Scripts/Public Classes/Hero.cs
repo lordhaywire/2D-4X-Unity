@@ -6,6 +6,7 @@ public class Hero
     public GameObject gameObject;
     public HeroMovement heroMovement; // We might be able to get rid of this because we are assigning the gameobject
                                       // to currentlySelectedHero;
+    public bool isSpawned;
     public string owner;
     public string name;
     public int heroIndex;
@@ -30,11 +31,11 @@ public class Hero
 
             if (isSelected == false && gameObject != null)
             {
-                gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+                gameObject.GetComponent<SpriteRenderer>().sprite = HeroTokenSprites.Instance.heroUnselectedSprite;
             }
             else if (isSelected == true && gameObject != null)
             {
-                gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                gameObject.GetComponent<SpriteRenderer>().sprite = HeroTokenSprites.Instance.heroSelectedSprite;
             }
             else
             {
@@ -43,13 +44,14 @@ public class Hero
         }
     }
 
-    public Hero(GameObject gameObject, HeroMovement heroMovement, string owner,
+    public Hero(GameObject gameObject, HeroMovement heroMovement, bool isSpawned, string owner,
         string name, int heroIndex, int countyPopulationIndex, string location, bool IsSelected, string destination, 
         bool startTimer, bool isCountingDown)
     {
         this.gameObject = gameObject;
         this.heroMovement = heroMovement;
 
+        this.isSpawned = isSpawned;
         this.owner = owner;
         this.name = name;
         this.heroIndex = heroIndex;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UIVerticalArmyList : MonoBehaviour
 { 
-    public static TextMeshProUGUI armyButtonText; // This will be changed to an array when we are instantiating the buttons.
+    public static TextMeshProUGUI armyButtonText;
 
     private void Awake()
     {

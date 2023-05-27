@@ -364,6 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leaderButtonText: {fileID: 8040321988788666992}
+  heroSpawnedToggle: {fileID: 6660077323132066875}
 --- !u!1 &7059157602487075322
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,4 +554,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroPrefab: {fileID: 5666813678520692905, guid: 01902f293a8e3814291e6350f2fdb408, type: 3}
-  heroSpawnToggle: {fileID: 6660077323132066875}

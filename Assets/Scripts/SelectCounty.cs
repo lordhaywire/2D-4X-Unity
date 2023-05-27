@@ -33,16 +33,13 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             Debug.Log("County Name: " + name);
-            
-            if (WorldMapLoad.Instance.currentlySelectedHero != null)
-            {
-                WorldMapLoad.Instance.heroes[int.Parse(WorldMapLoad.Instance.currentlySelectedHero.name)].destination 
-                    = name;
-                Debug.Log("Right Clicked on a county while a hero is selected.");
-                HeroRightClickCounty();
-            }
+            WorldMapLoad.Instance.currentlyRightClickedCounty = name;
+
+            HeroRightClickCounty();
+
             /*
-             // Army movement isn't going to work because of this.
+            // Army movement isn't going to work because of this.  This is disabled until we get to fixing Army
+            // Movement.
             {
                 ArmyRightClickCounty();
             }
@@ -51,32 +48,19 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
         }
     }
-
-    private void DeselectHeroOnCountyClick()
-    {
-        if (WorldMapLoad.Instance.currentlySelectedHero != null)
-        {
-            WorldMapLoad.Instance.heroes[int.Parse(WorldMapLoad.Instance.currentlySelectedHero.name)].IsSelected = false;
-            WorldMapLoad.Instance.currentlySelectedHero = null;
-        }
-        else
-        {
-            Debug.Log("Currently Selected Hero is null.");
-        }
-    }
-
     private void HeroRightClickCounty()
     {
-
-        if (WorldMapLoad.Instance.currentlySelectedHero != null)
+        var currentHero = WorldMapLoad.Instance.currentlySelectedHero;
+        
+        if (currentHero != null)
         {
-            WorldMapLoad.Instance.currentlySelectedHero.GetComponent<HeroMovement>().StartHeroMovement();
+            Debug.Log("Right Clicked on a county while a hero is selected.");
+            WorldMapLoad.Instance.heroes[int.Parse(currentHero.name)].heroMovement.StartHeroMovement();
         }
         else
         {
             Debug.Log("Currently Selected Hero is null.");
         }
-
     }
 
     private void ArmyRightClickCounty()
@@ -120,6 +104,18 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
     }
 
+    private void DeselectHeroOnCountyClick()
+    {
+        if (WorldMapLoad.Instance.currentlySelectedHero != null)
+        {
+            WorldMapLoad.Instance.heroes[int.Parse(WorldMapLoad.Instance.currentlySelectedHero.name)].IsSelected = false;
+            WorldMapLoad.Instance.currentlySelectedHero = null;
+        }
+        else
+        {
+            //Debug.Log("Currently Selected Hero is null.");
+        }
+    }
     private void CloseDescriptionPanels()
     {
         if (WorldMapLoad.Instance.currentBuildingDescriptionPanelExpanded == true)
@@ -158,7 +154,9 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
     private void PanelChanges()
     {
         WorldMapLoad.Instance.countyInfoPanel.SetActive(true);
+        WorldMapLoad.Instance.heroInfoPanel.SetActive(false);
         WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
+
         UICountyPanel.Instance.heroScrollView.SetActive(false); // This was some bullshit.  This makes it so that onEnable
                                                                 // resets the HeroInfoList.
 

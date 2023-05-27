@@ -94,8 +94,8 @@ public class ArmyMovement : MonoBehaviour
             LocalHours = TimeKeeper.Instance.Hours + hoursTillArrival;
             LocalMinutes = TimeKeeper.Instance.minutes + minutesTillArrival;  //Cast from Float to Int.
             localDays = TimeKeeper.Instance.days + daysTillArrival;
-            //Debug.Log("2st Local Hours: " + LocalHours);
-            //Debug.Log("2st Local Minutes: " + LocalMinutes);
+            Debug.Log("2st Local Hours: " + LocalHours);
+            Debug.Log("2st Local Minutes: " + LocalMinutes);
 
             isTimeToDestinationSet = true;
         }

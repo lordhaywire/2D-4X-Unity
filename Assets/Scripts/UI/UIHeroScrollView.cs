@@ -17,13 +17,12 @@ public class UIHeroScrollView : MonoBehaviour
 
     private void OnEnable()
     {
-        // I hate this bullshit.
-        DestoryPanel();
         RefreshPanel();
     }
 
     public void RefreshPanel()
     {
+        DestoryPanel();
         var heroes = WorldMapLoad.Instance.heroes;
         int numberOfHeroes = 0;
         if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.factionNameAndColor.name

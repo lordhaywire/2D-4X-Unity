@@ -16,7 +16,7 @@ public class HeroMovement : MonoBehaviour
 
     // Eventually this will be update depending on the distance to destination.
     private readonly int minutesTillArrival = 10; // This is a temp aount of Hours for testing.
-    private readonly int hoursTillArrival = 2; // This is a temp amount of Hours.  
+    private readonly int hoursTillArrival = 4; // This is a temp amount of Hours.  
     private readonly int daysTillArrival = 0; // This is a temp amount of days.  
 
     //private float lastCheckTime = 0;
@@ -63,16 +63,46 @@ public class HeroMovement : MonoBehaviour
 
     public void StartHeroMovement()
     {
-        //var heroToken = WorldMapLoad.Instance.currentlySelectedHero;
-        if (WorldMapLoad.Instance.heroes[int.Parse(name)].location
-            != WorldMapLoad.Instance.heroes[int.Parse(name)].destination)
+        //Debug.Log("Destination : " + WorldMapLoad.Instance.heroes[int.Parse(name)].destination);
+        var hero = WorldMapLoad.Instance.heroes[int.Parse(name)];
+        if(hero.heroMovement.isTimeToDestinationSet == false)
         {
-            Debug.Log("Starting Hero Movement!");
+            hero.destination = WorldMapLoad.Instance.currentlyRightClickedCounty;
+        }
+        if (hero.location != hero.destination && hero.heroMovement.isTimeToDestinationSet == false)
+        {
+            Debug.Log("Hero Location: " + hero.location + " Hero Destination: " + hero.destination);
+            Debug.Log("Set Initial Time!");
             SetInitialTime();
         }
         else
         {
             Debug.Log("The hero is already in that County.");
+            StopTimer();
+        }
+    }
+
+    private void SetInitialTime()
+    {
+        if (isTimeToDestinationSet == false)
+        {
+            // This needs to be in the order of Days > Hours > Minutes so that the Getter setter works.
+            localDays = TimeKeeper.Instance.days + daysTillArrival;
+            LocalHours = TimeKeeper.Instance.Hours + hoursTillArrival;
+            LocalMinutes = TimeKeeper.Instance.minutes + minutesTillArrival;  //Cast from Float to Int.
+
+            Debug.Log("2st Local Hours: " + LocalHours);
+            Debug.Log("2st Local Minutes: " + LocalMinutes);
+
+            isTimeToDestinationSet = true;
+
+            //WorldMapLoad.Instance.heroes[int.Parse(name)].isCountingDown = true;
+
+            timerCanvasGameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Time to Destionation is not set.");
         }
     }
     private void FixedUpdate()
@@ -85,30 +115,15 @@ public class HeroMovement : MonoBehaviour
         {
             Move();
         }
-    }
-
-    private void SetInitialTime()
-    {
-        if (isTimeToDestinationSet == false)
+        // Cancels the move if the player right clicks on the county the army is already in.
+        if (isTimeToDestinationSet == true && WorldMapLoad.Instance.heroes[int.Parse(name)].location ==
+            WorldMapLoad.Instance.heroes[int.Parse(name)].destination)
         {
-            // This needs to be in the order of Days > Hours > Minutes so that the Getter setter works.
-            LocalHours = TimeKeeper.Instance.Hours + hoursTillArrival;
-            LocalMinutes = TimeKeeper.Instance.minutes + minutesTillArrival;  //Cast from Float to Int.
-            localDays = TimeKeeper.Instance.days + daysTillArrival;
-            Debug.Log("2st Local Hours: " + LocalHours);
-            Debug.Log("2st Local Minutes: " + LocalMinutes);
-
-            isTimeToDestinationSet = true;
-
-            WorldMapLoad.Instance.heroes[int.Parse(name)].isCountingDown = true;
-
-            timerCanvasGameObject.SetActive(true);
-        }
-        else
-        {
-            Debug.Log("Time to Destionation is not set.");
+            StopTimer();
         }
     }
+
+
 
     private void HeroTimer()
     {
@@ -122,7 +137,7 @@ public class HeroMovement : MonoBehaviour
             //Debug.Log("TimeKeeper Minutes: " + TimeKeeper.minutes);
             // This still could be broken.
             if (TimeKeeper.Instance.days == localDays && TimeKeeper.Instance.Hours 
-                == LocalHours && TimeKeeper.Instance.minutes >= LocalMinutes) //  && LocalMinutes <= TimeKeeper.minutes + 1)
+                == LocalHours && TimeKeeper.Instance.minutes >= LocalMinutes)
             {
                 // Why is this here?
                 WorldMapLoad.Instance.heroes[int.Parse(name)].startTimer = false;
@@ -186,7 +201,6 @@ public class HeroMovement : MonoBehaviour
     }
 }
 
-// There has to be better fucking way to do this so that it is not in FixedUpdate.  I don't think there is.
 // This checks to make sure the hero isn't in the selected county already.
 /*
 if (WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].location != WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].destination)
@@ -200,12 +214,7 @@ if (WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].location != WorldMapLoa
         }
     }
 }
-// Cancels the move if the player right clicks on the county the army is already in.
-if (WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].startTimer == true && WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].location ==
-    WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].destination)
-{
-    StopTimer();
-}
+
 
 }
 */

@@ -9,6 +9,7 @@ public class WorldMapLoad : MonoBehaviour
 
     public static WorldMapLoad Instance;
     public string currentlySelectedCounty;
+    public string currentlyRightClickedCounty;
     public int currentlySelectedPopulation;
     public GameObject currentlySelectedHero;
     //public string selectedHeroDestination;
@@ -30,6 +31,7 @@ public class WorldMapLoad : MonoBehaviour
     public bool DevView;
 
     public GameObject countyInfoPanel;
+    public GameObject heroInfoPanel;
     public GameObject armyInfoPanel;
 
     public GameObject populationInfoPanel;
@@ -407,7 +409,7 @@ public class WorldMapLoad : MonoBehaviour
                     if (counties[countyName].faction.factionNameAndColor.name == playerFaction)
                     {
                         //Debug.Log("Heroes List Count : " + heroes.Count);
-                        heroes.Add(new Hero(null, null, playerFaction, 
+                        heroes.Add(new Hero(null, null, false, playerFaction, 
                             $"{countyPopulation[i].firstName} {countyPopulation[i].lastName}", i,
                             i, countyName, false, null, false, false));
                         //Debug.Log("Heroes List Count2 : " + heroes.Count);

@@ -65,20 +65,30 @@ public class HeroMovement : MonoBehaviour
     {
         //Debug.Log("Destination : " + WorldMapLoad.Instance.heroes[int.Parse(name)].destination);
         var hero = WorldMapLoad.Instance.heroes[int.Parse(name)];
-        if(hero.heroMovement.isTimeToDestinationSet == false)
+        /* I guess this is extra.  Leave it here for a bit just in case we do need it after all.
+        if (hero.location == WorldMapLoad.Instance.currentlyRightClickedCounty)
+        {
+            Debug.Log($"The hero is already in {WorldMapLoad.Instance.currentlyRightClickedCounty}.");
+            StopTimer();
+            return;
+        }*/
+        if(hero.heroMovement.isTimeToDestinationSet == true && hero.destination != WorldMapLoad.Instance.currentlyRightClickedCounty)
+        {
+            Debug.Log($"Hero movement was set to {hero.destination} but you clicked on " +
+                $"{WorldMapLoad.Instance.currentlyRightClickedCounty} so it has been canceled.");
+            StopTimer();
+            return;
+        }
+        if (hero.heroMovement.isTimeToDestinationSet == false)
         {
             hero.destination = WorldMapLoad.Instance.currentlyRightClickedCounty;
-        }
-        if (hero.location != hero.destination && hero.heroMovement.isTimeToDestinationSet == false)
-        {
             Debug.Log("Hero Location: " + hero.location + " Hero Destination: " + hero.destination);
             Debug.Log("Set Initial Time!");
             SetInitialTime();
         }
         else
         {
-            Debug.Log("The hero is already in that County.");
-            StopTimer();
+            Debug.Log("Hero is already set to move.");
         }
     }
 
@@ -102,7 +112,7 @@ public class HeroMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("Time to Destionation is not set.");
+            Debug.Log("Time to Destionation is set.");
         }
     }
     private void FixedUpdate()
@@ -119,6 +129,8 @@ public class HeroMovement : MonoBehaviour
         if (isTimeToDestinationSet == true && WorldMapLoad.Instance.heroes[int.Parse(name)].location ==
             WorldMapLoad.Instance.heroes[int.Parse(name)].destination)
         {
+            Debug.Log("Location: " + WorldMapLoad.Instance.heroes[int.Parse(name)].location + " Destination: " +
+                WorldMapLoad.Instance.heroes[int.Parse(name)].destination);
             StopTimer();
         }
     }
@@ -136,7 +148,7 @@ public class HeroMovement : MonoBehaviour
 
             //Debug.Log("TimeKeeper Minutes: " + TimeKeeper.minutes);
             // This still could be broken.
-            if (TimeKeeper.Instance.days == localDays && TimeKeeper.Instance.Hours 
+            if (TimeKeeper.Instance.days == localDays && TimeKeeper.Instance.Hours
                 == LocalHours && TimeKeeper.Instance.minutes >= LocalMinutes)
             {
                 // Why is this here?
@@ -148,7 +160,7 @@ public class HeroMovement : MonoBehaviour
                 WorldMapLoad.Instance.currentlySelectedHero = null;
                 move = true;
 
-                Debug.Log("Time is up!");
+                //Debug.Log("Time is up!");
             }
         }
     }

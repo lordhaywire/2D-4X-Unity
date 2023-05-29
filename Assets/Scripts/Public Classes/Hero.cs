@@ -1,4 +1,4 @@
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Hero
@@ -6,10 +6,13 @@ public class Hero
     public GameObject gameObject;
     public HeroMovement heroMovement; // We might be able to get rid of this because we are assigning the gameobject
                                       // to currentlySelectedHero;
+                                      //public List<HeroStack> heroStacks;
+    public HeroStacking heroStacking;
     public bool isSpawned;
+    public int orderLayer;
     public string owner;
     public string name;
-    public int heroIndex;
+    public int heroIndex; // Maybe move this to the top at some point.
     public int countyPopulationIndex;
     public string location;
     public string destination;
@@ -18,7 +21,22 @@ public class Hero
     public bool startTimer;
     public bool isCountingDown;
 
-    // This property currently just changes the color32 of the army so we know if it selected or not.
+    public int OrderLayer
+    {
+        get
+        {
+            return orderLayer;
+        }
+        set
+        {
+            orderLayer = value;
+            if (gameObject != null)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sortingOrder = orderLayer;
+            }
+
+        }
+    }
     public bool IsSelected
     {
         get
@@ -44,14 +62,18 @@ public class Hero
         }
     }
 
-    public Hero(GameObject gameObject, HeroMovement heroMovement, bool isSpawned, string owner,
-        string name, int heroIndex, int countyPopulationIndex, string location, bool IsSelected, string destination, 
+    public Hero(GameObject gameObject, HeroMovement heroMovement, HeroStacking heroStacking, bool isSpawned, int OrderLayer, string owner,
+        string name, int heroIndex, int countyPopulationIndex, string location, bool IsSelected, string destination,
         bool startTimer, bool isCountingDown)
     {
         this.gameObject = gameObject;
         this.heroMovement = heroMovement;
+        this.heroStacking = heroStacking;
+
+        //heroStacks = new();// This initializes the list. It is not in the constructor. 
 
         this.isSpawned = isSpawned;
+        this.OrderLayer = OrderLayer;
         this.owner = owner;
         this.name = name;
         this.heroIndex = heroIndex;

@@ -20,14 +20,12 @@ public class UIHeroListButton : MonoBehaviour
         // Gives 1 frame of time before the panel refreshes, otherwise it bugs out.
         StartCoroutine(AfterWaitForOneFrame());
 
-
         leaderButtonText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     IEnumerator AfterWaitForOneFrame()
     {
         yield return null;
-
 
         //Debug.Log("Name: " + gameObject.name + " Currently Selected Hero: "
         //    + WorldMapLoad.Instance.currentlySelectedHero);

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class WorldMapLoad : MonoBehaviour
 {
+    // This is just for the current hero stacking test.
+    public int testHeroCount;
+
     public event Action RefreshBuildingPanels;
 
     public static WorldMapLoad Instance;
@@ -56,6 +59,8 @@ public class WorldMapLoad : MonoBehaviour
 
     // Initialize army list of spawned heroes.
     public List<Hero> heroes = new();
+
+    public List<HeroStack> heroStacking = new();
 
     // Initialize Factions list that will be used with the counties.
     public List<FactionNameAndColor> factionNameAndColors = new();
@@ -409,7 +414,7 @@ public class WorldMapLoad : MonoBehaviour
                     if (counties[countyName].faction.factionNameAndColor.name == playerFaction)
                     {
                         //Debug.Log("Heroes List Count : " + heroes.Count);
-                        heroes.Add(new Hero(null, null, false, playerFaction, 
+                        heroes.Add(new Hero(null, null, null, false, 100, playerFaction, 
                             $"{countyPopulation[i].firstName} {countyPopulation[i].lastName}", i,
                             i, countyName, false, null, false, false));
                         //Debug.Log("Heroes List Count2 : " + heroes.Count);

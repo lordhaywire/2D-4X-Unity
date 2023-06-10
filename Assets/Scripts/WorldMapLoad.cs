@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class WorldMapLoad : MonoBehaviour
 {
-    // This is just for the current hero stacking test.
-    public int testHeroCount;
-
     public event Action RefreshBuildingPanels;
 
     public static WorldMapLoad Instance;
@@ -60,7 +57,7 @@ public class WorldMapLoad : MonoBehaviour
     // Initialize army list of spawned heroes.
     public List<Hero> heroes = new();
 
-    public List<HeroStack> heroStacking = new();
+    public Dictionary<string, List<HeroStack>> heroStacking = new();
 
     // Initialize Factions list that will be used with the counties.
     public List<FactionNameAndColor> factionNameAndColors = new();
@@ -297,29 +294,31 @@ public class WorldMapLoad : MonoBehaviour
     private void CreateCountiesDictionary()
     {
         // Why aren't these counties.Add or why is counyPopulation below countyPopulation.Add instead of = new.
+        // I believe this is because the counties dictionary list has only been initialized and it needs the name (string) added as well.
+        // I think this idea might be wrong and it is really because it is a public class, not a list.
         // Counties added to counties Dictionary.
         // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin, River
         counties[CountyListCreator.Instance.countiesList[0].name] = new County(
             0, true, null, null, null, factions[1],
-            Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0);
+            Arrays.provinceName[0], "Coast", "Forest", "Ruin",0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[1].name] = new County(
             1, true, null, null, null, factions[0],
-            Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 1);
+            Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 0, 1);
         counties[CountyListCreator.Instance.countiesList[2].name] = new County(
             2, false, null, null, null, factions[0], // Temporarily set to the player faction for testing.
-            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
+            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[3].name] = new County(
             3, false, null, null, null, factions[2],
-            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0);
+            Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[4].name] = new County(
             4, false, null, null, null, factions[3],
-            Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0, 0);
+            Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[5].name] = new County(
             5, false, null, null, null, factions[4],
-            Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0, 0);
+            Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[6].name] = new County(
             6, false, null, null, null, factions[5],
-            Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0, 0);
+            Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0, 0, 0);
         /*
         // Create and add currentBuildings list to each county so each county knows what it has built.
         for(int i = 0; i < counties.Count; i++)

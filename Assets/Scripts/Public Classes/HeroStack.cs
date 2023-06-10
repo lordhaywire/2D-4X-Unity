@@ -1,6 +1,12 @@
 
+using UnityEngine;
+
 public class HeroStack
 {
-    public int orderLayer;
+    public GameObject gameObject;
 
+    public HeroStack(GameObject gameObject)
+    {
+        this.gameObject = gameObject;
+    }
 }

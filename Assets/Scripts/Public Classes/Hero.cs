@@ -7,7 +7,7 @@ public class Hero
     public HeroMovement heroMovement; // We might be able to get rid of this because we are assigning the gameobject
                                       // to currentlySelectedHero;
                                       //public List<HeroStack> heroStacks;
-    public HeroStacking heroStacking;
+    public HeroStackCount heroStackCount;
     public bool isSpawned;
     public int orderLayer;
     public string owner;
@@ -21,6 +21,7 @@ public class Hero
     public bool startTimer;
     public bool isCountingDown;
 
+    // I don't think we need to store this info.
     public int OrderLayer
     {
         get
@@ -62,13 +63,13 @@ public class Hero
         }
     }
 
-    public Hero(GameObject gameObject, HeroMovement heroMovement, HeroStacking heroStacking, bool isSpawned, int OrderLayer, string owner,
+    public Hero(GameObject gameObject, HeroMovement heroMovement, HeroStackCount heroStacking, bool isSpawned, int OrderLayer, string owner,
         string name, int heroIndex, int countyPopulationIndex, string location, bool IsSelected, string destination,
         bool startTimer, bool isCountingDown)
     {
         this.gameObject = gameObject;
         this.heroMovement = heroMovement;
-        this.heroStacking = heroStacking;
+        this.heroStackCount = heroStacking;
 
         //heroStacks = new();// This initializes the list. It is not in the constructor. 
 

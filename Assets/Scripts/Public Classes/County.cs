@@ -18,13 +18,15 @@ public class County
     public string biomeTertiary;
     public List<PossibleBuilding> possibleBuildings;
     public List<CurrentBuilding> currentBuildings;
+
+    public int spawnedHeroCount; // Count of all the heroes in the county.
     public int currentlyWorkingPopulation; // We should put this number on the county info panel.
     public int population;
 
     public County(int countyID, bool isCapital, GameObject countyCenterGameObject, GameObject heroSpawnGameObject,
         SpriteRenderer spriteRenderer,  Faction faction, 
         string province, string biomePrimary, string biomeSecondary, string biomeTertiary,
-         int currentlyWorkingPopulation, int population)
+        int spawnedHeroCount, int currentlyWorkingPopulation, int population)
     {
         this.countyID = countyID;
         this.isCapital = isCapital;
@@ -39,6 +41,7 @@ public class County
         this.biomeTertiary = biomeTertiary;
         possibleBuildings = new List<PossibleBuilding>(); // This initializes the list. It is not in the constructor. 
         currentBuildings = new List<CurrentBuilding>(); // This initializes the list. It is not in the constructor. 
+        this.spawnedHeroCount = spawnedHeroCount;
         this.currentlyWorkingPopulation = currentlyWorkingPopulation;
         this.population = population;
     }

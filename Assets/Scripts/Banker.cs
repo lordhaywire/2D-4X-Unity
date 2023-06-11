@@ -1,10 +1,8 @@
-using System;
 using UnityEngine;
 
 public class Banker : MonoBehaviour
 {
     public static Banker Instance;
-
 
     public void RemoveCostOfHeroButton()
     {
@@ -17,7 +15,7 @@ public class Banker : MonoBehaviour
             WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].Influence -= WorldMapLoad.Instance.costOfHero;
             WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty][WorldMapLoad.Instance.currentlySelectedPopulation].isHero
                 = true;
-            UIHeroScrollView.Instance.DestoryPanel();
+            UIHeroScrollView.Instance.DestroyPanel();
             UIHeroScrollView.Instance.RefreshPanel();
         }
     }

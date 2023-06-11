@@ -22,7 +22,7 @@ public class UIHeroScrollView : MonoBehaviour
 
     public void RefreshPanel()
     {
-        DestoryPanel();
+        DestroyPanel();
         var heroes = WorldMapLoad.Instance.heroes;
         int numberOfHeroes = 0;
         if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.factionNameAndColor.name
@@ -44,7 +44,7 @@ public class UIHeroScrollView : MonoBehaviour
         }
     }
 
-    public void DestoryPanel()
+    public void DestroyPanel()
     {
         for (int i = 0; i < heroListClones.Count; i++)
         {
@@ -55,6 +55,6 @@ public class UIHeroScrollView : MonoBehaviour
 
     private void OnDisable()
     {
-        DestoryPanel();
+        DestroyPanel();
     }
 }

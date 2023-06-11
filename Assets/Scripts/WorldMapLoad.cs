@@ -8,11 +8,11 @@ public class WorldMapLoad : MonoBehaviour
     public event Action RefreshBuildingPanels;
 
     public static WorldMapLoad Instance;
+
     public string currentlySelectedCounty;
     public string currentlyRightClickedCounty;
     public int currentlySelectedPopulation;
     public GameObject currentlySelectedHero;
-    //public string selectedHeroDestination;
 
     [SerializeField] private int totalCapitolPop;
     [SerializeField] private int minimumCountyPop;

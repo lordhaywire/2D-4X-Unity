@@ -8,11 +8,13 @@ public class HeroMovement : MonoBehaviour
 
     public GameObject timerCanvasGameObject;
     public TextMeshProUGUI timerText;
+    public bool move;
+    public float speed = 10.0f;
 
     private float localMinutes;
     private int localHours;
     private int localDays;
-    public bool move;
+
 
     // Eventually this will be update depending on the distance to destination.
     private readonly int minutesTillArrival = 10; // This is a temp aount of Hours for testing.
@@ -72,7 +74,7 @@ public class HeroMovement : MonoBehaviour
             StopTimer();
             return;
         }*/
-        if(hero.heroMovement.isTimeToDestinationSet == true && hero.destination != WorldMapLoad.Instance.currentlyRightClickedCounty)
+        if (hero.heroMovement.isTimeToDestinationSet == true && hero.destination != WorldMapLoad.Instance.currentlyRightClickedCounty)
         {
             Debug.Log($"Hero movement was set to {hero.destination} but you clicked on " +
                 $"{WorldMapLoad.Instance.currentlyRightClickedCounty} so it has been canceled.");
@@ -135,8 +137,6 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
-
-
     private void HeroTimer()
     {
         {
@@ -157,6 +157,7 @@ public class HeroMovement : MonoBehaviour
                 // This starts the heroMovement for the hero to move.
                 timerCanvasGameObject.SetActive(false);
                 WorldMapLoad.Instance.heroes[int.Parse(name)].IsSelected = false;
+                //HeroStacking.Instance.heroIndexNumber = int.Parse(WorldMapLoad.Instance.currentlySelectedHero.name);
                 WorldMapLoad.Instance.currentlySelectedHero = null;
                 move = true;
 
@@ -174,35 +175,34 @@ public class HeroMovement : MonoBehaviour
     }
     private void Move()
     {
-        var county = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.heroes[int.Parse(name)].destination];
+        float step = speed * Time.fixedDeltaTime;
+        var hero = WorldMapLoad.Instance.heroes[int.Parse(name)];
+        var destinationCounty = WorldMapLoad.Instance.counties[hero.destination];
+        Debug.Log("Hero Token Destination: " + hero.destination);
+        
+        // Move the token.
+        Vector2 targetPosition = destinationCounty.heroSpawnLocation.transform.position;
+        hero.gameObject.transform.position = Vector2.MoveTowards(transform.position, targetPosition, step);
 
-        Vector2 targetPosition = county.heroSpawnLocation.transform.position;
-
-        float closeEnough = .1f;
-        float distance = Vector2.Distance(transform.position, targetPosition);
-        float smoothTime = 0.1f; // This controls how fast the army moves.  Lower is faster.
-        Vector2 velocity = Vector2.zero;
-
-
-        WorldMapLoad.Instance.heroes[int.Parse(name)].gameObject.transform.position
-            = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+        // Turn off hero stack count.
+        hero.gameObject.GetComponent<HeroSortOrders>().heroStackCountRenderer.enabled = false;
 
         // If the hero gets to the center of the county its move is considered done.
         if (WorldMapLoad.Instance.heroes[int.Parse(name)].gameObject.transform.position
-            == county.countyCenterGameObject.transform.position)
+            == destinationCounty.heroSpawnLocation.transform.position)
         {
-            move = false;
-            //Debug.Log("SpawnedArmy is at its destination.  Move is: " + move);
-        }
-        // The army is close enough so we don't have to wait for that minscule amount of armyMovement.
-        if (distance < closeEnough)
-        {
-            WorldMapLoad.Instance.heroes[int.Parse(name)].location = WorldMapLoad.Instance.heroes[int.Parse(name)].destination;
-            //Debug.Log("Is Time to Destination Set: " + isTimeToDestinationSet);
+            Debug.Log("Hero has arrived at its destination.");
+            //RemoveHeroFromList();
+            //HeroStacking.Instance.StackHeroes();
             move = false;
             isTimeToDestinationSet = false;
             WorldMapLoad.Instance.heroes[int.Parse(name)].isCountingDown = false;
+            WorldMapLoad.Instance.heroes[int.Parse(name)].location = WorldMapLoad.Instance.heroes[int.Parse(name)].destination;
+            WorldMapLoad.Instance.heroes[int.Parse(name)].destination = null;
+
+            UIHeroScrollView.Instance.RefreshPanel();
         }
+
         // Cancels the move if the player right clicks on the county the army is already in.
         if (WorldMapLoad.Instance.heroes[int.Parse(name)].startTimer == true
             && WorldMapLoad.Instance.heroes[int.Parse(name)].location ==
@@ -210,6 +210,38 @@ public class HeroMovement : MonoBehaviour
         {
             StopTimer();
         }
+
+        /* Removed SmoothDamp for now.
+        float closeEnough = .1f;
+        float distance = Vector2.Distance(transform.position, targetPosition);
+        float smoothTime = 0.1f; // This controls how fast the army moves.  Lower is faster.
+        Vector2 velocity = Vector2.zero;
+        WorldMapLoad.Instance.heroes[int.Parse(name)].gameObject.transform.position
+            = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+        */
+
+
+        // The army is close enough so we don't have to wait for that minscule amount of armyMovement.
+        // Not needed if SmoothDamp isn't used.
+        /*
+        if (distance < closeEnough)
+        {
+            ChangeHeroList();
+            WorldMapLoad.Instance.heroes[int.Parse(name)].location = WorldMapLoad.Instance.heroes[int.Parse(name)].destination;
+            //Debug.Log("Is Time to Destination Set: " + isTimeToDestinationSet);
+            //move = false;
+            isTimeToDestinationSet = false;
+            WorldMapLoad.Instance.heroes[int.Parse(name)].isCountingDown = false;
+        }
+        */
+    }
+
+    private void RemoveHeroFromList()
+    {
+        var heroStackingStarting = WorldMapLoad.Instance.heroStacking[WorldMapLoad.Instance.heroes[int.Parse(name)].location];
+
+        heroStackingStarting.Remove(heroStackingStarting[int.Parse(name)]);
+        Debug.Log("Hero Starting Count: " + heroStackingStarting.Count);
     }
 }
 

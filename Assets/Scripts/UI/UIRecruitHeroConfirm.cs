@@ -36,7 +36,7 @@ public class UIRecruitHeroConfirm : MonoBehaviour
         }
 
         UICountyPanel.Instance.heroScrollView.SetActive(true);
-        UIHeroScrollView.Instance.DestoryPanel();
+        UIHeroScrollView.Instance.DestroyPanel();
         UIHeroScrollView.Instance.RefreshPanel();
     }
 }

@@ -9,14 +9,14 @@ public class Hero
                                       //public List<HeroStack> heroStacks;
     public HeroStackCount heroStackCount;
     public bool isSpawned;
-    public int orderLayer;
+    private int orderLayer;
     public string owner;
     public string name;
     public int heroIndex; // Maybe move this to the top at some point.
     public int countyPopulationIndex;
     public string location;
     public string destination;
-    public bool isSelected;
+    private bool isSelected;
 
     public bool startTimer;
     public bool isCountingDown;

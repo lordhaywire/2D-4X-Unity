@@ -1,13 +1,14 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[Serializable]
 public class Hero
 {
     public GameObject gameObject;
     public HeroMovement heroMovement; // We might be able to get rid of this because we are assigning the gameobject
                                       // to currentlySelectedHero;
                                       //public List<HeroStack> heroStacks;
-    public HeroStackCount heroStackCount;
+    public HeroStackCountText heroStackCount;
     public bool isSpawned;
     private int orderLayer;
     public string owner;
@@ -16,7 +17,8 @@ public class Hero
     public int countyPopulationIndex;
     public string location;
     public string destination;
-    private bool isSelected;
+    [SerializeField] private bool isSelected;
+    public bool justMoved;
 
     public bool startTimer;
     public bool isCountingDown;
@@ -38,6 +40,7 @@ public class Hero
 
         }
     }
+    
     public bool IsSelected
     {
         get
@@ -63,8 +66,8 @@ public class Hero
         }
     }
 
-    public Hero(GameObject gameObject, HeroMovement heroMovement, HeroStackCount heroStacking, bool isSpawned, int OrderLayer, string owner,
-        string name, int heroIndex, int countyPopulationIndex, string location, bool IsSelected, string destination,
+    public Hero(GameObject gameObject, HeroMovement heroMovement, HeroStackCountText heroStacking, bool isSpawned, int OrderLayer, string owner,
+        string name, int heroIndex, int countyPopulationIndex, string location, bool IsSelected, bool justMoved, string destination,
         bool startTimer, bool isCountingDown)
     {
         this.gameObject = gameObject;
@@ -82,6 +85,7 @@ public class Hero
         this.location = location;
         this.destination = destination;
         this.IsSelected = IsSelected;
+        this.justMoved = justMoved;
 
         this.startTimer = startTimer;
         this.isCountingDown = isCountingDown;

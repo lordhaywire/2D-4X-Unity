@@ -28,7 +28,6 @@ public class Faction
         }
     }
 
-    // Is this better then saying variable = newVariable
     public Faction(FactionNameAndColor factionNameAndColor, CountyPopulation factionLeader, 
         int influence, int money, int food, int scrap)
     {

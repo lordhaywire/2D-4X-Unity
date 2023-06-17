@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class HeroStackCount : MonoBehaviour
+public class HeroStackCountText : MonoBehaviour
 {
     public GameObject heroCountGameObject;
     public TextMeshProUGUI heroCountText;

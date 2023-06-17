@@ -19,7 +19,7 @@ public class MusterArmy : MonoBehaviour
             WorldMapLoad.Instance.spawnedArmies.Add(spawnedArmyToken);
 
             spawnedArmyToken.gameObject = Instantiate(unitPrefab, WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].countyCenterGameObject.transform.position,
-              Quaternion.identity);
+              Quaternion.identity, armyListGameObject.transform);
             //Debug.Log("New SpawnedArmy Game Object: " + spawnedArmyToken.uIResearchItemPanelGameObject);
             // Change name of GameObject in the inspector
             spawnedArmyToken.gameObject.name = armyNumber.ToString();
@@ -28,7 +28,7 @@ public class MusterArmy : MonoBehaviour
             spawnedArmyToken.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
 
             // Move GameObject to army list in Inspector.
-            spawnedArmyToken.gameObject.transform.parent = armyListGameObject.transform;
+            //spawnedArmyToken.gameObject.transform.parent = armyListGameObject.transform;
 
             // This is for the text box above the army's uIResearchItemPanelGameObject in the game.
             spawnedArmyToken.timerCanvasGameObject = spawnedArmyToken.gameObject.transform.GetChild(0).gameObject;

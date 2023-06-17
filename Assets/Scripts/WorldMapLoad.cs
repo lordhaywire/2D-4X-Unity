@@ -415,7 +415,7 @@ public class WorldMapLoad : MonoBehaviour
                         //Debug.Log("Heroes List Count : " + heroes.Count);
                         heroes.Add(new Hero(null, null, null, false, 100, playerFaction, 
                             $"{countyPopulation[i].firstName} {countyPopulation[i].lastName}", i,
-                            i, countyName, false, null, false, false));
+                            i, countyName, false, false, null, false, false));
                         //Debug.Log("Heroes List Count2 : " + heroes.Count);
                     }
                 }

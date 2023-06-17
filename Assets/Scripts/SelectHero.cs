@@ -7,7 +7,7 @@ public class SelectHero : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if (WorldMapLoad.Instance.heroes[int.Parse(name)].heroMovement.move == false)
+            if (WorldMapLoad.Instance.heroes[int.Parse(name)].heroMovement.heroMove == false)
             {
                 if(WorldMapLoad.Instance.heroes[int.Parse(name)].IsSelected == true)
                 {

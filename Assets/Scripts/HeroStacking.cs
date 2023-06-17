@@ -5,6 +5,7 @@ public class HeroStacking : MonoBehaviour
     public static HeroStacking Instance;
 
     public int heroIndexNumber;
+
     private void Awake()
     {
         Instance = this;
@@ -13,20 +14,19 @@ public class HeroStacking : MonoBehaviour
     {
         var heroSpawnStack = WorldMapLoad.Instance.heroStacking[WorldMapLoad.Instance.heroes[heroIndexNumber].location];
 
-        if (heroSpawnStack.Count != WorldMapLoad.Instance.counties[WorldMapLoad.Instance.heroes[heroIndexNumber].location].spawnedHeroCount)
+        if (heroSpawnStack.Count > 1)
         {
-            heroSpawnStack.Add(new HeroStack(WorldMapLoad.Instance.heroes[heroIndexNumber].gameObject));
+            heroSpawnStack.Insert(0, heroSpawnStack[^1]);
+            Debug.Log("Hero Spawn Stack Count: " + heroSpawnStack.Count);
+            heroSpawnStack.RemoveAt(heroSpawnStack.Count - 1);
             Debug.Log("Hero Spawn Stack Count: " + heroSpawnStack.Count);
         }
 
-        heroSpawnStack.Insert(0, heroSpawnStack[^1]);
-        Debug.Log("Hero Spawn Stack Count: " + heroSpawnStack.Count);
-        heroSpawnStack.RemoveAt(heroSpawnStack.Count - 1);
-        Debug.Log("Hero Spawn Stack Count: " + heroSpawnStack.Count);
 
         for (int i = 0; i < heroSpawnStack.Count; i++)
         {
             var hero = WorldMapLoad.Instance.heroes[int.Parse(heroSpawnStack[i].gameObject.name)];
+            var county = WorldMapLoad.Instance.counties[hero.location];
 
             Debug.Log("Hero Spawn Stack Game Object Name: " + heroSpawnStack[i].gameObject.name);
             //Debug.Log("Position: " + i + " " + heroSpawnStack[i].gameObject.transform.position.x);
@@ -44,33 +44,40 @@ public class HeroStacking : MonoBehaviour
                 heroSpawnStack[i].gameObject.GetComponentInChildren<HeroName>().heroNameGameObject.SetActive(true);
                 if(heroSpawnStack.Count > 1)
                 {
-                    heroSpawnStack[i].gameObject.GetComponent<HeroStackCount>().heroCountGameObject.SetActive(true);
+                    heroSpawnStack[i].gameObject.GetComponent<HeroStackCountText>().heroCountGameObject.SetActive(true);
                 }
                 else
                 {
-                    heroSpawnStack[i].gameObject.GetComponent<HeroStackCount>().heroCountGameObject.SetActive(false);
+                    heroSpawnStack[i].gameObject.GetComponent<HeroStackCountText>().heroCountGameObject.SetActive(false);
                 }   
-                //heroSpawnStack[i].gameObject.GetComponent<HeroStackCount>().heroCountGameObject.SetActive(true);
-                heroSpawnStack[i].gameObject.transform.position
-                    = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.heroes[heroIndexNumber].location].heroSpawnLocation.transform.position;
-                hero.IsSelected = true;
+                heroSpawnStack[i].gameObject.transform.position = county.heroSpawnLocation.transform.position;
+
+                if(hero.justMoved != true)
+                {
+                    hero.IsSelected = true;
+                }
+                else
+                {
+                    hero.justMoved = false;
+                }
+                
             }
             else if (i == 1)
             {
                 heroSpawnStack[i].gameObject.GetComponentInChildren<HeroName>().heroNameGameObject.SetActive(false);
-                heroSpawnStack[i].gameObject.GetComponent<HeroStackCount>().heroCountGameObject.SetActive(false);
+                heroSpawnStack[i].gameObject.GetComponent<HeroStackCountText>().heroCountGameObject.SetActive(false);
                 heroSpawnStack[i].gameObject.transform.position 
-                    = new Vector2(WorldMapLoad.Instance.counties[WorldMapLoad.Instance.heroes[heroIndexNumber].location].heroSpawnLocation.transform.position.x + 0.2f
-                    , WorldMapLoad.Instance.counties[WorldMapLoad.Instance.heroes[heroIndexNumber].location].heroSpawnLocation.transform.position.y);
+                    = new Vector2(county.heroSpawnLocation.transform.position.x + 0.2f
+                    , county.heroSpawnLocation.transform.position.y);
                 hero.IsSelected = false;
             }
             else
             {
                 heroSpawnStack[i].gameObject.GetComponentInChildren<HeroName>().heroNameGameObject.SetActive(false);
-                heroSpawnStack[i].gameObject.GetComponent<HeroStackCount>().heroCountGameObject.SetActive(false);
+                heroSpawnStack[i].gameObject.GetComponent<HeroStackCountText>().heroCountGameObject.SetActive(false);
 
                 heroSpawnStack[i].gameObject.transform.position
-                    = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.heroes[heroIndexNumber].location].heroSpawnLocation.transform.position;
+                    = county.heroSpawnLocation.transform.position;
                 hero.IsSelected = false;
             }
         }

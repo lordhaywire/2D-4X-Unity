@@ -22,7 +22,9 @@ public class UIHeroScrollView : MonoBehaviour
 
     public void RefreshPanel()
     {
+        Debug.Log("Hero List Clones: " + heroListClones.Count);
         DestroyPanel();
+        Debug.Log("Refresh Panel");
         var heroes = WorldMapLoad.Instance.heroes;
         int numberOfHeroes = 0;
         if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.factionNameAndColor.name
@@ -46,11 +48,14 @@ public class UIHeroScrollView : MonoBehaviour
 
     public void DestroyPanel()
     {
-        for (int i = 0; i < heroListClones.Count; i++)
+        if (heroListClones.Count > 0)
         {
-            Destroy(heroListClones[i]);
+            for (int i = 0; i < heroListClones.Count; i++)
+            {
+                Destroy(heroListClones[i]);
+            }
+            heroListClones.Clear();
         }
-        heroListClones.Clear();
     }
 
     private void OnDisable()

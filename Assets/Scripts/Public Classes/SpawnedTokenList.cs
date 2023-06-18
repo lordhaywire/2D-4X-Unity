@@ -1,11 +1,11 @@
-using System;
 using UnityEngine;
 
-public class HeroStack
+public class SpawnedTokenList
+
 {
     public GameObject gameObject;
 
-    public HeroStack(GameObject gameObject)
+    public SpawnedTokenList(GameObject gameObject)
     {
         this.gameObject = gameObject;
     }

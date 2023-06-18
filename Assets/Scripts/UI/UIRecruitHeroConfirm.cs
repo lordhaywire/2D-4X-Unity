@@ -24,7 +24,7 @@ public class UIRecruitHeroConfirm : MonoBehaviour
             Debug.Log("Heroes List Count : " + WorldMapLoad.Instance.heroes.Count);
             var heroList = WorldMapLoad.Instance.heroes;
             heroList.Add(new Hero(null, null, null, false, 100, WorldMapLoad.Instance.playerFaction,
-                $"{population.firstName} {population.lastName}", heroList.Count,
+                $"{population.firstName} {population.lastName}", heroList.Count, 0,
                 WorldMapLoad.Instance.currentlySelectedPopulation, WorldMapLoad.Instance.currentlySelectedCounty,
                 false, false, null, false, false));
             Debug.Log("Hero List Index: " + heroList[^1].heroIndex);

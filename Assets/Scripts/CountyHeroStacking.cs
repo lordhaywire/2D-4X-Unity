@@ -6,6 +6,6 @@ public class CountyHeroStacking : MonoBehaviour
     // This generates the list needed for the dictionary list in WorldMapLoad
     private void Start()
     {
-        WorldMapLoad.Instance.heroStacking[name] = new List<HeroStack>();
+        WorldMapLoad.Instance.heroTokens[name] = new List<SpawnedTokenList>();
     }
 }

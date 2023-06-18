@@ -57,7 +57,7 @@ public class WorldMapLoad : MonoBehaviour
     // Initialize army list of spawned heroes.
     public List<Hero> heroes = new();
 
-    public Dictionary<string, List<HeroStack>> heroStacking = new();
+    public Dictionary<string, List<SpawnedTokenList>> heroTokens = new();
 
     // Initialize Factions list that will be used with the counties.
     public List<FactionNameAndColor> factionNameAndColors = new();
@@ -414,7 +414,7 @@ public class WorldMapLoad : MonoBehaviour
                     {
                         //Debug.Log("Heroes List Count : " + heroes.Count);
                         heroes.Add(new Hero(null, null, null, false, 100, playerFaction, 
-                            $"{countyPopulation[i].firstName} {countyPopulation[i].lastName}", i,
+                            $"{countyPopulation[i].firstName} {countyPopulation[i].lastName}", i, i,
                             i, countyName, false, false, null, false, false));
                         //Debug.Log("Heroes List Count2 : " + heroes.Count);
                     }

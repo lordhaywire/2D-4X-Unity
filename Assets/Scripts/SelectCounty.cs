@@ -11,6 +11,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
+            Debug.Log("Select County Left Clicked.");
             WorldMapLoad.Instance.currentlySelectedCounty = name;
 
             CloseDescriptionPanels();
@@ -23,7 +24,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
             DeselectHeroOnCountyClick();
 
-            DeselectArmyOnCountyLeftClick();
+            //DeselectArmyOnCountyLeftClick();
 
             //hasAnArmyBeenSelected = false; // Why the fuck is this here, if it is already being checked above?
             // We probably can delete this, but should do some more testing.
@@ -113,7 +114,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            //Debug.Log("Currently Selected Hero is null.");
+            Debug.Log("Currently Selected Hero is null.");
         }
     }
     private void CloseDescriptionPanels()
@@ -138,7 +139,6 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             UIPopulationInfoPanel.Instance.gameObject.SetActive(false);
             WorldMapLoad.Instance.populationInfoPanelOpen = false;
         }
-
     }
 
     // Is this supposed to be an event that UIBuildingPanelsRefresher subscribes to and refreshes when it is triggered?
@@ -181,9 +181,10 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(false);
             UICountyPanel.Instance.buildingsPanelExpanded = false;
         }
+        Debug.Log("We have gotten to the end of PanelChanges()");
     }
 
-
+    /*
 
     private void DeselectArmyOnCountyLeftClick()
     {
@@ -200,7 +201,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             //Debug.Log("No army has been selected so this is not clearing the selected army variable.");
         }
     }
-
+    */
     private void FillCountyInfoPanel()
     {
         UICountyPanel.Instance.countyOwnerText.text = "Owner: " + WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name;

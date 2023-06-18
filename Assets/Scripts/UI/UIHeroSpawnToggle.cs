@@ -10,62 +10,55 @@ public class UIHeroSpawnToggle : MonoBehaviour
         var heroListIndex = int.Parse(gameObject.transform.parent.name);
         var countyList = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty];
         var hero = WorldMapLoad.Instance.heroes[heroListIndex];
-        var heroSpawnStack = WorldMapLoad.Instance.heroStacking[WorldMapLoad.Instance.currentlySelectedCounty];
+        var heroSpawnStack = WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.currentlySelectedCounty];
 
-        // We don't actually need this if check because you can't click the toggle if it is already spawned.
-        if (hero.isSpawned == true)
-        {
-            Debug.Log("Hero already spawned.");
-            return;
-        }
-        else
-        {
-            Debug.Log("Hero Index List: " + heroListIndex);
 
-            // Maybe have the heroes spawn as a child of the county in the hierarchy?
-            var spawnedHeroToken = Instantiate(heroPrefab,
-                WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].heroSpawnLocation.transform.position,
-                Quaternion.identity, HeroHierarchyList.Instance.gameObject.transform);
+        Debug.Log("Hero Index List: " + heroListIndex);
 
-            // This is set up this way so it gets the toggle on the GameObject.
-            GetComponent<Toggle>().interactable = false;
+        // Maybe have the heroes spawn as a child of the county in the hierarchy?
+        var spawnedHeroToken = Instantiate(heroPrefab,
+            WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].heroSpawnLocation.transform.position,
+            Quaternion.identity, HeroHierarchyList.Instance.gameObject.transform);
 
-            spawnedHeroToken.name = heroListIndex.ToString();
+        // This is set up this way so it gets the toggle on the GameObject.
+        GetComponent<Toggle>().interactable = false;
 
-            // This isn't needed. Move the game object to the Hero list in the hierarchy.
-            //spawnedHeroToken.transform.parent = HeroHierarchyList.Instance.gameObject.transform;
+        spawnedHeroToken.name = heroListIndex.ToString();
 
-            hero.isSpawned = true;
+        // This isn't needed. Move the game object to the Hero list in the hierarchy.
+        //spawnedHeroToken.transform.parent = HeroHierarchyList.Instance.gameObject.transform;
 
-            hero.gameObject = spawnedHeroToken;
+        hero.isSpawned = true;
 
-            hero.gameObject.GetComponent<SpriteRenderer>().sprite
-                = HeroTokenSprites.Instance.heroSelectedSprite;
+        hero.gameObject = spawnedHeroToken;
 
-            hero.IsSelected = true;
+        hero.gameObject.GetComponent<SpriteRenderer>().sprite
+            = HeroTokenSprites.Instance.heroSelectedSprite;
 
-            // Set the hero as already selected.
-            WorldMapLoad.Instance.currentlySelectedHero = spawnedHeroToken;
-            HeroStacking.Instance.heroIndexNumber = heroListIndex;
+        hero.IsSelected = true;
 
-            hero.heroMovement = spawnedHeroToken.GetComponent<HeroMovement>();
+        // Set the hero as already selected.
+        WorldMapLoad.Instance.currentlySelectedHero = spawnedHeroToken;
+        TokenStacking.Instance.heroIndexNumber = heroListIndex;
 
-            // Are we using this?
-            WorldMapLoad.Instance.heroes[heroListIndex].heroStackCount = spawnedHeroToken.GetComponent<HeroStackCountText>();
+        hero.heroMovement = spawnedHeroToken.GetComponent<HeroMovement>();
 
-            hero.location
-                = WorldMapLoad.Instance.currentlySelectedCounty;
+        // Are we using this?
+        WorldMapLoad.Instance.heroes[heroListIndex].tokenComponents = spawnedHeroToken.GetComponent<TokenComponents>();
 
-            WorldMapLoad.Instance.heroInfoPanel.SetActive(true);
-            WorldMapLoad.Instance.countyInfoPanel.SetActive(false);
-            WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
+        hero.location
+            = WorldMapLoad.Instance.currentlySelectedCounty;
 
-            // Add the hero to the hero stack list, and increment the spawned hero count.
-            countyList.spawnedHeroCount++;
-            heroSpawnStack.Add(new HeroStack(hero.gameObject));
-            Debug.Log("Hero Stack Game Object Name: " + heroSpawnStack[0].gameObject.name);
-            HeroStacking.Instance.StackHeroes();
-            //hero.gameObject.GetComponent<HeroSortOrders>().heroRenderer.sortingOrder = 100;
-        }
+        WorldMapLoad.Instance.heroInfoPanel.SetActive(true);
+        WorldMapLoad.Instance.countyInfoPanel.SetActive(false);
+        WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
+
+        // Add the hero to the hero stack list, and increment the spawned hero count.
+        countyList.spawnedHeroCount++;
+        heroSpawnStack.Insert(0, new SpawnedTokenList(hero.gameObject));
+
+        Debug.Log("Hero Stack Game Object Name: " + heroSpawnStack[0].gameObject.name);
+        TokenStacking.Instance.StackTokens(heroSpawnStack, true);
+
     }
 }

@@ -9,7 +9,7 @@ public class HeroMovement : MonoBehaviour
     public GameObject timerCanvasGameObject;
     public TextMeshProUGUI timerText;
     public bool heroMove;
-    public float speed = 10.0f;
+    public float speed = 1.0f; // How fast the tokens move.
 
     private float localMinutes;
     private int localHours;
@@ -149,7 +149,7 @@ public class HeroMovement : MonoBehaviour
                 " {2:00}:{3:00}", LocalHours, LocalMinutes, TimeKeeper.Instance.Hours, (int)Math.Round(TimeKeeper.Instance.minutes));
 
             //Debug.Log("TimeKeeper Minutes: " + TimeKeeper.minutes);
-            // This still could be broken.
+            // This still is be broken.
             if (TimeKeeper.Instance.days == localDays && TimeKeeper.Instance.Hours
                 == LocalHours && TimeKeeper.Instance.minutes >= LocalMinutes)
             {
@@ -166,7 +166,9 @@ public class HeroMovement : MonoBehaviour
                 isTimeToDestinationSet = false;
 
                 ChangeHerosList(); // Do some hero maintenance once.
-                HeroStacking.Instance.StackHeroes();
+
+                //Stacking the heroes starting location tokens.
+                TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location], false);
 
                 // Timer is done so hero should start moving.
                 heroMove = true;
@@ -192,7 +194,7 @@ public class HeroMovement : MonoBehaviour
         //Debug.Log("Hero Token Destination: " + hero.destination);
 
         // Turn off hero stack count because the hero is moving.
-        hero.gameObject.GetComponent<HeroSortOrders>().heroStackCountRenderer.enabled = false;
+        hero.gameObject.GetComponent<TokenComponents>().counterCanvas.enabled = false;
 
         // Move the token.
         Vector2 targetPosition = destinationCounty.heroSpawnLocation.transform.position;
@@ -209,10 +211,11 @@ public class HeroMovement : MonoBehaviour
             // Change the heroes current location and destination.
             WorldMapLoad.Instance.heroes[int.Parse(name)].location = WorldMapLoad.Instance.heroes[int.Parse(name)].destination;
             WorldMapLoad.Instance.heroes[int.Parse(name)].destination = null;
-
-            // Stack the hero tokens starting location.
             WorldMapLoad.Instance.heroes[int.Parse(name)].justMoved = true;
-            HeroStacking.Instance.StackHeroes();
+            
+            // Stack the hero tokens at destination location.
+            Debug.Log("Hero Token Location: " + WorldMapLoad.Instance.heroes[int.Parse(name)].location);
+            TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location], true);
 
             WorldMapLoad.Instance.heroes[int.Parse(name)].isCountingDown = false; // Why do we have this if he have isTimeToDestinationSet?
 
@@ -227,25 +230,24 @@ public class HeroMovement : MonoBehaviour
         {
             StopTimer();
         }
-
-
     }
 
     private void ChangeHerosList()
     {
-        var heroStackingStarting = WorldMapLoad.Instance.heroStacking[WorldMapLoad.Instance.heroes[int.Parse(name)].location];
-        var heroStackingEnding = WorldMapLoad.Instance.heroStacking[WorldMapLoad.Instance.heroes[int.Parse(name)].destination];
+        var heroStackingEnding = WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].destination];
+        var heroStackingStarting = WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location];
+        
 
         Debug.Log("Hero Destination: " + WorldMapLoad.Instance.heroes[int.Parse(name)].destination);
         Debug.Log("Hero Token Name: " + name);
 
-        // Add to destination list.
-        heroStackingEnding.Add(heroStackingStarting[int.Parse(name)]);
-        Debug.Log("Hero Ending Count: " + heroStackingEnding.Count);
+        // Add to destination list from zero index to zero index.
+        heroStackingEnding.Insert(0, heroStackingStarting[0]);
+        Debug.Log("Hero Ending List Count: " + heroStackingEnding.Count);
 
-        // Remove from starting list.
-        heroStackingStarting.Remove(heroStackingStarting[int.Parse(name)]);
-        Debug.Log("Hero Starting Count: " + heroStackingStarting.Count);
+        // Remove from starting list at zero index.
+        heroStackingStarting.RemoveAt(0);
+        Debug.Log("Hero Starting List Count: " + heroStackingStarting.Count);
     }
 }
 

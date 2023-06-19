@@ -13,6 +13,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         {
             Debug.Log("Select County Left Clicked.");
             WorldMapLoad.Instance.currentlySelectedCounty = name;
+            Debug.Log("Currently Selected County: " + WorldMapLoad.Instance.currentlySelectedCounty);
 
             CloseDescriptionPanels();
 
@@ -24,7 +25,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
             DeselectHeroOnCountyClick();
 
-            //DeselectArmyOnCountyLeftClick();
+            DeselectArmyOnCountyLeftClick();
 
             //hasAnArmyBeenSelected = false; // Why the fuck is this here, if it is already being checked above?
             // We probably can delete this, but should do some more testing.
@@ -157,7 +158,8 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         WorldMapLoad.Instance.heroInfoPanel.SetActive(false);
         WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
 
-        UICountyPanel.Instance.heroScrollView.SetActive(false); // This was some bullshit.  This makes it so that onEnable
+        UIHeroScrollView.Instance.RefreshPanel();
+        //UICountyPanel.Instance.heroScrollView.SetActive(false); // This was some bullshit.  This makes it so that onEnable
                                                                 // resets the HeroInfoList.
 
         if (WorldMapLoad.Instance.playerFaction == WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name
@@ -184,7 +186,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         Debug.Log("We have gotten to the end of PanelChanges()");
     }
 
-    /*
+    
 
     private void DeselectArmyOnCountyLeftClick()
     {
@@ -201,7 +203,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             //Debug.Log("No army has been selected so this is not clearing the selected army variable.");
         }
     }
-    */
+    
     private void FillCountyInfoPanel()
     {
         UICountyPanel.Instance.countyOwnerText.text = "Owner: " + WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name;

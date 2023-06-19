@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UIHeroScrollView : MonoBehaviour
@@ -17,28 +19,30 @@ public class UIHeroScrollView : MonoBehaviour
 
     private void OnEnable()
     {
+
         RefreshPanel();
     }
 
     public void RefreshPanel()
     {
-        Debug.Log("Hero List Clones: " + heroListClones.Count);
+        //Debug.Log("Hero List Clones: " + heroListClones.Count);
         DestroyPanel();
-        Debug.Log("Refresh Panel");
-        var heroes = WorldMapLoad.Instance.heroes;
+        //Debug.Log("Refresh Panel");
+        var heroesList = WorldMapLoad.Instance.heroes;
         int numberOfHeroes = 0;
         if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.factionNameAndColor.name
-            == WorldMapLoad.Instance.playerFaction)
+            == WorldMapLoad.Instance.playerFaction || WorldMapLoad.Instance.DevView == true)
         {
+            Debug.Log("Refresh Panel Currently Selected County: " + WorldMapLoad.Instance.currentlySelectedCounty);
             for (int i = 0; i < WorldMapLoad.Instance.heroes.Count; i++)
             {
-                if (heroes[i].location == WorldMapLoad.Instance.currentlySelectedCounty)
+                if (heroesList[i].location == WorldMapLoad.Instance.currentlySelectedCounty)
                 {
                     heroListClones.Add(Instantiate(prefabHeroButton, parentHeroListGroup.transform));
-                    heroListClones[numberOfHeroes].name = heroes[i].heroIndex.ToString();
+                    heroListClones[numberOfHeroes].name = heroesList[i].heroIndex.ToString();
 
                     heroListClones[numberOfHeroes].GetComponent<UIHeroListButton>().leaderButtonText.text =
-                        heroes[i].name.ToString();
+                        heroesList[i].name.ToString();
                     numberOfHeroes++;
                 }
             }
@@ -48,7 +52,10 @@ public class UIHeroScrollView : MonoBehaviour
 
     public void DestroyPanel()
     {
-        if (heroListClones.Count > 0)
+        /*
+        bool isEmpty = !heroListClones.Any();
+        Debug.Log("Is Empty: " + isEmpty);
+        if (isEmpty == false)
         {
             for (int i = 0; i < heroListClones.Count; i++)
             {
@@ -56,6 +63,17 @@ public class UIHeroScrollView : MonoBehaviour
             }
             heroListClones.Clear();
         }
+        */
+
+
+        for (int i = 0; i < heroListClones.Count; i++)
+        {
+            Destroy(heroListClones[i]);
+        }
+        heroListClones.Clear();
+        Debug.Log("Everything destroyed?");
+
+
     }
 
     private void OnDisable()

@@ -52,28 +52,12 @@ public class UIHeroScrollView : MonoBehaviour
 
     public void DestroyPanel()
     {
-        /*
-        bool isEmpty = !heroListClones.Any();
-        Debug.Log("Is Empty: " + isEmpty);
-        if (isEmpty == false)
-        {
-            for (int i = 0; i < heroListClones.Count; i++)
-            {
-                Destroy(heroListClones[i]);
-            }
-            heroListClones.Clear();
-        }
-        */
-
-
         for (int i = 0; i < heroListClones.Count; i++)
         {
             Destroy(heroListClones[i]);
         }
         heroListClones.Clear();
         Debug.Log("Everything destroyed?");
-
-
     }
 
     private void OnDisable()

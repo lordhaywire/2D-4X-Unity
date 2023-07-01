@@ -7,27 +7,26 @@ public class SelectHero : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log("You have left CLICKED!!!!");
+            //Debug.Log("You have left CLICKED!!!!");
             if (WorldMapLoad.Instance.heroes[int.Parse(name)].heroMovement.heroMove == false)
             {
-                if(WorldMapLoad.Instance.heroes[int.Parse(name)].IsSelected == true)
+                if(gameObject == WorldMapLoad.Instance.CurrentlySelectedHero)
                 {
                     var heroSpawnedTokens = WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location];
                     // Move the top token to the bottom.
                     heroSpawnedTokens.Insert(heroSpawnedTokens.Count , heroSpawnedTokens[0]);
                     heroSpawnedTokens.RemoveAt(0);
-                    TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location], true);
+                    TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location]);
                 }
                 else
                 {
-                    WorldMapLoad.Instance.currentlySelectedHero = gameObject;
+                    WorldMapLoad.Instance.CurrentlySelectedHero = gameObject;
 
                     WorldMapLoad.Instance.heroInfoPanel.SetActive(true);
                     WorldMapLoad.Instance.countyInfoPanel.SetActive(false);
                     WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
 
                     Debug.Log("Hero Game Object Name: " + name);
-                    WorldMapLoad.Instance.heroes[int.Parse(name)].IsSelected = true;
                     //Debug.Log("Currently Selected Hero: " + WorldMapLoad.Instance.currentlySelectedHero);
                 }
 

@@ -30,7 +30,7 @@ public class UIBuildingPanelsRefresher : MonoBehaviour
 
     public void PossibleBuildingPanelsRefresher()
     {
-        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings;
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].possibleBuildings;
         for (int i = 0; i < possibleBuildings.Count; i++)
         {
             possibleBuildingClones.Add(Instantiate(possibleBuildingsPrefab, possibleBuildingsParent.transform));
@@ -51,7 +51,7 @@ public class UIBuildingPanelsRefresher : MonoBehaviour
     }
     public void CurrentBuildingPanelsRefresher()
     {
-        var currentBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].currentBuildings;
+        var currentBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].currentBuildings;
         for (int i = 0; i < currentBuildings.Count; i++)
         {
             currentBuildingClones.Add(Instantiate(currentBuildingsPrefab, currentBuildingsParent.transform));

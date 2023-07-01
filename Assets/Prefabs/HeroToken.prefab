@@ -719,7 +719,7 @@ MonoBehaviour:
   timerCanvasGameObject: {fileID: 1101061000}
   timerText: {fileID: 228796798}
   heroMove: 0
-  speed: 10
+  speed: 20
   isTimeToDestinationSet: 0
 --- !u!114 &4572878835178861048
 MonoBehaviour:

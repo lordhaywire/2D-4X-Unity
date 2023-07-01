@@ -13,9 +13,9 @@ public class Banker : MonoBehaviour
         else
         {
             WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].Influence -= WorldMapLoad.Instance.costOfHero;
-            WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty][WorldMapLoad.Instance.currentlySelectedPopulation].isHero
+            WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty][WorldMapLoad.Instance.currentlySelectedPopulation].isHero
                 = true;
-            UIHeroScrollView.Instance.RefreshPanel();
+            UIHeroScrollViewRefresher.Instance.RefreshPanel();
         }
     }
 }

@@ -5,20 +5,66 @@ using UnityEngine;
 
 public class WorldMapLoad : MonoBehaviour
 {
+    public static WorldMapLoad Instance { get; private set; }
+
     public event Action RefreshBuildingPanels;
 
-    public static WorldMapLoad Instance;
-
-    public string currentlySelectedCounty;
     public string currentlyRightClickedCounty;
     public int currentlySelectedPopulation;
-    public GameObject currentlySelectedHero;
+
+
+    [SerializeField] private string currentlySelectedCounty;
+    [SerializeField] private GameObject countyInfoPanelGameObject;
+    public string CurrentlySelectedCounty
+    {
+        get
+        {
+            return currentlySelectedCounty;
+        }
+        set
+        {
+            currentlySelectedCounty = value;
+            if (currentlySelectedCounty != null)
+            {
+                countyInfoPanel.GetComponent<UIHeroScrollViewRefresher>().RefreshPanel();
+            }
+            else
+            {
+                countyInfoPanelGameObject.SetActive(false);
+            }
+        }
+    }
+
+    [SerializeField] private GameObject currentlySelectedHero;
+    public GameObject CurrentlySelectedHero
+    {
+        get
+        {
+            return currentlySelectedHero;
+        }
+        set
+        {
+            if (currentlySelectedHero != null)
+            {
+                currentlySelectedHero.GetComponent<SpriteRenderer>().sprite = HeroTokenSprites.Instance.heroUnselectedSprite;
+            }
+            if (value == null)
+            {
+                currentlySelectedHero.GetComponent<SpriteRenderer>().sprite = HeroTokenSprites.Instance.heroUnselectedSprite;
+            }
+            currentlySelectedHero = value;
+            if (currentlySelectedHero != null)
+            {
+                currentlySelectedHero.GetComponent<SpriteRenderer>().sprite = HeroTokenSprites.Instance.heroSelectedSprite;
+            }
+        }
+    }
 
     [SerializeField] private int totalCapitolPop;
     [SerializeField] private int minimumCountyPop;
     [SerializeField] private int maximumCountyPop;
 
-    [SerializeField] private GameObject countyInfoPanelGameObject;
+
     [SerializeField] private GameObject countyListGameObject;
     [SerializeField] private GameObject uICanvas;
 
@@ -112,18 +158,18 @@ public class WorldMapLoad : MonoBehaviour
     }
     private void DeductCostOfBuilding()
     {
-        factions[playerFactionID].Influence -= counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].influenceCost;
+        factions[playerFactionID].Influence -= counties[CurrentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].influenceCost;
     }
 
     private void MoveBuildingToCurrentBuildingList()
     {
-        var possibleBuilding = counties[currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
+        var possibleBuilding = counties[CurrentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
 
         //Debug.Log("Possible Building Number: " + UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber);
         //Debug.Log("Move Building To Current Building List Current Building Number: " + UICurrentBuildingsPanel.Instance.CurrentBuildingNumber);
 
         // Create the Current Building List and add list to the County so the County knows what it has built.
-        counties[currentlySelectedCounty].currentBuildings.Add(new CurrentBuilding(possibleBuilding.name,
+        counties[CurrentlySelectedCounty].currentBuildings.Add(new CurrentBuilding(possibleBuilding.name,
             possibleBuilding.description, 0, possibleBuilding.workCost, possibleBuilding.CurrentWorkers,
             possibleBuilding.maxEmployees, true, false, null));
 
@@ -132,10 +178,10 @@ public class WorldMapLoad : MonoBehaviour
 
         // This makes is so that the population gets the correct building to build.
         UICurrentBuildingsPanel.Instance.CurrentBuildingNumber =
-            counties[currentlySelectedCounty].currentBuildings.Count - 1;
+            counties[CurrentlySelectedCounty].currentBuildings.Count - 1;
 
         // Remove the building from the possible Building list.
-        counties[currentlySelectedCounty].possibleBuildings.Remove(possibleBuilding);
+        counties[CurrentlySelectedCounty].possibleBuildings.Remove(possibleBuilding);
 
         RefreshBuildingPanels?.Invoke();
     }
@@ -144,24 +190,24 @@ public class WorldMapLoad : MonoBehaviour
     {
         int numberWorkers = 0;
         Debug.Log($"UI Current Buildings Panel Current Building Number: {UICurrentBuildingsPanel.Instance.CurrentBuildingNumber}");
-        Debug.Log($"Current Workers: {counties[currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].currentWorkers}");
-        for (int i = 0; i < countyPopulationDictionary[currentlySelectedCounty].Count; i++)
+        Debug.Log($"Current Workers: {counties[CurrentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].currentWorkers}");
+        for (int i = 0; i < countyPopulationDictionary[CurrentlySelectedCounty].Count; i++)
         {
-            if (countyPopulationDictionary[currentlySelectedCounty][i].nextActivity == AllText.Jobs.IDLE
+            if (countyPopulationDictionary[CurrentlySelectedCounty][i].nextActivity == AllText.Jobs.IDLE
                 && numberWorkers <
-                counties[currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].currentWorkers)
+                counties[CurrentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].currentWorkers)
             {
-                countyPopulationDictionary[currentlySelectedCounty][i].nextActivity = AllText.Jobs.BUILDING;
-                countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding =
-                    counties[currentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber];
+                countyPopulationDictionary[CurrentlySelectedCounty][i].nextActivity = AllText.Jobs.BUILDING;
+                countyPopulationDictionary[CurrentlySelectedCounty][i].nextBuilding =
+                    counties[CurrentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber];
                 /*
                 Debug.Log($"Name: {countyPopulationDictionary[currentlySelectedCounty][i].firstName} and job: " +
                     $"{countyPopulationDictionary[currentlySelectedCounty][i].nextBuilding.name}");
                 */
                 numberWorkers++; // Why is this incrementing when it should match the i in the for loop?
-                counties[currentlySelectedCounty].currentlyWorkingPopulation++; // We need to put this number on the county info panel.
+                counties[CurrentlySelectedCounty].currentlyWorkingPopulation++; // We need to put this number on the county info panel.
 
-                Debug.Log("Currently Working Population: " + counties[currentlySelectedCounty].currentlyWorkingPopulation);
+                Debug.Log("Currently Working Population: " + counties[CurrentlySelectedCounty].currentlyWorkingPopulation);
                 /*
                 Debug.Log("First Name: " + countyPopulationDictionary[currentlySelectedCounty][i].firstName);
                 Debug.Log("Activity: " + countyPopulationDictionary[currentlySelectedCounty][i].nextActivity);
@@ -300,7 +346,7 @@ public class WorldMapLoad : MonoBehaviour
         // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin, River
         counties[CountyListCreator.Instance.countiesList[0].name] = new County(
             0, true, null, null, null, factions[1],
-            Arrays.provinceName[0], "Coast", "Forest", "Ruin",0, 0, 0);
+            Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[1].name] = new County(
             1, true, null, null, null, factions[0],
             Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 0, 1);
@@ -413,9 +459,9 @@ public class WorldMapLoad : MonoBehaviour
                     if (counties[countyName].faction.factionNameAndColor.name == playerFaction)
                     {
                         //Debug.Log("Heroes List Count : " + heroes.Count);
-                        heroes.Add(new Hero(null, null, null, false, 100, playerFaction, 
+                        heroes.Add(new Hero(null, null, null, false, 100, playerFaction,
                             $"{countyPopulation[i].firstName} {countyPopulation[i].lastName}", i, i,
-                            i, countyName, false, false, null, false, false));
+                            i, countyName, false, null, false, false));
                         //Debug.Log("Heroes List Count2 : " + heroes.Count);
                     }
                 }

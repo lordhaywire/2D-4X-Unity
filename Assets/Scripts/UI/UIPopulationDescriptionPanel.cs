@@ -31,7 +31,7 @@ public class UIPopulationDescriptionPanel : MonoBehaviour
     {
         //Debug.Log("Currently Selected Hero in Description Panel: " + WorldMapLoad.Instance.currentlySelectedPopulation);
         var currentPerson =
-        WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty][WorldMapLoad.Instance.currentlySelectedPopulation];
+        WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty][WorldMapLoad.Instance.currentlySelectedPopulation];
         populationNameText.text = $"{currentPerson.firstName} {currentPerson.lastName}";
         constructionSkillText.text = $"Construction: {currentPerson.constructionSkill}";
 

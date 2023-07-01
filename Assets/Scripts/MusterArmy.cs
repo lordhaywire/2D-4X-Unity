@@ -10,7 +10,7 @@ public class MusterArmy : MonoBehaviour
     public void MusterArmyButton()
     {
         // This is so we can only create the army in our own counties.
-        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.factionNameAndColor.name
+        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].faction.factionNameAndColor.name
             == WorldMapLoad.Instance.playerFaction)
         {
             var armyNumber = WorldMapLoad.Instance.spawnedArmies.Count;
@@ -18,7 +18,7 @@ public class MusterArmy : MonoBehaviour
 
             WorldMapLoad.Instance.spawnedArmies.Add(spawnedArmyToken);
 
-            spawnedArmyToken.gameObject = Instantiate(unitPrefab, WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].countyCenterGameObject.transform.position,
+            spawnedArmyToken.gameObject = Instantiate(unitPrefab, WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].countyCenterGameObject.transform.position,
               Quaternion.identity, armyListGameObject.transform);
             //Debug.Log("New SpawnedArmy Game Object: " + spawnedArmyToken.uIResearchItemPanelGameObject);
             // Change name of GameObject in the inspector
@@ -39,11 +39,11 @@ public class MusterArmy : MonoBehaviour
             Debug.Log("Army Movement Script? " + spawnedArmyToken.armyMovement);
             
             // Store the current location name of the army.
-            spawnedArmyToken.location = WorldMapLoad.Instance.currentlySelectedCounty;
+            spawnedArmyToken.location = WorldMapLoad.Instance.CurrentlySelectedCounty;
             Debug.Log("Current Location: " + spawnedArmyToken.location);
 
             // Sets the army Destination to its current location.
-            spawnedArmyToken.destination = WorldMapLoad.Instance.currentlySelectedCounty;
+            spawnedArmyToken.destination = WorldMapLoad.Instance.CurrentlySelectedCounty;
 
             // Change the SpawnedArmy Info Panel to have the new army info from list.
             WorldMapLoad.Instance.armyInfoPanel.SetActive(true);

@@ -20,6 +20,6 @@ public class HeroName : MonoBehaviour
     {
         yield return null;
 
-        heroNameText.text = WorldMapLoad.Instance.heroes[int.Parse(WorldMapLoad.Instance.currentlySelectedHero.name)].name;
+        heroNameText.text = WorldMapLoad.Instance.heroes[int.Parse(WorldMapLoad.Instance.CurrentlySelectedHero.name)].name;
     }
 }

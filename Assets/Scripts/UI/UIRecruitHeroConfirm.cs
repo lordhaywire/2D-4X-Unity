@@ -8,25 +8,25 @@ public class UIRecruitHeroConfirm : MonoBehaviour
     [SerializeField] private TextMeshProUGUI areYouSureHeroText;
     private void OnEnable()
     {
-        var population = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty][WorldMapLoad.Instance.currentlySelectedPopulation];
+        var population = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty][WorldMapLoad.Instance.currentlySelectedPopulation];
 
         areYouSureHeroText.text = $"{AllText.UIText.AREYOUSUREHERO} {population.firstName} {population.lastName}";
     }
 
     public void ConfirmHeroRecruitment()
     {
-        var population = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty][WorldMapLoad.Instance.currentlySelectedPopulation];
+        var population = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty][WorldMapLoad.Instance.currentlySelectedPopulation];
         
         // We should really make this a method that is used here and in WorldMapLoad.
-        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].faction.factionNameAndColor.name
+        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].faction.factionNameAndColor.name
             == WorldMapLoad.Instance.playerFaction)
         {
             Debug.Log("Heroes List Count : " + WorldMapLoad.Instance.heroes.Count);
             var heroList = WorldMapLoad.Instance.heroes;
             heroList.Add(new Hero(null, null, null, false, 100, WorldMapLoad.Instance.playerFaction,
                 $"{population.firstName} {population.lastName}", heroList.Count, 0,
-                WorldMapLoad.Instance.currentlySelectedPopulation, WorldMapLoad.Instance.currentlySelectedCounty,
-                false, false, null, false, false));
+                WorldMapLoad.Instance.currentlySelectedPopulation, WorldMapLoad.Instance.CurrentlySelectedCounty,
+                false, null, false, false));
             Debug.Log("Hero List Index: " + heroList[^1].heroIndex);
             Debug.Log("Heroes List Count2 : " + WorldMapLoad.Instance.heroes.Count);
         }
@@ -36,7 +36,7 @@ public class UIRecruitHeroConfirm : MonoBehaviour
         }
 
         UICountyPanel.Instance.heroScrollView.SetActive(true);
-        UIHeroScrollView.Instance.DestroyPanel();
-        UIHeroScrollView.Instance.RefreshPanel();
+        UIHeroScrollViewRefresher.Instance.DestroyPanel();
+        UIHeroScrollViewRefresher.Instance.RefreshPanel();
     }
 }

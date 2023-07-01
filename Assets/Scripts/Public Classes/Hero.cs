@@ -18,7 +18,6 @@ public class Hero
     public int countyPopulationIndex;
     public string location;
     public string destination;
-    [SerializeField] private bool isSelected;
     public bool justMoved;
 
     public bool startTimer;
@@ -41,34 +40,9 @@ public class Hero
 
         }
     }
-    
-    public bool IsSelected
-    {
-        get
-        {
-            return isSelected;
-        }
-        set
-        {
-            isSelected = value;
-
-            if (isSelected == false && gameObject != null)
-            {
-                gameObject.GetComponent<SpriteRenderer>().sprite = HeroTokenSprites.Instance.heroUnselectedSprite;
-            }
-            else if (isSelected == true && gameObject != null)
-            {
-                gameObject.GetComponent<SpriteRenderer>().sprite = HeroTokenSprites.Instance.heroSelectedSprite;
-            }
-            else
-            {
-                Debug.Log("GameObject is null in the Is Army Selected Property.");
-            }
-        }
-    }
 
     public Hero(GameObject gameObject, HeroMovement heroMovement, TokenComponents tokenComponents, bool isSpawned, int OrderLayer, string owner,
-        string name, int heroIndex, int heroStackIndex, int countyPopulationIndex, string location, bool IsSelected, bool justMoved, string destination,
+        string name, int heroIndex, int heroStackIndex, int countyPopulationIndex, string location, bool justMoved, string destination,
         bool startTimer, bool isCountingDown)
     {
         this.gameObject = gameObject;
@@ -84,7 +58,6 @@ public class Hero
         this.countyPopulationIndex = countyPopulationIndex;
         this.location = location;
         this.destination = destination;
-        this.IsSelected = IsSelected;
         this.justMoved = justMoved;
 
         this.startTimer = startTimer;

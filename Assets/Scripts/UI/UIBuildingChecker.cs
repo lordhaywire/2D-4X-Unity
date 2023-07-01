@@ -14,7 +14,7 @@ public class UIBuildingChecker : MonoBehaviour
     }
     private void OnEnable()
     {
-        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings;
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].possibleBuildings;
         for (int i = 0; i < possibleBuildings.Count; i++)
         {
             possibleBuildings[i].CurrentWorkersChanged += CheckEnoughUnemployed;
@@ -26,12 +26,12 @@ public class UIBuildingChecker : MonoBehaviour
         // Check for Population.
         unemployed = 0;
         enoughPopulation = false;
-        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
 
 
-        for (int i = 0; i < WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty].Count; i++)
+        for (int i = 0; i < WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty].Count; i++)
         {
-            if (WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty][i].nextActivity
+            if (WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty][i].nextActivity
                 == AllText.Jobs.IDLE)
             {
                 unemployed++; // Can we get rid of the incrementing?
@@ -52,7 +52,7 @@ public class UIBuildingChecker : MonoBehaviour
 
     private void OnDisable()
     {
-        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].possibleBuildings;
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].possibleBuildings;
         for (int i = 0; i < possibleBuildings.Count; i++)
         {
             possibleBuildings[i].CurrentWorkersChanged -= CheckEnoughUnemployed;

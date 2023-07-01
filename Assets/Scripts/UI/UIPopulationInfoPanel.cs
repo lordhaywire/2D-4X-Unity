@@ -21,9 +21,9 @@ public class UIPopulationInfoPanel : MonoBehaviour
 
         WorldMapLoad.Instance.populationInfoPanelOpen = true;
 
-        if (WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty] != null)
+        if (WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty] != null)
         {
-            var countyList = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.currentlySelectedCounty];
+            var countyList = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty];
 
             for (int i = 0; i < countyList.Count; i++)
             {

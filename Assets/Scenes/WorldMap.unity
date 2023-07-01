@@ -2261,7 +2261,7 @@ MonoBehaviour:
   populationInfoPanel: {fileID: 2144487633}
   expandBuildingsPanelButton: {fileID: 7085729}
   buildingsPanelExpanded: 0
-  heroScrollView: {fileID: 1293565463}
+  heroScrollView: {fileID: 1462681376}
   armyScrollView: {fileID: 855617236}
   countyOwnerText: {fileID: 1917657219}
   countyNameText: {fileID: 223208136}
@@ -2307,7 +2307,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ee052c56ac97d439c8fadfecbf3097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroListClones: []
   prefabHeroButton: {fileID: 6580587887990886728, guid: 221d2dad0e9415c4bb84e5e02871d4e6, type: 3}
   parentHeroListGroup: {fileID: 574562893}
 --- !u!1001 &169628995
@@ -6741,7 +6740,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8846,7 +8845,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10433,14 +10432,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8c985dc8d71d648931e744aa792209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentlySelectedCounty: 
   currentlyRightClickedCounty: 
   currentlySelectedPopulation: 0
+  currentlySelectedCounty: 
+  countyInfoPanelGameObject: {fileID: 155121155}
   currentlySelectedHero: {fileID: 0}
   totalCapitolPop: 20
   minimumCountyPop: 3
   maximumCountyPop: 8
-  countyInfoPanelGameObject: {fileID: 155121155}
   countyListGameObject: {fileID: 249060077}
   uICanvas: {fileID: 275133780}
   currentBuildingDescriptionPanelExpanded: 0
@@ -17901,7 +17900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1293565464
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20220,7 +20219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1462681377
 RectTransform:
   m_ObjectHideFlags: 0

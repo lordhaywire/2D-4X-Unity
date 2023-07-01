@@ -11,9 +11,9 @@ public class TokenStacking : MonoBehaviour
     {
         Instance = this;
     }
-     
-    public void StackTokens(List<SpawnedTokenList> tokenList, bool isSelected)
-    {   
+
+    public void StackTokens(List<SpawnedTokenList> tokenList)
+    {
         for (int i = 0; i < tokenList.Count; i++)
         {
             var hero = WorldMapLoad.Instance.heroes[int.Parse(tokenList[i].gameObject.name)];
@@ -34,35 +34,27 @@ public class TokenStacking : MonoBehaviour
             if (i == 0)
             {
                 tokenList[i].gameObject.GetComponentInChildren<HeroName>().heroNameGameObject.SetActive(true);
-                if(tokenList.Count == 1)
-                {                   
-                    tokenList[i].gameObject.GetComponent<TokenComponents>().counterGameObject.SetActive(false);                   
-                }
-                else
-                {
-                    tokenList[i].gameObject.GetComponent<TokenComponents>().counterGameObject.SetActive(true);
-                }   
+
                 tokenList[i].gameObject.transform.position = county.heroSpawnLocation.transform.position;
 
-                if(isSelected == true)
-                {
-                    hero.IsSelected = true;
-                    WorldMapLoad.Instance.currentlySelectedHero = tokenList[i].gameObject;
-                }
-                else
-                {
-                    hero.IsSelected = false;
-                }
+                WorldMapLoad.Instance.CurrentlySelectedHero = tokenList[i].gameObject;
             }
             else
             {
                 tokenList[i].gameObject.GetComponentInChildren<HeroName>().heroNameGameObject.SetActive(false);
                 tokenList[i].gameObject.GetComponent<TokenComponents>().counterGameObject.SetActive(false);
-                tokenList[i].gameObject.transform.position 
+                tokenList[i].gameObject.transform.position
                     = new Vector2(county.heroSpawnLocation.transform.position.x + (i * 0.1f)
                     , county.heroSpawnLocation.transform.position.y);
-                hero.IsSelected = false;
             }
+        }
+        if (tokenList.Count >= 1)
+        {
+            tokenList[0].gameObject.GetComponent<TokenComponents>().counterGameObject.SetActive(false);
+        }
+        else
+        {
+            tokenList[0].gameObject.GetComponent<TokenComponents>().counterGameObject.SetActive(true);
         }
     }
 }

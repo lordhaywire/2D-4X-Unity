@@ -9,7 +9,7 @@ public class HeroMovement : MonoBehaviour
     public GameObject timerCanvasGameObject;
     public TextMeshProUGUI timerText;
     public bool heroMove;
-    public float speed = 1.0f; // How fast the tokens move.
+    public float speed; // How fast the tokens move.
 
     private float localMinutes;
     private int localHours;
@@ -158,9 +158,8 @@ public class HeroMovement : MonoBehaviour
 
                 // This starts the heroMovement for the hero to move.
                 timerCanvasGameObject.SetActive(false);
-                WorldMapLoad.Instance.heroes[int.Parse(name)].IsSelected = false;
 
-                WorldMapLoad.Instance.currentlySelectedHero = null;
+                WorldMapLoad.Instance.CurrentlySelectedHero = null;
 
                 // Timer is done, so this is false.
                 isTimeToDestinationSet = false;
@@ -168,7 +167,7 @@ public class HeroMovement : MonoBehaviour
                 ChangeHerosList(); // Do some hero maintenance once.
 
                 //Stacking the heroes starting location tokens.
-                TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location], false);
+                TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location]);
 
                 // Timer is done so hero should start moving.
                 heroMove = true;
@@ -189,7 +188,7 @@ public class HeroMovement : MonoBehaviour
     {
         float step = speed * Time.fixedDeltaTime;
         var hero = WorldMapLoad.Instance.heroes[int.Parse(name)];
-        var destinationCounty = WorldMapLoad.Instance.counties[hero.destination];
+        County destinationCounty = WorldMapLoad.Instance.counties[hero.destination];
 
         //Debug.Log("Hero Token Destination: " + hero.destination);
 
@@ -199,6 +198,9 @@ public class HeroMovement : MonoBehaviour
         // Move the token.
         Vector2 targetPosition = destinationCounty.heroSpawnLocation.transform.position;
         hero.gameObject.transform.position = Vector2.MoveTowards(transform.position, targetPosition, step);
+
+        // Refresh the hero scroll view immediately when the hero starts moving.
+        UIHeroScrollViewRefresher.Instance.RefreshPanel();
 
         // If the hero gets to the hero spawn location its move is considered done.
         if (WorldMapLoad.Instance.heroes[int.Parse(name)].gameObject.transform.position
@@ -215,12 +217,11 @@ public class HeroMovement : MonoBehaviour
             
             // Stack the hero tokens at destination location.
             Debug.Log("Hero Token Location: " + WorldMapLoad.Instance.heroes[int.Parse(name)].location);
-            TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location], true);
+            TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location]);
 
             WorldMapLoad.Instance.heroes[int.Parse(name)].isCountingDown = false; // Why do we have this if he have isTimeToDestinationSet?
 
-            UIHeroScrollView.Instance.RefreshPanel(); // This isn't working how we want it to.  Meaning that the destintion isn't openning
-            // the hero list panel.
+
         }
 
         // Cancels the move if the player right clicks on the county the army is already in.
@@ -250,46 +251,3 @@ public class HeroMovement : MonoBehaviour
         Debug.Log("Hero Starting List Count: " + heroStackingStarting.Count);
     }
 }
-
-
-/* Removed SmoothDamp for now.
-float closeEnough = .1f;
-float distance = Vector2.Distance(transform.position, targetPosition);
-float smoothTime = 0.1f; // This controls how fast the army moves.  Lower is faster.
-Vector2 velocity = Vector2.zero;
-WorldMapLoad.Instance.heroes[int.Parse(name)].gameObject.transform.position
-    = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
-*/
-
-
-// The army is close enough so we don't have to wait for that minscule amount of armyMovement.
-// Not needed if SmoothDamp isn't used.
-/*
-if (distance < closeEnough)
-{
-    ChangeHeroList();
-    WorldMapLoad.Instance.heroes[int.Parse(name)].location = WorldMapLoad.Instance.heroes[int.Parse(name)].destination;
-    //Debug.Log("Is Time to Destination Set: " + isTimeToDestinationSet);
-    //move = false;
-    isTimeToDestinationSet = false;
-    WorldMapLoad.Instance.heroes[int.Parse(name)].isCountingDown = false;
-}
-*/
-
-// This checks to make sure the hero isn't in the selected county already.
-/*
-if (WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].location != WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].destination)
-{
-    if (WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].startTimer == true)
-    {
-        if (TimeKeeper.Instance.foreverTimer > lastCheckTime + 1) // Checking every "minute" (which is the 1 in the if statement).
-        {
-            HeroTimer();
-            lastCheckTime = TimeKeeper.Instance.foreverTimer;
-        }
-    }
-}
-
-
-}
-*/

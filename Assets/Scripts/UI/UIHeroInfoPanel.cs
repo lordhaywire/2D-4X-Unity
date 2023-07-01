@@ -16,8 +16,8 @@ public class UIHeroInfoPanel : MonoBehaviour
     private void OnEnable()
     {
         heroOwnerText.text 
-            = WorldMapLoad.Instance.heroes[int.Parse(WorldMapLoad.Instance.currentlySelectedHero.name)].owner;
+            = WorldMapLoad.Instance.heroes[int.Parse(WorldMapLoad.Instance.CurrentlySelectedHero.name)].owner;
         heroNameText.text 
-            = WorldMapLoad.Instance.heroes[int.Parse(WorldMapLoad.Instance.currentlySelectedHero.name)].name; 
+            = WorldMapLoad.Instance.heroes[int.Parse(WorldMapLoad.Instance.CurrentlySelectedHero.name)].name; 
     }
 }

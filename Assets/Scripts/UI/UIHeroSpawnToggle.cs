@@ -8,11 +8,11 @@ public class UIHeroSpawnToggle : MonoBehaviour
     public void SpawnHero()
     {
         var heroListIndex = int.Parse(gameObject.transform.parent.name);
-        var countyList = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty];
+        var countyList = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty];
         var hero = WorldMapLoad.Instance.heroes[heroListIndex];
-        var heroSpawnStack = WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.currentlySelectedCounty];
+        var heroSpawnStack = WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.CurrentlySelectedCounty];
         
-        // I think I need this shit here.
+        // I think I need this shit here.  With out this every time the hero list is refresh it respawns the heroes.
         if (hero.isSpawned == true)
         {
             Debug.Log("Hero already spawned.");
@@ -25,7 +25,7 @@ public class UIHeroSpawnToggle : MonoBehaviour
 
             // Maybe have the heroes spawn as a child of the county in the hierarchy?
             var spawnedHeroToken = Instantiate(heroPrefab,
-                WorldMapLoad.Instance.counties[WorldMapLoad.Instance.currentlySelectedCounty].heroSpawnLocation.transform.position,
+                WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].heroSpawnLocation.transform.position,
                 Quaternion.identity, HeroHierarchyList.Instance.gameObject.transform);
 
             // This is set up this way so it gets the toggle on the GameObject.
@@ -43,10 +43,10 @@ public class UIHeroSpawnToggle : MonoBehaviour
             hero.gameObject.GetComponent<SpriteRenderer>().sprite
                 = HeroTokenSprites.Instance.heroSelectedSprite;
 
-            hero.IsSelected = true;
+            //hero.IsSelected = true;
 
             // Set the hero as already selected.
-            WorldMapLoad.Instance.currentlySelectedHero = spawnedHeroToken;
+            WorldMapLoad.Instance.CurrentlySelectedHero = spawnedHeroToken;
             TokenStacking.Instance.heroIndexNumber = heroListIndex;
 
             hero.heroMovement = spawnedHeroToken.GetComponent<HeroMovement>();
@@ -55,7 +55,7 @@ public class UIHeroSpawnToggle : MonoBehaviour
             WorldMapLoad.Instance.heroes[heroListIndex].tokenComponents = spawnedHeroToken.GetComponent<TokenComponents>();
 
             hero.location
-                = WorldMapLoad.Instance.currentlySelectedCounty;
+                = WorldMapLoad.Instance.CurrentlySelectedCounty;
 
             WorldMapLoad.Instance.heroInfoPanel.SetActive(true);
             WorldMapLoad.Instance.countyInfoPanel.SetActive(false);
@@ -66,7 +66,9 @@ public class UIHeroSpawnToggle : MonoBehaviour
             heroSpawnStack.Insert(0, new SpawnedTokenList(hero.gameObject));
 
             Debug.Log("Hero Stack Game Object Name: " + heroSpawnStack[0].gameObject.name);
-            TokenStacking.Instance.StackTokens(heroSpawnStack, true);
+            TokenStacking.Instance.StackTokens(heroSpawnStack);
+
+            UIHeroScrollViewRefresher.Instance.RefreshPanel();
         }
     }
 }

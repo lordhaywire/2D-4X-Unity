@@ -4,7 +4,7 @@ public class Banker : MonoBehaviour
 {
     public static Banker Instance;
 
-    public void RemoveCostOfHeroButton()
+    public void RemoveCostOfHero()
     {
         if (WorldMapLoad.Instance.costOfHero > WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].Influence)
         {
@@ -13,9 +13,6 @@ public class Banker : MonoBehaviour
         else
         {
             WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].Influence -= WorldMapLoad.Instance.costOfHero;
-            WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty][WorldMapLoad.Instance.currentlySelectedPopulation].isHero
-                = true;
-            UIHeroScrollViewRefresher.Instance.RefreshPanel();
         }
     }
 }

@@ -10,10 +10,10 @@ public class UIHeroSpawnToggle : MonoBehaviour
         var heroListIndex = int.Parse(gameObject.transform.parent.name);
         var countyList = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty];
         var hero = WorldMapLoad.Instance.heroes[heroListIndex];
-        var heroSpawnStack = WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.CurrentlySelectedCounty];
+        var heroSpawnStack = WorldMapLoad.Instance.countyHeroTokens[WorldMapLoad.Instance.CurrentlySelectedCounty];
         
         // I think I need this shit here.  With out this every time the hero list is refresh it respawns the heroes.
-        if (hero.isSpawned == true)
+        if (hero.gameObject != null)
         {
             Debug.Log("Hero already spawned.");
             return;
@@ -36,8 +36,6 @@ public class UIHeroSpawnToggle : MonoBehaviour
             // This isn't needed. Move the game object to the Hero list in the hierarchy.
             //spawnedHeroToken.transform.parent = HeroHierarchyList.Instance.gameObject.transform;
 
-            hero.isSpawned = true;
-
             hero.gameObject = spawnedHeroToken;
 
             hero.gameObject.GetComponent<SpriteRenderer>().sprite
@@ -48,11 +46,6 @@ public class UIHeroSpawnToggle : MonoBehaviour
             // Set the hero as already selected.
             WorldMapLoad.Instance.CurrentlySelectedHero = spawnedHeroToken;
             TokenStacking.Instance.heroIndexNumber = heroListIndex;
-
-            hero.heroMovement = spawnedHeroToken.GetComponent<HeroMovement>();
-
-            // Are we using this?
-            WorldMapLoad.Instance.heroes[heroListIndex].tokenComponents = spawnedHeroToken.GetComponent<TokenComponents>();
 
             hero.location
                 = WorldMapLoad.Instance.CurrentlySelectedCounty;

@@ -3,40 +3,25 @@ using UnityEngine;
 
 public class UIRecruitHeroConfirm : MonoBehaviour
 {
-    public static UIRecruitHeroConfirm Instance;
-
     [SerializeField] private TextMeshProUGUI areYouSureHeroText;
+    private CountyPopulation countyPopulation;
     private void OnEnable()
     {
-        var population = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty][WorldMapLoad.Instance.currentlySelectedPopulation];
+        countyPopulation = WorldMapLoad.Instance.currentlySelectedCountyPopulation;
 
-        areYouSureHeroText.text = $"{AllText.UIText.AREYOUSUREHERO} {population.firstName} {population.lastName}";
+        areYouSureHeroText.text = $"{AllText.UIText.AREYOUSUREHERO} {countyPopulation.firstName} {countyPopulation.lastName}";
     }
 
     public void ConfirmHeroRecruitment()
     {
-        var population = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty][WorldMapLoad.Instance.currentlySelectedPopulation];
-        
-        // We should really make this a method that is used here and in WorldMapLoad.
-        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].faction.factionNameAndColor.name
-            == WorldMapLoad.Instance.playerFaction)
-        {
-            Debug.Log("Heroes List Count : " + WorldMapLoad.Instance.heroes.Count);
-            var heroList = WorldMapLoad.Instance.heroes;
-            heroList.Add(new Hero(null, null, null, false, 100, WorldMapLoad.Instance.playerFaction,
-                $"{population.firstName} {population.lastName}", heroList.Count, 0,
-                WorldMapLoad.Instance.currentlySelectedPopulation, WorldMapLoad.Instance.CurrentlySelectedCounty,
-                false, null, false, false));
-            Debug.Log("Hero List Index: " + heroList[^1].heroIndex);
-            Debug.Log("Heroes List Count2 : " + WorldMapLoad.Instance.heroes.Count);
-        }
-        else
-        {
-            Debug.Log("You don't own this county, mother fucker.");
-        }
+        var heroList = WorldMapLoad.Instance.heroes;
+        Hero hero = new(null, countyPopulation, WorldMapLoad.Instance.playerFaction
+            , WorldMapLoad.Instance.CurrentlySelectedCounty, null, false, false, false);
+
+        heroList.Add(hero);
+
+        WorldMapLoad.Instance.currentlySelectedCountyPopulation.hero = hero;
 
         UICountyPanel.Instance.heroScrollView.SetActive(true);
-        UIHeroScrollViewRefresher.Instance.DestroyPanel();
-        UIHeroScrollViewRefresher.Instance.RefreshPanel();
     }
 }

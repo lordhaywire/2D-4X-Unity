@@ -2309,6 +2309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabHeroButton: {fileID: 6580587887990886728, guid: 221d2dad0e9415c4bb84e5e02871d4e6, type: 3}
   parentHeroListGroup: {fileID: 574562893}
+  heroScrollView: {fileID: 1462681376}
 --- !u!1001 &169628995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10433,7 +10434,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentlyRightClickedCounty: 
-  currentlySelectedPopulation: 0
   currentlySelectedCounty: 
   countyInfoPanelGameObject: {fileID: 155121155}
   currentlySelectedHero: {fileID: 0}

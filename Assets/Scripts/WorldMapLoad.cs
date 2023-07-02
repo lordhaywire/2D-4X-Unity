@@ -10,8 +10,7 @@ public class WorldMapLoad : MonoBehaviour
     public event Action RefreshBuildingPanels;
 
     public string currentlyRightClickedCounty;
-    public int currentlySelectedPopulation;
-
+    public CountyPopulation currentlySelectedCountyPopulation;
 
     [SerializeField] private string currentlySelectedCounty;
     [SerializeField] private GameObject countyInfoPanelGameObject;
@@ -103,7 +102,8 @@ public class WorldMapLoad : MonoBehaviour
     // Initialize army list of spawned heroes.
     public List<Hero> heroes = new();
 
-    public Dictionary<string, List<SpawnedTokenList>> heroTokens = new();
+    // List of all spawned tokens in a county.
+    public Dictionary<string, List<SpawnedTokenList>> countyHeroTokens = new();
 
     // Initialize Factions list that will be used with the counties.
     public List<FactionNameAndColor> factionNameAndColors = new();
@@ -117,7 +117,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Awake()
     {
-        currentlySelectedPopulation = 57; // This is just a test number for when there is more then 1 hero.
+        //currentlySelectedCountyPopulation = 57; // This is just a test number for when there is more then 1 hero.
 
         Instance = this;
         currentBuildingDescriptionPanelExpanded = false;
@@ -417,7 +417,7 @@ public class WorldMapLoad : MonoBehaviour
         for (int i = 0; i < totalPopulation; i++)
         {
             // This adds to the Dictionary List a new person.
-            countyPopulation.Add(new CountyPopulation(0, null, null, false, false, true, false, 0, false, 0, AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null));
+            countyPopulation.Add(new CountyPopulation(0, null, null, false, null, true, false, 0, false, 0, AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null));
 
             // Assign the County Populations ID
             countyPopulation[i].countyPopulationID = i;
@@ -453,16 +453,19 @@ public class WorldMapLoad : MonoBehaviour
                 {
                     counties[countyName].faction.factionLeader = countyPopulation[i];
                     countyPopulation[i].isFactionLeader = true;
-                    countyPopulation[i].isHero = true;
+                    
                     countyPopulation[i].leaderOfPeoplePerk = true;
-                    //Debug.Log("Faction Name: " + counties[countyName].faction.factionNameAndColor.name);
+
                     if (counties[countyName].faction.factionNameAndColor.name == playerFaction)
                     {
-                        //Debug.Log("Heroes List Count : " + heroes.Count);
-                        heroes.Add(new Hero(null, null, null, false, 100, playerFaction,
-                            $"{countyPopulation[i].firstName} {countyPopulation[i].lastName}", i, i,
-                            i, countyName, false, null, false, false));
-                        //Debug.Log("Heroes List Count2 : " + heroes.Count);
+
+
+                        Hero hero = new(null, countyPopulation[i], playerFaction,
+                            countyName, null, false, false, false);
+
+                        heroes.Add(hero);
+
+                        countyPopulation[i].hero = hero;
                     }
                 }
             }

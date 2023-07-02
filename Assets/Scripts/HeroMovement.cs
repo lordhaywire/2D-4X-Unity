@@ -65,23 +65,16 @@ public class HeroMovement : MonoBehaviour
 
     public void StartHeroMovement()
     {
-        //Debug.Log("Destination : " + WorldMapLoad.Instance.heroes[int.Parse(name)].destination);
         var hero = WorldMapLoad.Instance.heroes[int.Parse(name)];
-        /* I guess this is extra.  Leave it here for a bit just in case we do need it after all.
-        if (hero.location == WorldMapLoad.Instance.currentlyRightClickedCounty)
-        {
-            Debug.Log($"The hero is already in {WorldMapLoad.Instance.currentlyRightClickedCounty}.");
-            StopTimer();
-            return;
-        }*/
-        if (hero.heroMovement.isTimeToDestinationSet == true && hero.destination != WorldMapLoad.Instance.currentlyRightClickedCounty)
+
+        if (isTimeToDestinationSet == true && hero.destination != WorldMapLoad.Instance.currentlyRightClickedCounty)
         {
             Debug.Log($"Hero movement was set to {hero.destination} but you clicked on " +
                 $"{WorldMapLoad.Instance.currentlyRightClickedCounty} so it has been canceled.");
             StopTimer();
             return;
         }
-        if (hero.heroMovement.isTimeToDestinationSet == false)
+        if (isTimeToDestinationSet == false)
         {
             hero.destination = WorldMapLoad.Instance.currentlyRightClickedCounty;
             Debug.Log("Hero Location: " + hero.location + " Hero Destination: " + hero.destination);
@@ -167,7 +160,7 @@ public class HeroMovement : MonoBehaviour
                 ChangeHerosList(); // Do some hero maintenance once.
 
                 //Stacking the heroes starting location tokens.
-                TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location]);
+                TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.countyHeroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location]);
 
                 // Timer is done so hero should start moving.
                 heroMove = true;
@@ -193,18 +186,17 @@ public class HeroMovement : MonoBehaviour
         //Debug.Log("Hero Token Destination: " + hero.destination);
 
         // Turn off hero stack count because the hero is moving.
-        hero.gameObject.GetComponent<TokenComponents>().counterCanvas.enabled = false;
+        GetComponent<TokenInfo>().counterGameObject.SetActive(false);
 
         // Move the token.
         Vector2 targetPosition = destinationCounty.heroSpawnLocation.transform.position;
-        hero.gameObject.transform.position = Vector2.MoveTowards(transform.position, targetPosition, step);
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, step);
 
         // Refresh the hero scroll view immediately when the hero starts moving.
         UIHeroScrollViewRefresher.Instance.RefreshPanel();
 
         // If the hero gets to the hero spawn location its move is considered done.
-        if (WorldMapLoad.Instance.heroes[int.Parse(name)].gameObject.transform.position
-            == destinationCounty.heroSpawnLocation.transform.position)
+        if (transform.position == destinationCounty.heroSpawnLocation.transform.position)
         {
             Debug.Log("Hero has arrived at its destination.");
 
@@ -217,7 +209,8 @@ public class HeroMovement : MonoBehaviour
             
             // Stack the hero tokens at destination location.
             Debug.Log("Hero Token Location: " + WorldMapLoad.Instance.heroes[int.Parse(name)].location);
-            TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location]);
+            Debug.Log("Hero List Count: " + WorldMapLoad.Instance.countyHeroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location].Count);
+            TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.countyHeroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location]);
 
             WorldMapLoad.Instance.heroes[int.Parse(name)].isCountingDown = false; // Why do we have this if he have isTimeToDestinationSet?
 
@@ -235,8 +228,8 @@ public class HeroMovement : MonoBehaviour
 
     private void ChangeHerosList()
     {
-        var heroStackingEnding = WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].destination];
-        var heroStackingStarting = WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location];
+        var heroStackingEnding = WorldMapLoad.Instance.countyHeroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].destination];
+        var heroStackingStarting = WorldMapLoad.Instance.countyHeroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location];
         
 
         Debug.Log("Hero Destination: " + WorldMapLoad.Instance.heroes[int.Parse(name)].destination);

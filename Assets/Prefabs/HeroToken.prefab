@@ -576,9 +576,8 @@ GameObject:
   - component: {fileID: 5666813678520692907}
   - component: {fileID: 8012245619660347971}
   - component: {fileID: 1939168428307916755}
-  - component: {fileID: 5062811573372759088}
-  - component: {fileID: 4572878835178861048}
   - component: {fileID: 4252955109994803164}
+  - component: {fileID: 5062811573372759088}
   m_Layer: 0
   m_Name: HeroToken
   m_TagString: Untagged
@@ -704,6 +703,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f5a8c0c62e54549a3f008578e0583f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4252955109994803164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5666813678520692905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3942263051b1d654bb8fffd379db4085, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 0}
+  nameGameObject: {fileID: 0}
+  counterGameObject: {fileID: 5436810105093668824}
+  spriteRenderer: {fileID: 5666813678520692907}
+  counterText: {fileID: 1316492368640986990}
+  timerCanvas: {fileID: 1101061004}
+  counterCanvas: {fileID: 4840781157083331858}
+  nameCanvas: {fileID: 2833895730042432053}
 --- !u!114 &5062811573372759088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,38 +740,6 @@ MonoBehaviour:
   heroMove: 0
   speed: 20
   isTimeToDestinationSet: 0
---- !u!114 &4572878835178861048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5666813678520692905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e962225515b4247419d287890d6083d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heroNameGameObject: {fileID: 1984798671607724818}
-  heroNameText: {fileID: 5303660249292316973}
---- !u!114 &4252955109994803164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5666813678520692905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3942263051b1d654bb8fffd379db4085, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  counterGameObject: {fileID: 5436810105093668824}
-  spriteRenderer: {fileID: 5666813678520692907}
-  counterText: {fileID: 1316492368640986990}
-  timerCanvas: {fileID: 1101061004}
-  counterCanvas: {fileID: 4840781157083331858}
-  nameCanvas: {fileID: 2833895730042432053}
 --- !u!1 &5902234253197047548
 GameObject:
   m_ObjectHideFlags: 0

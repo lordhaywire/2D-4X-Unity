@@ -8,15 +8,15 @@ public class SelectHero : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             //Debug.Log("You have left CLICKED!!!!");
-            if (WorldMapLoad.Instance.heroes[int.Parse(name)].heroMovement.heroMove == false)
+            if (GetComponent<HeroMovement>().heroMove == false)
             {
                 if(gameObject == WorldMapLoad.Instance.CurrentlySelectedHero)
                 {
-                    var heroSpawnedTokens = WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location];
+                    var heroSpawnedTokens = WorldMapLoad.Instance.countyHeroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location];
                     // Move the top token to the bottom.
                     heroSpawnedTokens.Insert(heroSpawnedTokens.Count , heroSpawnedTokens[0]);
                     heroSpawnedTokens.RemoveAt(0);
-                    TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.heroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location]);
+                    TokenStacking.Instance.StackTokens(WorldMapLoad.Instance.countyHeroTokens[WorldMapLoad.Instance.heroes[int.Parse(name)].location]);
                 }
                 else
                 {

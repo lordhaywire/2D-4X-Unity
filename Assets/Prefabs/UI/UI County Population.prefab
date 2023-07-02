@@ -148,8 +148,7 @@ GameObject:
   - component: {fileID: 250946738408604974}
   - component: {fileID: 3086233870229814357}
   - component: {fileID: 3705792598929105446}
-  - component: {fileID: 6638392775360474651}
-  - component: {fileID: 2926940408833080220}
+  - component: {fileID: 9207766574706997862}
   m_Layer: 5
   m_Name: UI County Population
   m_TagString: Untagged
@@ -289,37 +288,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 250946738408604974}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2926940408833080220}
-        m_TargetAssemblyTypeName: UIPopulationListButton, Assembly-CSharp
-        m_MethodName: PopulationListButtonClicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6638392775360474651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3086233870229814359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0383fe83b5a60564ba2a8a7ed01794ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 3280258020344101274}
-  ageText: {fileID: 5540430870638691851}
-  sexText: {fileID: 1736031936603183766}
-  currentActivityText: {fileID: 5623439038003125718}
-  nextActivityText: {fileID: 1891171080499340752}
---- !u!114 &2926940408833080220
+      m_Calls: []
+--- !u!114 &9207766574706997862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,6 +301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2449b93efd48446b6b633a91c29726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameText: {fileID: 3280258020344101274}
+  ageText: {fileID: 5540430870638691851}
+  sexText: {fileID: 1736031936603183766}
+  currentActivityText: {fileID: 5623439038003125718}
+  nextActivityText: {fileID: 1891171080499340752}
 --- !u!1 &4516763840298170959
 GameObject:
   m_ObjectHideFlags: 0

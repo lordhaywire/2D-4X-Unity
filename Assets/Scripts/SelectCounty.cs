@@ -111,7 +111,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         if (currentHero != null)
         {
             Debug.Log("Right Clicked on a county while a hero is selected.");
-            WorldMapLoad.Instance.heroes[int.Parse(currentHero.name)].heroMovement.StartHeroMovement();
+            currentHero.GetComponent<HeroMovement>().StartHeroMovement();
         }
         else
         {
@@ -263,7 +263,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         {
             //Debug.Log("Name: " + name);
             // This is going to need to turn off the Hero Scroll View at some point.
-            if (countyPopulation[i].isHero == true)
+            if (countyPopulation[i].hero != null)
             {
                 numberOfHeros++;
             }

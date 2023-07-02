@@ -19,21 +19,27 @@ public class TokenStacking : MonoBehaviour
             var hero = WorldMapLoad.Instance.heroes[int.Parse(tokenList[i].gameObject.name)];
             var county = WorldMapLoad.Instance.counties[hero.location];
 
-            Debug.Log("Hero Spawn Stack Game Object Name: " + tokenList[i].gameObject.name);
+            // Change each token's order to be lower then the one on "top" of it.
+            tokenList[i].gameObject.GetComponent<TokenInfo>().OrderInLayer = 100 - i;
 
-            hero.gameObject.GetComponent<TokenComponents>().spriteRenderer.sortingOrder = 100 - i;
-            hero.gameObject.GetComponent<TokenComponents>().timerCanvas.sortingOrder = 100 - i;
-            hero.gameObject.GetComponent<TokenComponents>().counterCanvas.sortingOrder = 100 - i;
-            hero.gameObject.GetComponent<TokenComponents>().nameCanvas.sortingOrder = 100 - i;
+            tokenList[0].gameObject.GetComponent<TokenInfo>().counterText.text = tokenList.Count.ToString();
 
-            hero.tokenComponents.counterText.text = tokenList.Count.ToString();
-
+            /*
             hero.heroStackIndex = i;
             Debug.Log("Hero Stack Index: " + hero.heroStackIndex);
+            */
+            if (tokenList.Count > 1)
+            {
+                tokenList[0].gameObject.GetComponent<TokenInfo>().counterGameObject.SetActive(true);
+            }
+            else
+            {
+                tokenList[0].gameObject.GetComponent<TokenInfo>().counterGameObject.SetActive(false);
+            }
 
             if (i == 0)
             {
-                tokenList[i].gameObject.GetComponentInChildren<HeroName>().heroNameGameObject.SetActive(true);
+                tokenList[i].gameObject.GetComponentInChildren<TokenInfo>().nameGameObject.SetActive(true);
 
                 tokenList[i].gameObject.transform.position = county.heroSpawnLocation.transform.position;
 
@@ -41,20 +47,13 @@ public class TokenStacking : MonoBehaviour
             }
             else
             {
-                tokenList[i].gameObject.GetComponentInChildren<HeroName>().heroNameGameObject.SetActive(false);
-                tokenList[i].gameObject.GetComponent<TokenComponents>().counterGameObject.SetActive(false);
+                tokenList[i].gameObject.GetComponentInChildren<TokenInfo>().nameGameObject.SetActive(false);
+                tokenList[i].gameObject.GetComponent<TokenInfo>().counterGameObject.SetActive(false);
                 tokenList[i].gameObject.transform.position
                     = new Vector2(county.heroSpawnLocation.transform.position.x + (i * 0.1f)
                     , county.heroSpawnLocation.transform.position.y);
             }
-        }
-        if (tokenList.Count >= 1)
-        {
-            tokenList[0].gameObject.GetComponent<TokenComponents>().counterGameObject.SetActive(false);
-        }
-        else
-        {
-            tokenList[0].gameObject.GetComponent<TokenComponents>().counterGameObject.SetActive(true);
+
         }
     }
 }

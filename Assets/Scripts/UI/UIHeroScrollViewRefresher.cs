@@ -5,8 +5,9 @@ public class UIHeroScrollViewRefresher : MonoBehaviour
 {
     public static UIHeroScrollViewRefresher Instance;
 
-    public GameObject prefabHeroButton;
-    public GameObject parentHeroListGroup;
+    [SerializeField] private GameObject prefabHeroButton;
+    [SerializeField] private GameObject parentHeroListGroup;
+    [SerializeField] private GameObject heroScrollView;
 
     private void Awake()
     {
@@ -15,7 +16,6 @@ public class UIHeroScrollViewRefresher : MonoBehaviour
 
     private void OnEnable()
     {
-
         if (WorldMapLoad.Instance.playerFaction == WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].faction.factionNameAndColor.name)
         {
             RefreshPanel();
@@ -24,34 +24,48 @@ public class UIHeroScrollViewRefresher : MonoBehaviour
         {
             Debug.Log("Not your county, mother fucker.");
         }
-            
+
     }
 
     public void RefreshPanel()
     {
+        var heroesList = WorldMapLoad.Instance.heroes;
+        //var heroTokens = WorldMapLoad.Instance.countyHeroTokens;
+
         DestroyPanel();
 
         //Debug.Log("Refresh Panel");
-        var heroesList = WorldMapLoad.Instance.heroes;
+
 
         if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].faction.factionNameAndColor.name
-            == WorldMapLoad.Instance.playerFaction) //|| WorldMapLoad.Instance.DevView == true
+            == WorldMapLoad.Instance.playerFaction)
         {
-            Debug.Log("Refresh Panel Currently Selected County: " + WorldMapLoad.Instance.CurrentlySelectedCounty);
-            for (int i = 0; i < WorldMapLoad.Instance.heroes.Count; i++)
+            //Debug.Log("Refresh Panel Currently Selected County: " + WorldMapLoad.Instance.CurrentlySelectedCounty);
+            for (int i = 0; i < heroesList.Count; i++)
             {
                 if (heroesList[i].location == WorldMapLoad.Instance.CurrentlySelectedCounty)
                 {
-                    int childCount = parentHeroListGroup.transform.childCount;
-                    Debug.Log("Child count: " + childCount);
 
                     GameObject UIhero = Instantiate(prefabHeroButton, parentHeroListGroup.transform);
 
-                    UIhero.name = heroesList[i].heroIndex.ToString();
-                    UIhero.GetComponent<UIHeroListButton>().leaderButtonText.text =
-                        heroesList[i].name.ToString();
+                    UIhero.GetComponent<UIHeroListButton>().hero = heroesList[i];
+
+                    // We need to set the name text of the UIHeroListButton.
+
+                    //$"{heroesList[i].countyPopulation.firstName} {heroesList[i].countyPopulation.lastName}";
                 }
             }
+            
+            int childCount = parentHeroListGroup.transform.childCount;
+            //Debug.Log("Child count: " + childCount);
+            if(childCount == 0)
+            {
+                heroScrollView.SetActive(false);
+            }
+        }
+        else
+        {
+            heroScrollView.SetActive(false);
         }
     }
 

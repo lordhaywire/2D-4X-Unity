@@ -6,7 +6,7 @@ public class CountyPopulation
     public string lastName;
 
     public bool isFactionLeader;
-    public bool isHero;
+    public Hero hero;
     public bool isWorker;
     public bool isMale;
     public int age;
@@ -24,7 +24,7 @@ public class CountyPopulation
     public string nextActivity;
     public CurrentBuilding nextBuilding;
 
-    public CountyPopulation(int countyPopulationID, string firstName, string lastName, bool isFactionLeader, bool isHero, bool isWorker,
+    public CountyPopulation(int countyPopulationID, string firstName, string lastName, bool isFactionLeader, Hero hero, bool isWorker,
          bool isMale, int age, bool leaderOfPeoplePerk, int constructionSkill, string currentActivity, 
          CurrentBuilding currentBuilding, string nextActivity, CurrentBuilding nextBuilding)
     {
@@ -33,7 +33,7 @@ public class CountyPopulation
         this.lastName = lastName;
 
         this.isFactionLeader = isFactionLeader;
-        this.isHero = isHero;
+        this.hero = hero;
         this.isWorker = isWorker;
         this.isMale = isMale;
         this.age = age;

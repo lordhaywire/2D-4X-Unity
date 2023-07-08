@@ -20,7 +20,7 @@ public class CountyPopulation
     public int constructionSkill;
 
     public string currentActivity;
-    public CurrentBuilding currentBuilding;
+    public CurrentBuilding currentBuilding; // What this person is currently building that day.
     public string nextActivity;
     public CurrentBuilding nextBuilding;
 

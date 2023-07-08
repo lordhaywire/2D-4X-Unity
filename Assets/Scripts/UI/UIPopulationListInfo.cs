@@ -1,9 +1,11 @@
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class UIPopulationListInfo : MonoBehaviour
 {
-    public static UIPopulationListInfo Instance;
+    public static UIPopulationListInfo Instance;// { get; private set; }
 
     public CountyPopulation countyPopulation;
 
@@ -21,44 +23,47 @@ public class UIPopulationListInfo : MonoBehaviour
 
     private void OnEnable()
     {
+        StartCoroutine(UpdateText());  
+    }
+
+    IEnumerator UpdateText()
+    {
+        yield return null;
 
         // Fill in the Game Object's text fields from the list.
-        
-        nameText.text =
-            countyList[i].firstName + " " + countyList[i].lastName;
-        populationListClones[i].GetComponent<UIHorizontalPopulationListText>().ageText.text =
-            countyList[i].age.ToString();
-        if (countyList[i].isMale == true)
+        nameText.text = countyPopulation.firstName + " " + countyPopulation.lastName;
+
+        ageText.text = countyPopulation.age.ToString();
+
+        if (countyPopulation.isMale == true)
         {
-            populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Male";
+            sexText.text = "Male";
         }
         else
         {
-            populationListClones[i].GetComponent<UIHorizontalPopulationListText>().sexText.text = "Female";
+            sexText.text = "Female";
         }
-        // This makes it so the text box looks right.
-        if (countyList[i].currentBuilding == null)
+        // This makes it so the text box looks right. What the fuck is this?
+        if (countyPopulation.currentBuilding == null)
         {
-            populationListClones[i].GetComponent<UIHorizontalPopulationListText>().currentActivityText.text =
-                                $"{countyList[i].currentActivity}";
+            currentActivityText.text = $"{countyPopulation.currentActivity}";
         }
         else
         {
-            populationListClones[i].GetComponent<UIHorizontalPopulationListText>().currentActivityText.text =
-            $"{countyList[i].currentActivity} \n {countyList[i].currentBuilding.name}";
+            currentActivityText.text =
+            $"{countyPopulation.currentActivity} \n {countyPopulation.currentBuilding.name}";
         }
-        // This makes it so the text box looks right.
-        if (countyList[i].nextBuilding == null)
+        // This makes it so the text box looks right. What the fuck is this?
+        if (countyPopulation.nextBuilding == null)
         {
-            populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nextActivityText.text =
-            $"{countyList[i].nextActivity}";
+            nextActivityText.text = $"{countyPopulation.nextActivity}";
         }
         else
         {
-            populationListClones[i].GetComponent<UIHorizontalPopulationListText>().nextActivityText.text =
-            $"{countyList[i].nextActivity} \n {countyList[i].nextBuilding.name}";
+            nextActivityText.text =
+            $"{countyPopulation.nextActivity} \n {countyPopulation.nextBuilding.name}";
         }
-        
+
     }
 
     public void PopulationListButtonClicked()
@@ -67,4 +72,6 @@ public class UIPopulationListInfo : MonoBehaviour
         WorldMapLoad.Instance.populationDescriptionPanelOpen = true;
         WorldMapLoad.Instance.currentlySelectedCountyPopulation = countyPopulation;
     }
+
+
 }

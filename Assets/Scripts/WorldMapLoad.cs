@@ -73,7 +73,7 @@ public class WorldMapLoad : MonoBehaviour
     public bool populationInfoPanelOpen;
     public bool populationInfoPanelOpenedByHeroListClick;
 
-    public bool DevView;
+    //public bool DevView;
 
     public GameObject countyInfoPanel;
     public GameObject heroInfoPanel;
@@ -85,7 +85,7 @@ public class WorldMapLoad : MonoBehaviour
     public GameObject populationDescriptionPanel;
 
     // This is just temp bullshit.
-    public string playerFaction;
+    public Faction playerFaction;
     public int playerFactionID;
     public int dailyInfluenceGain;
     public int costOfHero;
@@ -103,7 +103,7 @@ public class WorldMapLoad : MonoBehaviour
     public List<Hero> heroes = new();
 
     // List of all spawned tokens in a county.
-    public Dictionary<string, List<SpawnedTokenList>> countyHeroTokens = new();
+    //public Dictionary<string, List<SpawnedTokenList>> countyHeroTokens = new();
 
     // Initialize Factions list that will be used with the counties.
     public List<FactionNameAndColor> factionNameAndColors = new();
@@ -137,7 +137,7 @@ public class WorldMapLoad : MonoBehaviour
         CreateResearchandBuildingList();
 
         // This is just temp till we do character creation.
-        playerFaction = factionNameAndColors[0].name;
+        playerFaction = factions[0];
         playerFactionID = 0;
 
         CreatePopulation();
@@ -242,39 +242,7 @@ public class WorldMapLoad : MonoBehaviour
                 null, null, null, "Elitism", AllText.Descriptions.ELITISM,
                 null, null, 1, false, true));
         }
-        /*
-        researchItems.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.RESEARCHSSHACK, AllText.Descriptions.RESEARCHSSHACK,
-            null, null, 1, true, true, null));
-        researchItems.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.SCAVENGERSSHACK, AllText.Descriptions.SCAVENGERSSHACK,
-            null, null, 1, true, true, null));
-        researchItems.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.STONEWORKERSSHACK, AllText.Descriptions.STONEWORKERSSHACK,
-            null, null, 1, true, true, null));
-        researchItems.Add(new ResearchItem(
-            null, null, null, "Basic Tactics - Guns", AllText.Descriptions.BASICTACTICSGUNS,
-            null, null, 1, false, false, null));
-        researchItems.Add(new ResearchItem(
-            null, null, null, "Basic Tactics - Melee", AllText.Descriptions.BASICTACTICSMELEE,
-            null, null, 1, false, false, null));
-        researchItems.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.PRIMATIVEMELEESMITHSHACK, AllText.Descriptions.PRIMATIVEMELEESMITHSHACK,
-            null, null, 1, true, false, null));
-        researchItems.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.PRIMATIVERANGEDSMITHSHACK, AllText.Descriptions.PRIMATIVERANGEDSMITHSHACK,
-            null, null, 1, true, false, null));
-        researchItems.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.PRIMATIVEGUNSMITHSHACK, AllText.Descriptions.PRIMATIVEGUNSMITHSHACK,
-            null, null, 1, true, false, null));
-        researchItems.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.PRIMATIVEAMMOSHACK, AllText.Descriptions.PRIMATIVEAMMOSHACK,
-            null, null, 1, true, false, null));
-        researchItems.Add(new ResearchItem(
-            null, null, null, AllText.BuildingName.PRIMATVEGUNAMMOSHACK, AllText.Descriptions.PRIMATVEGUNAMMOSHACK,
-            null, null, 1, true, false, null));
-        */
-        // Should we eventually just have all the buildings generated from the research list?
+
 
         foreach (KeyValuePair<string, County> item in counties)
         {
@@ -287,30 +255,7 @@ public class WorldMapLoad : MonoBehaviour
                 AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK, 500, 7, 0, 5));
         }
 
-        /*
-        possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.RESEARCHSSHACK, AllText.Descriptions.RESEARCHSSHACK, 500, 7, 0, 5));
-        possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.SCAVENGERSSHACK, AllText.Descriptions.SCAVENGERSSHACK, 500, 7, 0, 5));
-        possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.STONEWORKERSSHACK, AllText.Descriptions.STONEWORKERSSHACK, 500, 7, 0, 5));
-        possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.PRIMATIVEMELEESMITHSHACK, AllText.Descriptions.PRIMATIVEMELEESMITHSHACK, 500, 7, 0, 5));
-        possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.PRIMATIVERANGEDSMITHSHACK, AllText.Descriptions.PRIMATIVERANGEDSMITHSHACK, 500, 7, 0, 5));
-        possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.PRIMATIVEGUNSMITHSHACK, AllText.Descriptions.PRIMATIVEGUNSMITHSHACK, 500, 7, 0, 5));
-        possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.PRIMATIVEAMMOSHACK, AllText.Descriptions.PRIMATIVEAMMOSHACK, 500, 7, 0, 5));
-        possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.PRIMATVEGUNAMMOSHACK, AllText.Descriptions.PRIMATVEGUNAMMOSHACK, 500, 7, 0, 5));
-        */
-        /*
-        // Do we really need this?
-        researchItems[0].possibleBuildings = possibleBuildings[0];
-        researchItems[1].possibleBuildings = possibleBuildings[1];
-        researchItems[2].possibleBuildings = possibleBuildings[2];
-        */
+
     }
 
     private void FirstRunTopInfoBar()
@@ -344,42 +289,44 @@ public class WorldMapLoad : MonoBehaviour
         // I think this idea might be wrong and it is really because it is a public class, not a list.
         // Counties added to counties Dictionary.
         // Types of biomes - Coast, Desert, Farm, Forest, Mountain, Ruin, River
+        // The first county is the player county.
+        
         counties[CountyListCreator.Instance.countiesList[0].name] = new County(
-            0, true, null, null, null, factions[1],
+            0, true, CountyListCreator.Instance.countiesList[0].gameObject, null, factions[1],
             Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[1].name] = new County(
-            1, true, null, null, null, factions[0],
+            1, true, CountyListCreator.Instance.countiesList[1].gameObject, null, factions[0],
             Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 0, 1);
         counties[CountyListCreator.Instance.countiesList[2].name] = new County(
-            2, false, null, null, null, factions[0], // Temporarily set to the player faction for testing.
+            2, false, CountyListCreator.Instance.countiesList[2].gameObject, null, factions[0], // Temporarily set to the player faction for testing.
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[3].name] = new County(
-            3, false, null, null, null, factions[2],
+            3, false, CountyListCreator.Instance.countiesList[3].gameObject, null, factions[2],
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[4].name] = new County(
-            4, false, null, null, null, factions[3],
+            4, false, CountyListCreator.Instance.countiesList[4].gameObject, null, factions[3],
             Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[5].name] = new County(
-            5, false, null, null, null, factions[4],
+            5, false, CountyListCreator.Instance.countiesList[5].gameObject, null, factions[4],
             Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[6].name] = new County(
-            6, false, null, null, null, factions[5],
+            6, false, CountyListCreator.Instance.countiesList[6].gameObject, null, factions[5],
             Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0, 0, 0);
-        /*
-        // Create and add currentBuildings list to each county so each county knows what it has built.
-        for(int i = 0; i < counties.Count; i++)
+
+        // We should expand this for loop if possible.
+        for(int i = 0; i < CountyListCreator.Instance.countiesList.Count; i++)
         {
-            counties[CountyListCreator.Instance.countiesList[i].name].currentBuilding = new CurrentBuilding();
+            CountyListCreator.Instance.countiesList[i].gameObject.GetComponent<CountyInfo>().county =
+                counties[CountyListCreator.Instance.countiesList[i].name];
         }
-        */
     }
 
     private void CreatePopulation()
     {
         // Create various county specific data.
-        for (int countyIndex = 0; countyIndex < counties.Count; countyIndex++)
+        for (int i = 0; i < counties.Count; i++)
         {
-            string countyName = CountyListCreator.Instance.countiesList[countyIndex].name;
+            string countyName = CountyListCreator.Instance.countiesList[i].name;
             //string factionName = factionNameAndColors[countyIndex].name;
 
             // There should probably be some sort of null check in here?
@@ -387,11 +334,13 @@ public class WorldMapLoad : MonoBehaviour
             countyPopulationDictionary[countyName] = new List<CountyPopulation>();
             //factionHeroesDictionary[factionName] = new List<Hero>();
 
-            // Get game object for center of county and assign to correct county in list.
+            // Get gameobject for center of county and assign to correct county in list.
             // Why did we do that here?
+            /*
             counties[countyName].countyCenterGameObject =
-                countyListGameObject.transform.GetChild(countyIndex).GetChild(0).gameObject;
-            counties[countyName].heroSpawnLocation = countyListGameObject.transform.GetChild(countyIndex).GetChild(1).gameObject;
+                countyListGameObject.transform.GetChild(i).GetChild(0).gameObject;
+            counties[countyName].heroSpawnLocation = countyListGameObject.transform.GetChild(i).GetChild(1).gameObject;
+            */
 
             if (counties[countyName].isCapital == true)
             {
@@ -453,15 +402,13 @@ public class WorldMapLoad : MonoBehaviour
                 {
                     counties[countyName].faction.factionLeader = countyPopulation[i];
                     countyPopulation[i].isFactionLeader = true;
-                    
+
                     countyPopulation[i].leaderOfPeoplePerk = true;
 
-                    if (counties[countyName].faction.factionNameAndColor.name == playerFaction)
+                    if (counties[countyName].faction.factionNameAndColor.name == playerFaction.factionNameAndColor.name)
                     {
-
-
                         Hero hero = new(null, countyPopulation[i], playerFaction,
-                            countyName, null, false, false, false);
+                            counties[countyName].gameObject, null, false, false, false);
 
                         heroes.Add(hero);
 
@@ -479,4 +426,63 @@ public class WorldMapLoad : MonoBehaviour
     {
         UIBuildingConfirmed.Instance.BuildingConfirmed -= BuildCountyImprovement;
     }
+
+    /*
+        researchItems.Add(new ResearchItem(
+            null, null, null, AllText.BuildingName.RESEARCHSSHACK, AllText.Descriptions.RESEARCHSSHACK,
+            null, null, 1, true, true, null));
+        researchItems.Add(new ResearchItem(
+            null, null, null, AllText.BuildingName.SCAVENGERSSHACK, AllText.Descriptions.SCAVENGERSSHACK,
+            null, null, 1, true, true, null));
+        researchItems.Add(new ResearchItem(
+            null, null, null, AllText.BuildingName.STONEWORKERSSHACK, AllText.Descriptions.STONEWORKERSSHACK,
+            null, null, 1, true, true, null));
+        researchItems.Add(new ResearchItem(
+            null, null, null, "Basic Tactics - Guns", AllText.Descriptions.BASICTACTICSGUNS,
+            null, null, 1, false, false, null));
+        researchItems.Add(new ResearchItem(
+            null, null, null, "Basic Tactics - Melee", AllText.Descriptions.BASICTACTICSMELEE,
+            null, null, 1, false, false, null));
+        researchItems.Add(new ResearchItem(
+            null, null, null, AllText.BuildingName.PRIMATIVEMELEESMITHSHACK, AllText.Descriptions.PRIMATIVEMELEESMITHSHACK,
+            null, null, 1, true, false, null));
+        researchItems.Add(new ResearchItem(
+            null, null, null, AllText.BuildingName.PRIMATIVERANGEDSMITHSHACK, AllText.Descriptions.PRIMATIVERANGEDSMITHSHACK,
+            null, null, 1, true, false, null));
+        researchItems.Add(new ResearchItem(
+            null, null, null, AllText.BuildingName.PRIMATIVEGUNSMITHSHACK, AllText.Descriptions.PRIMATIVEGUNSMITHSHACK,
+            null, null, 1, true, false, null));
+        researchItems.Add(new ResearchItem(
+            null, null, null, AllText.BuildingName.PRIMATIVEAMMOSHACK, AllText.Descriptions.PRIMATIVEAMMOSHACK,
+            null, null, 1, true, false, null));
+        researchItems.Add(new ResearchItem(
+            null, null, null, AllText.BuildingName.PRIMATVEGUNAMMOSHACK, AllText.Descriptions.PRIMATVEGUNAMMOSHACK,
+            null, null, 1, true, false, null));
+        */
+    // Should we eventually just have all the buildings generated from the research list?
+
+    /*
+possibleBuildings.Add(new PossibleBuilding(
+    AllText.BuildingName.RESEARCHSSHACK, AllText.Descriptions.RESEARCHSSHACK, 500, 7, 0, 5));
+possibleBuildings.Add(new PossibleBuilding(
+    AllText.BuildingName.SCAVENGERSSHACK, AllText.Descriptions.SCAVENGERSSHACK, 500, 7, 0, 5));
+possibleBuildings.Add(new PossibleBuilding(
+    AllText.BuildingName.STONEWORKERSSHACK, AllText.Descriptions.STONEWORKERSSHACK, 500, 7, 0, 5));
+possibleBuildings.Add(new PossibleBuilding(
+    AllText.BuildingName.PRIMATIVEMELEESMITHSHACK, AllText.Descriptions.PRIMATIVEMELEESMITHSHACK, 500, 7, 0, 5));
+possibleBuildings.Add(new PossibleBuilding(
+    AllText.BuildingName.PRIMATIVERANGEDSMITHSHACK, AllText.Descriptions.PRIMATIVERANGEDSMITHSHACK, 500, 7, 0, 5));
+possibleBuildings.Add(new PossibleBuilding(
+    AllText.BuildingName.PRIMATIVEGUNSMITHSHACK, AllText.Descriptions.PRIMATIVEGUNSMITHSHACK, 500, 7, 0, 5));
+possibleBuildings.Add(new PossibleBuilding(
+    AllText.BuildingName.PRIMATIVEAMMOSHACK, AllText.Descriptions.PRIMATIVEAMMOSHACK, 500, 7, 0, 5));
+possibleBuildings.Add(new PossibleBuilding(
+    AllText.BuildingName.PRIMATVEGUNAMMOSHACK, AllText.Descriptions.PRIMATVEGUNAMMOSHACK, 500, 7, 0, 5));
+*/
+    /*
+    // Do we really need this?
+    researchItems[0].possibleBuildings = possibleBuildings[0];
+    researchItems[1].possibleBuildings = possibleBuildings[1];
+    researchItems[2].possibleBuildings = possibleBuildings[2];
+    */
 }

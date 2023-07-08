@@ -1,7 +1,6 @@
 using UnityEngine;
 
 public class SpawnedTokenList
-
 {
     public GameObject gameObject;
 

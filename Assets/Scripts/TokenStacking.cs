@@ -12,6 +12,7 @@ public class TokenStacking : MonoBehaviour
         Instance = this;
     }
 
+    /*
     public void StackTokens(List<SpawnedTokenList> tokenList)
     {
         for (int i = 0; i < tokenList.Count; i++)
@@ -27,7 +28,7 @@ public class TokenStacking : MonoBehaviour
             /*
             hero.heroStackIndex = i;
             Debug.Log("Hero Stack Index: " + hero.heroStackIndex);
-            */
+            
             if (tokenList.Count > 1)
             {
                 tokenList[0].gameObject.GetComponent<TokenInfo>().counterGameObject.SetActive(true);
@@ -56,4 +57,5 @@ public class TokenStacking : MonoBehaviour
 
         }
     }
+  */
 }

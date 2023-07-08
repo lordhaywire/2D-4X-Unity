@@ -16,7 +16,7 @@ public class UIHeroScrollViewRefresher : MonoBehaviour
 
     private void OnEnable()
     {
-        if (WorldMapLoad.Instance.playerFaction == WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].faction.factionNameAndColor.name)
+        if (WorldMapLoad.Instance.playerFaction.factionNameAndColor.name == WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].faction.factionNameAndColor.name)
         {
             RefreshPanel();
         }
@@ -38,12 +38,12 @@ public class UIHeroScrollViewRefresher : MonoBehaviour
 
 
         if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].faction.factionNameAndColor.name
-            == WorldMapLoad.Instance.playerFaction)
+            == WorldMapLoad.Instance.playerFaction.factionNameAndColor.name)
         {
             //Debug.Log("Refresh Panel Currently Selected County: " + WorldMapLoad.Instance.CurrentlySelectedCounty);
             for (int i = 0; i < heroesList.Count; i++)
             {
-                if (heroesList[i].location == WorldMapLoad.Instance.CurrentlySelectedCounty)
+                if (heroesList[i].location.name == WorldMapLoad.Instance.CurrentlySelectedCounty)
                 {
 
                     GameObject UIhero = Instantiate(prefabHeroButton, parentHeroListGroup.transform);

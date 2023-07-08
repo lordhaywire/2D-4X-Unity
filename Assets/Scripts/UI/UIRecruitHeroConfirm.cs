@@ -16,7 +16,7 @@ public class UIRecruitHeroConfirm : MonoBehaviour
     {
         var heroList = WorldMapLoad.Instance.heroes;
         Hero hero = new(null, countyPopulation, WorldMapLoad.Instance.playerFaction
-            , WorldMapLoad.Instance.CurrentlySelectedCounty, null, false, false, false);
+            , WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].gameObject, null, false, false, false);
 
         heroList.Add(hero);
 

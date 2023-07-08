@@ -7,9 +7,8 @@ public class UIHeroSpawnToggle : MonoBehaviour
 
     public void SpawnHero()
     {
-        var heroListIndex = int.Parse(gameObject.transform.parent.name);
-        var countyList = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty];
-        var hero = WorldMapLoad.Instance.heroes[heroListIndex];
+        Hero hero = GetComponentInParent<UIHeroListButton>().hero;
+        County countyList = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty];
         var heroSpawnStack = WorldMapLoad.Instance.countyHeroTokens[WorldMapLoad.Instance.CurrentlySelectedCounty];
         
         // I think I need this shit here.  With out this every time the hero list is refresh it respawns the heroes.
@@ -20,35 +19,35 @@ public class UIHeroSpawnToggle : MonoBehaviour
         }
         else
         {
-
-            Debug.Log("Hero Index List: " + heroListIndex);
-
             // Maybe have the heroes spawn as a child of the county in the hierarchy?
-            var spawnedHeroToken = Instantiate(heroPrefab,
-                WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].heroSpawnLocation.transform.position,
+            var spawnedHeroToken = Instantiate(heroPrefab, countyList.heroSpawnLocation.transform.position,
                 Quaternion.identity, HeroHierarchyList.Instance.gameObject.transform);
 
             // This is set up this way so it gets the toggle on the GameObject.
             GetComponent<Toggle>().interactable = false;
 
-            spawnedHeroToken.name = heroListIndex.ToString();
+            hero.gameObject = spawnedHeroToken;
+            hero.location = WorldMapLoad.Instance.CurrentlySelectedCounty;
+            spawnedHeroToken.GetComponent<TokenInfo>().hero = hero;
+
+            //spawnedHeroToken.name = heroListIndex.ToString();
 
             // This isn't needed. Move the game object to the Hero list in the hierarchy.
             //spawnedHeroToken.transform.parent = HeroHierarchyList.Instance.gameObject.transform;
 
-            hero.gameObject = spawnedHeroToken;
 
-            hero.gameObject.GetComponent<SpriteRenderer>().sprite
-                = HeroTokenSprites.Instance.heroSelectedSprite;
+
+            // I would like this to be controlled by the selected gameObject's script
+            //hero.gameObject.GetComponent<SpriteRenderer>().sprite
+            //    = HeroTokenSprites.Instance.heroSelectedSprite;
 
             //hero.IsSelected = true;
 
             // Set the hero as already selected.
             WorldMapLoad.Instance.CurrentlySelectedHero = spawnedHeroToken;
-            TokenStacking.Instance.heroIndexNumber = heroListIndex;
+            //TokenStacking.Instance.heroIndexNumber = heroListIndex;
 
-            hero.location
-                = WorldMapLoad.Instance.CurrentlySelectedCounty;
+
 
             WorldMapLoad.Instance.heroInfoPanel.SetActive(true);
             WorldMapLoad.Instance.countyInfoPanel.SetActive(false);

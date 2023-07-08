@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TokenInfo : MonoBehaviour
 {
-    public static TokenInfo Instance;
+    //public static TokenInfo Instance;
 
     public Hero hero;
     public SpawnedTokenList spawnedTokenList;
@@ -35,11 +35,13 @@ public class TokenInfo : MonoBehaviour
         }
     }
 
+    /*
     private void Awake()
     {
         Instance = this;
     }
 
+    */
     private void OnEnable()
     {
         nameGameObject.SetActive(true);

@@ -81,7 +81,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         WorldMapLoad.Instance.heroInfoPanel.SetActive(false);
         WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
 
-        if (WorldMapLoad.Instance.playerFaction == WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name) //|| WorldMapLoad.Instance.DevView == true
+        if (WorldMapLoad.Instance.playerFaction.factionNameAndColor.name == WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name)
         {
             UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(true);
             if (UICountyPanel.Instance.buildingsPanelExpanded == false)
@@ -210,7 +210,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         //Debug.Log("Player Faction : " + WorldMapLoad.Instance.playerFaction);
         //Debug.Log("Can See County Info? " + WorldMapLoad.Instance.DevView);
         if (WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name ==
-            WorldMapLoad.Instance.playerFaction)
+            WorldMapLoad.Instance.playerFaction.factionNameAndColor.name)
         {
             CheckForHeroes(); // Check to see if this county has any heroes in it.
         }
@@ -218,7 +218,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         //CheckForArmies(); // Check to see if this county has any spawnedArmies in it.
 
         // This is just some temp bullshit to not allow you to look at counties you don't own.
-        if (WorldMapLoad.Instance.playerFaction ==
+        if (WorldMapLoad.Instance.playerFaction.factionNameAndColor.name ==
             WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name)
         {
             UICountyPanel.Instance.countyPopulationText.text =

@@ -10,7 +10,7 @@ public class Hero
     */
 
 
-    
+
     //public HeroMovement heroMovement; // We might be able to get rid of this because we are assigning the gameobject
     // to currentlySelectedHero;
     //public List<HeroStack> heroStacks;
@@ -19,21 +19,21 @@ public class Hero
 
     public GameObject gameObject;
     public CountyPopulation countyPopulation;
-    public string owner;
-    public string location;
-    public string destination;
+    public Faction faction;
+    public GameObject location;
+    public GameObject destination;
 
     public bool justMoved;
     public bool startTimer;
     public bool isCountingDown;
 
-    public Hero(GameObject gameObject, CountyPopulation countyPopulation, string owner,   string location,  string destination, bool justMoved,
-        bool startTimer, bool isCountingDown)
+    public Hero(GameObject gameObject, CountyPopulation countyPopulation, Faction faction, GameObject location
+        , GameObject destination, bool justMoved, bool startTimer, bool isCountingDown)
     {
         this.gameObject = gameObject;
         this.countyPopulation = countyPopulation;
 
-        this.owner = owner;
+        this.faction = faction;
         this.location = location;
         this.destination = destination;
 

@@ -28,8 +28,10 @@ public class UIPopulationInfoPanel : MonoBehaviour
             for (int i = 0; i < countyList.Count; i++)
             {
                 GameObject population = Instantiate(prefabHorizontalPopulationListText, parentPopulationListGroup.transform);
-
+                //Debug.Log("UI Population Info Panel: " + countyList[i].firstName + " " + countyList[i].lastName);
+                population.GetComponent<UIPopulationListInfo>().countyPopulation = countyList[i];
                 populationListClones.Add(population); // We need to kill all the kids instead of making a pointless list.
+
 
                 // Rename all the Game Objects in the list to the index for later clickablity.
                 // We can probably ditch this shit too.

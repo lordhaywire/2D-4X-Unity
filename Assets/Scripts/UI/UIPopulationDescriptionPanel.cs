@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,17 +27,24 @@ public class UIPopulationDescriptionPanel : MonoBehaviour
         WorldMapLoad.Instance.populationInfoPanel.SetActive(false);
 
         PopulationDescriptionPanelRefesh();
-        // Gives 1 frame of time before the panel refreshes, otherwise it bugs out.
-        //StartCoroutine(AfterWaitForOneFrame());
     }
 
     private void PopulationDescriptionPanelRefesh()
     {
+        StartCoroutine(AfterWaitForOneFrame());
+
+    }
+
+    IEnumerator AfterWaitForOneFrame()
+    {
+        yield return null;
+
         CountyPopulation countyPopulation = WorldMapLoad.Instance.currentlySelectedCountyPopulation;
+        Debug.Log("County Population First Name: " + countyPopulation.firstName);
         populationNameText.text = $"{countyPopulation.firstName} {countyPopulation.lastName}";
         constructionSkillText.text = $"Construction: {countyPopulation.constructionSkill}";
 
-        if(countyPopulation.hero != null)
+        if (countyPopulation.hero != null)
         {
             recruitButton.interactable = false;
         }
@@ -44,21 +53,12 @@ public class UIPopulationDescriptionPanel : MonoBehaviour
             recruitButton.interactable = true;
         }
 
-        if(countyPopulation.leaderOfPeoplePerk == true)
+        if (countyPopulation.leaderOfPeoplePerk == true)
         {
             leaderOfPeoplePerkGameObject.SetActive(true);
         }
     }
 
-    /*
-    // I hate this.
-    IEnumerator AfterWaitForOneFrame()
-    {
-        yield return null;
-
-        PopulationDescriptionPanelRefesh();
-    }
-    */
     private void OnDisable()
     {
         TimeKeeper.Instance.UnpauseTime();

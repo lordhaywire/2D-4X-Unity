@@ -35,7 +35,7 @@ public class UIBuildingChecker : MonoBehaviour
                 == AllText.Jobs.IDLE)
             {
                 unemployed++; // Can we get rid of the incrementing?
-                Debug.Log("Unemployed: " + unemployed);
+                //Debug.Log("Unemployed: " + unemployed);
             }
         }
         //Debug.Log("Unemployed: " + unemployed);

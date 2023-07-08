@@ -715,14 +715,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3942263051b1d654bb8fffd379db4085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hero:
+    gameObject: {fileID: 0}
+    owner: 
+    location: 
+    destination: 
+    justMoved: 0
+    startTimer: 0
+    isCountingDown: 0
   nameText: {fileID: 0}
-  nameGameObject: {fileID: 0}
+  nameGameObject: {fileID: 1984798671607724818}
   counterGameObject: {fileID: 5436810105093668824}
   spriteRenderer: {fileID: 5666813678520692907}
-  counterText: {fileID: 1316492368640986990}
   timerCanvas: {fileID: 1101061004}
   counterCanvas: {fileID: 4840781157083331858}
   nameCanvas: {fileID: 2833895730042432053}
+  counterText: {fileID: 1316492368640986990}
 --- !u!114 &5062811573372759088
 MonoBehaviour:
   m_ObjectHideFlags: 0

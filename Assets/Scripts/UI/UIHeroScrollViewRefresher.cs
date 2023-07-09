@@ -16,48 +16,34 @@ public class UIHeroScrollViewRefresher : MonoBehaviour
 
     private void OnEnable()
     {
-        if (WorldMapLoad.Instance.playerFaction.factionNameAndColor.name == WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].faction.factionNameAndColor.name)
+        if (WorldMapLoad.Instance.playerFaction.factionNameAndColor.name 
+            == WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].faction.factionNameAndColor.name)
         {
             RefreshPanel();
         }
-        else
-        {
-            Debug.Log("Not your county, mother fucker.");
-        }
-
     }
 
     public void RefreshPanel()
     {
         var heroesList = WorldMapLoad.Instance.heroes;
-        //var heroTokens = WorldMapLoad.Instance.countyHeroTokens;
 
         DestroyPanel();
 
-        //Debug.Log("Refresh Panel");
-
-
-        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].faction.factionNameAndColor.name
+        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].faction.factionNameAndColor.name
             == WorldMapLoad.Instance.playerFaction.factionNameAndColor.name)
         {
-            //Debug.Log("Refresh Panel Currently Selected County: " + WorldMapLoad.Instance.CurrentlySelectedCounty);
             for (int i = 0; i < heroesList.Count; i++)
             {
-                if (heroesList[i].location.name == WorldMapLoad.Instance.CurrentlySelectedCounty)
+                if (heroesList[i].location.name == WorldMapLoad.Instance.CurrentlySelectedCounty.name)
                 {
 
                     GameObject UIhero = Instantiate(prefabHeroButton, parentHeroListGroup.transform);
 
                     UIhero.GetComponent<UIHeroListButton>().hero = heroesList[i];
-
-                    // We need to set the name text of the UIHeroListButton.
-
-                    //$"{heroesList[i].countyPopulation.firstName} {heroesList[i].countyPopulation.lastName}";
                 }
             }
             
             int childCount = parentHeroListGroup.transform.childCount;
-            //Debug.Log("Child count: " + childCount);
             if(childCount == 0)
             {
                 heroScrollView.SetActive(false);
@@ -73,10 +59,8 @@ public class UIHeroScrollViewRefresher : MonoBehaviour
     {
         foreach (Transform child in parentHeroListGroup.transform)
         {
-            Debug.Log("Destroying: " + child.gameObject.name);
             Destroy(child.gameObject);
         }
-        Debug.Log("Everything destroyed?");
     }
 
     private void OnDisable()

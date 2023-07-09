@@ -9,6 +9,7 @@ public class CountyListCreator : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
         for (int i = 0; i < transform.childCount; i++)
         {
             countiesList.Add(new CountyList(transform.GetChild(i).name, transform.GetChild(i).gameObject));

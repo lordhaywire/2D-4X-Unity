@@ -5,36 +5,28 @@ using UnityEngine.UI;
 
 public class UIHeroListButton : MonoBehaviour
 {
-    //public static UIHeroListButton Instance;
-
     public Hero hero;
     public Toggle heroSpawnedToggle;
 
-    /*
-    private void Awake()
-    {
-        Instance = this;
-    }
-    */
     private void OnEnable()
     {
-        // Gives 1 frame of time before the panel refreshes, otherwise it bugs out.
-        // This gameobject is getting Instantiated then the Hero list is being assigned to hero and I think it is happening
-        // after this is "enabled."
-        //StartCoroutine(AfterWaitForOneFrame());
-        TextUpdate();
+        StartCoroutine(TextUpdate());
+        
         CheckIfHeroSpawned();
     }
 
-    private void TextUpdate()
+    IEnumerator TextUpdate()
     {
+        yield return null;
         GetComponent<TextMeshProUGUI>().text = $"{hero.countyPopulation.firstName} {hero.countyPopulation.lastName}";
     }
 
     public void HeroListButtonClicked()
     {
-        Debug.Log("Game Object Name: " + gameObject.name);
+        // Closes the Description Panel then reopens it so it refreshes.
+        WorldMapLoad.Instance.populationDescriptionPanel.SetActive(false);
         WorldMapLoad.Instance.populationDescriptionPanel.SetActive(true);
+
         WorldMapLoad.Instance.currentlySelectedCountyPopulation =
             hero.countyPopulation;
         WorldMapLoad.Instance.populationDescriptionPanelOpen = true;
@@ -43,25 +35,11 @@ public class UIHeroListButton : MonoBehaviour
 
     private void CheckIfHeroSpawned()
     {
+        // This is the code that is causing us to have to have an if statement in UIHeroSpawnToggle
         if (hero.gameObject != null)
         {
             heroSpawnedToggle.isOn = true;
             heroSpawnedToggle.interactable = false;
         }
-        else
-        {
-            //Debug.Log("Is Spawned is false");
-        }
     }
-    IEnumerator AfterWaitForOneFrame()
-    {
-        yield return null;
-
-        Debug.Log("Name: " + gameObject.name + " Currently Selected Hero: "
-            + WorldMapLoad.Instance.CurrentlySelectedHero);
-
-    }
-
-
-
 }

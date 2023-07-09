@@ -23,14 +23,10 @@ public class UICountyPanel : MonoBehaviour
     }
     public void PopulationButton()
     {
-        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].faction.factionNameAndColor.name ==
+        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].faction.factionNameAndColor.name ==
             WorldMapLoad.Instance.playerFaction.factionNameAndColor.name)
         {
             populationInfoPanel.SetActive(true);
-        }
-        else
-        {
-            Debug.Log("You don't own this county, fuck brain.");
         }
     }
 }

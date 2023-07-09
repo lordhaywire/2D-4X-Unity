@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 19502180}
   - component: {fileID: 19502183}
   - component: {fileID: 19502181}
+  - component: {fileID: 19502185}
   - component: {fileID: 19502182}
   - component: {fileID: 19502184}
   m_Layer: 0
@@ -549,6 +550,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec6aed0576fb2e42b4bc13dcb946f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnedTokenList: []
+--- !u!114 &19502185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19502179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583f05b34342a2742b35053f1bae5e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  county:
+    countyID: 0
+    isCapital: 0
+    gameObject: {fileID: 0}
+    spriteRenderer: {fileID: 0}
+    faction:
+      factionNameAndColor:
+        factionID: 0
+        name: 
+        color32:
+          serializedVersion: 2
+          rgba: 0
+      researchItems: []
+      influence: 0
+      money: 0
+      food: 0
+      scrap: 0
+    province: 
+    biomePrimary: 
+    biomeSecondary: 
+    biomeTertiary: 
+    spawnedHeroCount: 0
+    currentlyWorkingPopulation: 0
+    population: 0
+  armySpawn: {fileID: 142613842}
+  heroSpawn: {fileID: 35545027}
 --- !u!1 &20212083
 GameObject:
   m_ObjectHideFlags: 0
@@ -3190,7 +3230,7 @@ Transform:
   - {fileID: 1628319666}
   - {fileID: 19502180}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &249060079
 MonoBehaviour:
@@ -3767,7 +3807,7 @@ RectTransform:
   - {fileID: 1462681377}
   - {fileID: 2084734599}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3785,6 +3825,7 @@ GameObject:
   - component: {fileID: 285694181}
   - component: {fileID: 285694182}
   - component: {fileID: 285694183}
+  - component: {fileID: 285694186}
   - component: {fileID: 285694184}
   - component: {fileID: 285694185}
   m_Layer: 0
@@ -4114,6 +4155,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec6aed0576fb2e42b4bc13dcb946f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnedTokenList: []
+--- !u!114 &285694186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285694180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583f05b34342a2742b35053f1bae5e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  county:
+    countyID: 0
+    isCapital: 0
+    gameObject: {fileID: 0}
+    spriteRenderer: {fileID: 0}
+    faction:
+      factionNameAndColor:
+        factionID: 0
+        name: 
+        color32:
+          serializedVersion: 2
+          rgba: 0
+      researchItems: []
+      influence: 0
+      money: 0
+      food: 0
+      scrap: 0
+    province: 
+    biomePrimary: 
+    biomeSecondary: 
+    biomeTertiary: 
+    spawnedHeroCount: 0
+    currentlyWorkingPopulation: 0
+    population: 0
+  armySpawn: {fileID: 1795166296}
+  heroSpawn: {fileID: 1521357791}
 --- !u!1001 &295376126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5107,51 +5187,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344639666}
   m_CullTransparentMesh: 1
---- !u!1 &345109759
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 345109761}
-  - component: {fileID: 345109760}
-  m_Layer: 0
-  m_Name: Token Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &345109760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 345109759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fb94d61111a89e488ec392eaba38e5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heroIndexNumber: 0
---- !u!4 &345109761
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 345109759}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -110.86658, y: 173.20346, z: -1.0302061}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &353494218
 GameObject:
   m_ObjectHideFlags: 0
@@ -10433,8 +10468,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8c985dc8d71d648931e744aa792209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentlyRightClickedCounty: 
-  currentlySelectedCounty: 
+  tokenSpeed: 0
+  currentlyRightClickedCounty: {fileID: 0}
+  currentlySelectedCounty: {fileID: 0}
   countyInfoPanelGameObject: {fileID: 155121155}
   currentlySelectedHero: {fileID: 0}
   totalCapitolPop: 20
@@ -10447,13 +10483,23 @@ MonoBehaviour:
   populationDescriptionPanelOpen: 0
   populationInfoPanelOpen: 0
   populationInfoPanelOpenedByHeroListClick: 0
-  DevView: 1
   countyInfoPanel: {fileID: 155121155}
   heroInfoPanel: {fileID: 1246091702}
   armyInfoPanel: {fileID: 738409371}
   populationInfoPanel: {fileID: 2144487633}
   populationDescriptionPanel: {fileID: 248797748}
-  playerFaction: 
+  playerFaction:
+    factionNameAndColor:
+      factionID: 0
+      name: 
+      color32:
+        serializedVersion: 2
+        rgba: 0
+    researchItems: []
+    influence: 0
+    money: 0
+    food: 0
+    scrap: 0
   playerFactionID: 0
   dailyInfluenceGain: 1
   costOfHero: 500
@@ -11001,7 +11047,7 @@ RectTransform:
   m_Children:
   - {fileID: 1943145296}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11754,18 +11800,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1078402821}
-        m_TargetAssemblyTypeName: Banker, Assembly-CSharp
-        m_MethodName: RemoveCostOfHeroButton
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13002,6 +13036,7 @@ GameObject:
   - component: {fileID: 889005930}
   - component: {fileID: 889005933}
   - component: {fileID: 889005931}
+  - component: {fileID: 889005935}
   - component: {fileID: 889005932}
   - component: {fileID: 889005934}
   m_Layer: 0
@@ -13235,6 +13270,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec6aed0576fb2e42b4bc13dcb946f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnedTokenList: []
+--- !u!114 &889005935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889005929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583f05b34342a2742b35053f1bae5e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  county:
+    countyID: 0
+    isCapital: 0
+    gameObject: {fileID: 0}
+    spriteRenderer: {fileID: 0}
+    faction:
+      factionNameAndColor:
+        factionID: 0
+        name: 
+        color32:
+          serializedVersion: 2
+          rgba: 0
+      researchItems: []
+      influence: 0
+      money: 0
+      food: 0
+      scrap: 0
+    province: 
+    biomePrimary: 
+    biomeSecondary: 
+    biomeTertiary: 
+    spawnedHeroCount: 0
+    currentlyWorkingPopulation: 0
+    population: 0
+  armySpawn: {fileID: 227570533}
+  heroSpawn: {fileID: 717136140}
 --- !u!1 &892772828
 GameObject:
   m_ObjectHideFlags: 0
@@ -13441,8 +13515,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -477.5514, y: -217.06885}
-  m_SizeDelta: {x: 955.1028, y: 434.1377}
+  m_AnchoredPosition: {x: -415.61597, y: -218.98041}
+  m_SizeDelta: {x: 1069.5778, y: 437.9608}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910294438
 MonoBehaviour:
@@ -13493,6 +13567,7 @@ GameObject:
   - component: {fileID: 916023829}
   - component: {fileID: 916023830}
   - component: {fileID: 916023831}
+  - component: {fileID: 916023834}
   - component: {fileID: 916023832}
   - component: {fileID: 916023833}
   m_Layer: 0
@@ -13742,6 +13817,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec6aed0576fb2e42b4bc13dcb946f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnedTokenList: []
+--- !u!114 &916023834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916023828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583f05b34342a2742b35053f1bae5e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  county:
+    countyID: 0
+    isCapital: 0
+    gameObject: {fileID: 0}
+    spriteRenderer: {fileID: 0}
+    faction:
+      factionNameAndColor:
+        factionID: 0
+        name: 
+        color32:
+          serializedVersion: 2
+          rgba: 0
+      researchItems: []
+      influence: 0
+      money: 0
+      food: 0
+      scrap: 0
+    province: 
+    biomePrimary: 
+    biomeSecondary: 
+    biomeTertiary: 
+    spawnedHeroCount: 0
+    currentlyWorkingPopulation: 0
+    population: 0
+  armySpawn: {fileID: 2101913301}
+  heroSpawn: {fileID: 1356585801}
 --- !u!1 &919394856
 GameObject:
   m_ObjectHideFlags: 0
@@ -16302,7 +16416,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1091607102
 GameObject:
@@ -17726,7 +17840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5666813678520692906, guid: 1a06c7212f41df841b4359e1e258c056, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5666813678520692906, guid: 1a06c7212f41df841b4359e1e258c056, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18567,6 +18681,7 @@ GameObject:
   - component: {fileID: 1365887284}
   - component: {fileID: 1365887285}
   - component: {fileID: 1365887286}
+  - component: {fileID: 1365887289}
   - component: {fileID: 1365887287}
   - component: {fileID: 1365887288}
   m_Layer: 0
@@ -18823,6 +18938,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec6aed0576fb2e42b4bc13dcb946f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnedTokenList: []
+--- !u!114 &1365887289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365887283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583f05b34342a2742b35053f1bae5e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  county:
+    countyID: 0
+    isCapital: 0
+    gameObject: {fileID: 0}
+    spriteRenderer: {fileID: 0}
+    faction:
+      factionNameAndColor:
+        factionID: 0
+        name: 
+        color32:
+          serializedVersion: 2
+          rgba: 0
+      researchItems: []
+      influence: 0
+      money: 0
+      food: 0
+      scrap: 0
+    province: 
+    biomePrimary: 
+    biomeSecondary: 
+    biomeTertiary: 
+    spawnedHeroCount: 0
+    currentlyWorkingPopulation: 0
+    population: 0
+  armySpawn: {fileID: 1193097061}
+  heroSpawn: {fileID: 1460320580}
 --- !u!1 &1371332148
 GameObject:
   m_ObjectHideFlags: 0
@@ -21085,8 +21239,10 @@ GameObject:
   - component: {fileID: 1537027674}
   - component: {fileID: 1537027675}
   - component: {fileID: 1537027676}
+  - component: {fileID: 1537027680}
   - component: {fileID: 1537027677}
   - component: {fileID: 1537027678}
+  - component: {fileID: 1537027679}
   m_Layer: 0
   m_Name: Cowlitz
   m_TagString: Untagged
@@ -21353,6 +21509,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec6aed0576fb2e42b4bc13dcb946f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnedTokenList: []
+--- !u!114 &1537027679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537027673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583f05b34342a2742b35053f1bae5e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  county:
+    countyID: 0
+    isCapital: 0
+    gameObject: {fileID: 0}
+    spriteRenderer: {fileID: 0}
+    faction:
+      factionNameAndColor:
+        factionID: 0
+        name: 
+        color32:
+          serializedVersion: 2
+          rgba: 0
+      researchItems: []
+      influence: 0
+      money: 0
+      food: 0
+      scrap: 0
+    province: 
+    biomePrimary: 
+    biomeSecondary: 
+    biomeTertiary: 
+    spawnedHeroCount: 0
+    currentlyWorkingPopulation: 0
+    population: 0
+  armySpawn: {fileID: 0}
+  heroSpawn: {fileID: 0}
+--- !u!114 &1537027680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537027673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583f05b34342a2742b35053f1bae5e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  county:
+    countyID: 0
+    isCapital: 0
+    gameObject: {fileID: 0}
+    spriteRenderer: {fileID: 0}
+    faction:
+      factionNameAndColor:
+        factionID: 0
+        name: 
+        color32:
+          serializedVersion: 2
+          rgba: 0
+      researchItems: []
+      influence: 0
+      money: 0
+      food: 0
+      scrap: 0
+    province: 
+    biomePrimary: 
+    biomeSecondary: 
+    biomeTertiary: 
+    spawnedHeroCount: 0
+    currentlyWorkingPopulation: 0
+    population: 0
+  armySpawn: {fileID: 142921182}
+  heroSpawn: {fileID: 1377409167}
 --- !u!1 &1539136297
 GameObject:
   m_ObjectHideFlags: 0
@@ -21447,7 +21680,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1543565168
 MonoBehaviour:
@@ -22028,6 +22261,7 @@ GameObject:
   - component: {fileID: 1628319666}
   - component: {fileID: 1628319669}
   - component: {fileID: 1628319667}
+  - component: {fileID: 1628319671}
   - component: {fileID: 1628319668}
   - component: {fileID: 1628319670}
   m_Layer: 0
@@ -22243,6 +22477,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec6aed0576fb2e42b4bc13dcb946f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnedTokenList: []
+--- !u!114 &1628319671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628319665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583f05b34342a2742b35053f1bae5e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  county:
+    countyID: 0
+    isCapital: 0
+    gameObject: {fileID: 0}
+    spriteRenderer: {fileID: 0}
+    faction:
+      factionNameAndColor:
+        factionID: 0
+        name: 
+        color32:
+          serializedVersion: 2
+          rgba: 0
+      researchItems: []
+      influence: 0
+      money: 0
+      food: 0
+      scrap: 0
+    province: 
+    biomePrimary: 
+    biomeSecondary: 
+    biomeTertiary: 
+    spawnedHeroCount: 0
+    currentlyWorkingPopulation: 0
+    population: 0
+  armySpawn: {fileID: 1115387479}
+  heroSpawn: {fileID: 1289274623}
 --- !u!1 &1629445698
 GameObject:
   m_ObjectHideFlags: 0
@@ -23033,7 +23306,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1667418927
 GameObject:
@@ -29369,7 +29642,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2140408007
 MonoBehaviour:

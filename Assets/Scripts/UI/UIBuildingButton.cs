@@ -24,7 +24,6 @@ public class UIBuildingButton : MonoBehaviour
             //Debug.Log("Current Building.");
             UICurrentBuildingsPanel.Instance.buildingDescriptionPanel.SetActive(true);
             UIPossibleBuildingsPanel.Instance.buildingDescriptionPanel.SetActive(false);
-            Debug.Log("UIBuildingButton Current Building Number: " + name);
             UICurrentBuildingsPanel.Instance.CurrentBuildingNumber = int.Parse(name);
         }
     }

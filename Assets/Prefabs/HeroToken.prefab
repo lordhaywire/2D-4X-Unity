@@ -717,13 +717,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hero:
     gameObject: {fileID: 0}
-    owner: 
-    location: 
-    destination: 
+    faction:
+      factionNameAndColor:
+        factionID: 0
+        name: 
+        color32:
+          serializedVersion: 2
+          rgba: 0
+      researchItems: []
+      influence: 0
+      money: 0
+      food: 0
+      scrap: 0
+    location: {fileID: 0}
+    destination: {fileID: 0}
     justMoved: 0
     startTimer: 0
     isCountingDown: 0
-  nameText: {fileID: 0}
+  nameText: {fileID: 5303660249292316973}
   nameGameObject: {fileID: 1984798671607724818}
   counterGameObject: {fileID: 5436810105093668824}
   spriteRenderer: {fileID: 5666813678520692907}
@@ -746,7 +757,6 @@ MonoBehaviour:
   timerCanvasGameObject: {fileID: 1101061000}
   timerText: {fileID: 228796798}
   heroMove: 0
-  speed: 20
   isTimeToDestinationSet: 0
 --- !u!1 &5902234253197047548
 GameObject:

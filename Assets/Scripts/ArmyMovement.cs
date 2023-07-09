@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ArmyMovement : MonoBehaviour
 {
+    /*
     private float localMinutes;
     private int localHours;
     private int localDays;
@@ -135,7 +136,7 @@ public class ArmyMovement : MonoBehaviour
     }
     private void Move()
     {
-
+        /*
         Vector2 targetPosition = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].destination].countyCenterGameObject.transform.position;
 
         float closeEnough = .1f;
@@ -162,6 +163,8 @@ public class ArmyMovement : MonoBehaviour
             isTimeToDestinationSet = false;
             WorldMapLoad.Instance.spawnedArmies[int.Parse(name)].isCountingDown = false;
         }
+        
     }
+    */
 }
 

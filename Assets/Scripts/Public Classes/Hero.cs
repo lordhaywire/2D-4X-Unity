@@ -4,19 +4,6 @@ using UnityEngine;
 [Serializable]
 public class Hero
 {
-    /*
-    public int heroIndex;
-    public int heroStackIndex;
-    */
-
-
-
-    //public HeroMovement heroMovement; // We might be able to get rid of this because we are assigning the gameobject
-    // to currentlySelectedHero;
-    //public List<HeroStack> heroStacks;
-    //public TokenInfo tokenInfo; // We don't need this here, I don't think.
-    //public bool isSpawned;
-
     public GameObject gameObject;
     public CountyPopulation countyPopulation;
     public Faction faction;
@@ -40,19 +27,5 @@ public class Hero
         this.justMoved = justMoved;
         this.startTimer = startTimer;
         this.isCountingDown = isCountingDown;
-
-        /*
-        this.gameObject = gameObject;
-        this.heroMovement = heroMovement;
-        this.tokenInfo = tokenComponents;
-        this.isSpawned = isSpawned;
-        */
-
-        /*
-        this.heroIndex = heroIndex;
-        this.heroStackIndex = heroStackIndex;
-        this.countyPopulationIndex = countyPopulationIndex;
-        */
-
     }
 }

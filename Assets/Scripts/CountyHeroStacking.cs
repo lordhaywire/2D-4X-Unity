@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class CountyHeroStacking : MonoBehaviour
 {
-    private List<SpawnedTokenList> spawnedTokenList = new();
+    public List<GameObject> spawnedTokenList = new();
 
     public void StackTokens()
     {
         for (int i = 0; i < spawnedTokenList.Count; i++)
         {
-            Hero hero = spawnedTokenList[i].gameObject.GetComponent<TokenInfo>().hero;
+            Hero hero = spawnedTokenList[i].GetComponent<TokenInfo>().hero;
             GameObject county = hero.location;
 
             // Change each token's order to be lower then the one on "top" of it.
@@ -18,26 +18,26 @@ public class CountyHeroStacking : MonoBehaviour
 
             if (spawnedTokenList.Count > 1)
             {
-                spawnedTokenList[0].gameObject.GetComponent<TokenInfo>().counterGameObject.SetActive(true);
+                spawnedTokenList[0].GetComponent<TokenInfo>().counterGameObject.SetActive(true);
             }
             else
             {
-                spawnedTokenList[0].gameObject.GetComponent<TokenInfo>().counterGameObject.SetActive(false);
+                spawnedTokenList[0].GetComponent<TokenInfo>().counterGameObject.SetActive(false);
             }
 
             if (i == 0)
             {
-                spawnedTokenList[i].gameObject.GetComponentInChildren<TokenInfo>().nameGameObject.SetActive(true);
+                spawnedTokenList[i].GetComponentInChildren<TokenInfo>().nameGameObject.SetActive(true);
 
-                spawnedTokenList[i].gameObject.transform.position = county.GetComponent<CountyInfo>().heroSpawn.transform.position;
+                spawnedTokenList[i].transform.position = county.GetComponent<CountyInfo>().heroSpawn.transform.position;
 
-                WorldMapLoad.Instance.CurrentlySelectedHero = spawnedTokenList[i].gameObject;
+                WorldMapLoad.Instance.CurrentlySelectedHero = spawnedTokenList[i];
             }
             else
             {
-                spawnedTokenList[i].gameObject.GetComponentInChildren<TokenInfo>().nameGameObject.SetActive(false);
-                spawnedTokenList[i].gameObject.GetComponent<TokenInfo>().counterGameObject.SetActive(false);
-                spawnedTokenList[i].gameObject.transform.position
+                spawnedTokenList[i].GetComponentInChildren<TokenInfo>().nameGameObject.SetActive(false);
+                spawnedTokenList[i].GetComponent<TokenInfo>().counterGameObject.SetActive(false);
+                spawnedTokenList[i].transform.position
                     = new Vector2(county.GetComponent<CountyInfo>().heroSpawn.transform.position.x + (i * 0.1f)
                     , county.GetComponent<CountyInfo>().heroSpawn.transform.position.y);
             }

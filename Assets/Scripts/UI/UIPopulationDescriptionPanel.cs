@@ -40,7 +40,6 @@ public class UIPopulationDescriptionPanel : MonoBehaviour
         yield return null;
 
         CountyPopulation countyPopulation = WorldMapLoad.Instance.currentlySelectedCountyPopulation;
-        Debug.Log("County Population First Name: " + countyPopulation.firstName);
         populationNameText.text = $"{countyPopulation.firstName} {countyPopulation.lastName}";
         constructionSkillText.text = $"Construction: {countyPopulation.constructionSkill}";
 

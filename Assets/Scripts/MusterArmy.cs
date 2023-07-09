@@ -6,19 +6,20 @@ public class MusterArmy : MonoBehaviour
     [SerializeField] private GameObject unitPrefab;
     [SerializeField] private GameObject armyListGameObject;
 
-    //private int numberOfArmies = 0; // This is the current number of spawnedArmies spawned by the player.
     public void MusterArmyButton()
     {
+        Debug.Log("Muster Army Button Pressed");
+        /*
         // This is so we can only create the army in our own counties.
-        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].faction.factionNameAndColor.name
-            == WorldMapLoad.Instance.playerFaction)
+        if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].faction.factionNameAndColor.name
+            == WorldMapLoad.Instance.playerFaction.factionNameAndColor.name)
         {
             var armyNumber = WorldMapLoad.Instance.spawnedArmies.Count;
             var spawnedArmyToken = new SpawnedArmy(null, null, null, null, null, null,false, false,false, "Player", "Fuck Stick" + armyNumber, Random.Range(1, 1001));
 
             WorldMapLoad.Instance.spawnedArmies.Add(spawnedArmyToken);
 
-            spawnedArmyToken.gameObject = Instantiate(unitPrefab, WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].countyCenterGameObject.transform.position,
+            spawnedArmyToken.gameObject = Instantiate(unitPrefab, WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyInfo>().heroSpawn.transform.position,
               Quaternion.identity, armyListGameObject.transform);
             //Debug.Log("New SpawnedArmy Game Object: " + spawnedArmyToken.uIResearchItemPanelGameObject);
             // Change name of GameObject in the inspector
@@ -58,6 +59,6 @@ public class MusterArmy : MonoBehaviour
         {
             Debug.Log("You don't own this county, so you can't spawn armies here.");
         }
-
+        */
     }
 }

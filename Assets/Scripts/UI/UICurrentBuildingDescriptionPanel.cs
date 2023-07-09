@@ -39,7 +39,8 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
     private void PanelRefresh()
     { 
         var currentBuildings =
-            WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber];
+            WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name]
+            .currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber];
         nameText.text = currentBuildings.name;
         descriptionText.text = currentBuildings.description;
         workCompletedText.text = currentBuildings.workCompleted.ToString();

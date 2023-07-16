@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class HeroMovement : MonoBehaviour
 {
-    //public static HeroMovement Instance;
-
     public GameObject timerCanvasGameObject;
     public TextMeshProUGUI timerText;
     public bool heroMove;
+
     private float speed; // How fast the tokens move.
+
+    private TokenInfo tokenInfo;
 
     private float localMinutes;
     private int localHours;
@@ -66,6 +67,7 @@ public class HeroMovement : MonoBehaviour
     private void Awake()
     {
         speed = WorldMapLoad.Instance.tokenSpeed;
+        tokenInfo = GetComponent<TokenInfo>();
     }
 
     private void FixedUpdate()
@@ -81,34 +83,39 @@ public class HeroMovement : MonoBehaviour
     }
     public void StartHeroMovement()
     {
-        GameObject destination = WorldMapLoad.Instance.CurrentlySelectedHero.GetComponent<TokenInfo>().hero.destination;
+        Hero hero = GetComponent<TokenInfo>().hero;
 
-        if (isTimeToDestinationSet == true && destination != WorldMapLoad.Instance.currentlyRightClickedCounty)
+        if (hero.destination == null)
+        {
+            Debug.Log("Destination is null!");
+        }
+        else
+        {
+            Debug.Log(gameObject.name + " destination is " + hero.destination.name);
+        }
+
+        if (isTimeToDestinationSet == true && hero.destination != WorldMapLoad.Instance.currentlyRightClickedCounty)
         {
             StopTimer();
             return;
         }
+
         if (isTimeToDestinationSet == false)
         {
-            WorldMapLoad.Instance.CurrentlySelectedHero.GetComponent<TokenInfo>().hero.destination 
-                = WorldMapLoad.Instance.currentlyRightClickedCounty;
             SetInitialTime(); // This is the start of the timer, not hero movement.       
         }
     }
 
     private void SetInitialTime()
     {
-        if (isTimeToDestinationSet == false)
-        {
-            // This needs to be in the order of Days > Hours > Minutes so that the Getter setter works.
-            localDays = TimeKeeper.Instance.days + daysTillArrival;
-            LocalHours = TimeKeeper.Instance.Hours + hoursTillArrival;
-            LocalMinutes = TimeKeeper.Instance.minutes + minutesTillArrival;  //Cast from Float to Int.
+        // This needs to be in the order of Days > Hours > Minutes so that the Getter setter works.
+        localDays = TimeKeeper.Instance.days + daysTillArrival;
+        LocalHours = TimeKeeper.Instance.Hours + hoursTillArrival;
+        LocalMinutes = TimeKeeper.Instance.minutes + minutesTillArrival;  //Cast from Float to Int.
 
-            isTimeToDestinationSet = true;
+        isTimeToDestinationSet = true;
 
-            timerCanvasGameObject.SetActive(true);
-        }
+        timerCanvasGameObject.SetActive(true);
     }
 
     private void HeroTimer()
@@ -125,26 +132,24 @@ public class HeroMovement : MonoBehaviour
                 == LocalHours && TimeKeeper.Instance.minutes >= LocalMinutes)
             {
                 // Why is this here?
-                GetComponent<TokenInfo>().hero.startTimer = false;
+                tokenInfo.hero.startTimer = false;
 
                 // This starts the heroMovement for the hero to move.
                 timerCanvasGameObject.SetActive(false);
 
-                WorldMapLoad.Instance.CurrentlySelectedHero = null;
+                //WorldMapLoad.Instance.CurrentlySelectedHero = null;
 
                 // Timer is done, so this is false.
                 isTimeToDestinationSet = false;
 
                 // This needs to happen the minute the hero starts moving. Stacking the heroes starting location tokens.
-                GetComponent<TokenInfo>().hero.location.GetComponent<CountyHeroStacking>().StackTokens();
+                tokenInfo.hero.location.GetComponent<CountyHeroStacking>().StackTokens();
 
                 // This needs to happen here because the hero starting location would still have them in it.
                 ChangeSpawnedTokenList();
 
                 // Timer is done so hero should start moving.
                 heroMove = true;
-
-                //Debug.Log("Time is up!");
             }
         }
     }
@@ -163,7 +168,7 @@ public class HeroMovement : MonoBehaviour
         GameObject destination = GetComponent<TokenInfo>().hero.destination;
 
         // Turn off hero stack count because the hero is moving.
-        GetComponent<TokenInfo>().counterGameObject.SetActive(false);
+        tokenInfo.counterGameObject.SetActive(false);
 
         // Move the token.
         transform.position = Vector2.MoveTowards(transform.position, destination.transform.position, step);

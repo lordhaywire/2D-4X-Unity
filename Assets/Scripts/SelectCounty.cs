@@ -31,7 +31,11 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         {
             WorldMapLoad.Instance.currentlyRightClickedCounty = gameObject;
 
-            HeroRightClickCounty();
+            if (WorldMapLoad.Instance.CurrentlySelectedHero != null)
+            {
+                HeroRightClickCounty();
+            }
+
         }
     }
 
@@ -93,21 +97,19 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
     {
         GameObject currentHero = WorldMapLoad.Instance.CurrentlySelectedHero;
         HeroMovement heroMovement = currentHero.GetComponent<HeroMovement>();
+        Hero hero = currentHero.GetComponent<TokenInfo>().hero;
 
-        if (currentHero != null)
+        hero.destination = WorldMapLoad.Instance.currentlyRightClickedCounty;
+
+        if (heroMovement.isTimeToDestinationSet == true && hero.location == hero.destination)
         {
-            if (heroMovement.isTimeToDestinationSet == true && currentHero.GetComponent<TokenInfo>().hero.location ==
-            currentHero.GetComponent<TokenInfo>().hero.destination)
-            {
-                heroMovement.StopTimer();
-            }
-            else
-            {
-                heroMovement.StartHeroMovement();
-            }
+            heroMovement.StopTimer();
+        }
+        else
+        {
+            heroMovement.StartHeroMovement();
         }
     }
-
 
     private void DeselectHeroOnCountyClick()
     {

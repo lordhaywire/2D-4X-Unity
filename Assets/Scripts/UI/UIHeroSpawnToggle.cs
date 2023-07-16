@@ -28,6 +28,8 @@ public class UIHeroSpawnToggle : MonoBehaviour
             // This is set up this way so it gets the toggle on the GameObject.
             GetComponent<Toggle>().interactable = false;
 
+            spawnedHeroToken.name = hero.countyPopulation.firstName + " " + hero.countyPopulation.lastName;
+
             hero.gameObject = spawnedHeroToken;
             hero.location = WorldMapLoad.Instance.CurrentlySelectedCounty;
             spawnedHeroToken.GetComponent<TokenInfo>().hero = hero;

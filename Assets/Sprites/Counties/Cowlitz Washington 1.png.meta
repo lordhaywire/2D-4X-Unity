@@ -176,7 +176,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cowlitz Washington 1_0: -7891483991755950711
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -176,7 +176,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Harney Oregon 1_0: -5256214448519131613
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

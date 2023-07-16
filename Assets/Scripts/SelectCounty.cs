@@ -28,18 +28,45 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
         // Right Click
         if (eventData.button == PointerEventData.InputButton.Right)
-        {
+        {          
             WorldMapLoad.Instance.currentlyRightClickedCounty = gameObject;
 
-            if (WorldMapLoad.Instance.CurrentlySelectedHero != null)
+            if (WorldMapLoad.Instance.CurrentlySelectedToken != null)
             {
-                HeroRightClickCounty();
-            }
+                GameObject heroDestination 
+                    = WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().hero.destination;
+                
+                if (heroDestination == null)
+                {
+                    // Sets token destination in hero.
+                    WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().hero.destination
+                        = WorldMapLoad.Instance.currentlyRightClickedCounty;
 
+                    TokenMoveToCounty();
+                }
+                else
+                {
+                    if(WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().move == true 
+                        && WorldMapLoad.Instance.currentlyRightClickedCounty.GetComponent<CountyInfo>().tokenSpawn 
+                        != heroDestination.GetComponent<CountyInfo>().tokenSpawn)
+                    {
+                        TokenReturnHome();
+                    }
+                }
+            }
         }
     }
 
+    private void TokenReturnHome()
+    {
+        WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().move = false;
+        WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().returnHome = true;
+    }
 
+    private void TokenMoveToCounty()
+    {
+        WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().move = true;
+    }
 
     private void CloseDescriptionPanels()
     {
@@ -93,9 +120,10 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    /*
     private void HeroRightClickCounty()
     {
-        GameObject currentHero = WorldMapLoad.Instance.CurrentlySelectedHero;
+        GameObject currentHero = WorldMapLoad.Instance.CurrentlySelectedToken;
         HeroMovement heroMovement = currentHero.GetComponent<HeroMovement>();
         Hero hero = currentHero.GetComponent<TokenInfo>().hero;
 
@@ -110,15 +138,15 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             heroMovement.StartHeroMovement();
         }
     }
-
+    */
     private void DeselectHeroOnCountyClick()
     {
-        if (WorldMapLoad.Instance.CurrentlySelectedHero != null)
+        if (WorldMapLoad.Instance.CurrentlySelectedToken != null)
         {
-            WorldMapLoad.Instance.CurrentlySelectedHero = null;
+            WorldMapLoad.Instance.CurrentlySelectedToken = null;
         }
     }
-
+    
 
     // Is this supposed to be an event that UIBuildingPanelsRefresher subscribes to and refreshes when it is triggered?
     private void RefreshBuildingsPanels()

@@ -176,7 +176,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Wasco Oregon 1_0: -1860740902387375515
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

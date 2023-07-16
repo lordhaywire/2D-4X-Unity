@@ -29,17 +29,17 @@ public class CountyHeroStacking : MonoBehaviour
             {
                 spawnedTokenList[i].GetComponentInChildren<TokenInfo>().nameGameObject.SetActive(true);
 
-                spawnedTokenList[i].transform.position = county.GetComponent<CountyInfo>().heroSpawn.transform.position;
+                spawnedTokenList[i].transform.position = county.GetComponent<CountyInfo>().tokenSpawn.transform.position;
 
-                WorldMapLoad.Instance.CurrentlySelectedHero = spawnedTokenList[i];
+                WorldMapLoad.Instance.CurrentlySelectedToken = spawnedTokenList[i];
             }
             else
             {
                 spawnedTokenList[i].GetComponentInChildren<TokenInfo>().nameGameObject.SetActive(false);
                 spawnedTokenList[i].GetComponent<TokenInfo>().counterGameObject.SetActive(false);
                 spawnedTokenList[i].transform.position
-                    = new Vector2(county.GetComponent<CountyInfo>().heroSpawn.transform.position.x + (i * 0.1f)
-                    , county.GetComponent<CountyInfo>().heroSpawn.transform.position.y);
+                    = new Vector2(county.GetComponent<CountyInfo>().tokenSpawn.transform.position.x + (i * 0.1f)
+                    , county.GetComponent<CountyInfo>().tokenSpawn.transform.position.y);
             }
 
         }

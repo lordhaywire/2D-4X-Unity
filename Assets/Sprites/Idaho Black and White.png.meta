@@ -176,7 +176,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Idaho Black and White_0: 6219948018227091703
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

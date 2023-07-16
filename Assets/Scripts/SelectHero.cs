@@ -9,7 +9,7 @@ public class SelectHero : MonoBehaviour, IPointerClickHandler
         {
             if (GetComponent<HeroMovement>().heroMove == false)
             {
-                if(gameObject == WorldMapLoad.Instance.CurrentlySelectedHero)
+                if(gameObject == WorldMapLoad.Instance.CurrentlySelectedToken)
                 {
                     CountyHeroStacking countyHeroStacking = gameObject.GetComponent<TokenInfo>().hero.location.GetComponent<CountyHeroStacking>();
                     
@@ -20,7 +20,7 @@ public class SelectHero : MonoBehaviour, IPointerClickHandler
                 }
                 else
                 {
-                    WorldMapLoad.Instance.CurrentlySelectedHero = gameObject;
+                    WorldMapLoad.Instance.CurrentlySelectedToken = gameObject;
 
                     WorldMapLoad.Instance.heroInfoPanel.SetActive(true);
                     WorldMapLoad.Instance.countyInfoPanel.SetActive(false);

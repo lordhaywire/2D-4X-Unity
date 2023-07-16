@@ -66,7 +66,7 @@ public class HeroMovement : MonoBehaviour
 
     private void Awake()
     {
-        speed = WorldMapLoad.Instance.tokenSpeed;
+        speed = 10;
         tokenInfo = GetComponent<TokenInfo>();
     }
 
@@ -201,7 +201,7 @@ public class HeroMovement : MonoBehaviour
 
     private void ChangeSpawnedTokenList()
     {
-        Hero hero = WorldMapLoad.Instance.CurrentlySelectedHero.GetComponent<TokenInfo>().hero;
+        Hero hero = WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().hero;
         CountyHeroStacking startingCounty = hero.location.GetComponent<CountyHeroStacking>();
         CountyHeroStacking destinationCounty = hero.destination.GetComponent<CountyHeroStacking>();
 

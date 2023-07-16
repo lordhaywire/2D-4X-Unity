@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1101061001}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -170,7 +169,6 @@ RectTransform:
   m_Children:
   - {fileID: 228796797}
   m_Father: {fileID: 5666813678520692906}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -313,7 +311,6 @@ RectTransform:
   m_Children:
   - {fileID: 9062312481405930639}
   m_Father: {fileID: 5666813678520692906}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -456,7 +453,6 @@ RectTransform:
   m_Children:
   - {fileID: 7135529263688274226}
   m_Father: {fileID: 5666813678520692906}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -577,7 +573,7 @@ GameObject:
   - component: {fileID: 8012245619660347971}
   - component: {fileID: 1939168428307916755}
   - component: {fileID: 4252955109994803164}
-  - component: {fileID: 5062811573372759088}
+  - component: {fileID: 7180733170560862706}
   m_Layer: 0
   m_Name: HeroToken
   m_TagString: Untagged
@@ -592,6 +588,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5666813678520692905}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
@@ -601,7 +598,6 @@ Transform:
   - {fileID: 7062513882495024077}
   - {fileID: 8640910516899853909}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5666813678520692907
 SpriteRenderer:
@@ -742,7 +738,7 @@ MonoBehaviour:
   counterCanvas: {fileID: 4840781157083331858}
   nameCanvas: {fileID: 2833895730042432053}
   counterText: {fileID: 1316492368640986990}
---- !u!114 &5062811573372759088
+--- !u!114 &7180733170560862706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -751,13 +747,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5666813678520692905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 516556c52ffaf8947bb8dc4022c89ec0, type: 3}
+  m_Script: {fileID: 11500000, guid: a5f311ce5e17434469acf1822efc763b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerCanvasGameObject: {fileID: 1101061000}
-  timerText: {fileID: 228796798}
-  heroMove: 0
-  isTimeToDestinationSet: 0
 --- !u!1 &5902234253197047548
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,7 +781,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8640910516899853909}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -924,7 +915,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7062513882495024077}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

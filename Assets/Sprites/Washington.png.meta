@@ -176,7 +176,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Washington_0: 903129668741181174
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

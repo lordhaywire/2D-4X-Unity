@@ -9,7 +9,7 @@ public class UIHeroSpawnToggle : MonoBehaviour
     {
         Hero hero = GetComponentInParent<UIHeroListButton>().hero;
         var spawnedTokenList = WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyHeroStacking>().spawnedTokenList;
-        GameObject spawnLocation = WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyInfo>().heroSpawn;
+        GameObject spawnLocation = WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyInfo>().tokenSpawn;
         
         // I think I need this shit here.  With out this every time the hero list is refresh it respawns the heroes.
         // I know why this happens.  Every time the list is refreshed it checks marks the Toggle button automatically.
@@ -35,7 +35,7 @@ public class UIHeroSpawnToggle : MonoBehaviour
             spawnedHeroToken.GetComponent<TokenInfo>().hero = hero;
 
             // Set the hero as already selected.
-            WorldMapLoad.Instance.CurrentlySelectedHero = spawnedHeroToken;
+            WorldMapLoad.Instance.CurrentlySelectedToken = spawnedHeroToken;
             WorldMapLoad.Instance.heroInfoPanel.SetActive(true);
             WorldMapLoad.Instance.countyInfoPanel.SetActive(false);
             WorldMapLoad.Instance.armyInfoPanel.SetActive(false);

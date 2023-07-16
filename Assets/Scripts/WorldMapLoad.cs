@@ -9,7 +9,6 @@ public class WorldMapLoad : MonoBehaviour
 
     public event Action RefreshBuildingPanels;
 
-    public float tokenSpeed;
     public GameObject currentlyRightClickedCounty;
     public CountyPopulation currentlySelectedCountyPopulation;
 
@@ -36,7 +35,7 @@ public class WorldMapLoad : MonoBehaviour
     }
 
     [SerializeField] private GameObject currentlySelectedHero;
-    public GameObject CurrentlySelectedHero
+    public GameObject CurrentlySelectedToken
     {
         get
         {

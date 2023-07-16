@@ -176,7 +176,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Douglas Oregon 1_0: 7126969080992086745
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

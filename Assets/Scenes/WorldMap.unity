@@ -326,7 +326,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 142613843}
-  - {fileID: 35545028}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &19502182
@@ -442,8 +441,7 @@ MonoBehaviour:
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
-  armySpawn: {fileID: 142613842}
-  heroSpawn: {fileID: 35545027}
+  tokenSpawn: {fileID: 142613842}
 --- !u!60 &19502186
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1050,37 +1048,6 @@ RectTransform:
   m_AnchoredPosition: {x: -62.5, y: 0}
   m_SizeDelta: {x: 125, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &35545027
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 35545028}
-  m_Layer: 0
-  m_Name: Umatilla Hero Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &35545028
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35545027}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.78, y: -0.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 19502180}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &48541449
 GameObject:
   m_ObjectHideFlags: 0
@@ -4019,7 +3986,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1795166297}
-  - {fileID: 1521357792}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &285694182
@@ -4135,8 +4101,7 @@ MonoBehaviour:
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
-  armySpawn: {fileID: 1795166296}
-  heroSpawn: {fileID: 1521357791}
+  tokenSpawn: {fileID: 1795166296}
 --- !u!60 &285694187
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -10358,37 +10323,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &717136140
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 717136141}
-  m_Layer: 0
-  m_Name: Douglas Hero Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &717136141
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 717136140}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.13, y: -1.3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 889005930}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &730348899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10772,7 +10706,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8c985dc8d71d648931e744aa792209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tokenSpeed: 0
   currentlyRightClickedCounty: {fileID: 0}
   currentlySelectedCounty: {fileID: 0}
   countyInfoPanelGameObject: {fileID: 155121155}
@@ -13343,7 +13276,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 227570534}
-  - {fileID: 717136141}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &889005932
@@ -13459,8 +13391,7 @@ MonoBehaviour:
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
-  armySpawn: {fileID: 227570533}
-  heroSpawn: {fileID: 717136140}
+  tokenSpawn: {fileID: 227570533}
 --- !u!60 &889005936
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -14070,7 +14001,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2101913302}
-  - {fileID: 1356585802}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &916023830
@@ -14186,8 +14116,7 @@ MonoBehaviour:
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
-  armySpawn: {fileID: 2101913301}
-  heroSpawn: {fileID: 1356585801}
+  tokenSpawn: {fileID: 2101913301}
 --- !u!60 &916023835
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -17497,6 +17426,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103880770}
   m_CullTransparentMesh: 1
+--- !u!1 &1106664555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1106664557}
+  - component: {fileID: 1106664556}
+  m_Layer: 0
+  m_Name: Globals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1106664556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106664555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe232869d82d2c4ebc04a3d82ff7e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tokenSpeed: 5
+--- !u!4 &1106664557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106664555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.156962, y: 5.0222473, z: -9.831945}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1115387479
 GameObject:
   m_ObjectHideFlags: 0
@@ -18683,37 +18657,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285127316}
   m_CullTransparentMesh: 1
---- !u!1 &1289274623
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1289274624}
-  m_Layer: 0
-  m_Name: Harney Hero Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1289274624
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289274623}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.48, y: -1.39, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1628319666}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1293565463
 GameObject:
   m_ObjectHideFlags: 0
@@ -19352,37 +19295,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6674127218891363220, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
   m_PrefabInstance: {fileID: 1352426354}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1356585801
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1356585802}
-  m_Layer: 0
-  m_Name: Portland Hero Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1356585802
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1356585801}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.68, y: -0.88, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 916023829}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1365887283
 GameObject:
   m_ObjectHideFlags: 0
@@ -19418,7 +19330,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1193097062}
-  - {fileID: 1460320581}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1365887285
@@ -19534,8 +19445,7 @@ MonoBehaviour:
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
-  armySpawn: {fileID: 1193097061}
-  heroSpawn: {fileID: 1460320580}
+  tokenSpawn: {fileID: 1193097061}
 --- !u!60 &1365887290
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -20096,37 +20006,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6674127218891363220, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
   m_PrefabInstance: {fileID: 1372040859}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1377409167
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1377409168}
-  m_Layer: 0
-  m_Name: Cowlitz Hero Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1377409168
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377409167}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.42, y: -0.22, z: 0}
-  m_LocalScale: {x: 1.0526316, y: 1.0526316, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1537027674}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1382777141
 GameObject:
   m_ObjectHideFlags: 0
@@ -21274,37 +21153,6 @@ MonoBehaviour:
   notEnoughAssignedWorkersPanel: {fileID: 1798558005}
   areYouSurePanel: {fileID: 406029672}
   enoughInfluence: 0
---- !u!1 &1460320580
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1460320581}
-  m_Layer: 0
-  m_Name: Wasco Hero Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1460320581
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1460320580}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.31, y: -0.76, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1365887284}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1462681376
 GameObject:
   m_ObjectHideFlags: 0
@@ -22044,37 +21892,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520832053}
   m_CullTransparentMesh: 1
---- !u!1 &1521357791
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1521357792}
-  m_Layer: 0
-  m_Name: Tillamook Hero Spawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1521357792
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1521357791}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.06, y: -2.14, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 285694181}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1531895324
 GameObject:
   m_ObjectHideFlags: 0
@@ -22181,7 +21998,6 @@ GameObject:
   - component: {fileID: 1537027680}
   - component: {fileID: 1537027677}
   - component: {fileID: 1537027678}
-  - component: {fileID: 1537027679}
   m_Layer: 0
   m_Name: Cowlitz
   m_TagString: Untagged
@@ -22203,7 +22019,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 142921183}
-  - {fileID: 1377409168}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1537027675
@@ -22283,44 +22098,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnedTokenList: []
---- !u!114 &1537027679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537027673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 583f05b34342a2742b35053f1bae5e8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  county:
-    countyID: 0
-    isCapital: 0
-    gameObject: {fileID: 0}
-    spriteRenderer: {fileID: 0}
-    faction:
-      factionNameAndColor:
-        factionID: 0
-        name: 
-        color32:
-          serializedVersion: 2
-          rgba: 0
-      researchItems: []
-      influence: 0
-      money: 0
-      food: 0
-      scrap: 0
-    province: 
-    biomePrimary: 
-    biomeSecondary: 
-    biomeTertiary: 
-    spawnedHeroCount: 0
-    currentlyWorkingPopulation: 0
-    population: 0
-  armySpawn: {fileID: 0}
-  heroSpawn: {fileID: 0}
 --- !u!114 &1537027680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22357,8 +22134,7 @@ MonoBehaviour:
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
-  armySpawn: {fileID: 142921182}
-  heroSpawn: {fileID: 1377409167}
+  tokenSpawn: {fileID: 142921182}
 --- !u!60 &1537027681
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -23197,7 +22973,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1115387480}
-  - {fileID: 1289274624}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1628319668
@@ -23313,8 +23088,7 @@ MonoBehaviour:
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
-  armySpawn: {fileID: 1115387479}
-  heroSpawn: {fileID: 1289274623}
+  tokenSpawn: {fileID: 1115387479}
 --- !u!60 &1628319672
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -30710,6 +30484,7 @@ SceneRoots:
   - {fileID: 1557132589}
   - {fileID: 1138419348}
   - {fileID: 1629445701}
+  - {fileID: 1106664557}
   - {fileID: 746868440}
   - {fileID: 2140408006}
   - {fileID: 1078402822}

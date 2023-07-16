@@ -176,7 +176,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Oregon Black and White_0: -4342900714317900302
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -176,7 +176,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Umatilla Oregon 1_0: 6534166654590006801
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

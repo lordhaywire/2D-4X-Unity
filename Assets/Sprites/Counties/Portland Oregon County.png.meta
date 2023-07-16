@@ -176,7 +176,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Portland Oregon County_0: 7901939078305597391
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -176,7 +176,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Oregon_0: -6424849982138446294
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

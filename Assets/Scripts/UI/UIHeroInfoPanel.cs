@@ -9,9 +9,9 @@ public class UIHeroInfoPanel : MonoBehaviour
     private void OnEnable()
     {
         heroOwnerText.text 
-            = WorldMapLoad.Instance.CurrentlySelectedHero.GetComponent<TokenInfo>().hero.faction.ToString();
+            = WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().hero.faction.ToString();
         heroNameText.text 
-            = $"{ WorldMapLoad.Instance.CurrentlySelectedHero.GetComponent<TokenInfo>().hero.countyPopulation.firstName}" +
-            $"{WorldMapLoad.Instance.CurrentlySelectedHero.GetComponent<TokenInfo>().hero.countyPopulation.lastName}"; 
+            = $"{ WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().hero.countyPopulation.firstName}" +
+            $"{WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().hero.countyPopulation.lastName}"; 
     }
 }

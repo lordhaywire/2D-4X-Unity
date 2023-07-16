@@ -176,7 +176,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tillamook Oregon 1_0: -5440840286889508440
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -34,12 +34,12 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             if (WorldMapLoad.Instance.CurrentlySelectedToken != null)
             {
                 GameObject heroDestination 
-                    = WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().hero.destination;
+                    = WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().countyPopulation.destination;
                 
                 if (heroDestination == null)
                 {
                     // Sets token destination in hero.
-                    WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().hero.destination
+                    WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().countyPopulation.destination
                         = WorldMapLoad.Instance.currentlyRightClickedCounty;
 
                     TokenMoveToCounty();
@@ -192,7 +192,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         for (int i = 0; i < countyPopulation.Count; i++)
         {
             // This is going to need to turn off the Hero Scroll View at some point.
-            if (countyPopulation[i].hero != null)
+            if (countyPopulation[i].isHero == true)
             {
                 numberOfHeros++;
             }

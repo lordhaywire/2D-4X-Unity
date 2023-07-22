@@ -43,7 +43,7 @@ public class UIPopulationDescriptionPanel : MonoBehaviour
         populationNameText.text = $"{countyPopulation.firstName} {countyPopulation.lastName}";
         constructionSkillText.text = $"Construction: {countyPopulation.constructionSkill}";
 
-        if (countyPopulation.hero != null)
+        if (countyPopulation.isHero == true)
         {
             recruitButton.interactable = false;
         }

@@ -25,14 +25,14 @@ public class TokenMovement : MonoBehaviour
     private void MoveToken()
     {
         float step = Globals.Instance.tokenSpeed * Time.fixedDeltaTime;
-        Transform destination = tokenInfo.hero.destination.transform;
+        Transform destination = tokenInfo.countyPopulation.destination.transform;
         
         transform.position = Vector2.MoveTowards(transform.position, destination.position, step);
         if(transform.position == destination.position)
         {
             move = false;
-            tokenInfo.hero.location = tokenInfo.hero.destination;
-            tokenInfo.hero.destination = null;
+            tokenInfo.countyPopulation.location = tokenInfo.countyPopulation.destination;
+            tokenInfo.countyPopulation.destination = null;
             Debug.Log("Token has reached its destination.");
         }
     }
@@ -40,13 +40,13 @@ public class TokenMovement : MonoBehaviour
     private void MoveTokenHome()
     {
         float step = Globals.Instance.tokenSpeed * Time.fixedDeltaTime;
-        Transform homeLocation = tokenInfo.hero.location.GetComponent<CountyInfo>().tokenSpawn.transform;
+        Transform homeLocation = tokenInfo.countyPopulation.location.GetComponent<CountyInfo>().tokenSpawn.transform;
 
         transform.position = Vector2.MoveTowards(transform.position, homeLocation.position, step);
         if (transform.position == homeLocation.position)
         {
             returnHome = false;
-            tokenInfo.hero.destination = null;
+            tokenInfo.countyPopulation.destination = null;
             Debug.Log("Token has returned home.");
         }
 

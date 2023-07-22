@@ -5,20 +5,20 @@ using UnityEngine.UI;
 
 public class UIHeroListButton : MonoBehaviour
 {
-    public Hero hero;
-    public Toggle heroSpawnedToggle;
+    private readonly Toggle heroSpawnedToggle;
+    public CountyPopulation countyPopulation;
 
     private void OnEnable()
     {
         StartCoroutine(TextUpdate());
-        
+
         CheckIfHeroSpawned();
     }
 
     IEnumerator TextUpdate()
     {
         yield return null;
-        GetComponent<TextMeshProUGUI>().text = $"{hero.countyPopulation.firstName} {hero.countyPopulation.lastName}";
+        GetComponent<TextMeshProUGUI>().text = $"{countyPopulation.firstName} {countyPopulation.lastName}";
     }
 
     public void HeroListButtonClicked()
@@ -27,19 +27,16 @@ public class UIHeroListButton : MonoBehaviour
         WorldMapLoad.Instance.populationDescriptionPanel.SetActive(false);
         WorldMapLoad.Instance.populationDescriptionPanel.SetActive(true);
 
-        WorldMapLoad.Instance.currentlySelectedCountyPopulation =
-            hero.countyPopulation;
+        WorldMapLoad.Instance.currentlySelectedCountyPopulation = countyPopulation;
         WorldMapLoad.Instance.populationDescriptionPanelOpen = true;
         WorldMapLoad.Instance.populationInfoPanelOpenedByHeroListClick = true;
     }
 
     private void CheckIfHeroSpawned()
     {
-        // This is the code that is causing us to have to have an if statement in UIHeroSpawnToggle
-        if (hero.gameObject != null)
+        if (countyPopulation.isSpawned == true)
         {
             heroSpawnedToggle.isOn = true;
-            heroSpawnedToggle.interactable = false;
         }
     }
 }

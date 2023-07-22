@@ -8,10 +8,8 @@ public class UIHeroInfoPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        heroOwnerText.text 
-            = WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().hero.faction.ToString();
-        heroNameText.text 
-            = $"{ WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().hero.countyPopulation.firstName}" +
-            $"{WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().hero.countyPopulation.lastName}"; 
+        CountyPopulation countyPopulation = WorldMapLoad.Instance.currentlySelectedCountyPopulation;
+        heroOwnerText.text = countyPopulation.faction.ToString();
+        heroNameText.text = $"{countyPopulation.firstName} {countyPopulation.lastName}"; 
     }
 }

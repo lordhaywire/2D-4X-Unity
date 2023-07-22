@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TokenInfo : MonoBehaviour
 {
-    public Hero hero;
+    public CountyPopulation countyPopulation;
+    public bool isArmy;
 
     public TextMeshProUGUI nameText;
     public GameObject nameGameObject;
@@ -43,6 +44,6 @@ public class TokenInfo : MonoBehaviour
     {
         yield return null;
 
-        nameText.text = $"{hero.countyPopulation.firstName} {hero.countyPopulation.lastName}";
+        nameText.text = gameObject.name;
     }
 }

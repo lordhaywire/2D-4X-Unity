@@ -9,12 +9,12 @@ public class CountyHeroStacking : MonoBehaviour
     {
         for (int i = 0; i < spawnedTokenList.Count; i++)
         {
-            Hero hero = spawnedTokenList[i].GetComponent<TokenInfo>().hero;
-            GameObject county = hero.location;
+            TokenInfo tokenInfo = spawnedTokenList[i].GetComponent<TokenInfo>();
+            GameObject tokenLocation = tokenInfo.countyPopulation.location;
 
             // Change each token's order to be lower then the one on "top" of it.
-            hero.gameObject.GetComponent<TokenInfo>().OrderInLayer = 100 - i;
-            hero.gameObject.GetComponent<TokenInfo>().counterText.text = spawnedTokenList.Count.ToString();
+            tokenInfo.OrderInLayer = 100 - i;
+            tokenInfo.counterText.text = spawnedTokenList.Count.ToString();
 
             if (spawnedTokenList.Count > 1)
             {
@@ -29,7 +29,7 @@ public class CountyHeroStacking : MonoBehaviour
             {
                 spawnedTokenList[i].GetComponentInChildren<TokenInfo>().nameGameObject.SetActive(true);
 
-                spawnedTokenList[i].transform.position = county.GetComponent<CountyInfo>().tokenSpawn.transform.position;
+                spawnedTokenList[i].transform.position = tokenLocation.GetComponent<CountyInfo>().tokenSpawn.transform.position;
 
                 WorldMapLoad.Instance.CurrentlySelectedToken = spawnedTokenList[i];
             }
@@ -38,8 +38,8 @@ public class CountyHeroStacking : MonoBehaviour
                 spawnedTokenList[i].GetComponentInChildren<TokenInfo>().nameGameObject.SetActive(false);
                 spawnedTokenList[i].GetComponent<TokenInfo>().counterGameObject.SetActive(false);
                 spawnedTokenList[i].transform.position
-                    = new Vector2(county.GetComponent<CountyInfo>().tokenSpawn.transform.position.x + (i * 0.1f)
-                    , county.GetComponent<CountyInfo>().tokenSpawn.transform.position.y);
+                    = new Vector2(tokenLocation.GetComponent<CountyInfo>().tokenSpawn.transform.position.x + (i * 0.1f)
+                    , tokenLocation.GetComponent<CountyInfo>().tokenSpawn.transform.position.y);
             }
 
         }

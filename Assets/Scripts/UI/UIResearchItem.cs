@@ -1,7 +1,28 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIResearchItem : MonoBehaviour
 {
+    [SerializeField] private Toggle toggle;
+    [SerializeField] private TextMeshProUGUI researchName;
+
+    private void OnEnable()
+    {
+        var researchItems = WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].researchItems;
+        for (int i = 0; i < researchItems.Count; i++)
+        {
+            researchName.text = researchItems[i].name;
+            if (researchItems[i].isResearchDone == true)
+            {
+                toggle.isOn = true;
+            }
+            else
+            {
+                toggle.isOn = false;
+            }
+        }
+    }
     public void UIResearchItemButton()
     {
         Research.Instance.researchTitleAndDescriptionPanel.SetActive(true);

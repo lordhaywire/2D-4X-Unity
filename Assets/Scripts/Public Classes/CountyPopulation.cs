@@ -1,50 +1,68 @@
+using System;
+using UnityEngine;
 
+//[Serializable]
 public class CountyPopulation
 {
-    public int countyPopulationID;
+    public GameObject location;
+    public GameObject destination;
+
+    public Faction faction;
+
     public string firstName;
     public string lastName;
-
-    public bool isFactionLeader;
-    public Hero hero;
-    public bool isWorker;
     public bool isMale;
     public int age;
 
-    // Perks
+    public bool isFactionLeader;
+    public bool isHero;
+    public bool isWorker;
+
+    [Header("Perks")]
     public bool leaderOfPeoplePerk;
 
-    // Attributes
+    [Header("Attributes")]
 
-    // Skills
+    [Header("Skills")]
     public int constructionSkill;
 
+    [Header("Activities")]
     public string currentActivity;
     public CurrentBuilding currentBuilding; // What this person is currently building that day.
     public string nextActivity;
     public CurrentBuilding nextBuilding;
 
-    public CountyPopulation(int countyPopulationID, string firstName, string lastName, bool isFactionLeader, Hero hero, bool isWorker,
-         bool isMale, int age, bool leaderOfPeoplePerk, int constructionSkill, string currentActivity, 
-         CurrentBuilding currentBuilding, string nextActivity, CurrentBuilding nextBuilding)
+
+    [Header("Token")]
+    public bool isSpawned;
+    
+    public CountyPopulation(GameObject location, GameObject destination, Faction faction
+        , string firstName, string lastName, bool isMale, int age, bool isFactionLeader, bool isHero, bool isWorker
+         , bool leaderOfPeoplePerk, int constructionSkill, string currentActivity
+        , CurrentBuilding currentBuilding, string nextActivity, CurrentBuilding nextBuilding, bool isSpawned)
     {
-        this.countyPopulationID = countyPopulationID;
+        this.location = location;
+        this.destination = destination;
+        this.faction = faction;
+
         this.firstName = firstName;
         this.lastName = lastName;
-
-        this.isFactionLeader = isFactionLeader;
-        this.hero = hero;
-        this.isWorker = isWorker;
         this.isMale = isMale;
         this.age = age;
 
-        this.leaderOfPeoplePerk = leaderOfPeoplePerk; 
+        this.isFactionLeader = isFactionLeader;
+        this.isHero = isHero;
+        this.isWorker = isWorker;
+
+        this.leaderOfPeoplePerk = leaderOfPeoplePerk;
 
         this.constructionSkill = constructionSkill;
 
         this.currentActivity = currentActivity;
         this.currentBuilding = currentBuilding;
-        this.nextActivity = nextActivity;  
+        this.nextActivity = nextActivity;
         this.nextBuilding = nextBuilding;
+
+        this.isSpawned = isSpawned;
     }
 }

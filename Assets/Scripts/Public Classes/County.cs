@@ -7,9 +7,8 @@ public class County
 {
     public int countyID; // This isn't used yet, and if it never is then we need to get rid of it.
     public bool isCapital;
+    public bool isIndependentCapital;
     public GameObject gameObject; // This is the game object that is the county.
-    //public GameObject countyCenterGameObject;
-    //public GameObject heroSpawnLocation;
     public SpriteRenderer spriteRenderer;
 
     public Faction faction;
@@ -24,18 +23,17 @@ public class County
     public int currentlyWorkingPopulation; // We should put this number on the county info panel.
     public int population;
 
-    public County(int countyID, bool isCapital, GameObject gameObject, //GameObject heroSpawnGameObject,
+    public County(int countyID, bool isCapital, bool isIndependentCaptial, GameObject gameObject, 
         SpriteRenderer spriteRenderer,  Faction faction, 
         string province, string biomePrimary, string biomeSecondary, string biomeTertiary,
         int spawnedHeroCount, int currentlyWorkingPopulation, int population)
     {
         this.countyID = countyID;
         this.isCapital = isCapital;
+        this.isIndependentCapital = isIndependentCaptial;
         this.gameObject = gameObject;
-        //this.countyCenterGameObject = countyCenterGameObject;
-        //this.heroSpawnLocation = heroSpawnGameObject;
+
         this.spriteRenderer = spriteRenderer;
-        //this.selectCounty = selectCounty;
         this.faction = faction;
         this.province = province;
         this.biomePrimary = biomePrimary;

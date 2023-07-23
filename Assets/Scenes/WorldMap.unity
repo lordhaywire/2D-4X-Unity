@@ -431,6 +431,7 @@ MonoBehaviour:
   county:
     countyID: 0
     isCapital: 0
+    isIndependentCapital: 0
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
@@ -441,6 +442,22 @@ MonoBehaviour:
           serializedVersion: 2
           rgba: 0
       researchItems: []
+      factionLeader:
+        location: {fileID: 0}
+        destination: {fileID: 0}
+        faction: 
+        firstName: 
+        lastName: 
+        isMale: 0
+        age: 0
+        isFactionLeader: 0
+        isHero: 0
+        isWorker: 0
+        leaderOfPeoplePerk: 0
+        constructionSkill: 0
+        currentActivity: 
+        nextActivity: 
+        isSpawned: 0
       influence: 0
       money: 0
       food: 0
@@ -2476,8 +2493,6 @@ MonoBehaviour:
   populationInfoPanel: {fileID: 2144487633}
   expandBuildingsPanelButton: {fileID: 7085729}
   buildingsPanelExpanded: 0
-  heroScrollView: {fileID: 1462681376}
-  armyScrollView: {fileID: 855617236}
   countyOwnerText: {fileID: 1917657219}
   countyNameText: {fileID: 223208136}
   countyPopulationText: {fileID: 259231820}
@@ -4034,7 +4049,6 @@ GameObject:
   - component: {fileID: 275133783}
   - component: {fileID: 275133782}
   - component: {fileID: 275133781}
-  - component: {fileID: 275133785}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -4131,23 +4145,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &275133785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275133780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40ee052c56ac97d439c8fadfecbf3097, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabHeroButton: {fileID: 6580587887990886728, guid: 221d2dad0e9415c4bb84e5e02871d4e6, type: 3}
-  parentHeroListGroup: {fileID: 574562893}
-  heroScrollView: {fileID: 1462681376}
-  countyFactionName: 
-  playerFactionName: 
 --- !u!114 &276654491 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4700359049039459008, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
@@ -4288,6 +4285,7 @@ MonoBehaviour:
   county:
     countyID: 0
     isCapital: 0
+    isIndependentCapital: 0
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
@@ -4298,6 +4296,22 @@ MonoBehaviour:
           serializedVersion: 2
           rgba: 0
       researchItems: []
+      factionLeader:
+        location: {fileID: 0}
+        destination: {fileID: 0}
+        faction: 
+        firstName: 
+        lastName: 
+        isMale: 0
+        age: 0
+        isFactionLeader: 0
+        isHero: 0
+        isWorker: 0
+        leaderOfPeoplePerk: 0
+        constructionSkill: 0
+        currentActivity: 
+        nextActivity: 
+        isSpawned: 0
       influence: 0
       money: 0
       food: 0
@@ -8028,7 +8042,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2006974786}
   m_HandleRect: {fileID: 2006974785}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -9351,7 +9365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00097332854}
+  m_AnchoredPosition: {x: 0, y: -0.000032635508}
   m_SizeDelta: {x: -383, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &574562895
@@ -10500,7 +10514,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00097332854}
+  m_AnchoredPosition: {x: 0, y: -0.000031003343}
   m_SizeDelta: {x: -383, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &682875875
@@ -11024,6 +11038,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentlyRightClickedCounty: {fileID: 0}
+  currentlySelectedCountyPopulation:
+    location: {fileID: 0}
+    destination: {fileID: 0}
+    faction: 
+    firstName: 
+    lastName: 
+    isMale: 0
+    age: 0
+    isFactionLeader: 0
+    isHero: 0
+    isWorker: 0
+    leaderOfPeoplePerk: 0
+    constructionSkill: 0
+    currentActivity: 
+    nextActivity: 
+    isSpawned: 0
   currentlySelectedCounty: {fileID: 0}
   countyInfoPanelGameObject: {fileID: 155121155}
   currentlySelectedToken: {fileID: 0}
@@ -11040,6 +11070,9 @@ MonoBehaviour:
   countyInfoPanel: {fileID: 155121155}
   heroInfoPanel: {fileID: 1246091702}
   armyInfoPanel: {fileID: 738409371}
+  heroesAndArmiesVerticalGroup: {fileID: 1462681376}
+  heroScrollView: {fileID: 1293565463}
+  armyScrollView: {fileID: 855617236}
   populationInfoPanel: {fileID: 2144487633}
   populationDescriptionPanel: {fileID: 248797748}
   playerFaction:
@@ -11050,6 +11083,22 @@ MonoBehaviour:
         serializedVersion: 2
         rgba: 0
     researchItems: []
+    factionLeader:
+      location: {fileID: 0}
+      destination: {fileID: 0}
+      faction: 
+      firstName: 
+      lastName: 
+      isMale: 0
+      age: 0
+      isFactionLeader: 0
+      isHero: 0
+      isWorker: 0
+      leaderOfPeoplePerk: 0
+      constructionSkill: 0
+      currentActivity: 
+      nextActivity: 
+      isSpawned: 0
     influence: 0
     money: 0
     food: 0
@@ -11096,6 +11145,22 @@ MonoBehaviour:
         serializedVersion: 2
         rgba: 0
     researchItems: []
+    factionLeader:
+      location: {fileID: 0}
+      destination: {fileID: 0}
+      faction: 
+      firstName: 
+      lastName: 
+      isMale: 0
+      age: 0
+      isFactionLeader: 0
+      isHero: 0
+      isWorker: 0
+      leaderOfPeoplePerk: 0
+      constructionSkill: 0
+      currentActivity: 
+      nextActivity: 
+      isSpawned: 0
     influence: 10000
     money: 0
     food: 1000
@@ -11107,6 +11172,22 @@ MonoBehaviour:
         serializedVersion: 2
         rgba: 0
     researchItems: []
+    factionLeader:
+      location: {fileID: 0}
+      destination: {fileID: 0}
+      faction: 
+      firstName: 
+      lastName: 
+      isMale: 0
+      age: 0
+      isFactionLeader: 0
+      isHero: 0
+      isWorker: 0
+      leaderOfPeoplePerk: 0
+      constructionSkill: 0
+      currentActivity: 
+      nextActivity: 
+      isSpawned: 0
     influence: 0
     money: 0
     food: 0
@@ -11118,6 +11199,22 @@ MonoBehaviour:
         serializedVersion: 2
         rgba: 0
     researchItems: []
+    factionLeader:
+      location: {fileID: 0}
+      destination: {fileID: 0}
+      faction: 
+      firstName: 
+      lastName: 
+      isMale: 0
+      age: 0
+      isFactionLeader: 0
+      isHero: 0
+      isWorker: 0
+      leaderOfPeoplePerk: 0
+      constructionSkill: 0
+      currentActivity: 
+      nextActivity: 
+      isSpawned: 0
     influence: 0
     money: 0
     food: 0
@@ -11129,6 +11226,22 @@ MonoBehaviour:
         serializedVersion: 2
         rgba: 0
     researchItems: []
+    factionLeader:
+      location: {fileID: 0}
+      destination: {fileID: 0}
+      faction: 
+      firstName: 
+      lastName: 
+      isMale: 0
+      age: 0
+      isFactionLeader: 0
+      isHero: 0
+      isWorker: 0
+      leaderOfPeoplePerk: 0
+      constructionSkill: 0
+      currentActivity: 
+      nextActivity: 
+      isSpawned: 0
     influence: 0
     money: 0
     food: 0
@@ -11140,6 +11253,22 @@ MonoBehaviour:
         serializedVersion: 2
         rgba: 0
     researchItems: []
+    factionLeader:
+      location: {fileID: 0}
+      destination: {fileID: 0}
+      faction: 
+      firstName: 
+      lastName: 
+      isMale: 0
+      age: 0
+      isFactionLeader: 0
+      isHero: 0
+      isWorker: 0
+      leaderOfPeoplePerk: 0
+      constructionSkill: 0
+      currentActivity: 
+      nextActivity: 
+      isSpawned: 0
     influence: 0
     money: 0
     food: 0
@@ -11151,6 +11280,22 @@ MonoBehaviour:
         serializedVersion: 2
         rgba: 0
     researchItems: []
+    factionLeader:
+      location: {fileID: 0}
+      destination: {fileID: 0}
+      faction: 
+      firstName: 
+      lastName: 
+      isMale: 0
+      age: 0
+      isFactionLeader: 0
+      isHero: 0
+      isWorker: 0
+      leaderOfPeoplePerk: 0
+      constructionSkill: 0
+      currentActivity: 
+      nextActivity: 
+      isSpawned: 0
     influence: 0
     money: 0
     food: 0
@@ -12657,7 +12802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -112.5}
+  m_AnchoredPosition: {x: 200, y: -322.5}
   m_SizeDelta: {x: 400, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &855617238
@@ -13709,6 +13854,7 @@ MonoBehaviour:
   county:
     countyID: 0
     isCapital: 0
+    isIndependentCapital: 0
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
@@ -13719,6 +13865,22 @@ MonoBehaviour:
           serializedVersion: 2
           rgba: 0
       researchItems: []
+      factionLeader:
+        location: {fileID: 0}
+        destination: {fileID: 0}
+        faction: 
+        firstName: 
+        lastName: 
+        isMale: 0
+        age: 0
+        isFactionLeader: 0
+        isHero: 0
+        isWorker: 0
+        leaderOfPeoplePerk: 0
+        constructionSkill: 0
+        currentActivity: 
+        nextActivity: 
+        isSpawned: 0
       influence: 0
       money: 0
       food: 0
@@ -14446,6 +14608,7 @@ MonoBehaviour:
   county:
     countyID: 0
     isCapital: 0
+    isIndependentCapital: 0
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
@@ -14456,6 +14619,22 @@ MonoBehaviour:
           serializedVersion: 2
           rgba: 0
       researchItems: []
+      factionLeader:
+        location: {fileID: 0}
+        destination: {fileID: 0}
+        faction: 
+        firstName: 
+        lastName: 
+        isMale: 0
+        age: 0
+        isFactionLeader: 0
+        isHero: 0
+        isWorker: 0
+        leaderOfPeoplePerk: 0
+        constructionSkill: 0
+        currentActivity: 
+        nextActivity: 
+        isSpawned: 0
       influence: 0
       money: 0
       food: 0
@@ -17281,7 +17460,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 65838932}
   m_HandleRect: {fileID: 65838931}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -19958,6 +20137,7 @@ MonoBehaviour:
   county:
     countyID: 0
     isCapital: 0
+    isIndependentCapital: 0
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
@@ -19968,6 +20148,22 @@ MonoBehaviour:
           serializedVersion: 2
           rgba: 0
       researchItems: []
+      factionLeader:
+        location: {fileID: 0}
+        destination: {fileID: 0}
+        faction: 
+        firstName: 
+        lastName: 
+        isMale: 0
+        age: 0
+        isFactionLeader: 0
+        isHero: 0
+        isWorker: 0
+        leaderOfPeoplePerk: 0
+        constructionSkill: 0
+        currentActivity: 
+        nextActivity: 
+        isSpawned: 0
       influence: 0
       money: 0
       food: 0
@@ -21716,6 +21912,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1462681377}
   - component: {fileID: 1462681378}
+  - component: {fileID: 1462681379}
   m_Layer: 5
   m_Name: Heroes and Armies Vertical Group
   m_TagString: Untagged
@@ -21770,6 +21967,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1462681379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462681376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ee052c56ac97d439c8fadfecbf3097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabHeroButton: {fileID: 6580587887990886728, guid: 221d2dad0e9415c4bb84e5e02871d4e6, type: 3}
+  parentHeroList: {fileID: 574562893}
 --- !u!1 &1466688932
 GameObject:
   m_ObjectHideFlags: 0
@@ -22677,6 +22888,7 @@ MonoBehaviour:
   county:
     countyID: 0
     isCapital: 0
+    isIndependentCapital: 0
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
@@ -22687,6 +22899,22 @@ MonoBehaviour:
           serializedVersion: 2
           rgba: 0
       researchItems: []
+      factionLeader:
+        location: {fileID: 0}
+        destination: {fileID: 0}
+        faction: 
+        firstName: 
+        lastName: 
+        isMale: 0
+        age: 0
+        isFactionLeader: 0
+        isHero: 0
+        isWorker: 0
+        leaderOfPeoplePerk: 0
+        constructionSkill: 0
+        currentActivity: 
+        nextActivity: 
+        isSpawned: 0
       influence: 0
       money: 0
       food: 0
@@ -23675,6 +23903,7 @@ MonoBehaviour:
   county:
     countyID: 0
     isCapital: 0
+    isIndependentCapital: 0
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
@@ -23685,6 +23914,22 @@ MonoBehaviour:
           serializedVersion: 2
           rgba: 0
       researchItems: []
+      factionLeader:
+        location: {fileID: 0}
+        destination: {fileID: 0}
+        faction: 
+        firstName: 
+        lastName: 
+        isMale: 0
+        age: 0
+        isFactionLeader: 0
+        isHero: 0
+        isWorker: 0
+        leaderOfPeoplePerk: 0
+        constructionSkill: 0
+        currentActivity: 
+        nextActivity: 
+        isSpawned: 0
       influence: 0
       money: 0
       food: 0

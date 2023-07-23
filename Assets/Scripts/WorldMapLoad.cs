@@ -23,13 +23,26 @@ public class WorldMapLoad : MonoBehaviour
         set
         {
             currentlySelectedCounty = value;
-            if (currentlySelectedCounty != null)
+            heroesAndArmiesVerticalGroup.SetActive(false);
+            heroScrollView.SetActive(false);
+
+            if (currentlySelectedCounty == null)
             {
-                countyInfoPanel.GetComponent<UIHeroScrollViewRefresher>().RefreshPanel();
+                countyInfoPanelGameObject.SetActive(false);
             }
             else
             {
-                countyInfoPanelGameObject.SetActive(false);
+                // We need to move the HeroesAndArmiesVerticalGroup part to its own if when we add armies.
+                if (countyHeroes[currentlySelectedCounty.name].Count > 0 && playerFaction.factionNameAndColor.name == counties[currentlySelectedCounty.name].faction.factionNameAndColor.name)
+                {
+                    heroesAndArmiesVerticalGroup.SetActive(true);
+                    heroScrollView.SetActive(true);
+                }
+                else
+                {
+                    heroesAndArmiesVerticalGroup.SetActive(false);
+                    heroScrollView.SetActive(false);
+                }
             }
         }
     }
@@ -73,11 +86,12 @@ public class WorldMapLoad : MonoBehaviour
     public bool populationInfoPanelOpen;
     public bool populationInfoPanelOpenedByHeroListClick;
 
-    //public bool DevView;
-
     public GameObject countyInfoPanel;
     public GameObject heroInfoPanel;
     public GameObject armyInfoPanel;
+    public GameObject heroesAndArmiesVerticalGroup;
+    public GameObject heroScrollView;
+    public GameObject armyScrollView;
 
     public GameObject populationInfoPanel;
 
@@ -103,6 +117,8 @@ public class WorldMapLoad : MonoBehaviour
     public List<FactionNameAndColor> factionNameAndColors = new();
 
     public List<Faction> factions = new();
+
+    public Dictionary<string, List<CountyPopulation>> countyHeroes = new();
 
     // Arrays for County Population generation.
     private string[] maleNames;
@@ -258,25 +274,25 @@ public class WorldMapLoad : MonoBehaviour
         // The first county is the player county.
 
         counties[CountyListCreator.Instance.countiesList[0].name] = new County(
-            0, true, CountyListCreator.Instance.countiesList[0].gameObject, null, factions[1],
+            0, true, false, CountyListCreator.Instance.countiesList[0].gameObject, null, factions[1],
             Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[1].name] = new County(
-            1, true, CountyListCreator.Instance.countiesList[1].gameObject, null, factions[0],
+            1, true, false, CountyListCreator.Instance.countiesList[1].gameObject, null, factions[0],
             Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 0, 1);
         counties[CountyListCreator.Instance.countiesList[2].name] = new County(
-            2, false, CountyListCreator.Instance.countiesList[2].gameObject, null, factions[0], // Temporarily set to the player faction for testing.
+            2, false, false, CountyListCreator.Instance.countiesList[2].gameObject, null, factions[0], // Temporarily set to the player faction for testing.
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[3].name] = new County(
-            3, false, CountyListCreator.Instance.countiesList[3].gameObject, null, factions[2],
+            3, false, true, CountyListCreator.Instance.countiesList[3].gameObject, null, factions[2],
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[4].name] = new County(
-            4, false, CountyListCreator.Instance.countiesList[4].gameObject, null, factions[3],
+            4, false, true, CountyListCreator.Instance.countiesList[4].gameObject, null, factions[3],
             Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[5].name] = new County(
-            5, false, CountyListCreator.Instance.countiesList[5].gameObject, null, factions[4],
+            5, false, true, CountyListCreator.Instance.countiesList[5].gameObject, null, factions[4],
             Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[6].name] = new County(
-            6, false, CountyListCreator.Instance.countiesList[6].gameObject, null, factions[5],
+            6, false, true, CountyListCreator.Instance.countiesList[6].gameObject, null, factions[5],
             Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0, 0, 0);
 
         // We should expand this for loop if possible.
@@ -302,12 +318,35 @@ public class WorldMapLoad : MonoBehaviour
             {
                 GeneratePopulation(countyName, totalCapitolPop);
                 counties[countyName].population = totalCapitolPop;
+
+                countyPopulationDictionary[countyName][0].isHero = true;
+                counties[countyName].faction.factionLeader = countyPopulationDictionary[countyName][0];
+                countyHeroes[countyName] = new List<CountyPopulation>
+                {
+                    countyPopulationDictionary[countyName][0]
+                };
+                Debug.Log($"County Heroes:  {countyName} {countyHeroes[countyName][0].firstName}");
             }
-            else
+            else if (counties[countyName].isIndependentCapital == true)
             {
                 int normalPopulation = UnityEngine.Random.Range(minimumCountyPop, maximumCountyPop);
                 GeneratePopulation(countyName, normalPopulation);
                 counties[countyName].population = normalPopulation;
+
+                countyPopulationDictionary[countyName][0].isHero = true;
+                counties[countyName].faction.factionLeader = countyPopulationDictionary[countyName][0];
+                countyHeroes[countyName] = new List<CountyPopulation>
+                {
+                    countyPopulationDictionary[countyName][0]
+                };
+                Debug.Log($"County Heroes:  {countyName} {countyHeroes[countyName][0].firstName}");
+            }
+            else if (counties[countyName].isCapital == false && counties[countyName].isIndependentCapital == false)
+            {
+                int normalPopulation = UnityEngine.Random.Range(minimumCountyPop, maximumCountyPop);
+                GeneratePopulation(countyName, normalPopulation);
+                counties[countyName].population = normalPopulation;
+                countyHeroes[countyName] = new List<CountyPopulation>();
             }
         }
     }
@@ -359,16 +398,16 @@ public class WorldMapLoad : MonoBehaviour
             int constructionSkill = UnityEngine.Random.Range(20, 81);
 
             // This adds to the Dictionary List a new person.
-            countyPopulation.Add(new CountyPopulation(null, null, counties[countyName].faction,
+            countyPopulation.Add(new CountyPopulation(null, null, counties[countyName].faction.factionNameAndColor.name,
                 firstName, lastName, isMale, age, isFactionLeader, false, false, leaderOfPeoplePerk, constructionSkill,
                 AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null, false));
 
             // Assign the faction leader couny population to the faction.
-            if(i == 0)
+            if (i == 0)
             {
-                counties[countyName].faction.factionLeader = countyPopulation[0];
+
             }
-            
+
         }
     }
     private void OnDisable()

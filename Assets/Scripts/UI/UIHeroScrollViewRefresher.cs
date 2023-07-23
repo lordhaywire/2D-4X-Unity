@@ -5,11 +5,7 @@ public class UIHeroScrollViewRefresher : MonoBehaviour
     public static UIHeroScrollViewRefresher Instance;
 
     [SerializeField] private GameObject prefabHeroButton;
-    [SerializeField] private GameObject parentHeroListGroup;
-    [SerializeField] private GameObject heroScrollView;
-
-    [SerializeField] private string countyFactionName;
-    [SerializeField] private string playerFactionName;
+    [SerializeField] private GameObject parentHeroList;
 
     private void Awake()
     {
@@ -18,50 +14,33 @@ public class UIHeroScrollViewRefresher : MonoBehaviour
 
     private void OnEnable()
     {
-        countyFactionName = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].faction.factionNameAndColor.name;
-        playerFactionName = WorldMapLoad.Instance.playerFaction.factionNameAndColor.name;
 
-        if (countyFactionName == playerFactionName)
-        {
-            RefreshPanel();
-        }
+        RefreshPanel();
     }
 
     public void RefreshPanel()
     {
+        var countyHeroes = WorldMapLoad.Instance.countyHeroes[WorldMapLoad.Instance.CurrentlySelectedCounty.name];
+
         DestroyPanel();
 
-        var countyPopulationDictionary 
-            = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty.name];
-
-        if (countyFactionName == playerFactionName)
+        for (int i = 0; i < countyHeroes.Count; i++)
         {
-            for (int i = 0; i < countyPopulationDictionary.Count; i++)
-            {
-                if (countyPopulationDictionary[i].location.name == WorldMapLoad.Instance.CurrentlySelectedCounty.name)
-                {
+            GameObject uIHeroList = Instantiate(prefabHeroButton, parentHeroList.transform);
 
-                    GameObject uIHeroList = Instantiate(prefabHeroButton, parentHeroListGroup.transform);
+            uIHeroList.GetComponent<UIHeroListButton>().countyPopulation = countyHeroes[i];
 
-                    uIHeroList.GetComponent<UIHeroListButton>().countyPopulation = countyPopulationDictionary[i];
-                }
-            }
-
-            int childCount = parentHeroListGroup.transform.childCount;
-            if (childCount == 0)
-            {
-                heroScrollView.SetActive(false);
-            }
         }
-        else
+
+        if (countyHeroes.Count == 0)
         {
-            heroScrollView.SetActive(false);
+            WorldMapLoad.Instance.heroScrollView.SetActive(false);
         }
     }
 
     public void DestroyPanel()
     {
-        foreach (Transform child in parentHeroListGroup.transform)
+        foreach (Transform child in parentHeroList.transform)
         {
             Destroy(child.gameObject);
         }

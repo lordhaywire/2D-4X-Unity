@@ -10,8 +10,8 @@ public class UICountyPanel : MonoBehaviour
 
     public bool buildingsPanelExpanded;
 
-    public GameObject heroScrollView;
-    public GameObject armyScrollView;
+    //public GameObject heroScrollView;
+    //public GameObject armyScrollView;
 
     public TextMeshProUGUI countyOwnerText;
     public TextMeshProUGUI countyNameText;

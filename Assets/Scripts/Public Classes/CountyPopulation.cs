@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
 
-//[Serializable]
+[Serializable]
 public class CountyPopulation
 {
     public GameObject location;
     public GameObject destination;
 
-    public Faction faction;
+    public string faction;
 
     public string firstName;
     public string lastName;
@@ -36,7 +36,7 @@ public class CountyPopulation
     [Header("Token")]
     public bool isSpawned;
     
-    public CountyPopulation(GameObject location, GameObject destination, Faction faction
+    public CountyPopulation(GameObject location, GameObject destination, string faction
         , string firstName, string lastName, bool isMale, int age, bool isFactionLeader, bool isHero, bool isWorker
          , bool leaderOfPeoplePerk, int constructionSkill, string currentActivity
         , CurrentBuilding currentBuilding, string nextActivity, CurrentBuilding nextBuilding, bool isSpawned)

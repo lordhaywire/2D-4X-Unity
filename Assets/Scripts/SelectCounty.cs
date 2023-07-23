@@ -1,10 +1,11 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SelectCounty : MonoBehaviour, IPointerClickHandler
 {
     public static bool hasAnArmyBeenSelected;
+
+
 
     // Left Click
     public void OnPointerClick(PointerEventData eventData)
@@ -120,25 +121,6 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    /*
-    private void HeroRightClickCounty()
-    {
-        GameObject currentHero = WorldMapLoad.Instance.CurrentlySelectedToken;
-        HeroMovement heroMovement = currentHero.GetComponent<HeroMovement>();
-        Hero hero = currentHero.GetComponent<TokenInfo>().hero;
-
-        hero.destination = WorldMapLoad.Instance.currentlyRightClickedCounty;
-
-        if (heroMovement.isTimeToDestinationSet == true && hero.location == hero.destination)
-        {
-            heroMovement.StopTimer();
-        }
-        else
-        {
-            heroMovement.StartHeroMovement();
-        }
-    }
-    */
     private void DeselectHeroOnCountyClick()
     {
         if (WorldMapLoad.Instance.CurrentlySelectedToken != null)
@@ -158,19 +140,10 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         UIBuildingPanelsRefresher.Instance.PossibleBuildingPanelsRefresher();
     }
 
-
-
     private void FillCountyInfoPanel()
     {
         UICountyPanel.Instance.countyOwnerText.text = "Owner: " + WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name;
         UICountyPanel.Instance.countyNameText.text = "County: " + name;
-
-        // This is just some temp bullshit to not allow you to look at counties you don't own.
-        if (WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name ==
-            WorldMapLoad.Instance.playerFaction.factionNameAndColor.name)
-        {
-            CheckForHeroes(); // Check to see if this county has any heroes in it.
-        }
 
         // This is just some temp bullshit to not allow you to look at counties you don't own.
         if (WorldMapLoad.Instance.playerFaction.factionNameAndColor.name ==
@@ -183,30 +156,6 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         {
             UICountyPanel.Instance.countyPopulationText.text = "Population: Unknown";
         }
-    }
-    private void CheckForHeroes()
-    {
-        var countyPopulation = WorldMapLoad.Instance.countyPopulationDictionary[name];
-        int numberOfHeros = 0;
-
-        for (int i = 0; i < countyPopulation.Count; i++)
-        {
-            // This is going to need to turn off the Hero Scroll View at some point.
-            if (countyPopulation[i].isHero == true)
-            {
-                numberOfHeros++;
-            }
-        }
-
-        if (numberOfHeros > 0)
-        {
-            UICountyPanel.Instance.heroScrollView.SetActive(true);
-        }
-        else
-        {
-            UICountyPanel.Instance.heroScrollView.SetActive(false);
-        }
-
     }
 
     /*

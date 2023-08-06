@@ -25,7 +25,7 @@ public class TokenMovement : MonoBehaviour
             }
             else
             {
-                if (tokenInfo.countyPopulation.destination.GetComponent<CountyHeroStacking>().spawnedTokenList.Count > 1)
+                if (tokenInfo.countyPopulation.destination.GetComponent<CountyHeroStacking>().spawnedTokenList.Count() > 1)
                 {
                     stackCounterGameObject.SetActive(true);
                 }
@@ -55,20 +55,21 @@ public class TokenMovement : MonoBehaviour
     {
         float step = Globals.Instance.tokenSpeed * Time.fixedDeltaTime;
         Transform destination = tokenInfo.countyPopulation.destination.GetComponent<CountyInfo>().tokenSpawn.transform;
-
+        WorldMapLoad.Instance.heroesAndArmiesVerticalGroup.SetActive(false);
 
         transform.position = Vector2.MoveTowards(transform.position, destination.position, step);
         if (transform.position == destination.position)
         {
-            Move = false;
             tokenInfo.countyPopulation.location = tokenInfo.countyPopulation.destination;
-            tokenInfo.countyPopulation.destination.GetComponent<CountyHeroStacking>().spawnedTokenList.Add(gameObject);
+            tokenInfo.countyPopulation.destination.GetComponent<CountyHeroStacking>().spawnedTokenList.Insert(0,gameObject);
             WorldMapLoad.Instance.countyPopulationDictionary[tokenInfo.countyPopulation.destination.name]
                 .Add(gameObject.GetComponent<TokenInfo>().countyPopulation);
             WorldMapLoad.Instance.countyHeroes[tokenInfo.countyPopulation.destination.name]
                 .Add(gameObject.GetComponent<TokenInfo>().countyPopulation);
+            Move = false;
+
             tokenInfo.countyPopulation.destination = null;
-            Debug.Log(gameObject.name + " has reached " + destination.name);
+            //Debug.Log(gameObject.name + " has reached " + destination.name);
         }
     }
 
@@ -83,9 +84,9 @@ public class TokenMovement : MonoBehaviour
             returnHome = false;
             tokenInfo.countyPopulation.destination = null;
             tokenInfo.countyPopulation.location.GetComponent<CountyHeroStacking>().spawnedTokenList.Add(gameObject);
-            WorldMapLoad.Instance.countyPopulationDictionary[tokenInfo.countyPopulation.destination.name]
+            WorldMapLoad.Instance.countyPopulationDictionary[tokenInfo.countyPopulation.location.name]
                 .Add(gameObject.GetComponent<TokenInfo>().countyPopulation);
-            WorldMapLoad.Instance.countyHeroes[tokenInfo.countyPopulation.destination.name]
+            WorldMapLoad.Instance.countyHeroes[tokenInfo.countyPopulation.location.name]
                 .Add(gameObject.GetComponent<TokenInfo>().countyPopulation);
             Debug.Log(gameObject.name + " has returned home.");
         }

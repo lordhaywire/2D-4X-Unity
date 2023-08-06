@@ -54,7 +54,7 @@ public class UIHeroSpawnButton : MonoBehaviour
         WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyInfo>().county.spawnedHeroCount++;
         spawnedTokenList.Insert(0, spawnedHeroToken);
 
-        WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyHeroStacking>().StackTokens();
+        //WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyHeroStacking>().StackTokens();
 
         heroSpawnButton.GetComponent<Button>().interactable = false;
 

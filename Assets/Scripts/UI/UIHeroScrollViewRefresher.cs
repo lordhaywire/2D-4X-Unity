@@ -22,7 +22,7 @@ public class UIHeroScrollViewRefresher : MonoBehaviour
     {
         DestroyPanel();
         var countyHeroes = WorldMapLoad.Instance.countyHeroes[WorldMapLoad.Instance.CurrentlySelectedCounty.name];
-        Debug.Log("Currently Selected County: " + WorldMapLoad.Instance.CurrentlySelectedCounty.name);
+        //Debug.Log("Currently Selected County: " + WorldMapLoad.Instance.CurrentlySelectedCounty.name);
 
         for (int i = 0; i < countyHeroes.Count; i++)
         {

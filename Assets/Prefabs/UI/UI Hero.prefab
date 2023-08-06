@@ -360,26 +360,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e32b274cb5257a4a979d8407fa24efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hero:
-    gameObject: {fileID: 0}
-    faction:
-      factionNameAndColor:
-        factionID: 0
-        name: 
-        color32:
-          serializedVersion: 2
-          rgba: 0
-      researchItems: []
-      influence: 0
-      money: 0
-      food: 0
-      scrap: 0
+  heroSpawnedToggle: {fileID: 6660077323132066875}
+  countyPopulation:
     location: {fileID: 0}
     destination: {fileID: 0}
-    justMoved: 0
-    startTimer: 0
-    isCountingDown: 0
-  heroSpawnedToggle: {fileID: 6660077323132066875}
+    faction: 
+    firstName: 
+    lastName: 
+    isMale: 0
+    age: 0
+    isFactionLeader: 0
+    isHero: 0
+    isWorker: 0
+    leaderOfPeoplePerk: 0
+    constructionSkill: 0
+    currentActivity: 
+    nextActivity: 
+    isSpawned: 0
 --- !u!1 &7059157602487075322
 GameObject:
   m_ObjectHideFlags: 0

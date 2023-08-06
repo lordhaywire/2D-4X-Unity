@@ -5,8 +5,6 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 {
     public static bool hasAnArmyBeenSelected;
 
-
-
     // Left Click
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -29,14 +27,14 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
         // Right Click
         if (eventData.button == PointerEventData.InputButton.Right)
-        {          
+        {
             WorldMapLoad.Instance.currentlyRightClickedCounty = gameObject;
 
             if (WorldMapLoad.Instance.CurrentlySelectedToken != null)
             {
-                GameObject heroDestination 
+                GameObject heroDestination
                     = WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().countyPopulation.destination;
-                
+
                 if (heroDestination == null)
                 {
                     // Sets token destination in hero.
@@ -47,8 +45,8 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
                 }
                 else
                 {
-                    if(WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().move == true 
-                        && WorldMapLoad.Instance.currentlyRightClickedCounty.GetComponent<CountyInfo>().tokenSpawn 
+                    if (WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().Move == true
+                        && WorldMapLoad.Instance.currentlyRightClickedCounty.GetComponent<CountyInfo>().tokenSpawn
                         != heroDestination.GetComponent<CountyInfo>().tokenSpawn)
                     {
                         TokenReturnHome();
@@ -60,13 +58,13 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
     private void TokenReturnHome()
     {
-        WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().move = false;
+        WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().Move = false;
         WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().returnHome = true;
     }
 
     private void TokenMoveToCounty()
     {
-        WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().move = true;
+        WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().Move = true;
     }
 
     private void CloseDescriptionPanels()
@@ -99,9 +97,14 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         WorldMapLoad.Instance.heroInfoPanel.SetActive(false);
         WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
 
-        if (WorldMapLoad.Instance.playerFaction.factionNameAndColor.name == WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name)
+        WorldMapLoad.Instance.heroesAndArmiesVerticalGroup.SetActive(true);
+
+        if (WorldMapLoad.Instance.playerFaction.factionNameAndColor.name
+            == WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name)
         {
-            UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(true);
+            //UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(true);
+            
+            
             if (UICountyPanel.Instance.buildingsPanelExpanded == false)
             {
                 UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(true);
@@ -128,7 +131,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             WorldMapLoad.Instance.CurrentlySelectedToken = null;
         }
     }
-    
+
 
     // Is this supposed to be an event that UIBuildingPanelsRefresher subscribes to and refreshes when it is triggered?
     private void RefreshBuildingsPanels()

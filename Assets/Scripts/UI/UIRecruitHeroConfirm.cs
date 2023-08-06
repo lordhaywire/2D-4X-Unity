@@ -18,7 +18,10 @@ public class UIRecruitHeroConfirm : MonoBehaviour
 
         WorldMapLoad.Instance.currentlySelectedCountyPopulation.isHero = true;
 
-        UIHeroScrollViewRefresher.Instance.RefreshPanel();
+        WorldMapLoad.Instance.countyHeroes[WorldMapLoad.Instance.CurrentlySelectedCounty.name]
+            .Add(WorldMapLoad.Instance.currentlySelectedCountyPopulation);
         WorldMapLoad.Instance.heroesAndArmiesVerticalGroup.SetActive(true);
+        UIHeroScrollViewRefresher.Instance.RefreshPanel();
+        
     }
 }

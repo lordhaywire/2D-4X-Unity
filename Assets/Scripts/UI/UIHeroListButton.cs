@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIHeroListButton : MonoBehaviour
 {
-    private readonly Toggle heroSpawnedToggle;
+    [SerializeField] private Toggle heroSpawnedToggle;
     public CountyPopulation countyPopulation;
 
     private void OnEnable()
@@ -32,11 +32,12 @@ public class UIHeroListButton : MonoBehaviour
         WorldMapLoad.Instance.populationInfoPanelOpenedByHeroListClick = true;
     }
 
+    
     private void CheckIfHeroSpawned()
     {
         if (countyPopulation.isSpawned == true)
         {
-            heroSpawnedToggle.isOn = true;
+           heroSpawnedToggle.isOn = true;
         }
     }
 }

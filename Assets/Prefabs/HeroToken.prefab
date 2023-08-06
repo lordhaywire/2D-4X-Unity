@@ -370,7 +370,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1984798671607724818}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -711,25 +711,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3942263051b1d654bb8fffd379db4085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hero:
-    gameObject: {fileID: 0}
-    faction:
-      factionNameAndColor:
-        factionID: 0
-        name: 
-        color32:
-          serializedVersion: 2
-          rgba: 0
-      researchItems: []
-      influence: 0
-      money: 0
-      food: 0
-      scrap: 0
+  countyPopulation:
     location: {fileID: 0}
     destination: {fileID: 0}
-    justMoved: 0
-    startTimer: 0
-    isCountingDown: 0
+    faction: 
+    firstName: 
+    lastName: 
+    isMale: 0
+    age: 0
+    isFactionLeader: 0
+    isHero: 0
+    isWorker: 0
+    leaderOfPeoplePerk: 0
+    constructionSkill: 0
+    currentActivity: 
+    nextActivity: 
+    isSpawned: 0
+  isArmy: 0
   nameText: {fileID: 5303660249292316973}
   nameGameObject: {fileID: 1984798671607724818}
   counterGameObject: {fileID: 5436810105093668824}
@@ -750,6 +748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f311ce5e17434469acf1822efc763b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stackCounterGameObject: {fileID: 5436810105093668824}
+  returnHome: 0
 --- !u!1 &5902234253197047548
 GameObject:
   m_ObjectHideFlags: 0

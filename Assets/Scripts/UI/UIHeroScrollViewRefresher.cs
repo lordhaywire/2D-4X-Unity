@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIHeroScrollViewRefresher : MonoBehaviour
 {
     public static UIHeroScrollViewRefresher Instance;
 
+    [SerializeField] private GameObject uIHeroList;
     [SerializeField] private GameObject prefabHeroButton;
     [SerializeField] private GameObject parentHeroList;
 
@@ -14,27 +16,28 @@ public class UIHeroScrollViewRefresher : MonoBehaviour
 
     private void OnEnable()
     {
-
         RefreshPanel();
     }
-
     public void RefreshPanel()
     {
-        var countyHeroes = WorldMapLoad.Instance.countyHeroes[WorldMapLoad.Instance.CurrentlySelectedCounty.name];
-
         DestroyPanel();
+        var countyHeroes = WorldMapLoad.Instance.countyHeroes[WorldMapLoad.Instance.CurrentlySelectedCounty.name];
+        Debug.Log("Currently Selected County: " + WorldMapLoad.Instance.CurrentlySelectedCounty.name);
 
         for (int i = 0; i < countyHeroes.Count; i++)
         {
-            GameObject uIHeroList = Instantiate(prefabHeroButton, parentHeroList.transform);
+            GameObject uIHero = Instantiate(prefabHeroButton, parentHeroList.transform);
 
-            uIHeroList.GetComponent<UIHeroListButton>().countyPopulation = countyHeroes[i];
-
-        }
-
-        if (countyHeroes.Count == 0)
-        {
-            WorldMapLoad.Instance.heroScrollView.SetActive(false);
+            uIHero.name = $"UI {countyHeroes[i].firstName} {countyHeroes[i].lastName}";
+            uIHero.GetComponent<UIHeroListButton>().countyPopulation = countyHeroes[i];
+            if (countyHeroes[i].isSpawned == true)
+            {
+                uIHero.GetComponentInChildren<Toggle>().isOn = true;
+            }
+            else
+            {
+                uIHero.GetComponentInChildren<Toggle>().isOn = false;
+            }
         }
     }
 

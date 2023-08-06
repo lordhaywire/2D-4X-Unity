@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,15 +9,21 @@ public class UIHeroSpawnButton : MonoBehaviour
     [SerializeField] private GameObject heroSpawnButton;
 
     private void OnEnable()
+    {      
+        StartCoroutine(WaitCheckForSpawned());
+    }
+
+    private IEnumerator WaitCheckForSpawned()
     {
+        yield return null;
         CountyPopulation countyPopulation = WorldMapLoad.Instance.currentlySelectedCountyPopulation;
-        if (countyPopulation.isHero == true)
+        if (countyPopulation.isHero == true && countyPopulation.isSpawned == false)
         {
-            heroSpawnButton.SetActive(true);
+            heroSpawnButton.GetComponent<Button>().interactable = true;
         }
         else
         {
-            heroSpawnButton.SetActive(false);
+            heroSpawnButton.GetComponent<Button>().interactable = false;
         }
     }
 
@@ -24,6 +32,7 @@ public class UIHeroSpawnButton : MonoBehaviour
         CountyPopulation countyPopulation = WorldMapLoad.Instance.currentlySelectedCountyPopulation;
         var spawnedTokenList 
             = WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyHeroStacking>().spawnedTokenList;
+
         GameObject spawnLocation = WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyInfo>().tokenSpawn;
 
         // Maybe have the heroes spawn as a child of the county in the hierarchy?
@@ -32,14 +41,8 @@ public class UIHeroSpawnButton : MonoBehaviour
 
         spawnedHeroToken.name = countyPopulation.firstName + " " + countyPopulation.lastName;
         countyPopulation.isSpawned = true;
-        
-        /*spawnedHeroToken.GetComponent<TokenInfo>().countyPopulationID
-            = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty.name]
-            .IndexOf(countyPopulation);
-
-        Debug.Log("County Population Index: " + spawnedHeroToken.GetComponent<TokenInfo>().countyPopulationID);
-        */
         countyPopulation.location = WorldMapLoad.Instance.CurrentlySelectedCounty;
+        spawnedHeroToken.GetComponent<TokenInfo>().countyPopulation = countyPopulation;
         
         // Set the hero as already selected.
         WorldMapLoad.Instance.CurrentlySelectedToken = spawnedHeroToken;
@@ -52,6 +55,8 @@ public class UIHeroSpawnButton : MonoBehaviour
         spawnedTokenList.Insert(0, spawnedHeroToken);
 
         WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyHeroStacking>().StackTokens();
+
+        heroSpawnButton.GetComponent<Button>().interactable = false;
 
         UIHeroScrollViewRefresher.Instance.RefreshPanel();
 

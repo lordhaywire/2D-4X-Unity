@@ -325,7 +325,7 @@ public class WorldMapLoad : MonoBehaviour
                 {
                     countyPopulationDictionary[countyName][0]
                 };
-                Debug.Log($"County Heroes:  {countyName} {countyHeroes[countyName][0].firstName}");
+                //Debug.Log($"County Heroes:  {countyName} {countyHeroes[countyName][0].firstName}");
             }
             else if (counties[countyName].isIndependentCapital == true)
             {
@@ -339,7 +339,7 @@ public class WorldMapLoad : MonoBehaviour
                 {
                     countyPopulationDictionary[countyName][0]
                 };
-                Debug.Log($"County Heroes:  {countyName} {countyHeroes[countyName][0].firstName}");
+                //Debug.Log($"County Heroes:  {countyName} {countyHeroes[countyName][0].firstName}");
             }
             else if (counties[countyName].isCapital == false && counties[countyName].isIndependentCapital == false)
             {

@@ -3,8 +3,37 @@ using UnityEngine;
 public class TokenMovement : MonoBehaviour
 {
     private TokenInfo tokenInfo;
-    public bool move;
+    [SerializeField] private GameObject stackCounterGameObject;
     public bool returnHome;
+    private bool move;
+
+    public bool Move
+    {
+        get { return move; }
+        set
+        {
+            move = value;
+            if (move == true)
+            {
+                stackCounterGameObject.SetActive(false);
+                tokenInfo.countyPopulation.location.GetComponent<CountyHeroStacking>().spawnedTokenList.Remove(gameObject);
+                WorldMapLoad.Instance.countyHeroes[tokenInfo.countyPopulation.location.name]
+                .Remove(gameObject.GetComponent<TokenInfo>().countyPopulation);
+                WorldMapLoad.Instance.countyPopulationDictionary[tokenInfo.countyPopulation.location.name]
+                .Remove(gameObject.GetComponent<TokenInfo>().countyPopulation);
+
+            }
+            else
+            {
+                if (tokenInfo.countyPopulation.destination.GetComponent<CountyHeroStacking>().spawnedTokenList.Count > 1)
+                {
+                    stackCounterGameObject.SetActive(true);
+                }
+
+            }
+        }
+    }
+
 
     private void Awake()
     {
@@ -12,7 +41,7 @@ public class TokenMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (move == true)
+        if (Move == true)
         {
             MoveToken();
         }
@@ -25,15 +54,21 @@ public class TokenMovement : MonoBehaviour
     private void MoveToken()
     {
         float step = Globals.Instance.tokenSpeed * Time.fixedDeltaTime;
-        Transform destination = tokenInfo.countyPopulation.destination.transform;
-        
+        Transform destination = tokenInfo.countyPopulation.destination.GetComponent<CountyInfo>().tokenSpawn.transform;
+
+
         transform.position = Vector2.MoveTowards(transform.position, destination.position, step);
-        if(transform.position == destination.position)
+        if (transform.position == destination.position)
         {
-            move = false;
+            Move = false;
             tokenInfo.countyPopulation.location = tokenInfo.countyPopulation.destination;
+            tokenInfo.countyPopulation.destination.GetComponent<CountyHeroStacking>().spawnedTokenList.Add(gameObject);
+            WorldMapLoad.Instance.countyPopulationDictionary[tokenInfo.countyPopulation.destination.name]
+                .Add(gameObject.GetComponent<TokenInfo>().countyPopulation);
+            WorldMapLoad.Instance.countyHeroes[tokenInfo.countyPopulation.destination.name]
+                .Add(gameObject.GetComponent<TokenInfo>().countyPopulation);
             tokenInfo.countyPopulation.destination = null;
-            Debug.Log("Token has reached its destination.");
+            Debug.Log(gameObject.name + " has reached " + destination.name);
         }
     }
 
@@ -47,7 +82,12 @@ public class TokenMovement : MonoBehaviour
         {
             returnHome = false;
             tokenInfo.countyPopulation.destination = null;
-            Debug.Log("Token has returned home.");
+            tokenInfo.countyPopulation.location.GetComponent<CountyHeroStacking>().spawnedTokenList.Add(gameObject);
+            WorldMapLoad.Instance.countyPopulationDictionary[tokenInfo.countyPopulation.destination.name]
+                .Add(gameObject.GetComponent<TokenInfo>().countyPopulation);
+            WorldMapLoad.Instance.countyHeroes[tokenInfo.countyPopulation.destination.name]
+                .Add(gameObject.GetComponent<TokenInfo>().countyPopulation);
+            Debug.Log(gameObject.name + " has returned home.");
         }
 
     }

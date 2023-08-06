@@ -32,7 +32,6 @@ public class CountyPopulation
     public string nextActivity;
     public CurrentBuilding nextBuilding;
 
-
     [Header("Token")]
     public bool isSpawned;
     

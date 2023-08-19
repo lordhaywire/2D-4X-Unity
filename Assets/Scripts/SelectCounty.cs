@@ -45,21 +45,18 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
                 }
                 else
                 {
+                    // Return token to their starting location if the player clicks on a county that isn't the destination.
                     if (WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().Move == true
                         && WorldMapLoad.Instance.currentlyRightClickedCounty.GetComponent<CountyInfo>().tokenSpawn
                         != heroDestination.GetComponent<CountyInfo>().tokenSpawn)
                     {
-                        TokenReturnHome();
+                        
+                        WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().countyPopulation.destination 
+                            = WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().countyPopulation.location;                       
                     }
                 }
             }
         }
-    }
-
-    private void TokenReturnHome()
-    {
-        WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().Move = false;
-        WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenMovement>().returnHome = true;
     }
 
     private void TokenMoveToCounty()

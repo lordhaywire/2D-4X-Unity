@@ -50,9 +50,9 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
                         && WorldMapLoad.Instance.currentlyRightClickedCounty.GetComponent<CountyInfo>().tokenSpawn
                         != heroDestination.GetComponent<CountyInfo>().tokenSpawn)
                     {
-                        
-                        WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().countyPopulation.destination 
-                            = WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().countyPopulation.location;                       
+
+                        WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().countyPopulation.destination
+                            = WorldMapLoad.Instance.CurrentlySelectedToken.GetComponent<TokenInfo>().countyPopulation.location;
                     }
                 }
             }
@@ -81,11 +81,9 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             UIPopulationDescriptionPanel.Instance.gameObject.SetActive(false);
             WorldMapLoad.Instance.populationDescriptionPanelOpen = false;
         }
-        if (WorldMapLoad.Instance.populationInfoPanelOpen == true)
-        {
-            UIPopulationInfoPanel.Instance.gameObject.SetActive(false);
-            WorldMapLoad.Instance.populationInfoPanelOpen = false;
-        }
+
+        UIPlayerUI.Instance.populationListPanel.SetActive(false);
+
     }
 
     private void PanelChanges()
@@ -100,8 +98,8 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             == WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name)
         {
             //UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(true);
-            
-            
+
+
             if (UICountyPanel.Instance.buildingsPanelExpanded == false)
             {
                 UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(true);

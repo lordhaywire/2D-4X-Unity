@@ -5,7 +5,6 @@ public class UICountyPanel : MonoBehaviour
 {
     public static UICountyPanel Instance;
 
-    [SerializeField] private GameObject populationInfoPanel;
     [SerializeField] private GameObject expandBuildingsPanelButton;
 
     public bool buildingsPanelExpanded;
@@ -23,10 +22,11 @@ public class UICountyPanel : MonoBehaviour
     }
     public void PopulationButton()
     {
+        // Only allowed to look at your own population.
         if (WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].faction.factionNameAndColor.name ==
             WorldMapLoad.Instance.playerFaction.factionNameAndColor.name)
         {
-            populationInfoPanel.SetActive(true);
+            UIPlayerUI.Instance.populationListPanel.SetActive(true);
         }
     }
 }

@@ -15,7 +15,6 @@ public class UITopInfoBar : MonoBehaviour
     private int food;
     private int scrap;
 
-    
     public int Influence
     {
         get

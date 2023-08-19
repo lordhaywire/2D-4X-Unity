@@ -176,7 +176,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Old Yellow Lined Paper_0: 6741714867918864532
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

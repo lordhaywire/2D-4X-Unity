@@ -19,8 +19,6 @@ public class UIPopulationInfoPanel : MonoBehaviour
     {
         TimeKeeper.Instance.PauseTime();
 
-        WorldMapLoad.Instance.populationInfoPanelOpen = true;
-
         if (WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty.name] != null)
         {
             var countyList = WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty.name];
@@ -43,19 +41,20 @@ public class UIPopulationInfoPanel : MonoBehaviour
             Debug.Log("The Currently Selected County is null, dipshit.");
         }
     }
-    private void OnDisable()
-    {
-        TimeKeeper.Instance.UnpauseTime();
 
-        DestroyPopulation();
-    }
-
-    private void DestroyPopulation()
+    private void DestroyPopulationList()
     {
         for (int i = 0; i < populationListClones.Count; i++)
         {
             Destroy(populationListClones[i]);
         }
         populationListClones.Clear();
+    }
+
+    private void OnDisable()
+    {
+        TimeKeeper.Instance.UnpauseTime();
+
+        DestroyPopulationList();
     }
 }

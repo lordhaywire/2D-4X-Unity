@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Research : MonoBehaviour
+public class UIResearch : MonoBehaviour
 {
-    public static Research Instance;
+    public static UIResearch Instance;
 
     public GameObject researchTitleAndDescriptionPanel;
 
@@ -20,6 +20,4 @@ public class Research : MonoBehaviour
     {
         TimeKeeper.Instance.UnpauseTime();  
     }
-
-
 }

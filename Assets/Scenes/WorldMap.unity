@@ -2489,7 +2489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e2dcc84bcf59f40ae744593f599d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  populationInfoPanel: {fileID: 2144487633}
   expandBuildingsPanelButton: {fileID: 7085729}
   buildingsPanelExpanded: 0
   countyOwnerText: {fileID: 1917657219}
@@ -2871,7 +2870,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 214053435}
-  - component: {fileID: 214053436}
   m_Layer: 5
   m_Name: Research Items
   m_TagString: Untagged
@@ -2912,19 +2910,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1, y: 476}
   m_SizeDelta: {x: 1903.8267, y: 1740.9512}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &214053436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 214053434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3670a7881e49989469133456b643d985, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  researchTitleAndDescriptionPanel: {fileID: 421886999}
 --- !u!1 &223208134
 GameObject:
   m_ObjectHideFlags: 0
@@ -3736,7 +3721,7 @@ GameObject:
   - component: {fileID: 259231820}
   - component: {fileID: 259231822}
   m_Layer: 5
-  m_Name: County Population Text
+  m_Name: County Population Text Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3914,6 +3899,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 248797748}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &260328473
 GameObject:
   m_ObjectHideFlags: 0
@@ -4060,8 +4057,9 @@ GameObject:
   - component: {fileID: 275133783}
   - component: {fileID: 275133782}
   - component: {fileID: 275133781}
+  - component: {fileID: 275133785}
   m_Layer: 5
-  m_Name: UI Canvas
+  m_Name: Player UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4156,6 +4154,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &275133785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275133780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3aac3395f6f755498aea2d600ec1558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  populationListPanel: {fileID: 2144487633}
 --- !u!114 &276654491 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4700359049039459008, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
@@ -7010,6 +7021,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Research Item (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2204460969087345500, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6674127218891363220, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7200,7 +7215,7 @@ GameObject:
   - component: {fileID: 421887001}
   - component: {fileID: 421887003}
   m_Layer: 5
-  m_Name: Research Title and Description
+  m_Name: Research Description Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10668,6 +10683,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Research Item (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2204460969087345500, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6674127218891363220, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10751,6 +10770,10 @@ PrefabInstance:
     - target: {fileID: 6674127218891363220, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7890274884037204528, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9120295484086607164, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
       propertyPath: toggle
@@ -13452,18 +13475,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2140408005}
-        m_TargetAssemblyTypeName: TimeKeeper, Assembly-CSharp
-        m_MethodName: PauseTime
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &873185020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14319,18 +14330,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2140408005}
-        m_TargetAssemblyTypeName: TimeKeeper, Assembly-CSharp
-        m_MethodName: UnpauseTime
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -18026,6 +18025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe232869d82d2c4ebc04a3d82ff7e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPaused: 1
   tokenSpeed: 5
 --- !u!4 &1106664557
 Transform:
@@ -19529,7 +19529,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -853, y: -448}
+  m_SizeDelta: {x: -870, y: -448}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1305058286
 MonoBehaviour:
@@ -24830,6 +24830,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Research Item (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2204460969087345500, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6674127218891363220, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -25826,7 +25830,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 336901889}
   m_HandleRect: {fileID: 336901888}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -28013,7 +28017,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: -17}
+  m_SizeDelta: {x: 0, y: -17}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1918904801
 MonoBehaviour:
@@ -28775,6 +28779,10 @@ PrefabInstance:
     - target: {fileID: 2204460969087345500, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
       propertyPath: m_Name
       value: UI Research Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 2204460969087345500, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6674127218891363220, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
       propertyPath: m_Pivot.x
@@ -30231,6 +30239,7 @@ GameObject:
   - component: {fileID: 2084734599}
   - component: {fileID: 2084734601}
   - component: {fileID: 2084734600}
+  - component: {fileID: 2084734602}
   m_Layer: 5
   m_Name: Research Panel
   m_TagString: Untagged
@@ -30300,6 +30309,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2084734598}
   m_CullTransparentMesh: 1
+--- !u!114 &2084734602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084734598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3670a7881e49989469133456b643d985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  researchDescriptionPanel: {fileID: 421886999}
+  researchItemsParent: {fileID: 214053434}
 --- !u!1 &2101913301
 GameObject:
   m_ObjectHideFlags: 0
@@ -31385,7 +31408,7 @@ GameObject:
   - component: {fileID: 2144487635}
   - component: {fileID: 2144487637}
   m_Layer: 5
-  m_Name: Population Info Panel
+  m_Name: Population List Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

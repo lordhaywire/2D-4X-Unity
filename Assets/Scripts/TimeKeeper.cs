@@ -10,7 +10,7 @@ public class TimeKeeper : MonoBehaviour
     public static TimeKeeper Instance;
     [SerializeField] private TextMeshProUGUI dayAndTimeText;
     [SerializeField] private TextMeshProUGUI currentSpeedText;
-    [SerializeField] private GameObject paused;
+    [SerializeField] private GameObject pausedText;
     [SerializeField] private int ticks;
 
     public MapControls mapControls;
@@ -59,13 +59,11 @@ public class TimeKeeper : MonoBehaviour
             //Debug.Log($"ModifiedScale has changed to {modifiedTimeScale}");
             if (modifiedTimeScale == 0)
             {
-                paused.SetActive(true);
-
+                pausedText.SetActive(true);
             }
             else
             {
-                paused.SetActive(false);
-
+                pausedText.SetActive(false);
             }
         }
     }
@@ -73,24 +71,25 @@ public class TimeKeeper : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        mapControls = new MapControls();  // This sets up a new control scheme for this script. This sentence doesn't mean anything to me.
+
+        mapControls = new MapControls();
         ModifiedTimeScale = 1;
         numberOfThingsPaused = 0;
+
+        if (Globals.Instance.startPaused == true)
+        {
+            PauseTime();
+        }
     }
     private void Start()
     {
-        mapControls.Keyboard.Spacebar.started += _ => PauseandUnpause();
+        mapControls.Keyboard.Spacebar.performed += _ => PauseandUnpause();
         oldTimeSpeed = 1;
     }
 
     private void OnEnable()
     {
         mapControls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        mapControls.Disable();
     }
 
     private void FixedUpdate()
@@ -121,8 +120,12 @@ public class TimeKeeper : MonoBehaviour
 
     public void TimeSpeedx0()
     {
-        ModifiedTimeScale = 0;
-        oldTimeSpeed = 0;
+        if(ModifiedTimeScale != 0)
+        {
+            oldTimeSpeed = ModifiedTimeScale;
+            ModifiedTimeScale = 0;
+            numberOfThingsPaused++;
+        }  
     }
 
     public void TimeSpeedx1()
@@ -151,11 +154,11 @@ public class TimeKeeper : MonoBehaviour
 
     public void PauseTime()
     {
-        //Debug.Log("Pause Time!");
+        Debug.Log("Pause Time!");
         mapControls.Keyboard.Spacebar.Disable();
         numberOfThingsPaused++;
         if (ModifiedTimeScale != 0)
-        {  
+        {
             oldTimeSpeed = ModifiedTimeScale;
             ModifiedTimeScale = 0;
         }
@@ -163,24 +166,23 @@ public class TimeKeeper : MonoBehaviour
 
     public void UnpauseTime()
     {
-        //Debug.Log("Unpause Time!");
+        Debug.Log("Unpause Time!");
         mapControls.Keyboard.Spacebar.Enable();
 
         numberOfThingsPaused--;
         if (numberOfThingsPaused == 0)
         {
             ModifiedTimeScale = oldTimeSpeed;
-        } 
+        }
     }
     public void PauseandUnpause()
     {
-        
+        Debug.Log("Keyboard has been pressed!");
         if (ModifiedTimeScale > 0)
         {
             oldTimeSpeed = ModifiedTimeScale;
             ModifiedTimeScale = 0;
             numberOfThingsPaused++;
-
         }
         else
         {
@@ -190,33 +192,8 @@ public class TimeKeeper : MonoBehaviour
         //Debug.Log($"Modified Time: {ModifiedTimeScale} and Old Time Speed: {oldTimeSpeed}.");
     }
 
-    /*
-
-    public void OnPanelEnable()
+    private void OnDisable()
     {
-        mapControls.Keyboard.Spacebar.Disable();
-        if (Time.timeScale != 0)
-        {
-            
-            isAlreadyPaused = false;
-
-        }
-        else
-        {
-            isAlreadyPaused = true;
-        }
+        mapControls.Disable();
     }
-
-    public void OnPanelDisable()
-    {
-        mapControls.Keyboard.Spacebar.Enable();
-        if (isAlreadyPaused == false)
-        {
-            ModifiedTimeScale = oldTimeSpeed;
-        }
-    }
-
-    */
-    // Change this to an event, probably.
-
 }

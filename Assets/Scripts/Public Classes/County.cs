@@ -40,7 +40,8 @@ public class County
         this.biomePrimary = biomePrimary;
         this.biomeSecondary = biomeSecondary;
         this.biomeTertiary = biomeTertiary;
-        possibleBuildings = new List<PossibleBuilding>(); // This initializes the list. It is not in the constructor. 
+        possibleBuildings = new List<PossibleBuilding>(); // I am not sure if we need these here, or at all.
+                                                          // This initializes the list. It is not in the constructor. 
         currentBuildings = new List<CurrentBuilding>(); // This initializes the list. It is not in the constructor. 
         this.spawnedHeroCount = spawnedHeroCount;
         this.currentlyWorkingPopulation = currentlyWorkingPopulation;

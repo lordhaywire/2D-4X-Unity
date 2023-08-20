@@ -76,10 +76,6 @@ public class WorldMapLoad : MonoBehaviour
     [SerializeField] private int minimumCountyPop;
     [SerializeField] private int maximumCountyPop;
 
-
-    //[SerializeField] private GameObject countyListGameObject;
-    //[SerializeField] private GameObject uICanvas;
-
     public bool currentBuildingDescriptionPanelExpanded;
     public bool possibleBuildingDescriptionPanelExpanded;
     public bool populationDescriptionPanelOpen;
@@ -148,6 +144,12 @@ public class WorldMapLoad : MonoBehaviour
         lastNames = null;
         femaleNames = null;
         maleNames = null;
+
+        // Write to file test
+        /*
+        string saveGameName = "FactionList";
+        File.WriteAllText(Application.streamingAssetsPath + "\\" + saveGameName + ".json", JsonUtility.ToJson(factions[0], true));
+        */
     }
 
     private void BuildCountyImprovement()
@@ -218,7 +220,7 @@ public class WorldMapLoad : MonoBehaviour
 
         foreach (KeyValuePair<string, County> item in counties)
         {
-            //Debug.Log(item.Key + "   " + item.Value);
+            //Debug.Log(item.Key + " " + item.Value);
             counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
             AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK, 500, 7, 0, 5));
             counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
@@ -226,8 +228,6 @@ public class WorldMapLoad : MonoBehaviour
             counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
                 AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK, 500, 7, 0, 5));
         }
-
-
     }
 
     private void FirstRunTopInfoBar()
@@ -292,7 +292,6 @@ public class WorldMapLoad : MonoBehaviour
                 counties[CountyListCreator.Instance.countiesList[i].name];
         }
     }
-
     private void CreatePopulation()
     {
         // Create various county specific data.
@@ -393,13 +392,6 @@ public class WorldMapLoad : MonoBehaviour
             countyPopulation.Add(new CountyPopulation(null, null, counties[countyName].faction.factionNameAndColor.name,
                 firstName, lastName, isMale, age, isFactionLeader, false, false, leaderOfPeoplePerk, constructionSkill,
                 AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null, false));
-
-            // Assign the faction leader couny population to the faction.
-            if (i == 0)
-            {
-
-            }
-
         }
     }
     private void OnDisable()

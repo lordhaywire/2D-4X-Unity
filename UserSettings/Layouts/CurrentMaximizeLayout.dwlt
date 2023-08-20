@@ -863,9 +863,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 4a750000
-      m_LastClickedID: 30026
-      m_ExpandedIDs: 72e4ffff6efaffffa67000004a750000
+      m_SelectedIDs: 8e5c0000
+      m_LastClickedID: 0
+      m_ExpandedIDs: ccfaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -881,7 +881,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 7}
+        m_ClientGUIView: {fileID: 8}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -908,8 +908,8 @@ MonoBehaviour:
     y: 0
     width: 274.66663
     height: 854.6667
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 11}
   m_Panes:
   - {fileID: 11}
@@ -1037,7 +1037,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/UI
+    - Assets/Scripts/Public Classes
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1047,16 +1047,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts/UI
+  - Assets/Scripts/Public Classes
   m_LastFoldersGridSize: 16
   m_LastProjectPath: G:\Unity\2D 4X
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c67b0000
-    m_LastClickedID: 31686
-    m_ExpandedIDs: 00000000a47b0000a67b0000a87b0000aa7b0000ac7b0000ae7b000000ca9a3b
+    m_SelectedIDs: 9c7b0000
+    m_LastClickedID: 31644
+    m_ExpandedIDs: 00000000807b0000827b0000847b0000867b0000887b00008a7b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1084,7 +1084,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a47b0000a67b0000a87b0000aa7b0000ac7b0000ae7b000000ca9a3b
+    m_ExpandedIDs: 00000000807b0000827b0000847b0000867b0000887b00008a7b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1109,9 +1109,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 4a750000
-    m_LastClickedInstanceID: 30026
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 8e5c0000
+    m_LastClickedInstanceID: 23694
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 627e0000c6af000000000000484001002e580000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

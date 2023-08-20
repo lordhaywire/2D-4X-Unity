@@ -1927,6 +1927,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109927195}
   m_CullTransparentMesh: 1
+--- !u!1 &132961226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 132961227}
+  - component: {fileID: 132961228}
+  m_Layer: 0
+  m_Name: ---Factions---
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &132961227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132961226}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &132961228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132961226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503918e7cbc32ec48b2fbf4dc5f302cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  factionPrefab: {fileID: 5829746333929138468, guid: 90af39d0e176aaf4e8e2f952b72239cc, type: 3}
 --- !u!1 &138819673
 GameObject:
   m_ObjectHideFlags: 0
@@ -31950,6 +31995,7 @@ SceneRoots:
   - {fileID: 2140408006}
   - {fileID: 1078402822}
   - {fileID: 275133784}
+  - {fileID: 132961227}
   - {fileID: 249060078}
   - {fileID: 1543565167}
   - {fileID: 1665246711}

@@ -1,0 +1,75 @@
+{
+    "factionNameAndColor": {
+        "factionID": 0,
+        "name": "The Shit Birds",
+        "color32": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0
+        }
+    },
+    "researchItems": [
+        {
+            "name": "Fisher's Shack",
+            "description": "This is a fisher's shack.",
+            "prerequisite1": "",
+            "prerequisite2": "",
+            "tier": 1,
+            "isBuilding": true,
+            "isResearchDone": true
+        },
+        {
+            "name": "Forester's Shack",
+            "description": "This is a forester's shack.",
+            "prerequisite1": "",
+            "prerequisite2": "",
+            "tier": 1,
+            "isBuilding": true,
+            "isResearchDone": true
+        },
+        {
+            "name": "Gardener's Shack",
+            "description": "This is a gardener's shack.",
+            "prerequisite1": "",
+            "prerequisite2": "",
+            "tier": 1,
+            "isBuilding": true,
+            "isResearchDone": true
+        },
+        {
+            "name": "Elitism",
+            "description": "Some people think they are better then others.",
+            "prerequisite1": "",
+            "prerequisite2": "",
+            "tier": 1,
+            "isBuilding": false,
+            "isResearchDone": true
+        }
+    ],
+    "factionLeader": {
+        "location": {
+            "instanceID": 0
+        },
+        "destination": {
+            "instanceID": 0
+        },
+        "faction": "The Shit Birds",
+        "firstName": "Fred",
+        "lastName": "Gonzales",
+        "isMale": true,
+        "age": 45,
+        "isFactionLeader": false,
+        "isHero": true,
+        "isWorker": false,
+        "leaderOfPeoplePerk": false,
+        "constructionSkill": 54,
+        "currentActivity": "Scavenging",
+        "nextActivity": "Scavenging",
+        "isSpawned": false
+    },
+    "influence": 10000,
+    "money": 0,
+    "food": 1000,
+    "scrap": 1000
+}

@@ -54,26 +54,8 @@ public class UIHeroSpawnButton : MonoBehaviour
         WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyInfo>().county.spawnedHeroCount++;
         spawnedTokenList.Insert(0, spawnedHeroToken);
 
-        //WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyHeroStacking>().StackTokens();
-
         heroSpawnButton.GetComponent<Button>().interactable = false;
 
         UIHeroScrollViewRefresher.Instance.RefreshPanel();
-
-        // I think I need this shit here.  With out this every time the hero list is refresh it respawns the heroes.
-        // I know why this happens.  Every time the list is refreshed it checks marks the Toggle button automatically.
-        // If we change how that works, then we can get rid of this if statement, but not the else.
-        /*
-        if (hero.gameObject != null)
-        {
-            Debug.Log("Hero already spawned.");
-            return;
-        }
-        
-        else
-        {
-        */
-
-        //}
     }
 }

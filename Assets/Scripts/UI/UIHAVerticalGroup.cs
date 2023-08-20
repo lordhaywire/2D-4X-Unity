@@ -4,13 +4,14 @@ public class UIHAVerticalGroup : MonoBehaviour
 {
     private void OnEnable()
     {
-        if(WorldMapLoad.Instance.countyHeroes[ WorldMapLoad.Instance.CurrentlySelectedCounty.name].Count > 0)
+        if (WorldMapLoad.Instance.countyHeroes[WorldMapLoad.Instance.CurrentlySelectedCounty.name].Count > 0
+            && UIPlayerUI.Instance.countyInfoPanel.activeSelf == true || UIPlayerUI.Instance.heroInfoPanel.activeSelf == true)
         {
-            WorldMapLoad.Instance.heroScrollView.SetActive(true);
+            UIPlayerUI.Instance.heroScrollView.SetActive(true);
         }
         else
         {
-            WorldMapLoad.Instance.heroScrollView.SetActive(false);
+            UIPlayerUI.Instance.heroScrollView.SetActive(false);
             gameObject.SetActive(false);
         }
     }

@@ -24,7 +24,7 @@ public class WorldMapLoad : MonoBehaviour
         {
             currentlySelectedCounty = value;
             heroesAndArmiesVerticalGroup.SetActive(false);
-            heroScrollView.SetActive(false);
+            UIPlayerUI.Instance.heroScrollView.SetActive(false);
 
             if (currentlySelectedCounty == null)
             {
@@ -36,12 +36,12 @@ public class WorldMapLoad : MonoBehaviour
                 if (countyHeroes[currentlySelectedCounty.name].Count > 0 && playerFaction.factionNameAndColor.name == counties[currentlySelectedCounty.name].faction.factionNameAndColor.name)
                 {
                     heroesAndArmiesVerticalGroup.SetActive(true);
-                    heroScrollView.SetActive(true);
+                    UIPlayerUI.Instance.heroScrollView.SetActive(true);
                 }
                 else
                 {
                     heroesAndArmiesVerticalGroup.SetActive(false);
-                    heroScrollView.SetActive(false);
+                    UIPlayerUI.Instance.heroScrollView.SetActive(false);
                 }
             }
         }
@@ -77,8 +77,8 @@ public class WorldMapLoad : MonoBehaviour
     [SerializeField] private int maximumCountyPop;
 
 
-    [SerializeField] private GameObject countyListGameObject;
-    [SerializeField] private GameObject uICanvas;
+    //[SerializeField] private GameObject countyListGameObject;
+    //[SerializeField] private GameObject uICanvas;
 
     public bool currentBuildingDescriptionPanelExpanded;
     public bool possibleBuildingDescriptionPanelExpanded;
@@ -86,14 +86,7 @@ public class WorldMapLoad : MonoBehaviour
     public bool populationInfoPanelOpen;
     public bool populationInfoPanelOpenedByHeroListClick;
 
-    public GameObject countyInfoPanel;
-    public GameObject heroInfoPanel;
-    public GameObject armyInfoPanel;
     public GameObject heroesAndArmiesVerticalGroup;
-    public GameObject heroScrollView;
-    public GameObject armyScrollView;
-
-    public GameObject populationInfoPanel;
 
     // Because the button that opens this is in a Prefab.
     public GameObject populationDescriptionPanel;
@@ -109,9 +102,6 @@ public class WorldMapLoad : MonoBehaviour
 
     // A Dictionary for each county that holds a list of their population.
     public Dictionary<string, List<CountyPopulation>> countyPopulationDictionary = new();
-
-    // Initialize army list of spawned spawnedArmies.
-    public List<SpawnedArmy> spawnedArmies = new();
 
     // Initialize Factions list that will be used with the counties.
     public List<FactionNameAndColor> factionNameAndColors = new();
@@ -348,6 +338,8 @@ public class WorldMapLoad : MonoBehaviour
                 counties[countyName].population = normalPopulation;
                 countyHeroes[countyName] = new List<CountyPopulation>();
             }
+            counties[countyName].countyPopulation = countyPopulationDictionary[countyName];
+
         }
     }
 

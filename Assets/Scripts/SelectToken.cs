@@ -7,6 +7,7 @@ public class SelectToken : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
+            UIPlayerUI.Instance.heroInfoPanel.SetActive(true);
             if (WorldMapLoad.Instance.CurrentlySelectedToken == gameObject)
             {
                 string location =

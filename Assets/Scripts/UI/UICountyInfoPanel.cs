@@ -1,16 +1,13 @@
 using TMPro;
 using UnityEngine;
 
-public class UICountyPanel : MonoBehaviour
+public class UICountyInfoPanel : MonoBehaviour
 {
-    public static UICountyPanel Instance;
+    public static UICountyInfoPanel Instance;
 
     [SerializeField] private GameObject expandBuildingsPanelButton;
 
     public bool buildingsPanelExpanded;
-
-    //public GameObject heroScrollView;
-    //public GameObject armyScrollView;
 
     public TextMeshProUGUI countyOwnerText;
     public TextMeshProUGUI countyNameText;
@@ -19,6 +16,11 @@ public class UICountyPanel : MonoBehaviour
     {
         Instance = this;
         buildingsPanelExpanded = false;
+    }
+
+    private void OnEnable()
+    {
+        UIPlayerUI.Instance.heroInfoPanel.SetActive(false);
     }
     public void PopulationButton()
     {
@@ -29,4 +31,6 @@ public class UICountyPanel : MonoBehaviour
             UIPlayerUI.Instance.populationListPanel.SetActive(true);
         }
     }
+
+
 }

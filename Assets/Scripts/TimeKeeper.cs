@@ -154,7 +154,7 @@ public class TimeKeeper : MonoBehaviour
 
     public void PauseTime()
     {
-        Debug.Log("Pause Time!");
+        //Debug.Log("Pause Time!");
         mapControls.Keyboard.Spacebar.Disable();
         numberOfThingsPaused++;
         if (ModifiedTimeScale != 0)
@@ -166,7 +166,7 @@ public class TimeKeeper : MonoBehaviour
 
     public void UnpauseTime()
     {
-        Debug.Log("Unpause Time!");
+        //Debug.Log("Unpause Time!");
         mapControls.Keyboard.Spacebar.Enable();
 
         numberOfThingsPaused--;

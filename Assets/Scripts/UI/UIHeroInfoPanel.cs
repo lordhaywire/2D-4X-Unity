@@ -8,6 +8,7 @@ public class UIHeroInfoPanel : MonoBehaviour
 
     private void OnEnable()
     {
+        UIPlayerUI.Instance.countyInfoPanel.SetActive(false);
         CountyPopulation countyPopulation = WorldMapLoad.Instance.currentlySelectedCountyPopulation;
         heroOwnerText.text = countyPopulation.faction.ToString();
         heroNameText.text = $"{countyPopulation.firstName} {countyPopulation.lastName}"; 

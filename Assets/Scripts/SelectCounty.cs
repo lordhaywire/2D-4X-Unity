@@ -88,9 +88,9 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
     private void PanelChanges()
     {
-        WorldMapLoad.Instance.countyInfoPanel.SetActive(true);
-        WorldMapLoad.Instance.heroInfoPanel.SetActive(false);
-        WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
+        UIPlayerUI.Instance.countyInfoPanel.SetActive(true);
+        //UIPlayerUI.Instance.heroInfoPanel.SetActive(false);
+        //UIPlayerUI.Instance.armyInfoPanel.SetActive(false);
 
         WorldMapLoad.Instance.heroesAndArmiesVerticalGroup.SetActive(true);
 
@@ -100,22 +100,20 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             //UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(true);
 
 
-            if (UICountyPanel.Instance.buildingsPanelExpanded == false)
+            if (UICountyInfoPanel.Instance.buildingsPanelExpanded == false)
             {
                 UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(true);
             }
         }
         else
         {
-            if (UICountyPanel.Instance.buildingsPanelExpanded == true)
+            if (UICountyInfoPanel.Instance.buildingsPanelExpanded == true)
             {
                 UIPossibleBuildingsPanel.Instance.gameObject.SetActive(false);
                 UICurrentBuildingsPanel.Instance.gameObject.SetActive(false);
             }
-
-            UIMusterArmyButton.Instance.musterArmyButtonGameObject.SetActive(false);
             UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(false);
-            UICountyPanel.Instance.buildingsPanelExpanded = false;
+            UICountyInfoPanel.Instance.buildingsPanelExpanded = false;
         }
     }
 
@@ -140,19 +138,19 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
     private void FillCountyInfoPanel()
     {
-        UICountyPanel.Instance.countyOwnerText.text = "Owner: " + WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name;
-        UICountyPanel.Instance.countyNameText.text = "County: " + name;
+        UICountyInfoPanel.Instance.countyOwnerText.text = "Owner: " + WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name;
+        UICountyInfoPanel.Instance.countyNameText.text = "County: " + name;
 
         // This is just some temp bullshit to not allow you to look at counties you don't own.
         if (WorldMapLoad.Instance.playerFaction.factionNameAndColor.name ==
             WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name)
         {
-            UICountyPanel.Instance.countyPopulationText.text =
+            UICountyInfoPanel.Instance.countyPopulationText.text =
                 "Population: " + WorldMapLoad.Instance.counties[name].population.ToString();
         }
         else
         {
-            UICountyPanel.Instance.countyPopulationText.text = "Population: Unknown";
+            UICountyInfoPanel.Instance.countyPopulationText.text = "Population: Unknown";
         }
     }
 

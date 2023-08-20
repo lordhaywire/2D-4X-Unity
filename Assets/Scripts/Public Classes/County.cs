@@ -16,6 +16,7 @@ public class County
     public string biomePrimary;
     public string biomeSecondary;
     public string biomeTertiary;
+    public List<CountyPopulation> countyPopulation;
     public List<PossibleBuilding> possibleBuildings;
     public List<CurrentBuilding> currentBuildings;
 

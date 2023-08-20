@@ -46,9 +46,9 @@ public class UIHeroSpawnButton : MonoBehaviour
         
         // Set the hero as already selected.
         WorldMapLoad.Instance.CurrentlySelectedToken = spawnedHeroToken;
-        WorldMapLoad.Instance.heroInfoPanel.SetActive(true);
-        WorldMapLoad.Instance.countyInfoPanel.SetActive(false);
-        WorldMapLoad.Instance.armyInfoPanel.SetActive(false);
+        UIPlayerUI.Instance.heroInfoPanel.SetActive(true);
+        UIPlayerUI.Instance.countyInfoPanel.SetActive(false);
+        UIPlayerUI.Instance.armyInfoPanel.SetActive(false);
 
         // Add the hero to the hero stack list, and increment the spawned hero count.
         WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyInfo>().county.spawnedHeroCount++;

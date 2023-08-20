@@ -23,8 +23,8 @@ public class UIPopulationDescriptionPanel : MonoBehaviour
     
     private void OnEnable()
     {
-        TimeKeeper.Instance.PauseTime();
-        WorldMapLoad.Instance.populationInfoPanel.SetActive(false);
+
+        UIPlayerUI.Instance.populationListPanel.SetActive(false);
 
         PopulationDescriptionPanelRefesh();
     }
@@ -38,6 +38,8 @@ public class UIPopulationDescriptionPanel : MonoBehaviour
     IEnumerator AfterWaitForOneFrame()
     {
         yield return null;
+
+        TimeKeeper.Instance.PauseTime();
 
         CountyPopulation countyPopulation = WorldMapLoad.Instance.currentlySelectedCountyPopulation;
         populationNameText.text = $"{countyPopulation.firstName} {countyPopulation.lastName}";

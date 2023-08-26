@@ -164,10 +164,12 @@ public class WorldMapLoad : MonoBehaviour
         var possibleBuilding = counties[CurrentlySelectedCounty.name].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
 
         // Create the Current Building List and add list to the County so the County knows what it has built.
+        counties[CurrentlySelectedCounty.name].currentBuildings.Add(possibleBuilding);
+        /* Just in case I need to reference this during this bug hunt.
         counties[CurrentlySelectedCounty.name].currentBuildings.Add(new CurrentBuilding(possibleBuilding.name,
             possibleBuilding.description, 0, possibleBuilding.workCost, possibleBuilding.CurrentWorkers,
             possibleBuilding.maxEmployees, true, false, null));
-
+        */
         // This makes is so that the population gets the correct building to build.
         UICurrentBuildingsPanel.Instance.CurrentBuildingNumber =
             counties[CurrentlySelectedCounty.name].currentBuildings.Count - 1;
@@ -185,7 +187,7 @@ public class WorldMapLoad : MonoBehaviour
         {
             if (countyPopulationDictionary[CurrentlySelectedCounty.name][i].nextActivity == AllText.Jobs.IDLE
                 && numberWorkers <
-                counties[CurrentlySelectedCounty.name].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].currentWorkers)
+                counties[CurrentlySelectedCounty.name].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].CurrentWorkers)
             {
                 countyPopulationDictionary[CurrentlySelectedCounty.name][i].nextActivity = AllText.Jobs.BUILDING;
                 countyPopulationDictionary[CurrentlySelectedCounty.name][i].nextBuilding =
@@ -221,12 +223,15 @@ public class WorldMapLoad : MonoBehaviour
         foreach (KeyValuePair<string, County> item in counties)
         {
             //Debug.Log(item.Key + " " + item.Value);
-            counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
-            AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK, 500, 7, 0, 5));
-            counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
-                AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK, 500, 2, 0, 5));
-            counties[item.Key].possibleBuildings.Add(new PossibleBuilding(
-                AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK, 500, 7, 0, 5));
+            counties[item.Key].possibleBuildings.Add(new Building(
+                null, AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK, 0, 500, 7, 0, 5, false, false
+                , null));
+            counties[item.Key].possibleBuildings.Add(new Building(
+                null, AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK, 0, 500, 2, 0, 5, false
+                , false, null));
+            counties[item.Key].possibleBuildings.Add(new Building(
+                null, AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK, 0, 500, 7, 0, 5, false
+                , false, null));
         }
     }
 
@@ -338,7 +343,6 @@ public class WorldMapLoad : MonoBehaviour
                 countyHeroes[countyName] = new List<CountyPopulation>();
             }
             counties[countyName].countyPopulation = countyPopulationDictionary[countyName];
-
         }
     }
 

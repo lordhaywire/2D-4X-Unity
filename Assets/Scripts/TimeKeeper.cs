@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class TimeKeeper : MonoBehaviour
 {
+    public static TimeKeeper Instance;
+
+    public event Action FirstRun;
     public event Action DayStart;
     public event Action WorkDayOver;
 
-    public static TimeKeeper Instance;
     [SerializeField] private TextMeshProUGUI dayAndTimeText;
     [SerializeField] private TextMeshProUGUI currentSpeedText;
     [SerializeField] private GameObject pausedText;
@@ -35,7 +37,14 @@ public class TimeKeeper : MonoBehaviour
             if (hours == 0)
             {
                 DayStart?.Invoke();
-                //Debug.Log("Hour is ZERO!!!");
+                Debug.Log("Hour is ZERO!!!");
+            }
+
+            if(days == 0 && hours == 1)
+            {
+                Debug.Log("It is 1 am on day zero.");
+                FirstRun?.Invoke();
+                
             }
 
             if (hours == 17)
@@ -177,7 +186,7 @@ public class TimeKeeper : MonoBehaviour
     }
     public void PauseandUnpause()
     {
-        Debug.Log("Keyboard has been pressed!");
+        //Debug.Log("Keyboard has been pressed!");
         if (ModifiedTimeScale > 0)
         {
             oldTimeSpeed = ModifiedTimeScale;

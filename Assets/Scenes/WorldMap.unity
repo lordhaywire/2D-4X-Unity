@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 19502185}
   - component: {fileID: 19502182}
   - component: {fileID: 19502184}
+  - component: {fileID: 19502187}
   m_Layer: 0
   m_Name: Umatilla
   m_TagString: Untagged
@@ -434,6 +435,7 @@ MonoBehaviour:
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
+      isPlayer: 0
       factionNameAndColor:
         factionID: 0
         name: 
@@ -455,7 +457,29 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
+        currentBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         nextActivity: 
+        nextBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -466,6 +490,8 @@ MonoBehaviour:
     biomeSecondary: 
     biomeTertiary: 
     countyPopulation: []
+    possibleBuildings: []
+    currentBuildings: []
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
@@ -808,6 +834,18 @@ PolygonCollider2D:
       - {x: -4.52, y: 7.495}
       - {x: -4.58, y: 7.455}
   m_UseDelaunayMesh: 0
+--- !u!114 &19502187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19502179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e04de6cf68b2c045bcd8fe1f3b590c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &20212083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,7 +1976,7 @@ GameObject:
   - component: {fileID: 132961227}
   - component: {fileID: 132961228}
   m_Layer: 0
-  m_Name: ---Factions---
+  m_Name: ---AI Factions---
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4230,6 +4268,7 @@ GameObject:
   - component: {fileID: 285694186}
   - component: {fileID: 285694184}
   - component: {fileID: 285694185}
+  - component: {fileID: 285694188}
   m_Layer: 0
   m_Name: Tillamook
   m_TagString: Untagged
@@ -4348,6 +4387,7 @@ MonoBehaviour:
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
+      isPlayer: 0
       factionNameAndColor:
         factionID: 0
         name: 
@@ -4369,7 +4409,29 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
+        currentBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         nextActivity: 
+        nextBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -4380,6 +4442,8 @@ MonoBehaviour:
     biomeSecondary: 
     biomeTertiary: 
     countyPopulation: []
+    possibleBuildings: []
+    currentBuildings: []
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
@@ -4794,6 +4858,18 @@ PolygonCollider2D:
       - {x: -3.4808595, y: 10.426875}
       - {x: -3.4703908, y: 10.405938}
   m_UseDelaunayMesh: 0
+--- !u!114 &285694188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285694180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e04de6cf68b2c045bcd8fe1f3b590c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &295376126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9472,6 +9548,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!1 &585946902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 585946903}
+  m_Layer: 0
+  m_Name: Player 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &585946903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585946902}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1472709322}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &609194052 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4700359049039459008, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
@@ -11257,7 +11364,29 @@ MonoBehaviour:
     leaderOfPeoplePerk: 0
     constructionSkill: 0
     currentActivity: 
+    currentBuilding:
+      gameObject: {fileID: 0}
+      name: 
+      description: 
+      workCompleted: 0
+      influenceCost: 0
+      workCost: 0
+      maxWorkers: 0
+      isBeingBuilt: 0
+      isBuilt: 0
+      completedTextGameObject: {fileID: 0}
     nextActivity: 
+    nextBuilding:
+      gameObject: {fileID: 0}
+      name: 
+      description: 
+      workCompleted: 0
+      influenceCost: 0
+      workCost: 0
+      maxWorkers: 0
+      isBeingBuilt: 0
+      isBuilt: 0
+      completedTextGameObject: {fileID: 0}
     isSpawned: 0
   currentlySelectedCounty: {fileID: 0}
   countyInfoPanelGameObject: {fileID: 155121155}
@@ -11273,6 +11402,7 @@ MonoBehaviour:
   heroesAndArmiesVerticalGroup: {fileID: 1462681376}
   populationDescriptionPanel: {fileID: 248797748}
   playerFaction:
+    isPlayer: 0
     factionNameAndColor:
       factionID: 0
       name: 
@@ -11294,7 +11424,29 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
+      currentBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       nextActivity: 
+      nextBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       isSpawned: 0
     influence: 0
     money: 0
@@ -11335,7 +11487,8 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 0
   factions:
-  - factionNameAndColor:
+  - isPlayer: 1
+    factionNameAndColor:
       factionID: 0
       name: 
       color32:
@@ -11356,13 +11509,36 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
+      currentBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       nextActivity: 
+      nextBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       isSpawned: 0
     influence: 10000
     money: 0
     food: 1000
     scrap: 1000
-  - factionNameAndColor:
+  - isPlayer: 0
+    factionNameAndColor:
       factionID: 0
       name: 
       color32:
@@ -11383,13 +11559,36 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
+      currentBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       nextActivity: 
+      nextBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       isSpawned: 0
-    influence: 0
+    influence: 1000
     money: 0
     food: 0
     scrap: 0
-  - factionNameAndColor:
+  - isPlayer: 0
+    factionNameAndColor:
       factionID: 0
       name: 
       color32:
@@ -11410,13 +11609,36 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
+      currentBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       nextActivity: 
+      nextBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       isSpawned: 0
-    influence: 0
+    influence: 500
     money: 0
-    food: 0
+    food: 500
     scrap: 0
-  - factionNameAndColor:
+  - isPlayer: 0
+    factionNameAndColor:
       factionID: 0
       name: 
       color32:
@@ -11437,13 +11659,36 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
+      currentBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       nextActivity: 
+      nextBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       isSpawned: 0
-    influence: 0
+    influence: 500
     money: 0
-    food: 0
+    food: 50
     scrap: 0
-  - factionNameAndColor:
+  - isPlayer: 0
+    factionNameAndColor:
       factionID: 0
       name: 
       color32:
@@ -11464,13 +11709,36 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
+      currentBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       nextActivity: 
+      nextBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       isSpawned: 0
-    influence: 0
+    influence: 750
     money: 0
-    food: 0
+    food: 750
     scrap: 0
-  - factionNameAndColor:
+  - isPlayer: 0
+    factionNameAndColor:
       factionID: 0
       name: 
       color32:
@@ -11491,7 +11759,29 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
+      currentBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       nextActivity: 
+      nextBuilding:
+        gameObject: {fileID: 0}
+        name: 
+        description: 
+        workCompleted: 0
+        influenceCost: 0
+        workCost: 0
+        maxWorkers: 0
+        isBeingBuilt: 0
+        isBuilt: 0
+        completedTextGameObject: {fileID: 0}
       isSpawned: 0
     influence: 0
     money: 0
@@ -13910,6 +14200,7 @@ GameObject:
   - component: {fileID: 889005935}
   - component: {fileID: 889005932}
   - component: {fileID: 889005934}
+  - component: {fileID: 889005937}
   m_Layer: 0
   m_Name: Douglas
   m_TagString: Untagged
@@ -14028,6 +14319,7 @@ MonoBehaviour:
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
+      isPlayer: 0
       factionNameAndColor:
         factionID: 0
         name: 
@@ -14049,7 +14341,29 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
+        currentBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         nextActivity: 
+        nextBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -14060,6 +14374,8 @@ MonoBehaviour:
     biomeSecondary: 
     biomeTertiary: 
     countyPopulation: []
+    possibleBuildings: []
+    currentBuildings: []
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
@@ -14394,6 +14710,18 @@ PolygonCollider2D:
       - {x: -7.89, y: 5.68}
       - {x: -7.8799996, y: 5.68}
   m_UseDelaunayMesh: 0
+--- !u!114 &889005937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889005929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e04de6cf68b2c045bcd8fe1f3b590c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &892772828
 GameObject:
   m_ObjectHideFlags: 0
@@ -14652,6 +14980,7 @@ GameObject:
   - component: {fileID: 916023834}
   - component: {fileID: 916023832}
   - component: {fileID: 916023833}
+  - component: {fileID: 916023836}
   m_Layer: 0
   m_Name: Portland
   m_TagString: Untagged
@@ -14770,6 +15099,7 @@ MonoBehaviour:
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
+      isPlayer: 0
       factionNameAndColor:
         factionID: 0
         name: 
@@ -14791,7 +15121,29 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
+        currentBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         nextActivity: 
+        nextBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -14802,6 +15154,8 @@ MonoBehaviour:
     biomeSecondary: 
     biomeTertiary: 
     countyPopulation: []
+    possibleBuildings: []
+    currentBuildings: []
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
@@ -15223,6 +15577,18 @@ PolygonCollider2D:
       - {x: -4.31, y: 4.685}
       - {x: -4.33, y: 4.665}
   m_UseDelaunayMesh: 0
+--- !u!114 &916023836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916023828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e04de6cf68b2c045bcd8fe1f3b590c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &919394856
 GameObject:
   m_ObjectHideFlags: 0
@@ -18179,6 +18545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPaused: 1
   tokenSpeed: 5
+  minimumFood: 100
 --- !u!4 &1106664557
 Transform:
   m_ObjectHideFlags: 0
@@ -20267,6 +20634,7 @@ GameObject:
   - component: {fileID: 1365887289}
   - component: {fileID: 1365887287}
   - component: {fileID: 1365887288}
+  - component: {fileID: 1365887291}
   m_Layer: 0
   m_Name: Wasco
   m_TagString: Untagged
@@ -20385,6 +20753,7 @@ MonoBehaviour:
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
+      isPlayer: 0
       factionNameAndColor:
         factionID: 0
         name: 
@@ -20406,7 +20775,29 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
+        currentBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         nextActivity: 
+        nextBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -20417,6 +20808,8 @@ MonoBehaviour:
     biomeSecondary: 
     biomeTertiary: 
     countyPopulation: []
+    possibleBuildings: []
+    currentBuildings: []
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
@@ -20736,6 +21129,18 @@ PolygonCollider2D:
       - {x: 5.08, y: -7.7749996}
       - {x: 5.37, y: -7.825}
   m_UseDelaunayMesh: 0
+--- !u!114 &1365887291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365887283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e04de6cf68b2c045bcd8fe1f3b590c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1371332148
 GameObject:
   m_ObjectHideFlags: 0
@@ -22460,6 +22865,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1472709320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1472709322}
+  m_Layer: 0
+  m_Name: ---Player Factions---
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1472709322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472709320}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 585946903}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1504005582
 GameObject:
   m_ObjectHideFlags: 0
@@ -23016,6 +23453,7 @@ GameObject:
   - component: {fileID: 1537027680}
   - component: {fileID: 1537027677}
   - component: {fileID: 1537027678}
+  - component: {fileID: 1537027682}
   m_Layer: 0
   m_Name: Cowlitz
   m_TagString: Untagged
@@ -23134,6 +23572,7 @@ MonoBehaviour:
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
+      isPlayer: 0
       factionNameAndColor:
         factionID: 0
         name: 
@@ -23155,7 +23594,29 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
+        currentBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         nextActivity: 
+        nextBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -23166,6 +23627,8 @@ MonoBehaviour:
     biomeSecondary: 
     biomeTertiary: 
     countyPopulation: []
+    possibleBuildings: []
+    currentBuildings: []
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
@@ -23313,6 +23776,18 @@ PolygonCollider2D:
       - {x: -2.195, y: 0.56}
       - {x: -2.205, y: 0.55}
   m_UseDelaunayMesh: 0
+--- !u!114 &1537027682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537027673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e04de6cf68b2c045bcd8fe1f3b590c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1538215552 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4700359049039459008, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
@@ -24027,10 +24502,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1628319666}
   - component: {fileID: 1628319669}
+  - component: {fileID: 1628319672}
   - component: {fileID: 1628319671}
   - component: {fileID: 1628319668}
   - component: {fileID: 1628319670}
-  - component: {fileID: 1628319672}
+  - component: {fileID: 1628319673}
   m_Layer: 0
   m_Name: Harney
   m_TagString: Untagged
@@ -24149,6 +24625,7 @@ MonoBehaviour:
     gameObject: {fileID: 0}
     spriteRenderer: {fileID: 0}
     faction:
+      isPlayer: 0
       factionNameAndColor:
         factionID: 0
         name: 
@@ -24170,7 +24647,29 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
+        currentBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         nextActivity: 
+        nextBuilding:
+          gameObject: {fileID: 0}
+          name: 
+          description: 
+          workCompleted: 0
+          influenceCost: 0
+          workCost: 0
+          maxWorkers: 0
+          isBeingBuilt: 0
+          isBuilt: 0
+          completedTextGameObject: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -24181,6 +24680,8 @@ MonoBehaviour:
     biomeSecondary: 
     biomeTertiary: 
     countyPopulation: []
+    possibleBuildings: []
+    currentBuildings: []
     spawnedHeroCount: 0
     currentlyWorkingPopulation: 0
     population: 0
@@ -24392,6 +24893,18 @@ PolygonCollider2D:
       - {x: -5.8767595, y: -9.435}
       - {x: -5.864839, y: -9.4230795}
   m_UseDelaunayMesh: 0
+--- !u!114 &1628319673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628319665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e04de6cf68b2c045bcd8fe1f3b590c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1629445698
 GameObject:
   m_ObjectHideFlags: 0
@@ -31995,6 +32508,7 @@ SceneRoots:
   - {fileID: 2140408006}
   - {fileID: 1078402822}
   - {fileID: 275133784}
+  - {fileID: 1472709322}
   - {fileID: 132961227}
   - {fileID: 249060078}
   - {fileID: 1543565167}

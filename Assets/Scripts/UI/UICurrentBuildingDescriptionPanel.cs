@@ -45,7 +45,7 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
         descriptionText.text = currentBuildings.description;
         workCompletedText.text = currentBuildings.workCompleted.ToString();
         workCostText.text = currentBuildings.workCost.ToString();
-        currentWorkersText.text = currentBuildings.currentWorkers.ToString();
+        currentWorkersText.text = currentBuildings.CurrentWorkers.ToString();
         maxWorkersText.text = currentBuildings.maxWorkers.ToString();
 
         if(currentBuildings.isBuilt == true)

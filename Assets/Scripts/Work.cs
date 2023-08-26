@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 
 public class Work : MonoBehaviour
 {
@@ -37,8 +35,6 @@ public class Work : MonoBehaviour
                         += WorldMapLoad.Instance.dailyInfluenceGain;
                 }
             }
-
-
         }
     }
 
@@ -61,6 +57,8 @@ public class Work : MonoBehaviour
                         // So it is repeating the setting to true a bunch of times.  This is ineffecient code.
                         // Some of the population will be working on different buildings too....
                         item.Value[pop].currentBuilding.isBuilt = true;
+
+                        // This needs to work with AI factions as well which don't have a UI.
                         item.Value[pop].currentBuilding.gameObject.GetComponent<UIBuildingButton>().completedTextGameObject.SetActive(true);
                     }
                 }

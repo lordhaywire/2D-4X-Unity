@@ -7,6 +7,7 @@ public class Faction
 {
     public event Action InfluenceChanged;
 
+    public bool isPlayer;
     public FactionNameAndColor factionNameAndColor;
     public List<ResearchItem> researchItems;
     public CountyPopulation factionLeader;
@@ -28,9 +29,10 @@ public class Faction
         }
     }
 
-    public Faction(FactionNameAndColor factionNameAndColor, CountyPopulation factionLeader, 
+    public Faction(bool isPlayer, FactionNameAndColor factionNameAndColor, CountyPopulation factionLeader, 
         int influence, int money, int food, int scrap)
     {
+        this.isPlayer = isPlayer;
         this.factionNameAndColor = factionNameAndColor;
         researchItems = new List<ResearchItem>();
         this.factionLeader = factionLeader;

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class UIBuildingChecker : MonoBehaviour
 {
-    [SerializeField] private GameObject notEnoughWorkersPanel;
-
     public static UIBuildingChecker Instance;
+
+    [SerializeField] private GameObject notEnoughWorkersPanel;
 
     public bool enoughPopulation;
     public int unemployed;

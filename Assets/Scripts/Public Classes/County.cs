@@ -17,8 +17,8 @@ public class County
     public string biomeSecondary;
     public string biomeTertiary;
     public List<CountyPopulation> countyPopulation;
-    public List<PossibleBuilding> possibleBuildings;
-    public List<CurrentBuilding> currentBuildings;
+    public List<Building> possibleBuildings;
+    public List<Building> currentBuildings;
 
     public int spawnedHeroCount; // Count of all the heroes in the county.
     public int currentlyWorkingPopulation; // We should put this number on the county info panel.
@@ -40,9 +40,8 @@ public class County
         this.biomePrimary = biomePrimary;
         this.biomeSecondary = biomeSecondary;
         this.biomeTertiary = biomeTertiary;
-        possibleBuildings = new List<PossibleBuilding>(); // I am not sure if we need these here, or at all.
-                                                          // This initializes the list. It is not in the constructor. 
-        currentBuildings = new List<CurrentBuilding>(); // This initializes the list. It is not in the constructor. 
+        possibleBuildings = new List<Building>(); // This initializes the list. It is not in the constructor. 
+        currentBuildings = new List<Building>(); // This initializes the list. It is not in the constructor. 
         this.spawnedHeroCount = spawnedHeroCount;
         this.currentlyWorkingPopulation = currentlyWorkingPopulation;
         this.population = population;

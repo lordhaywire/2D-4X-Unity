@@ -28,9 +28,9 @@ public class CountyPopulation
 
     [Header("Activities")]
     public string currentActivity;
-    public CurrentBuilding currentBuilding; // What this person is currently building that day.
+    public Building currentBuilding; // What this person is currently building that day.
     public string nextActivity;
-    public CurrentBuilding nextBuilding;
+    public Building nextBuilding;
 
     [Header("Token")]
     public bool isSpawned;
@@ -38,7 +38,7 @@ public class CountyPopulation
     public CountyPopulation(GameObject location, GameObject destination, string faction
         , string firstName, string lastName, bool isMale, int age, bool isFactionLeader, bool isHero, bool isWorker
          , bool leaderOfPeoplePerk, int constructionSkill, string currentActivity
-        , CurrentBuilding currentBuilding, string nextActivity, CurrentBuilding nextBuilding, bool isSpawned)
+        , Building currentBuilding, string nextActivity, Building nextBuilding, bool isSpawned)
     {
         this.location = location;
         this.destination = destination;

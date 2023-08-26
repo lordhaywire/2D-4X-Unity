@@ -18,20 +18,22 @@ public class FactionGameObjectGeneration : MonoBehaviour
          
         for (int i = 0; i < factions.Count; i++)
         {
-            var counties = WorldMapLoad.Instance.counties;
-
-
-            GameObject gameObject = Instantiate(factionPrefab, transform);
-            gameObject.name = factions[i].factionNameAndColor.name;
-            FactionAI factionAI = gameObject.GetComponent<FactionAI>();
-            factionAI.faction = factions[i];
-
-            foreach (KeyValuePair<string, County> item in counties)
+            if (factions[i].isPlayer == false)
             {
-                if (factions[i] == counties[item.Key].faction)
+                var counties = WorldMapLoad.Instance.counties;
+
+                GameObject gameObject = Instantiate(factionPrefab, transform);
+                gameObject.name = factions[i].factionNameAndColor.name;
+                FactionAI factionAI = gameObject.GetComponent<FactionAI>();
+                factionAI.faction = factions[i];
+
+                foreach (KeyValuePair<string, County> item in counties)
                 {
-                    factionAI.countiesFactionOwns.Add(counties[item.Key]);
-                }      
+                    if (factions[i] == counties[item.Key].faction)
+                    {
+                        factionAI.countiesFactionOwns.Add(counties[item.Key]);
+                    }
+                }
             }
         }
     }

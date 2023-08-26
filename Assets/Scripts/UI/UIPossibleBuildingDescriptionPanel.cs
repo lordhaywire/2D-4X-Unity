@@ -55,7 +55,7 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
         // Reset current employees to 0.
         possibleBuilding.CurrentWorkers = 0;
         currentEmployeesText.text = possibleBuilding.CurrentWorkers.ToString();
-        maxEmployeesText.text = possibleBuilding.maxEmployees.ToString();
+        maxEmployeesText.text = possibleBuilding.maxWorkers.ToString();
 
         confirmBuildText.text = $"Are you sure you want to build {possibleBuilding.name}?";
     }
@@ -78,10 +78,10 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 
         possibleBuildings.CurrentWorkers++;
 
-        if (possibleBuildings.CurrentWorkers > possibleBuildings.maxEmployees)
+        if (possibleBuildings.CurrentWorkers > possibleBuildings.maxWorkers)
         {
             possibleBuildings.CurrentWorkers =
-                possibleBuildings.maxEmployees;
+                possibleBuildings.maxWorkers;
         }
     }
 
@@ -90,7 +90,7 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
         var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
 
         possibleBuildings.CurrentWorkers =
-            possibleBuildings.maxEmployees;
+            possibleBuildings.maxWorkers;
     }
 
     private void OnDisable()

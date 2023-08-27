@@ -95,17 +95,17 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
         {
             if (UICountyInfoPanel.Instance.buildingsPanelExpanded == false)
             {
-                UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(true);
+                //UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(true);
             }
         }
         else
         {
             if (UICountyInfoPanel.Instance.buildingsPanelExpanded == true)
             {
-                UIPossibleBuildingsPanel.Instance.gameObject.SetActive(false);
+                //UIPossibleBuildingsPanel.Instance.gameObject.SetActive(false);
                 UICurrentBuildingsPanel.Instance.gameObject.SetActive(false);
             }
-            UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(false);
+            //UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(false);
             UICountyInfoPanel.Instance.buildingsPanelExpanded = false;
         }
     }

@@ -30,14 +30,14 @@ public class UIBuildingPanelsRefresher : MonoBehaviour
 
     public void PossibleBuildingPanelsRefresher()
     {
-        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings;
+        List<GameObject> possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings;
         for (int i = 0; i < possibleBuildings.Count; i++)
         {
             possibleBuildingClones.Add(Instantiate(possibleBuildingsPrefab, possibleBuildingsParent.transform));
             possibleBuildingClones[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
                 possibleBuildings[i].name;
             possibleBuildingClones[i].name = i.ToString();
-            possibleBuildings[i].gameObject = possibleBuildingClones[i];
+            possibleBuildings[i].GetComponent<BuildingInfo>().uIGameObject = possibleBuildingClones[i];
         }
     }
 
@@ -51,15 +51,15 @@ public class UIBuildingPanelsRefresher : MonoBehaviour
     }
     public void CurrentBuildingPanelsRefresher()
     {
-        var currentBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].currentBuildings;
+        List<GameObject> currentBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].currentBuildings;
         for (int i = 0; i < currentBuildings.Count; i++)
         {
             currentBuildingClones.Add(Instantiate(currentBuildingsPrefab, currentBuildingsParent.transform));
             currentBuildingClones[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
                 currentBuildings[i].name;
             currentBuildingClones[i].name = i.ToString();
-            currentBuildings[i].gameObject = currentBuildingClones[i];
-            if (currentBuildings[i].isBuilt == true)
+            currentBuildings[i].GetComponent<BuildingInfo>().uIGameObject = currentBuildingClones[i];
+            if (currentBuildings[i].GetComponent<BuildingInfo>().isBuilt == true)
             {
                 currentBuildingClones[i].transform.GetChild(1).gameObject.SetActive(true);
             }

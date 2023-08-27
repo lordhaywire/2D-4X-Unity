@@ -13,7 +13,7 @@ public class Banker : MonoBehaviour
     {
         WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].Influence 
             -= WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyInfo>().county
-            .possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].influenceCost;
+            .possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].GetComponent<BuildingInfo>().influenceCost;
     }
     public void RemoveCostOfHero()
     {

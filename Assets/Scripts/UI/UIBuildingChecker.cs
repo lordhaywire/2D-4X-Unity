@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UIBuildingChecker : MonoBehaviour
@@ -14,10 +16,10 @@ public class UIBuildingChecker : MonoBehaviour
     }
     private void OnEnable()
     {
-        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings;
+        List<GameObject> possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings;
         for (int i = 0; i < possibleBuildings.Count; i++)
         {
-            possibleBuildings[i].CurrentWorkersChanged += CheckEnoughUnemployed;
+            possibleBuildings[i].GetComponent<BuildingInfo>().CurrentWorkersChanged += CheckEnoughUnemployed;
         }
     }
 
@@ -26,7 +28,7 @@ public class UIBuildingChecker : MonoBehaviour
         // Check for Population.
         unemployed = 0;
         enoughPopulation = false;
-        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
+        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].GetComponent<BuildingInfo>();
 
 
         for (int i = 0; i < WorldMapLoad.Instance.countyPopulationDictionary[WorldMapLoad.Instance.CurrentlySelectedCounty.name].Count; i++)
@@ -52,10 +54,10 @@ public class UIBuildingChecker : MonoBehaviour
 
     private void OnDisable()
     {
-        var possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings;
+        List<GameObject> possibleBuildings = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings;
         for (int i = 0; i < possibleBuildings.Count; i++)
         {
-            possibleBuildings[i].CurrentWorkersChanged -= CheckEnoughUnemployed;
+            possibleBuildings[i].GetComponent<BuildingInfo>().CurrentWorkersChanged -= CheckEnoughUnemployed;
         }
     }
 }

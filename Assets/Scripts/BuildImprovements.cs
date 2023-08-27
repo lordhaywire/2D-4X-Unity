@@ -2,24 +2,29 @@ using UnityEngine;
 
 public class BuildImprovements : MonoBehaviour
 {
-    public void BuildBuilding(Faction faction, Building building)
+    public void CheckIfBuildingAlreadyBuilt(Faction faction, GameObject building)
+    {
+
+    }
+    public void BuildBuilding(Faction faction, GameObject building)
     {
         Debug.Log(faction.factionNameAndColor.name + " is building " + building.name);
+        BuildingInfo buildingInfo = building.GetComponent<BuildingInfo>();
 
         County county = GetComponent<CountyInfo>().county;
         int numberOfWorkers;
 
         // Removes the cost of building.
-        faction.influence -= building.influenceCost;
+        faction.influence -= buildingInfo.influenceCost;
 
         // We need to set this before it is moved because we don't know which currentBuilding it is going to be.
-        building.isBeingBuilt = true;
+        buildingInfo.isBeingBuilt = true;
 
         // Diving the total population of the county by 2 (and because it is an int it always rounds down).
         numberOfWorkers = county.population / 2;
-        if (numberOfWorkers > building.maxWorkers)
+        if (numberOfWorkers > buildingInfo.maxWorkers)
         {
-            numberOfWorkers = building.maxWorkers;
+            numberOfWorkers = buildingInfo.maxWorkers;
         }
 
         for (int i = 0; i < numberOfWorkers; i++)

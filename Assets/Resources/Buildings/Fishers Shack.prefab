@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6724602881600395039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 488456310822656639}
+  - component: {fileID: 7641791381980441919}
+  m_Layer: 0
+  m_Name: Fishers Shack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &488456310822656639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6724602881600395039}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7641791381980441919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6724602881600395039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51182a54997bb9947a6757206e509a77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uIGameObject: {fileID: 0}
+  buildingName: Fisher's Shack
+  description: This is a shack for fishers.
+  workCompleted: 0
+  influenceCost: 500
+  workCost: 7
+  maxWorkers: 5
+  createsFood: 0
+  isBeingBuilt: 0
+  isBuilt: 0
+  completedTextGameObject: {fileID: 0}
+  resourceSO: {fileID: 11400000, guid: 3094f721654159d4ca9d0b247fc2ded8, type: 2}
+  resourceAmount: 0

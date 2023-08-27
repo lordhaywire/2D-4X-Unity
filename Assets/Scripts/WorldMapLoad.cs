@@ -113,8 +113,6 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Awake()
     {
-        //currentlySelectedCountyPopulation = 57; // This is just a test number for when there is more then 1 hero.
-
         Instance = this;
         currentBuildingDescriptionPanelExpanded = false;
         possibleBuildingDescriptionPanelExpanded = false;
@@ -124,7 +122,7 @@ public class WorldMapLoad : MonoBehaviour
 
     private void Start()
     {
-        UIBuildingConfirmed.Instance.BuildingConfirmed += BuildCountyImprovement;
+        //UIBuildingConfirmed.Instance.BuildingConfirmed += BuildCountyImprovement;
 
         AssignFactionNameAndColorToFaction();
 
@@ -152,12 +150,14 @@ public class WorldMapLoad : MonoBehaviour
         */
     }
 
+    /*
     private void BuildCountyImprovement()
     {
         Banker.Instance.DeductCostOfBuilding();
         MoveBuildingToCurrentBuildingList();
         SetNextDayJob();
     }
+    */
 
     private void MoveBuildingToCurrentBuildingList()
     {
@@ -187,7 +187,8 @@ public class WorldMapLoad : MonoBehaviour
         {
             if (countyPopulationDictionary[CurrentlySelectedCounty.name][i].nextActivity == AllText.Jobs.IDLE
                 && numberWorkers <
-                counties[CurrentlySelectedCounty.name].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].CurrentWorkers)
+                counties[CurrentlySelectedCounty.name].currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber]
+                .GetComponent<BuildingInfo>().CurrentWorkers)
             {
                 countyPopulationDictionary[CurrentlySelectedCounty.name][i].nextActivity = AllText.Jobs.BUILDING;
                 countyPopulationDictionary[CurrentlySelectedCounty.name][i].nextBuilding =
@@ -220,19 +221,21 @@ public class WorldMapLoad : MonoBehaviour
         }
 
 
+        /*
         foreach (KeyValuePair<string, County> item in counties)
         {
             //Debug.Log(item.Key + " " + item.Value);
             counties[item.Key].possibleBuildings.Add(new Building(
-                null, AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK, 0, 500, 7, 0, 5, false, false
+                null, AllText.BuildingName.FISHERSSHACK, AllText.Descriptions.FISHERSSHACK, 0, 500, 7, 0, 5, false, false, false
                 , null));
             counties[item.Key].possibleBuildings.Add(new Building(
-                null, AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK, 0, 500, 2, 0, 5, false
+                null, AllText.BuildingName.FORESTERSSHACK, AllText.Descriptions.FORESTERSSHACK, 0, 500, 2, 0, 5, false, false
                 , false, null));
             counties[item.Key].possibleBuildings.Add(new Building(
-                null, AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK, 0, 500, 7, 0, 5, false
+                null, AllText.BuildingName.GARDENERSSHACK, AllText.Descriptions.GARDENERSSHACK, 0, 500, 7, 0, 5, true, false
                 , false, null));
         }
+        */
     }
 
     private void FirstRunTopInfoBar()
@@ -400,7 +403,7 @@ public class WorldMapLoad : MonoBehaviour
     }
     private void OnDisable()
     {
-        UIBuildingConfirmed.Instance.BuildingConfirmed -= BuildCountyImprovement;
+        //UIBuildingConfirmed.Instance.BuildingConfirmed -= BuildCountyImprovement;
     }
 
     /*

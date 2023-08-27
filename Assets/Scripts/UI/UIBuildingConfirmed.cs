@@ -4,7 +4,7 @@ using UnityEngine;
 public class UIBuildingConfirmed : MonoBehaviour
 {
     public static UIBuildingConfirmed Instance;
-    public event Action BuildingConfirmed;
+    //public event Action BuildingConfirmed;
 
     private void Awake()
     {
@@ -13,6 +13,8 @@ public class UIBuildingConfirmed : MonoBehaviour
 
     public void YesButton()
     {
-        BuildingConfirmed?.Invoke();
+        BuildImprovements buildImprovements = WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<BuildImprovements>();
+        //buildImprovements.BuildBuilding(WorldMapLoad.Instance.playerFaction, )
+        //BuildingConfirmed?.Invoke();
     }
 }

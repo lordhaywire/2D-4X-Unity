@@ -38,17 +38,17 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
 
     private void PanelRefresh()
     { 
-        var currentBuildings =
+        BuildingInfo currentBuildingInfo =
             WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name]
-            .currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber];
-        nameText.text = currentBuildings.name;
-        descriptionText.text = currentBuildings.description;
-        workCompletedText.text = currentBuildings.workCompleted.ToString();
-        workCostText.text = currentBuildings.workCost.ToString();
-        currentWorkersText.text = currentBuildings.CurrentWorkers.ToString();
-        maxWorkersText.text = currentBuildings.maxWorkers.ToString();
+            .currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].GetComponent<BuildingInfo>();
+        nameText.text = currentBuildingInfo.name;
+        descriptionText.text = currentBuildingInfo.description;
+        workCompletedText.text = currentBuildingInfo.workCompleted.ToString();
+        workCostText.text = currentBuildingInfo.workCost.ToString();
+        currentWorkersText.text = currentBuildingInfo.CurrentWorkers.ToString();
+        maxWorkersText.text = currentBuildingInfo.maxWorkers.ToString();
 
-        if(currentBuildings.isBuilt == true)
+        if(currentBuildingInfo.isBuilt == true)
         {
             workTillCompletedPanel.SetActive(false);
             employeesPanel.SetActive(false);

@@ -30,7 +30,7 @@ public class UIBuildCountyImprovementButton : MonoBehaviour
     {
         enoughInfluence = false;
         if (WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyInfo>().county
-            .possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].influenceCost
+            .possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].GetComponent<BuildingInfo>().influenceCost
             > WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].Influence)
         {
             notEnoughResourcesPanel.SetActive(true);

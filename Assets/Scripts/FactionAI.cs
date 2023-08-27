@@ -16,7 +16,7 @@ public class FactionAI : MonoBehaviour
     {
         Debug.Log(faction.factionNameAndColor.name  + " checking to build buildings!");
 
-        // Is there enough food?
+        // Is there enough food? If not build a Garden Shack.
         if (faction.food < Globals.Instance.minimumFood)
         {
             // We need to figure out a less error prone way to do this because knowing which building is which in
@@ -25,7 +25,7 @@ public class FactionAI : MonoBehaviour
                 //Debug.Log("Influence Cost: " + countiesFactionOwns[i].possibleBuildings[2].influenceCost);
                 if(countiesFactionOwns[i].possibleBuildings[2] != null)
                 {
-                    if (faction.influence >= countiesFactionOwns[i].possibleBuildings[2].influenceCost)
+                    if (faction.influence >= countiesFactionOwns[i].possibleBuildings[2].GetComponent<BuildingInfo>().influenceCost)
                     //&& countiesFactionOwns[i].currentBuildings[2].isBeingBuilt == false
                     //&& countiesFactionOwns[i].currentBuildings[2].isBuilt == false)
                     {
@@ -37,8 +37,7 @@ public class FactionAI : MonoBehaviour
                         Debug.Log($"{faction.factionNameAndColor.name} doesn't have enough influence to build " +
                             $"{countiesFactionOwns[i].possibleBuildings[2].name} or some shit.");
                     }
-                }
-                
+                }            
             }
         }
         else

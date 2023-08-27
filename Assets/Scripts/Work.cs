@@ -49,14 +49,15 @@ public class Work : MonoBehaviour
             {
                 if (item.Value[pop].currentActivity == AllText.Jobs.BUILDING)
                 {
-                    item.Value[pop].currentBuilding.workCompleted++;
+                    item.Value[pop].currentBuilding.GetComponent<BuildingInfo>().workCompleted++;
                     // Checks to see if the building is completed.
-                    if (item.Value[pop].currentBuilding.workCompleted >= item.Value[pop].currentBuilding.workCost)
+                    if (item.Value[pop].currentBuilding.GetComponent<BuildingInfo>().workCompleted 
+                        >= item.Value[pop].currentBuilding.GetComponent<BuildingInfo>().workCost)
                     {
                         // This is having every population working on that building set that building as built.
                         // So it is repeating the setting to true a bunch of times.  This is ineffecient code.
                         // Some of the population will be working on different buildings too....
-                        item.Value[pop].currentBuilding.isBuilt = true;
+                        item.Value[pop].currentBuilding.GetComponent<BuildingInfo>().isBuilt = true;
 
                         // This needs to work with AI factions as well which don't have a UI.
                         item.Value[pop].currentBuilding.gameObject.GetComponent<UIBuildingButton>().completedTextGameObject.SetActive(true);
@@ -66,7 +67,7 @@ public class Work : MonoBehaviour
             // Go through everyone in this county again and clear out their job if their building is done.
             for (int popAgain = 0; popAgain < item.Value.Count; popAgain++)
             {
-                if (item.Value[popAgain].currentBuilding != null && item.Value[popAgain].currentBuilding.isBuilt == true)
+                if (item.Value[popAgain].currentBuilding != null && item.Value[popAgain].currentBuilding.GetComponent<BuildingInfo>().isBuilt == true)
                 {
                     item.Value[popAgain].nextActivity = AllText.Jobs.IDLE;
                     item.Value[popAgain].nextBuilding = null;

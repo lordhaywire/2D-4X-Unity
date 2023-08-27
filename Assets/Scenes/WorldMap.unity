@@ -227,19 +227,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1531895324}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 817069589}
+      - m_Target: {fileID: 2140654199}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -338,6 +326,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 142613843}
+  - {fileID: 267556448}
+  - {fileID: 188244811}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &19502182
@@ -457,29 +447,9 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
-        currentBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        currentBuilding: {fileID: 0}
         nextActivity: 
-        nextBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        nextBuilding: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -496,6 +466,8 @@ MonoBehaviour:
     currentlyWorkingPopulation: 0
     population: 0
   tokenSpawn: {fileID: 142613842}
+  possibleBuildingsParent: {fileID: 267556448}
+  currentBuildingsParent: {fileID: 188244811}
 --- !u!60 &19502186
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2492,7 +2464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &155121156
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2511,8 +2483,7 @@ RectTransform:
   - {fileID: 2144487634}
   - {fileID: 958003576}
   - {fileID: 7085730}
-  - {fileID: 817069590}
-  - {fileID: 1531895325}
+  - {fileID: 2140654200}
   - {fileID: 780018997}
   - {fileID: 361764198}
   - {fileID: 2048848388}
@@ -2712,6 +2683,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6674127218891363220, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
   m_PrefabInstance: {fileID: 169628995}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &188244810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 188244811}
+  m_Layer: 0
+  m_Name: Current Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &188244811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188244810}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13.28, y: -6.36, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 19502180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &191278010
 GameObject:
   m_ObjectHideFlags: 0
@@ -4116,6 +4118,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260328473}
   m_CullTransparentMesh: 1
+--- !u!1 &267556447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 267556448}
+  m_Layer: 0
+  m_Name: Possible Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &267556448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267556447}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13.28, y: -6.36, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 19502180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &275133780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4290,6 +4323,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1795166297}
+  - {fileID: 2059785356}
+  - {fileID: 750980659}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &285694182
@@ -4409,29 +4444,9 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
-        currentBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        currentBuilding: {fileID: 0}
         nextActivity: 
-        nextBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        nextBuilding: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -4448,6 +4463,8 @@ MonoBehaviour:
     currentlyWorkingPopulation: 0
     population: 0
   tokenSpawn: {fileID: 1795166296}
+  possibleBuildingsParent: {fileID: 2059785356}
+  currentBuildingsParent: {fileID: 750980659}
 --- !u!60 &285694187
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -6381,6 +6398,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379627606}
   m_CullTransparentMesh: 1
+--- !u!1 &380454404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 380454405}
+  m_Layer: 0
+  m_Name: Current Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &380454405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380454404}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.44, y: 7.26, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1628319666}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &383357465
 GameObject:
   m_ObjectHideFlags: 0
@@ -11364,29 +11412,9 @@ MonoBehaviour:
     leaderOfPeoplePerk: 0
     constructionSkill: 0
     currentActivity: 
-    currentBuilding:
-      gameObject: {fileID: 0}
-      name: 
-      description: 
-      workCompleted: 0
-      influenceCost: 0
-      workCost: 0
-      maxWorkers: 0
-      isBeingBuilt: 0
-      isBuilt: 0
-      completedTextGameObject: {fileID: 0}
+    currentBuilding: {fileID: 0}
     nextActivity: 
-    nextBuilding:
-      gameObject: {fileID: 0}
-      name: 
-      description: 
-      workCompleted: 0
-      influenceCost: 0
-      workCost: 0
-      maxWorkers: 0
-      isBeingBuilt: 0
-      isBuilt: 0
-      completedTextGameObject: {fileID: 0}
+    nextBuilding: {fileID: 0}
     isSpawned: 0
   currentlySelectedCounty: {fileID: 0}
   countyInfoPanelGameObject: {fileID: 155121155}
@@ -11424,29 +11452,9 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
-      currentBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      currentBuilding: {fileID: 0}
       nextActivity: 
-      nextBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      nextBuilding: {fileID: 0}
       isSpawned: 0
     influence: 0
     money: 0
@@ -11509,29 +11517,9 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
-      currentBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      currentBuilding: {fileID: 0}
       nextActivity: 
-      nextBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      nextBuilding: {fileID: 0}
       isSpawned: 0
     influence: 10000
     money: 0
@@ -11559,29 +11547,9 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
-      currentBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      currentBuilding: {fileID: 0}
       nextActivity: 
-      nextBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      nextBuilding: {fileID: 0}
       isSpawned: 0
     influence: 1000
     money: 0
@@ -11609,29 +11577,9 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
-      currentBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      currentBuilding: {fileID: 0}
       nextActivity: 
-      nextBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      nextBuilding: {fileID: 0}
       isSpawned: 0
     influence: 500
     money: 0
@@ -11659,29 +11607,9 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
-      currentBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      currentBuilding: {fileID: 0}
       nextActivity: 
-      nextBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      nextBuilding: {fileID: 0}
       isSpawned: 0
     influence: 500
     money: 0
@@ -11709,29 +11637,9 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
-      currentBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      currentBuilding: {fileID: 0}
       nextActivity: 
-      nextBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      nextBuilding: {fileID: 0}
       isSpawned: 0
     influence: 750
     money: 0
@@ -11759,29 +11667,9 @@ MonoBehaviour:
       leaderOfPeoplePerk: 0
       constructionSkill: 0
       currentActivity: 
-      currentBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      currentBuilding: {fileID: 0}
       nextActivity: 
-      nextBuilding:
-        gameObject: {fileID: 0}
-        name: 
-        description: 
-        workCompleted: 0
-        influenceCost: 0
-        workCost: 0
-        maxWorkers: 0
-        isBeingBuilt: 0
-        isBuilt: 0
-        completedTextGameObject: {fileID: 0}
+      nextBuilding: {fileID: 0}
       isSpawned: 0
     influence: 0
     money: 0
@@ -11837,6 +11725,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroSelectedSprite: {fileID: 21300000, guid: d80af0cf8af68d94faae02d1d552a5e4, type: 3}
   heroUnselectedSprite: {fileID: 21300000, guid: 7d30570078bad2848b6bc5016e409ded, type: 3}
+--- !u!1 &750980658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 750980659}
+  m_Layer: 0
+  m_Name: Current Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &750980659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750980658}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12.6, y: -5.18, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 285694181}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &754347016
 GameObject:
   m_ObjectHideFlags: 0
@@ -12418,7 +12337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &817069590
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12433,13 +12352,12 @@ RectTransform:
   m_Children:
   - {fileID: 398454163}
   - {fileID: 962863056}
-  - {fileID: 1024628628}
-  m_Father: {fileID: 155121156}
+  m_Father: {fileID: 2140654200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 500.00006, y: -0.00015258789}
-  m_SizeDelta: {x: -200, y: 0}
+  m_SizeDelta: {x: 100, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &817069591
 MonoBehaviour:
@@ -12491,8 +12409,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b869a310f80f3749aafc8882b4a35ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingDescriptionPanel: {fileID: 780018996}
-  possibleBuildingsGroupGameObject: {fileID: 1382777141}
+  uIBuildingsPanel: {fileID: 0}
+  possibleBuildingsScrollView: {fileID: 0}
+  buildingsParent: {fileID: 0}
 --- !u!114 &817069594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12849,6 +12768,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837560526}
   m_CullTransparentMesh: 1
+--- !u!1 &840834272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 840834273}
+  m_Layer: 0
+  m_Name: Possible Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &840834273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840834272}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.534591, y: -4.8742137, z: 0}
+  m_LocalScale: {x: 0.6289308, y: 0.6289308, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1537027674}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &841705859
 GameObject:
   m_ObjectHideFlags: 0
@@ -14222,6 +14172,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 227570534}
+  - {fileID: 1629419162}
+  - {fileID: 1680409551}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &889005932
@@ -14341,29 +14293,9 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
-        currentBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        currentBuilding: {fileID: 0}
         nextActivity: 
-        nextBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        nextBuilding: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -14380,6 +14312,8 @@ MonoBehaviour:
     currentlyWorkingPopulation: 0
     population: 0
   tokenSpawn: {fileID: 227570533}
+  possibleBuildingsParent: {fileID: 1629419162}
+  currentBuildingsParent: {fileID: 1680409551}
 --- !u!60 &889005936
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -15002,6 +14936,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2101913302}
+  - {fileID: 2108849868}
+  - {fileID: 1352855753}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &916023830
@@ -15121,29 +15057,9 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
-        currentBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        currentBuilding: {fileID: 0}
         nextActivity: 
-        nextBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        nextBuilding: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -15160,6 +15076,8 @@ MonoBehaviour:
     currentlyWorkingPopulation: 0
     population: 0
   tokenSpawn: {fileID: 2101913301}
+  possibleBuildingsParent: {fileID: 2108849868}
+  currentBuildingsParent: {fileID: 1352855753}
 --- !u!60 &916023835
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -16202,6 +16120,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &957228399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 957228400}
+  m_Layer: 0
+  m_Name: Current Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &957228400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957228399}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.534591, y: -4.8742137, z: 0}
+  m_LocalScale: {x: 0.6289308, y: 0.6289308, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1537027674}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &958003575
 GameObject:
   m_ObjectHideFlags: 0
@@ -17170,11 +17119,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 919407565}
-  m_Father: {fileID: 817069590}
+  m_Father: {fileID: 2140654200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 15, y: 88}
+  m_AnchoredPosition: {x: 565.00006, y: 87.99983}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1024628629
@@ -17233,46 +17182,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1531895324}
+      - m_Target: {fileID: 2140654199}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 817069589}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 780018996}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 817069593}
-        m_TargetAssemblyTypeName: UIBuildingsPanel, Assembly-CSharp
-        m_MethodName: CollapseButton
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -20620,6 +20533,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6674127218891363220, guid: 4ab2aaaaad27b344ebf740c4949dd25e, type: 3}
   m_PrefabInstance: {fileID: 1352426354}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1352855752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1352855753}
+  m_Layer: 0
+  m_Name: Current Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1352855753
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352855752}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10.46, y: -10.6, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 916023829}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1365887283
 GameObject:
   m_ObjectHideFlags: 0
@@ -20656,6 +20600,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1193097062}
+  - {fileID: 1465062932}
+  - {fileID: 1875952314}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1365887285
@@ -20775,29 +20721,9 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
-        currentBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        currentBuilding: {fileID: 0}
         nextActivity: 
-        nextBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        nextBuilding: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -20814,6 +20740,8 @@ MonoBehaviour:
     currentlyWorkingPopulation: 0
     population: 0
   tokenSpawn: {fileID: 1193097061}
+  possibleBuildingsParent: {fileID: 1465062932}
+  currentBuildingsParent: {fileID: 1875952314}
 --- !u!60 &1365887290
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -21471,6 +21399,37 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1385868637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1385868638}
+  m_Layer: 0
+  m_Name: Possible Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1385868638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385868637}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.44, y: 7.26, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1628319666}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1387417257
 GameObject:
   m_ObjectHideFlags: 0
@@ -22629,6 +22588,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e805b5d47585cf54e9886f11a76901c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1465062931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1465062932}
+  m_Layer: 0
+  m_Name: Possible Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1465062932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465062931}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.94, y: -4.18, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1365887284}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1466688932
 GameObject:
   m_ObjectHideFlags: 0
@@ -23365,7 +23355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1531895325
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23373,19 +23363,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1531895324}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 151283830}
   - {fileID: 2136520108}
-  m_Father: {fileID: 155121156}
+  m_Father: {fileID: 2140654200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 300, y: 0}
-  m_SizeDelta: {x: -200, y: 0}
+  m_SizeDelta: {x: 100, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1531895326
 MonoBehaviour:
@@ -23475,6 +23465,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 142921183}
+  - {fileID: 840834273}
+  - {fileID: 957228400}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1537027675
@@ -23594,29 +23586,9 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
-        currentBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        currentBuilding: {fileID: 0}
         nextActivity: 
-        nextBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        nextBuilding: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -23633,6 +23605,8 @@ MonoBehaviour:
     currentlyWorkingPopulation: 0
     population: 0
   tokenSpawn: {fileID: 142921182}
+  possibleBuildingsParent: {fileID: 840834273}
+  currentBuildingsParent: {fileID: 957228400}
 --- !u!60 &1537027681
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -24528,6 +24502,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1115387480}
+  - {fileID: 1385868638}
+  - {fileID: 380454405}
   m_Father: {fileID: 249060078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1628319668
@@ -24647,29 +24623,9 @@ MonoBehaviour:
         leaderOfPeoplePerk: 0
         constructionSkill: 0
         currentActivity: 
-        currentBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        currentBuilding: {fileID: 0}
         nextActivity: 
-        nextBuilding:
-          gameObject: {fileID: 0}
-          name: 
-          description: 
-          workCompleted: 0
-          influenceCost: 0
-          workCost: 0
-          maxWorkers: 0
-          isBeingBuilt: 0
-          isBuilt: 0
-          completedTextGameObject: {fileID: 0}
+        nextBuilding: {fileID: 0}
         isSpawned: 0
       influence: 0
       money: 0
@@ -24686,6 +24642,8 @@ MonoBehaviour:
     currentlyWorkingPopulation: 0
     population: 0
   tokenSpawn: {fileID: 1115387479}
+  possibleBuildingsParent: {fileID: 1385868638}
+  currentBuildingsParent: {fileID: 380454405}
 --- !u!60 &1628319672
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -24905,6 +24863,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e04de6cf68b2c045bcd8fe1f3b590c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1629419161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1629419162}
+  m_Layer: 0
+  m_Name: Possible Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1629419162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629419161}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.34, y: 9.16, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 889005930}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1629445698
 GameObject:
   m_ObjectHideFlags: 0
@@ -26230,6 +26219,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1679710138}
   m_CullTransparentMesh: 1
+--- !u!1 &1680409550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1680409551}
+  m_Layer: 0
+  m_Name: Current Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1680409551
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680409550}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.34, y: 9.16, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 889005930}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1682427641
 GameObject:
   m_ObjectHideFlags: 0
@@ -28047,6 +28067,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854960834}
   m_CullTransparentMesh: 1
+--- !u!1 &1875952313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1875952314}
+  m_Layer: 0
+  m_Name: Current Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1875952314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875952313}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.94, y: -4.18, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1365887284}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1885387226
 GameObject:
   m_ObjectHideFlags: 0
@@ -30008,7 +30059,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 191278012}
   m_HandleRect: {fileID: 191278011}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -30846,6 +30897,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2055416772}
   m_CullTransparentMesh: 1
+--- !u!1 &2059785355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2059785356}
+  m_Layer: 0
+  m_Name: Possible Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2059785356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059785355}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12.6, y: -5.18, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 285694181}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2063927569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31629,6 +31711,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108459935}
   m_CullTransparentMesh: 1
+--- !u!1 &2108849867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2108849868}
+  m_Layer: 0
+  m_Name: Possible Buildings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2108849868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108849867}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10.46, y: -10.6, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 916023829}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2112208178
 GameObject:
   m_ObjectHideFlags: 0
@@ -32399,6 +32512,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119a7cbdcfa94e545a9beb822ccf65f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2140654199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2140654200}
+  - component: {fileID: 2140654201}
+  m_Layer: 5
+  m_Name: Buildings Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2140654200
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140654199}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 817069590}
+  - {fileID: 1531895325}
+  - {fileID: 1024628628}
+  m_Father: {fileID: 155121156}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2140654201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140654199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff4e71b06a3ee24d80d28cfbf77869b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingPrefab: {fileID: 0}
 --- !u!1 &2144487633
 GameObject:
   m_ObjectHideFlags: 0

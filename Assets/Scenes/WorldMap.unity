@@ -143,7 +143,6 @@ GameObject:
   - component: {fileID: 7085733}
   - component: {fileID: 7085732}
   - component: {fileID: 7085731}
-  - component: {fileID: 7085734}
   m_Layer: 5
   m_Name: Expand Buildings Button
   m_TagString: Untagged
@@ -277,19 +276,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7085729}
   m_CullTransparentMesh: 1
---- !u!114 &7085734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7085729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30254ca6c8fca3143bda35e6e8ea6c0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  expandBuildingButtonGameObject: {fileID: 7085729}
 --- !u!1 &19502179
 GameObject:
   m_ObjectHideFlags: 0
@@ -2457,14 +2443,13 @@ GameObject:
   - component: {fileID: 155121158}
   - component: {fileID: 155121157}
   - component: {fileID: 155121159}
-  - component: {fileID: 155121161}
   m_Layer: 5
   m_Name: County Info Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &155121156
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2484,8 +2469,6 @@ RectTransform:
   - {fileID: 958003576}
   - {fileID: 7085730}
   - {fileID: 2140654200}
-  - {fileID: 780018997}
-  - {fileID: 361764198}
   - {fileID: 2048848388}
   m_Father: {fileID: 275133784}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2549,22 +2532,6 @@ MonoBehaviour:
   countyOwnerText: {fileID: 1917657219}
   countyNameText: {fileID: 223208136}
   countyPopulationText: {fileID: 259231820}
---- !u!114 &155121161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 155121155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b65aad9676803d42be624aeeb9d83cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentBuildingsPrefab: {fileID: 7259660105327218338, guid: 704fc2e5a6a179e46afeff909ad0caa0, type: 3}
-  currentBuildingsParent: {fileID: 1582751647}
-  possibleBuildingsPrefab: {fileID: 7259660105327218338, guid: 0bc0fa073f2386146be8757317a0e290, type: 3}
-  possibleBuildingsParent: {fileID: 1382777141}
 --- !u!1001 &169628995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6198,12 +6165,12 @@ RectTransform:
   - {fileID: 512020730}
   - {fileID: 1824319879}
   - {fileID: 1091607103}
-  m_Father: {fileID: 155121156}
+  m_Father: {fileID: 2140654200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 1175, y: 0}
-  m_SizeDelta: {x: 450, y: 0}
+  m_SizeDelta: {x: 750, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &361764201
 MonoBehaviour:
@@ -11422,6 +11389,7 @@ MonoBehaviour:
   totalCapitolPop: 20
   minimumCountyPop: 3
   maximumCountyPop: 8
+  currentlySelectedBuilding: {fileID: 0}
   currentBuildingDescriptionPanelExpanded: 0
   possibleBuildingDescriptionPanelExpanded: 0
   populationDescriptionPanelOpen: 0
@@ -11992,7 +11960,6 @@ GameObject:
   - component: {fileID: 780018999}
   - component: {fileID: 780018998}
   - component: {fileID: 780019000}
-  - component: {fileID: 780019001}
   m_Layer: 5
   m_Name: Possible Building Description Panel
   m_TagString: Untagged
@@ -12024,12 +11991,12 @@ RectTransform:
   - {fileID: 620227320}
   - {fileID: 406029673}
   - {fileID: 1678211620}
-  m_Father: {fileID: 155121156}
+  m_Father: {fileID: 2140654200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 1175, y: 0}
-  m_SizeDelta: {x: 450, y: 0}
+  m_SizeDelta: {x: 750, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &780018998
 MonoBehaviour:
@@ -12089,21 +12056,6 @@ MonoBehaviour:
   currentEmployeesText: {fileID: 511098729}
   maxEmployeesText: {fileID: 823250496}
   confirmBuildText: {fileID: 1433068420}
---- !u!114 &780019001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780018996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: facc1a2ab0e93364085e5a6db9c05366, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  notEnoughWorkersPanel: {fileID: 803584587}
-  enoughPopulation: 0
-  unemployed: 0
 --- !u!1 &786672417
 GameObject:
   m_ObjectHideFlags: 0
@@ -12329,8 +12281,6 @@ GameObject:
   - component: {fileID: 817069590}
   - component: {fileID: 817069592}
   - component: {fileID: 817069591}
-  - component: {fileID: 817069593}
-  - component: {fileID: 817069594}
   m_Layer: 5
   m_Name: Possible Buildings Panel
   m_TagString: Untagged
@@ -12397,34 +12347,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817069589}
   m_CullTransparentMesh: 1
---- !u!114 &817069593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 817069589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b869a310f80f3749aafc8882b4a35ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uIBuildingsPanel: {fileID: 0}
-  possibleBuildingsScrollView: {fileID: 0}
-  buildingsParent: {fileID: 0}
---- !u!114 &817069594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 817069589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17226f731c8fcfb46abb6a1e1430a607, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collapseBuildingButton: {fileID: 1024628627}
 --- !u!1 &823250494
 GameObject:
   m_ObjectHideFlags: 0
@@ -22373,7 +22295,6 @@ GameObject:
   - component: {fileID: 1449491217}
   - component: {fileID: 1449491216}
   - component: {fileID: 1449491215}
-  - component: {fileID: 1449491218}
   m_Layer: 5
   m_Name: Build Button
   m_TagString: Untagged
@@ -22445,7 +22366,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1449491218}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIBuildCountyImprovementButton, Assembly-CSharp
         m_MethodName: BuildCountyImprovementButton
         m_Mode: 1
@@ -22495,22 +22416,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1449491213}
   m_CullTransparentMesh: 1
---- !u!114 &1449491218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1449491213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172944fa7af28614ba93e01060b398b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  notEnoughResourcesPanel: {fileID: 620227319}
-  notEnoughAssignedWorkersPanel: {fileID: 1798558005}
-  areYouSurePanel: {fileID: 406029672}
-  enoughInfluence: 0
 --- !u!1 &1462681376
 GameObject:
   m_ObjectHideFlags: 0
@@ -23348,7 +23253,6 @@ GameObject:
   - component: {fileID: 1531895325}
   - component: {fileID: 1531895327}
   - component: {fileID: 1531895326}
-  - component: {fileID: 1531895328}
   m_Layer: 5
   m_Name: Current Buildings Panel
   m_TagString: Untagged
@@ -23415,20 +23319,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1531895324}
   m_CullTransparentMesh: 1
---- !u!114 &1531895328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1531895324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322bd777c4f33df44bf5d9643ac5e888, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingDescriptionPanel: {fileID: 361764197}
-  currentBuildingsGroupGameObject: {fileID: 1582751647}
 --- !u!1 &1537027673
 GameObject:
   m_ObjectHideFlags: 0
@@ -32522,6 +32412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2140654200}
   - component: {fileID: 2140654201}
+  - component: {fileID: 2140654202}
   m_Layer: 5
   m_Name: Buildings Panel
   m_TagString: Untagged
@@ -32544,6 +32435,8 @@ RectTransform:
   - {fileID: 817069590}
   - {fileID: 1531895325}
   - {fileID: 1024628628}
+  - {fileID: 780018997}
+  - {fileID: 361764198}
   m_Father: {fileID: 155121156}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -32563,7 +32456,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff4e71b06a3ee24d80d28cfbf77869b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 0}
+  buildingPrefab: {fileID: 7259660105327218338, guid: 0bc0fa073f2386146be8757317a0e290, type: 3}
+  possibleBuildingsScrollView: {fileID: 1382777142}
+  currentBuildingsScrollView: {fileID: 1582751648}
+  possibleBuildingDescriptionPanel: {fileID: 780018996}
+  currentBuildingDescriptionPanel: {fileID: 361764197}
+--- !u!114 &2140654202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140654199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172944fa7af28614ba93e01060b398b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notEnoughResourcesPanel: {fileID: 620227319}
+  notEnoughAssignedWorkersPanel: {fileID: 1798558005}
+  areYouSurePanel: {fileID: 406029672}
+  enoughInfluence: 0
 --- !u!1 &2144487633
 GameObject:
   m_ObjectHideFlags: 0

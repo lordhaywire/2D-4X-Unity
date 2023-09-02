@@ -1,32 +1,27 @@
+using TMPro;
 using UnityEngine;
 
 public class UIBuildingButton : MonoBehaviour
 {
-    public static UIBuildingButton Instance;
-
+    public TextMeshProUGUI buildingNameText;
     public GameObject completedTextGameObject;
-    private void Awake()
-    {
-        Instance = this;
-    }
+    public GameObject actualBuilding;
 
     public void BuildingButton()
     {
-        /*
-        if(transform.parent == UIPossibleBuildingsPanel.Instance.possibleBuildingsGroupGameObject.transform)
+        BuildingInfo buildingInfo = actualBuilding.GetComponent<BuildingInfo>();
+        WorldMapLoad.Instance.currentlySelectedBuilding = actualBuilding;
+        if(buildingInfo.isBeingBuilt == false || buildingInfo.isBuilt == false)
         {
-            //Debug.Log("Possible Building.");
-            //UIPossibleBuildingsPanel.Instance.buildingDescriptionPanel.SetActive(true);
-            UICurrentBuildingsPanel.Instance.buildingDescriptionPanel.SetActive(false);
-            UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber = int.Parse(name);
+            UIBuildingsPanel.Instance.possibleBuildingDescriptionPanel.SetActive(true);
+            UIPossibleBuildingDescriptionPanel.Instance.PanelRefresh();
         }
         else
         {
-            //Debug.Log("Current Building.");
-            UICurrentBuildingsPanel.Instance.buildingDescriptionPanel.SetActive(true);
-            //UIPossibleBuildingsPanel.Instance.buildingDescriptionPanel.SetActive(false);
-            UICurrentBuildingsPanel.Instance.CurrentBuildingNumber = int.Parse(name);
+            UIBuildingsPanel.Instance.currentBuildingDescriptionPanel.SetActive(true);
+            //UICurrentBuildingDescriptionPanel.Instance.PanelRefresh();
         }
-        */
+
+        
     }
 }

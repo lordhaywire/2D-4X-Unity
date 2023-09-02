@@ -7,7 +7,7 @@ public class WorldMapLoad : MonoBehaviour
 {
     public static WorldMapLoad Instance { get; private set; }
 
-    public event Action RefreshBuildingPanels;
+    //public event Action RefreshBuildingPanels;
 
     public GameObject currentlyRightClickedCounty;
     public CountyPopulation currentlySelectedCountyPopulation;
@@ -75,6 +75,8 @@ public class WorldMapLoad : MonoBehaviour
     [SerializeField] private int totalCapitolPop;
     [SerializeField] private int minimumCountyPop;
     [SerializeField] private int maximumCountyPop;
+
+    public GameObject currentlySelectedBuilding;
 
     public bool currentBuildingDescriptionPanelExpanded;
     public bool possibleBuildingDescriptionPanelExpanded;
@@ -161,6 +163,8 @@ public class WorldMapLoad : MonoBehaviour
 
     private void MoveBuildingToCurrentBuildingList()
     {
+        Debug.Log("WorldMapLoad.cs MoveBuildingToCurrentBuildingList()");
+        /*
         var possibleBuilding = counties[CurrentlySelectedCounty.name].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
 
         // Create the Current Building List and add list to the County so the County knows what it has built.
@@ -171,17 +175,22 @@ public class WorldMapLoad : MonoBehaviour
             possibleBuilding.maxEmployees, true, false, null));
         */
         // This makes is so that the population gets the correct building to build.
+        /*
         UICurrentBuildingsPanel.Instance.CurrentBuildingNumber =
             counties[CurrentlySelectedCounty.name].currentBuildings.Count - 1;
-
+        
         // Remove the building from the possible Building list.
         counties[CurrentlySelectedCounty.name].possibleBuildings.Remove(possibleBuilding);
 
         RefreshBuildingPanels?.Invoke();
+        */
     }
 
     private void SetNextDayJob()
     {
+        Debug.Log("WorldMapLoad.cs SetNextDayJob()");
+        /*
+
         int numberWorkers = 0;
         for (int i = 0; i < countyPopulationDictionary[CurrentlySelectedCounty.name].Count; i++)
         {
@@ -198,6 +207,7 @@ public class WorldMapLoad : MonoBehaviour
                 counties[CurrentlySelectedCounty.name].currentlyWorkingPopulation++; // We need to put this number on the county info panel.
             }
         }
+        */
     }
 
     private void CreateResearchandBuildingList()

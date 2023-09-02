@@ -4,7 +4,13 @@ using UnityEngine;
 public class FactionAI : MonoBehaviour
 {
     public Faction faction;
+    public Banker banker;
     public List<County> countiesFactionOwns;
+
+    private void Awake()
+    {
+        banker = GetComponent<Banker>();
+    }
 
     private void Start()
     {
@@ -17,7 +23,8 @@ public class FactionAI : MonoBehaviour
         Debug.Log(faction.factionNameAndColor.name  + " checking to build buildings!");
 
         // Is there enough food? If not build a Garden Shack.
-        if (faction.food < Globals.Instance.minimumFood)
+
+        if (banker.CheckEnoughFood(faction) == false)
         {
             // We need to figure out a less error prone way to do this because knowing which building is which in
             for (int i = 0; i < countiesFactionOwns.Count; i++)

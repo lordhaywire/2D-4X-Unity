@@ -14,7 +14,7 @@ public class UIRecruitHeroConfirm : MonoBehaviour
 
     public void ConfirmHeroRecruitment()
     {
-        Banker.Instance.RemoveCostOfHero();
+        //Banker.Instance.RemoveCostOfHero();
 
         WorldMapLoad.Instance.currentlySelectedCountyPopulation.isHero = true;
 

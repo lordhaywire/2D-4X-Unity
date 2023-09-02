@@ -66,12 +66,12 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
     {
         if (WorldMapLoad.Instance.currentBuildingDescriptionPanelExpanded == true)
         {
-            UICurrentBuildingDescriptionPanel.Instance.gameObject.SetActive(false);
+            //UICurrentBuildingDescriptionPanel.Instance.gameObject.SetActive(false);
             WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded = false;
         }
         if (WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded == true)
         {
-            UIPossibleBuildingDescriptionPanel.Instance.gameObject.SetActive(false);
+            //UIPossibleBuildingDescriptionPanel.Instance.gameObject.SetActive(false);
             WorldMapLoad.Instance.possibleBuildingDescriptionPanelExpanded = false;
         }
         if (WorldMapLoad.Instance.populationDescriptionPanelOpen == true)
@@ -103,7 +103,7 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
             if (UICountyInfoPanel.Instance.buildingsPanelExpanded == true)
             {
                 //UIPossibleBuildingsPanel.Instance.gameObject.SetActive(false);
-                UICurrentBuildingsPanel.Instance.gameObject.SetActive(false);
+                //UICurrentBuildingsPanel.Instance.gameObject.SetActive(false);
             }
             //UIExpandBuildingsButton.Instance.expandBuildingButtonGameObject.SetActive(false);
             UICountyInfoPanel.Instance.buildingsPanelExpanded = false;
@@ -122,11 +122,10 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
     // Is this supposed to be an event that UIBuildingPanelsRefresher subscribes to and refreshes when it is triggered?
     private void RefreshBuildingsPanels()
     {
-        UIBuildingPanelsRefresher.Instance.CurrentBuildingPanelsDestroyer();
-        UIBuildingPanelsRefresher.Instance.CurrentBuildingPanelsRefresher();
-
-        UIBuildingPanelsRefresher.Instance.PossibleBuildingsPanelsDestroyer();
-        UIBuildingPanelsRefresher.Instance.PossibleBuildingPanelsRefresher();
+        if(UIBuildingsPanel.Instance != null)
+        {
+            UIBuildingsPanel.Instance.PanelRefresher();
+        }   
     }
 
     private void FillCountyInfoPanel()

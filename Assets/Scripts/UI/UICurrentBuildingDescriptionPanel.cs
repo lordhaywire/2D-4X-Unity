@@ -23,24 +23,28 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
     private void OnEnable()
     {
         TimeKeeper.Instance.PauseTime();
+        UIBuildingsPanel.Instance.possibleBuildingDescriptionPanel.SetActive(false);
 
         WorldMapLoad.Instance.currentBuildingDescriptionPanelExpanded = true;
 
-        UICurrentBuildingsPanel.Instance.CurrentBuildingButtonPressed += PanelRefresh;
+        //UICurrentBuildingsPanel.Instance.CurrentBuildingButtonPressed += PanelRefresh;
     }
 
     private void OnDisable()
     {
         TimeKeeper.Instance.UnpauseTime();
 
-        UICurrentBuildingsPanel.Instance.CurrentBuildingButtonPressed -= PanelRefresh;
+        //UICurrentBuildingsPanel.Instance.CurrentBuildingButtonPressed -= PanelRefresh;
     }
 
     private void PanelRefresh()
-    { 
+    {
+        Debug.Log("UICurrentBuildingDescriptionPanel.cs PanelRefresh()");
+        /*
         BuildingInfo currentBuildingInfo =
             WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name]
             .currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].GetComponent<BuildingInfo>();
+        
         nameText.text = currentBuildingInfo.name;
         descriptionText.text = currentBuildingInfo.description;
         workCompletedText.text = currentBuildingInfo.workCompleted.ToString();
@@ -60,5 +64,6 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
             employeesPanel.SetActive(true);
             completedPanel.SetActive(false);
         }
+        */
     }
 }

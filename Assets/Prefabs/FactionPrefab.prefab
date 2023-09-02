@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 825713819139066636}
   - component: {fileID: 5591215602814591890}
+  - component: {fileID: 6136397112205939611}
   m_Layer: 0
   m_Name: FactionPrefab
   m_TagString: Untagged
@@ -42,5 +43,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fce73a4e8176cd488f118062c8c4270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faction:
+    isPlayer: 0
+    factionNameAndColor:
+      factionID: 0
+      name: 
+      color32:
+        serializedVersion: 2
+        rgba: 0
+    researchItems: []
+    factionLeader:
+      location: {fileID: 0}
+      destination: {fileID: 0}
+      faction: 
+      firstName: 
+      lastName: 
+      isMale: 0
+      age: 0
+      isFactionLeader: 0
+      isHero: 0
+      isWorker: 0
+      leaderOfPeoplePerk: 0
+      constructionSkill: 0
+      currentActivity: 
+      currentBuilding: {fileID: 0}
+      nextActivity: 
+      nextBuilding: {fileID: 0}
+      isSpawned: 0
+    influence: 0
+    money: 0
+    food: 0
+    scrap: 0
+  banker: {fileID: 0}
+  countiesFactionOwns: []
+--- !u!114 &6136397112205939611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5829746333929138468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639d76ce0ccec90479545323856becc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

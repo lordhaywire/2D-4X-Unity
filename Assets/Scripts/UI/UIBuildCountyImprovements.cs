@@ -1,33 +1,50 @@
 using UnityEngine;
 
-public class UIBuildCountyImprovementButton : MonoBehaviour
+public class UIBuildCountyImprovements : MonoBehaviour
 {
+    [SerializeField] private Banker banker;
     [SerializeField] private GameObject notEnoughResourcesPanel;
     [SerializeField] private GameObject notEnoughAssignedWorkersPanel;
     [SerializeField] private GameObject areYouSurePanel;
 
     public bool enoughInfluence;
 
-    public void BuildCountyImprovementButton()
+    public void BuildButton()
     {
+        Faction faction = WorldMapLoad.Instance.playerFaction;
+        BuildingInfo buildingInfo = WorldMapLoad.Instance.currentlySelectedBuilding.GetComponent<BuildingInfo>();
+        if(banker.CheckBuildingCost(faction, buildingInfo) == true)
+        {
+            Debug.Log("There is enough influence.");
+            //notEnoughAssignedWorkersPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("There is not enough influence.");
+            notEnoughResourcesPanel.SetActive(true);
+        }
+        
 
-        CheckEnoughInfluence();
+        /*
         if (UIBuildingChecker.Instance.enoughPopulation == false && enoughInfluence == true)
         {
-            notEnoughAssignedWorkersPanel.SetActive(true);
+            
         }
         else if(UIBuildingChecker.Instance.enoughPopulation == true && enoughInfluence == false)
         {
-            notEnoughResourcesPanel.SetActive(true);
+            
         }
         else if(UIBuildingChecker.Instance.enoughPopulation == true && enoughInfluence == true)
         {
             areYouSurePanel.SetActive(true);
         }
+        */
     }
 
     private void CheckEnoughInfluence()
     {
+        Debug.Log("UIBuildCountyImprovementButton CheckEnoughInfluence()");
+        /*
         enoughInfluence = false;
         if (WorldMapLoad.Instance.CurrentlySelectedCounty.GetComponent<CountyInfo>().county
             .possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].GetComponent<BuildingInfo>().influenceCost
@@ -39,5 +56,6 @@ public class UIBuildCountyImprovementButton : MonoBehaviour
         {
             enoughInfluence = true;
         }
+        */
     }
 }

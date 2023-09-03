@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 825713819139066636}
   - component: {fileID: 5591215602814591890}
-  - component: {fileID: 6136397112205939611}
   m_Layer: 0
   m_Name: FactionPrefab
   m_TagString: Untagged
@@ -76,17 +75,4 @@ MonoBehaviour:
     money: 0
     food: 0
     scrap: 0
-  banker: {fileID: 0}
   countiesFactionOwns: []
---- !u!114 &6136397112205939611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5829746333929138468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639d76ce0ccec90479545323856becc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

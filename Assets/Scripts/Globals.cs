@@ -7,7 +7,7 @@ public class Globals : MonoBehaviour
     public bool startPaused;
     public float tokenSpeed;
 
-    public int minimumFood;
+    public int minimumFoodAI;
     private void Awake()
     {
         Instance = this;

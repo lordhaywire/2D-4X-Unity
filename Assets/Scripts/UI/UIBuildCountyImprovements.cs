@@ -41,6 +41,7 @@ public class UIBuildCountyImprovements : MonoBehaviour
         */
     }
 
+    /*
     private void CheckEnoughInfluence()
     {
         Debug.Log("UIBuildCountyImprovementButton CheckEnoughInfluence()");
@@ -56,6 +57,7 @@ public class UIBuildCountyImprovements : MonoBehaviour
         {
             enoughInfluence = true;
         }
-        */
+       
     }
+    */
 }

@@ -18,7 +18,9 @@ public class CountyInfo : MonoBehaviour
         foreach (GameObject prefab in prefabs)
         {
             GameObject building = Instantiate(prefab, possibleBuildingsParent);
-            building.name = gameObject.name + " " + building.GetComponent<BuildingInfo>().buildingName;
+            BuildingInfo buildingInfo = building.GetComponent<BuildingInfo>();
+            building.name = gameObject.name + " " + buildingInfo.buildingName;
+            buildingInfo.county = county;
         }
     }
 }

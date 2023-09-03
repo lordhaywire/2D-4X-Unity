@@ -7,6 +7,7 @@ public class BuildingInfo : MonoBehaviour
     public event Action CurrentWorkersChanged;
 
     public GameObject uIGameObject;
+    public County county;
     public string buildingName;
     public string description;
 

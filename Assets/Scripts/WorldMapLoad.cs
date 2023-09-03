@@ -411,10 +411,6 @@ public class WorldMapLoad : MonoBehaviour
                 AllText.Jobs.IDLE, null, AllText.Jobs.IDLE, null, false));
         }
     }
-    private void OnDisable()
-    {
-        //UIBuildingConfirmed.Instance.BuildingConfirmed -= BuildCountyImprovement;
-    }
 
     /*
         researchItems.Add(new ResearchItem(

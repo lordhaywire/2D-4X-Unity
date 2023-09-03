@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class BuildImprovements : MonoBehaviour
 {
-    public void CheckIfBuildingAlreadyBuilt(Faction faction, GameObject building)
-    {
-
-    }
     public void BuildBuilding(Faction faction, GameObject building)
     {
         Debug.Log(faction.factionNameAndColor.name + " is building " + building.name);
@@ -37,7 +33,7 @@ public class BuildImprovements : MonoBehaviour
             }
         }
         // Moves the building to the current building list.
-        county.currentBuildings.Add(building);
-        county.possibleBuildings.Remove(building);
+        //county.currentBuildings.Add(building);
+        //county.possibleBuildings.Remove(building);
     }
 }

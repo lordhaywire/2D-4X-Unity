@@ -172,8 +172,8 @@ MonoBehaviour:
     y: 0
     width: 1028.6666
     height: 369.33334
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 5}
@@ -821,7 +821,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 75
+  controlID: 3226
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -886,10 +886,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 44}
-      m_SelectedIDs: a4540100
-      m_LastClickedID: 0
-      m_ExpandedIDs: 0afbffffea6f000066700000aa750000
+      scrollPos: {x: 0, y: 60}
+      m_SelectedIDs: ec6f0000
+      m_LastClickedID: 28652
+      m_ExpandedIDs: 0afbffffec6f000068700000d87200007e750000ac750000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -986,7 +986,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Public Classes
+    - Assets/Scripts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -996,16 +996,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts/Public Classes
+  - Assets/Scripts
   m_LastFoldersGridSize: 16
   m_LastProjectPath: G:\Unity\2D 4X
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: d47b0000
-    m_LastClickedID: 31700
-    m_ExpandedIDs: 00000000b87b0000c47b0000c87b000000ca9a3b
+    m_SelectedIDs: c87b0000
+    m_LastClickedID: 31688
+    m_ExpandedIDs: 00000000b87b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1033,7 +1033,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b87b0000
+    m_ExpandedIDs: 00000000b87b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1058,24 +1058,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: a4540100
-    m_LastClickedInstanceID: 87204
+    m_SelectedInstanceIDs: ec6f0000
+    m_LastClickedInstanceID: 28652
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 627e0000c6af000000000000484001002e580000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: CountyAndBuilding
-      m_OriginalName: CountyAndBuilding
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 87204
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_CreateAssetUtility:
@@ -1108,8 +1108,8 @@ MonoBehaviour:
     y: 0
     width: 254.66663
     height: 854.6667
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}

@@ -14,17 +14,16 @@ public class FactionAI : MonoBehaviour
 
     private void CheckForBuildingBuildings()
     {
-        Debug.Log(faction.factionNameAndColor.name + " checking to build buildings!");
+        //Debug.Log(faction.factionNameAndColor.name + " checking to build buildings!");
 
-        // Is there enough food? If not build a Garden Shack.
-
+        // Is there enough food? If not build a food building.
         if (Banker.Instance.CheckEnoughFood(faction) == false)
         {
             GameObject foodBuilding = Banker.Instance.FindFoodBuilding(gameObject);
             if (foodBuilding != null)
             {
-                Debug.Log("This is a food building " + foodBuilding.name);
-                foodBuilding.GetComponent<BuildingInfo>().isBeingBuilt = true;
+                //Debug.Log("Building to be built: " + foodBuilding.name);
+                foodBuilding.GetComponent<BuildingInfo>().county.buildImprovements.BuildBuilding(faction, foodBuilding);
             }
             else
             {

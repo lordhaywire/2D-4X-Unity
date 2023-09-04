@@ -7,6 +7,7 @@ public class Globals : MonoBehaviour
     public bool startPaused;
     public float tokenSpeed;
 
+    public int dailyInfluenceGain;
     public int minimumFoodAI;
     private void Awake()
     {

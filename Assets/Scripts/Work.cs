@@ -12,6 +12,24 @@ public class Work : MonoBehaviour
     private void DayStart()
     {
         AdjustPopulationActivity();
+        GenerateLeaderInfluence();
+    }
+
+    private void GenerateLeaderInfluence()
+    {
+        
+        for (int i = 0; i < WorldMapLoad.Instance.factions.Count; i++) 
+        {
+            Faction faction = WorldMapLoad.Instance.factions[i];
+            if(faction.factionLeader.leaderOfPeoplePerk == true)
+            {
+                faction.Influence += Globals.Instance.dailyInfluenceGain;
+            }
+            else
+            {
+                Debug.Log($"The leader of {faction.factionNameAndColor.name} isn't a leader of people.");
+            }
+        }     
     }
 
     // Adjust all of the world population!
@@ -27,13 +45,6 @@ public class Work : MonoBehaviour
                 //Debug.Log(item.Value[pop].lastName);
                 item.Value[i].currentActivity = item.Value[i].nextActivity;
                 item.Value[i].currentBuilding = item.Value[i].nextBuilding;
-
-                // Checks to see if the 
-                if (item.Value[i].leaderOfPeoplePerk == true && item.Value[i].isFactionLeader == true)
-                {
-                    WorldMapLoad.Instance.counties[item.Key].faction.Influence
-                        += WorldMapLoad.Instance.dailyInfluenceGain;
-                }
             }
         }
     }
@@ -59,8 +70,13 @@ public class Work : MonoBehaviour
                         // Some of the population will be working on different buildings too....
                         item.Value[pop].currentBuilding.GetComponent<BuildingInfo>().isBuilt = true;
 
-                        // This needs to work with AI factions as well which don't have a UI.
-                        item.Value[pop].currentBuilding.gameObject.GetComponent<UIBuildingButton>().completedTextGameObject.SetActive(true);
+                        // This needs to work with AI factions as well which don't have a UI, unless the player spies on that county,
+                        // it show in the UI what is being build.
+                        if(item.Value[pop].currentBuilding.GetComponent<BuildingInfo>().county.faction.isPlayer == true)
+                        {
+                            item.Value[pop].currentBuilding.GetComponent<UIBuildingButton>().completedTextGameObject.SetActive(true);
+                        }
+                        
                     }
                 }
             }

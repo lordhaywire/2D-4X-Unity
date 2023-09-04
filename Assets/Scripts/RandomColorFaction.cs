@@ -23,13 +23,16 @@ public class RandomColorFaction : MonoBehaviour
             availableColors.RemoveAt(randomIndex);
         }
 
-        // Go through each county, assign their Sprite Renderer and their color.
+        // Go through each county, assign their Sprite Renderer, their color and their Build Improvements script.
         foreach (KeyValuePair<string, County> item in WorldMapLoad.Instance.counties)
         {
             //Debug.Log("Random Color Faction: " + item.Key + "   " + item.Value);
             var county = WorldMapLoad.Instance.counties[item.Key];
             county.spriteRenderer =
                 CountyListCreator.Instance.countiesList[county.countyID].gameObject.GetComponent<SpriteRenderer>();
+            county.buildImprovements
+                = CountyListCreator.Instance.countiesList[county.countyID].gameObject.GetComponent<BuildImprovements>();
+            //Debug.Log(county.gameObject.name + " building improvements: " + county.buildImprovements);
 
             county.spriteRenderer.color = county.faction.factionNameAndColor.color32;
         }

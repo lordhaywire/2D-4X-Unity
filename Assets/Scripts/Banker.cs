@@ -11,6 +11,11 @@ public class Banker : MonoBehaviour
     {
         Instance = this;
     }
+
+    public void ChargeForBuilding(Faction faction, BuildingInfo buildingInfo)
+    {
+        faction.influence -= buildingInfo.influenceCost;
+    }
     public bool CheckBuildingCost(Faction faction, BuildingInfo buildingInfo)
     {
         return faction.influence >= buildingInfo.influenceCost;
@@ -28,24 +33,28 @@ public class Banker : MonoBehaviour
         for (int i = 0; i < counties.Count; i++)
         {
             Transform possibleBuildingsParent = counties[i].gameObject.GetComponent<CountyInfo>().possibleBuildingsParent;
+            Transform currentBuildingsParent = counties[i].gameObject.GetComponent<CountyInfo>().currentBuildingsParent;
+
+            for (int j = 0; j < currentBuildingsParent.childCount; j++)
+            {
+                BuildingInfo buildingInfo = currentBuildingsParent.GetChild(j).GetComponent<BuildingInfo>();
+                if (buildingInfo.isBeingBuilt == true || buildingInfo.isBuilt == true)
+                {
+                    Debug.Log($"{buildingInfo.buildingName} is already being built.");
+                    return null;
+                }
+            }
 
             for (int j = 0; j < possibleBuildingsParent.childCount; j++)
             {
                 BuildingInfo buildingInfo = possibleBuildingsParent.GetChild(j).GetComponent<BuildingInfo>();
-                if(buildingInfo.isBeingBuilt == true || buildingInfo.isBuilt == true)
-                {
-                    Debug.Log(buildingInfo.buildingName + " is being built or built.");
 
-                }
-                else
+                if (buildingInfo.resourceSO.name == foodSO.name)
                 {
-                    if (buildingInfo.resourceSO.name == foodSO.name)
-                    {
-                        GameObject foodBuilding = possibleBuildingsParent.GetChild(j).gameObject;
-                        Debug.Log($"Found {foodBuilding.name} in {counties[i].gameObject.name}");
+                    GameObject foodBuilding = possibleBuildingsParent.GetChild(j).gameObject;
+                    Debug.Log($"Found {foodBuilding.name} in {counties[i].gameObject.name}");
 
-                        return foodBuilding;
-                    }
+                    return foodBuilding;
                 }
             }
         }

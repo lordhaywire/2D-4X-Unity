@@ -36,8 +36,8 @@ public class TimeKeeper : MonoBehaviour
             // This will not trigger on day zero.
             if (hours == 0)
             {
-                DayStart?.Invoke();
                 Debug.Log("Hour is ZERO!!!");
+                DayStart?.Invoke();
             }
 
             if(days == 0 && hours == 1)
@@ -49,6 +49,7 @@ public class TimeKeeper : MonoBehaviour
 
             if (hours == 17)
             {
+                Debug.Log("Workday is over!");
                 WorkDayOver?.Invoke();
             }
         }

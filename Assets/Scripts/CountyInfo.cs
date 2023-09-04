@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CountyInfo : MonoBehaviour
@@ -11,6 +12,13 @@ public class CountyInfo : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(WaitForOneFrame());
+    }
+
+    IEnumerator WaitForOneFrame()
+    {
+        yield return null;
+
         // Load all prefabs in the specified folder
         GameObject[] prefabs = Resources.LoadAll<GameObject>(prefabFolder);
 
@@ -22,5 +30,6 @@ public class CountyInfo : MonoBehaviour
             building.name = gameObject.name + " " + buildingInfo.buildingName;
             buildingInfo.county = county;
         }
+
     }
 }

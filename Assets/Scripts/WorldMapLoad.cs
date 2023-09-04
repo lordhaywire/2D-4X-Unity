@@ -92,7 +92,6 @@ public class WorldMapLoad : MonoBehaviour
     // This is just temp bullshit.
     public Faction playerFaction;
     public int playerFactionID;
-    public int dailyInfluenceGain;
     public int costOfHero;
 
     // Initialize County Dictionary List.
@@ -282,25 +281,25 @@ public class WorldMapLoad : MonoBehaviour
         // The first county is the player county.
 
         counties[CountyListCreator.Instance.countiesList[0].name] = new County(
-            0, true, false, CountyListCreator.Instance.countiesList[0].gameObject, null, factions[1],
+            0, CountyListCreator.Instance.countiesList[0].gameObject, true, false, null, null, factions[1],
             Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[1].name] = new County(
-            1, true, false, CountyListCreator.Instance.countiesList[1].gameObject, null, factions[0],
+            1, CountyListCreator.Instance.countiesList[1].gameObject, true, false,  null, null, factions[0],
             Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 0, 1);
         counties[CountyListCreator.Instance.countiesList[2].name] = new County(
-            2, false, false, CountyListCreator.Instance.countiesList[2].gameObject, null, factions[0], // Temporarily set to the player faction for testing.
+            2, CountyListCreator.Instance.countiesList[2].gameObject, false, false,null, null, factions[0], // Temporarily set to the player faction for testing.
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[3].name] = new County(
-            3, false, true, CountyListCreator.Instance.countiesList[3].gameObject, null, factions[2],
+            3, CountyListCreator.Instance.countiesList[3].gameObject, false, true,  null, null, factions[2],
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[4].name] = new County(
-            4, false, true, CountyListCreator.Instance.countiesList[4].gameObject, null, factions[3],
+            4, CountyListCreator.Instance.countiesList[4].gameObject, false, true,  null, null, factions[3],
             Arrays.provinceName[1], "Mountain", "Forest", "Farm", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[5].name] = new County(
-            5, false, true, CountyListCreator.Instance.countiesList[5].gameObject, null, factions[4],
+            5, CountyListCreator.Instance.countiesList[5].gameObject, false, true,  null, null, factions[4],
             Arrays.provinceName[1], "Desert", "Mountain", "Forest", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[6].name] = new County(
-            6, false, true, CountyListCreator.Instance.countiesList[6].gameObject, null, factions[5],
+            6, CountyListCreator.Instance.countiesList[6].gameObject, false, true,  null, null, factions[5],
             Arrays.provinceName[1], "Mountain", "Desert", "Forest", 0, 0, 0);
 
         // We should expand this for loop if possible.
@@ -362,16 +361,16 @@ public class WorldMapLoad : MonoBehaviour
 
     private void GeneratePopulation(string countyName, int totalPopulation)
     {
-        var countyPopulation = countyPopulationDictionary[countyName];
-        string firstName;
-        string lastName;
-        bool isMale;
-        int age;
-        bool isFactionLeader = false;
-        bool leaderOfPeoplePerk = false;
-
         for (int i = 0; i < totalPopulation; i++)
         {
+            var countyPopulation = countyPopulationDictionary[countyName];
+            string firstName;
+            string lastName;
+            bool isMale;
+            int age;
+            bool isFactionLeader = false;
+            bool leaderOfPeoplePerk = false;
+
             // Generates Persons Last Name
             int randomLastNameNumber = UnityEngine.Random.Range(0, lastNames.Length);
             lastName = lastNames[randomLastNameNumber];
@@ -395,7 +394,7 @@ public class WorldMapLoad : MonoBehaviour
             // Determine the person's age.
             age = UnityEngine.Random.Range(18, 61);
 
-            if (counties[countyName].faction.factionLeader == null) // && i == 0)
+            if (i == 0)
             {
                 isFactionLeader = true;
 

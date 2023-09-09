@@ -5,7 +5,7 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
 {
     public static UIPossibleBuildingDescriptionPanel Instance { get; private set; }
 
-    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI buildingNameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private TextMeshProUGUI moneyCostText;
     [SerializeField] private TextMeshProUGUI resourcesCostText;
@@ -13,6 +13,8 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentEmployeesText;
     [SerializeField] private TextMeshProUGUI maxEmployeesText;
     [SerializeField] private TextMeshProUGUI confirmBuildText;
+
+    private BuildingInfo buildingInfo;
 
     private void Awake()
     {
@@ -24,23 +26,13 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
         UIBuildingsPanel.Instance.currentBuildingDescriptionPanel.SetActive(false);
 
         PanelRefresh();
-
-        /*
-        List<GameObject> possibleBuildings 
-            = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings;
-
-        for (int i = 0; i < possibleBuildings.Count; i++)
-        {
-            possibleBuildings[i].GetComponent<BuildingInfo>().CurrentWorkersChanged += CurrentEmployeesRefresh;
-        }
-        */
     }
 
     public void PanelRefresh()
     {
-        BuildingInfo buildingInfo = WorldMapLoad.Instance.currentlySelectedBuilding.GetComponent<BuildingInfo>();
+        buildingInfo = WorldMapLoad.Instance.currentlySelectedBuilding.GetComponent<BuildingInfo>();
             
-        nameText.text = buildingInfo.buildingName;
+        buildingNameText.text = $"{buildingInfo.county.gameObject.name}'s {buildingInfo.buildingName}";
         descriptionText.text = buildingInfo.description;
 
         moneyCostText.text = $"{buildingInfo.influenceCost} Influence";
@@ -55,54 +47,33 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
         confirmBuildText.text = $"Are you sure you want to build {buildingInfo.name}?";       
     }
 
-    private void CurrentEmployeesRefresh()
-    {
-        /*
-        GameObject possibleBuilding =
-           WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
-        currentEmployeesText.text = possibleBuilding.GetComponent<BuildingInfo>().CurrentWorkers.ToString();
-        */
-    }
-
-
     public void MinusButton()
     {
-        /*
-        BuildingInfo possibleBuildingInfo 
-            = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].GetComponent<BuildingInfo>();
-        possibleBuildingInfo.CurrentWorkers--;
-        Debug.Log("Current Workers: " + possibleBuildingInfo.CurrentWorkers);
-        if (possibleBuildingInfo.CurrentWorkers < 0)
-        {
-            possibleBuildingInfo.CurrentWorkers = 0;
+        buildingInfo.CurrentWorkers--;
 
+        if (buildingInfo.CurrentWorkers < 0)
+        {
+            buildingInfo.CurrentWorkers = 0;
         }
-        */
+        currentEmployeesText.text = buildingInfo.CurrentWorkers.ToString();
     }
 
     public void PlusButton()
     {
-        /*
-        BuildingInfo possibleBuildingInfo = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].GetComponent<BuildingInfo>();
+        buildingInfo.CurrentWorkers++;
 
-        possibleBuildingInfo.CurrentWorkers++;
-
-        if (possibleBuildingInfo.CurrentWorkers > possibleBuildingInfo.maxWorkers)
+        if (buildingInfo.CurrentWorkers > buildingInfo.maxWorkers)
         {
-            possibleBuildingInfo.CurrentWorkers =
-                possibleBuildingInfo.maxWorkers;
+            buildingInfo.CurrentWorkers =
+                buildingInfo.maxWorkers;
         }
-        */
+        currentEmployeesText.text = buildingInfo.CurrentWorkers.ToString();
     }
 
     public void MaxButton()
     {
-        /*
-        BuildingInfo possibleBuildingInfo 
-            = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].GetComponent<BuildingInfo>();
-
-        possibleBuildingInfo.CurrentWorkers = possibleBuildingInfo.maxWorkers;
-        */
+        buildingInfo.CurrentWorkers = buildingInfo.maxWorkers;
+        currentEmployeesText.text = buildingInfo.CurrentWorkers.ToString();
     }
 
     private void OnDisable()
@@ -110,15 +81,16 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
         TimeKeeper.Instance.UnpauseTime();
 
         //UIPossibleBuildingsPanel.Instance.PossibleBuildingButtonPressed -= PanelRefresh;
-
-        /*
-        List<GameObject> possibleBuildings 
-            = WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings;
-
-        for (int i = 0; i < possibleBuildings.Count; i++)
-        {
-            possibleBuildings[i].GetComponent<BuildingInfo>().CurrentWorkersChanged -= CurrentEmployeesRefresh;
-        }
-        */
     }
 }
+
+/* Saving this just in case we find a Current Workers bug.
+private void CurrentEmployeesRefresh()
+{
+
+    GameObject possibleBuilding =
+       WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
+    currentEmployeesText.text = possibleBuilding.GetComponent<BuildingInfo>().CurrentWorkers.ToString();
+
+}
+*/

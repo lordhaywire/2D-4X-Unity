@@ -17,7 +17,6 @@ public class UIBuildingsPanel : MonoBehaviour
     }
     private void OnEnable()
     {
-        
         PanelRefresher();
     }
 
@@ -38,12 +37,23 @@ public class UIBuildingsPanel : MonoBehaviour
         for (int i = 0; i < parent.childCount; i++)
         {
             GameObject uIBuilding = Instantiate(buildingPrefab, scrollView);
-            UIBuildingButton uiBuildingButton = uIBuilding.GetComponent<UIBuildingButton>();
+            UIBuildingButton uIBuildingButton = uIBuilding.GetComponent<UIBuildingButton>();
             BuildingInfo buildingInfo = parent.GetChild(i).GetComponent<BuildingInfo>();
 
-            uiBuildingButton.buildingNameText.text = buildingInfo.buildingName;
-            uiBuildingButton.actualBuilding = parent.GetChild(i).gameObject;
-            Debug.Log(uiBuildingButton.actualBuilding.name);
+            uIBuildingButton.buildingNameText.text = buildingInfo.buildingName;
+            uIBuildingButton.actualBuilding = parent.GetChild(i).gameObject;
+            buildingInfo.uIGameObject = uIBuilding;
+
+            if (buildingInfo.isBeingBuilt == true)
+            {
+                uIBuildingButton.underConstructionGameObject.SetActive(true);
+            }
+            else
+            {
+                uIBuildingButton.underConstructionGameObject.SetActive(false);
+            }
+
+            Debug.Log(uIBuildingButton.actualBuilding.name);
         }
     }
 
@@ -57,7 +67,7 @@ public class UIBuildingsPanel : MonoBehaviour
     }
 
     public void UIBuildingDestroyer(Transform parent)
-    { 
+    {
         for (int i = 0; i < parent.childCount; i++)
         {
             Destroy(parent.GetChild(i).gameObject);

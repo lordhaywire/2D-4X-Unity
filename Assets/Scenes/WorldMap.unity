@@ -11421,7 +11421,6 @@ GameObject:
   - component: {fileID: 746868447}
   - component: {fileID: 746868441}
   - component: {fileID: 746868445}
-  - component: {fileID: 746868446}
   m_Layer: 0
   m_Name: SceneLoad
   m_TagString: Untagged
@@ -11478,7 +11477,7 @@ MonoBehaviour:
   currentlySelectedCounty: {fileID: 0}
   countyInfoPanelGameObject: {fileID: 155121155}
   currentlySelectedToken: {fileID: 0}
-  totalCapitolPop: 20
+  totalCapitolPop: 10
   minimumCountyPop: 3
   maximumCountyPop: 8
   currentlySelectedBuilding: {fileID: 0}
@@ -11521,7 +11520,6 @@ MonoBehaviour:
     food: 0
     scrap: 0
   playerFactionID: 0
-  dailyInfluenceGain: 1
   costOfHero: 500
   factionNameAndColors:
   - factionID: 0
@@ -11757,18 +11755,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dab813026322736419b74aa9164fdf1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &746868446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746868438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2184ba12c9a0663498d4a57894b7e380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &746868447
@@ -12140,7 +12126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce31278d0704e748a255cd9a58f5d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 1892604473}
+  buildingNameText: {fileID: 1892604473}
   descriptionText: {fileID: 79887988}
   moneyCostText: {fileID: 1511575137}
   resourcesCostText: {fileID: 754347018}
@@ -22064,9 +22050,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 746868446}
-        m_TargetAssemblyTypeName: UIBuildingConfirmed, Assembly-CSharp
-        m_MethodName: YesButton
+      - m_Target: {fileID: 2140654202}
+        m_TargetAssemblyTypeName: UIBuildCountyImprovements, Assembly-CSharp
+        m_MethodName: YesConfirmButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -32797,11 +32783,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172944fa7af28614ba93e01060b398b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  banker: {fileID: 1078402821}
   notEnoughResourcesPanel: {fileID: 620227319}
   notEnoughAssignedWorkersPanel: {fileID: 1798558005}
   areYouSurePanel: {fileID: 406029672}
-  enoughInfluence: 0
 --- !u!1 &2144487633
 GameObject:
   m_ObjectHideFlags: 0

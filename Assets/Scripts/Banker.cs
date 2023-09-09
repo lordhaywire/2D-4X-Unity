@@ -12,6 +12,10 @@ public class Banker : MonoBehaviour
         Instance = this;
     }
 
+    public bool CheckForWorkers(BuildingInfo buildingInfo)
+    {
+        return buildingInfo.CurrentWorkers > 0;
+    }
     public void ChargeForBuilding(Faction faction, BuildingInfo buildingInfo)
     {
         faction.influence -= buildingInfo.influenceCost;
@@ -72,7 +76,7 @@ public class Banker : MonoBehaviour
             .possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber].GetComponent<BuildingInfo>().influenceCost;
         */
     }
-    public void RemoveCostOfHero()
+    public void ChargeForHero()
     {
         if (WorldMapLoad.Instance.costOfHero > WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].Influence)
         {

@@ -4,6 +4,7 @@ using UnityEngine;
 public class UIBuildingButton : MonoBehaviour
 {
     public TextMeshProUGUI buildingNameText;
+    public GameObject underConstructionGameObject;
     public GameObject completedTextGameObject;
     public GameObject actualBuilding;
 
@@ -19,9 +20,9 @@ public class UIBuildingButton : MonoBehaviour
         else
         {
             UIBuildingsPanel.Instance.currentBuildingDescriptionPanel.SetActive(true);
+
+            // This needs to be uncommented when we fix the Current Building Description.
             //UICurrentBuildingDescriptionPanel.Instance.PanelRefresh();
         }
-
-        
     }
 }

@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class BuildingInfo : MonoBehaviour
 {
     //public Building building;
-    public event Action CurrentWorkersChanged;
+    //public event Action CurrentWorkersChanged;
 
     public GameObject uIGameObject;
     public County county;
@@ -15,20 +17,19 @@ public class BuildingInfo : MonoBehaviour
     public int workCompleted;
     public int influenceCost;
     public int workCost;
-    private int currentWorkers = 0;
+    [SerializeField] private int currentWorkers = 0;
     public int maxWorkers;
 
     public bool isBeingBuilt;
     public bool isBuilt;
-    public GameObject completedTextGameObject; // What is this dumb shit?
 
-    public int CurrentWorkers
+    public int CurrentWorkers // This doesn't need to be a getter setter currently.
     {
         get { return currentWorkers; }
         set
         {
             currentWorkers = value;
-            CurrentWorkersChanged?.Invoke();
+            //CurrentWorkersChanged?.Invoke();
         }
     }
     public ResourceSO resourceSO;

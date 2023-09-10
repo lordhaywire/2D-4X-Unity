@@ -20,23 +20,34 @@ public class FactionAI : MonoBehaviour
         if (Banker.Instance.CheckEnoughFood(faction) == false)
         {
             GameObject foodBuilding = Banker.Instance.FindFoodBuilding(gameObject);
+            
             if (foodBuilding != null)
             {
+                BuildingInfo buildingInfo = foodBuilding.GetComponent<BuildingInfo>();
+                // Diving the total population of the county by 2 (and because it is an int it always rounds down).
+                int numberOfWorkers = buildingInfo.county.population / 2;
+                if (numberOfWorkers > buildingInfo.maxWorkers)
+                {
+                    numberOfWorkers = buildingInfo.maxWorkers;
+                }
+                buildingInfo.CurrentWorkers = numberOfWorkers;
                 //Debug.Log("Building to be built: " + foodBuilding.name);
-                foodBuilding.GetComponent<BuildingInfo>().county.buildImprovements.BuildBuilding(faction, foodBuilding);
+                if (Banker.Instance.CheckBuildingCost(faction, buildingInfo) == true
+                && Banker.Instance.CheckEnoughIdleWorkers(buildingInfo) == true
+                && Banker.Instance.CheckForWorkersAssigned(buildingInfo) == true)
+                {
+                    buildingInfo.county.buildImprovements.BuildBuilding(faction, foodBuilding);
+                }
+                else
+                {
+                    Debug.Log($"{faction.factionNameAndColor.name} has failed one of its resource checks.");
+                    buildingInfo.CurrentWorkers = 0;
+                }
             }
             else
             {
                 Debug.Log("Food building is null");
             }
-            
-
-            {
-                //Debug.Log($"{faction.factionNameAndColor.name} doesn't have enough influence to build " +
-                //   $"{counties[i].possibleBuildings[2].name} or some shit.");
-            }
-
-
         }
         else
         {

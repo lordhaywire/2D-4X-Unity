@@ -79,18 +79,5 @@ public class UIPossibleBuildingDescriptionPanel : MonoBehaviour
     private void OnDisable()
     {
         TimeKeeper.Instance.UnpauseTime();
-
-        //UIPossibleBuildingsPanel.Instance.PossibleBuildingButtonPressed -= PanelRefresh;
     }
 }
-
-/* Saving this just in case we find a Current Workers bug.
-private void CurrentEmployeesRefresh()
-{
-
-    GameObject possibleBuilding =
-       WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
-    currentEmployeesText.text = possibleBuilding.GetComponent<BuildingInfo>().CurrentWorkers.ToString();
-
-}
-*/

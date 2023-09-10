@@ -71,6 +71,6 @@ public class UITopInfoBar : MonoBehaviour
 
     private void UpdateInfluenceText()
     {
-        influenceText.text = WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].influence.ToString();
+        influenceText.text = WorldMapLoad.Instance.factions[WorldMapLoad.Instance.playerFactionID].Influence.ToString();
     }
 }

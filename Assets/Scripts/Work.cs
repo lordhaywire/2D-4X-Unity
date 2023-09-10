@@ -52,6 +52,7 @@ public class Work : MonoBehaviour
     // End work for all of the world population!
     private void WorkDayOverForPopulation()
     {
+        // We should rewrite this.  I think there is a better way to do this without using the Dictionary bullshit.
         // Go through all the counties and have people building add their work to the building.
         foreach (KeyValuePair<string, List<CountyPopulation>> item in WorldMapLoad.Instance.countyPopulationDictionary)
         {
@@ -60,26 +61,21 @@ public class Work : MonoBehaviour
             {
                 if (item.Value[pop].currentActivity == AllText.Jobs.BUILDING)
                 {
-                    item.Value[pop].currentBuilding.GetComponent<BuildingInfo>().workCompleted++;
+                    BuildingInfo buildingInfo = item.Value[pop].currentBuilding.GetComponent<BuildingInfo>();
+                    buildingInfo.workCompleted++;
                     // Checks to see if the building is completed.
-                    if (item.Value[pop].currentBuilding.GetComponent<BuildingInfo>().workCompleted 
-                        >= item.Value[pop].currentBuilding.GetComponent<BuildingInfo>().workCost)
+                    if (buildingInfo.workCompleted >= buildingInfo.workCost)
                     {
                         // This is having every population working on that building set that building as built.
                         // So it is repeating the setting to true a bunch of times.  This is ineffecient code.
                         // Some of the population will be working on different buildings too....
-                        item.Value[pop].currentBuilding.GetComponent<BuildingInfo>().isBuilt = true;
-
-                        // This needs to work with AI factions as well which don't have a UI, unless the player spies on that county,
-                        // it show in the UI what is being build.
-                        if(item.Value[pop].currentBuilding.GetComponent<BuildingInfo>().county.faction.isPlayer == true)
-                        {
-                            item.Value[pop].currentBuilding.GetComponent<UIBuildingButton>().completedTextGameObject.SetActive(true);
-                        }
-                        
+                        buildingInfo.isBuilt = true;
+                        buildingInfo.isBeingBuilt = false;
+                        buildingInfo.uIGameObject.GetComponent<UIBuildingButton>().underConstructionGameObject.SetActive(false);
                     }
                 }
             }
+
             // Go through everyone in this county again and clear out their job if their building is done.
             for (int popAgain = 0; popAgain < item.Value.Count; popAgain++)
             {

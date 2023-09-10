@@ -159,30 +159,6 @@ public class WorldMapLoad : MonoBehaviour
     }
     */
 
-    private void MoveBuildingToCurrentBuildingList()
-    {
-        Debug.Log("WorldMapLoad.cs MoveBuildingToCurrentBuildingList()");
-        /*
-        var possibleBuilding = counties[CurrentlySelectedCounty.name].possibleBuildings[UIPossibleBuildingsPanel.Instance.PossibleBuildingNumber];
-
-        // Create the Current Building List and add list to the County so the County knows what it has built.
-        counties[CurrentlySelectedCounty.name].currentBuildings.Add(possibleBuilding);
-        /* Just in case I need to reference this during this bug hunt.
-        counties[CurrentlySelectedCounty.name].currentBuildings.Add(new CurrentBuilding(possibleBuilding.name,
-            possibleBuilding.description, 0, possibleBuilding.workCost, possibleBuilding.CurrentWorkers,
-            possibleBuilding.maxEmployees, true, false, null));
-        */
-        // This makes is so that the population gets the correct building to build.
-        /*
-        UICurrentBuildingsPanel.Instance.CurrentBuildingNumber =
-            counties[CurrentlySelectedCounty.name].currentBuildings.Count - 1;
-        
-        // Remove the building from the possible Building list.
-        counties[CurrentlySelectedCounty.name].possibleBuildings.Remove(possibleBuilding);
-
-        RefreshBuildingPanels?.Invoke();
-        */
-    }
 
     private void SetNextDayJob()
     {
@@ -284,7 +260,7 @@ public class WorldMapLoad : MonoBehaviour
             Arrays.provinceName[0], "Coast", "Forest", "Ruin", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[1].name] = new County(
             1, CountyListCreator.Instance.countiesList[1].gameObject, true, false,  null, null, factions[0],
-            Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 0, 1);
+            Arrays.provinceName[1], "Ruin", "Forest", "River", 0, 0, 0);
         counties[CountyListCreator.Instance.countiesList[2].name] = new County(
             2, CountyListCreator.Instance.countiesList[2].gameObject, false, false,null, null, factions[0], // Temporarily set to the player faction for testing.
             Arrays.provinceName[1], "Coast", "Forest", "Mountain", 0, 0, 0);
@@ -323,7 +299,7 @@ public class WorldMapLoad : MonoBehaviour
             {
                 GeneratePopulation(countyName, totalCapitolPop);
                 counties[countyName].population = totalCapitolPop;
-
+                counties[countyName].IdleWorkers = totalCapitolPop;
                 countyPopulationDictionary[countyName][0].isHero = true;
                 counties[countyName].faction.factionLeader = countyPopulationDictionary[countyName][0];
                 countyHeroes[countyName] = new List<CountyPopulation>
@@ -337,7 +313,7 @@ public class WorldMapLoad : MonoBehaviour
                 int normalPopulation = UnityEngine.Random.Range(minimumCountyPop, maximumCountyPop);
                 GeneratePopulation(countyName, normalPopulation);
                 counties[countyName].population = normalPopulation;
-
+                counties[countyName].IdleWorkers = normalPopulation;
                 countyPopulationDictionary[countyName][0].isHero = true;
                 counties[countyName].faction.factionLeader = countyPopulationDictionary[countyName][0];
                 countyHeroes[countyName] = new List<CountyPopulation>
@@ -351,6 +327,7 @@ public class WorldMapLoad : MonoBehaviour
                 int normalPopulation = UnityEngine.Random.Range(minimumCountyPop, maximumCountyPop);
                 GeneratePopulation(countyName, normalPopulation);
                 counties[countyName].population = normalPopulation;
+                counties[countyName].IdleWorkers = normalPopulation;
                 countyHeroes[countyName] = new List<CountyPopulation>();
             }
             counties[countyName].countyPopulation = countyPopulationDictionary[countyName];

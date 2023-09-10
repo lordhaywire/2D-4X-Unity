@@ -5,7 +5,9 @@ using UnityEngine;
 [Serializable]
 public class County
 {
-    public int countyID; // This isn't used yet, and if it never is then we need to get rid of it.
+    public event Action IdleWorkersChanged;
+
+    public int countyID; // I believe this is being used now.
     public GameObject gameObject; // This is the game object that is the county.
     public bool isCapital;
     public bool isIndependentCapital;
@@ -21,13 +23,24 @@ public class County
     //public List<GameObject> currentBuildings;
 
     public int spawnedHeroCount; // Count of all the heroes in the county.
-    public int currentlyWorkingPopulation; // We should put this number on the county info panel.
     public int population;
+    [SerializeField] private int idleWorkers;
 
-    public County(int countyID, GameObject gameObject, bool isCapital, bool isIndependentCaptial,  
-        SpriteRenderer spriteRenderer, BuildImprovements buildImprovements, Faction faction, 
+    public int IdleWorkers
+    {
+        get { return idleWorkers; }
+        set
+        {
+            idleWorkers = value;
+            //Debug.Log("Invoke Mother Fucker!");
+            IdleWorkersChanged?.Invoke();
+        }
+    }
+
+    public County(int countyID, GameObject gameObject, bool isCapital, bool isIndependentCaptial,
+        SpriteRenderer spriteRenderer, BuildImprovements buildImprovements, Faction faction,
         string province, string biomePrimary, string biomeSecondary, string biomeTertiary,
-        int spawnedHeroCount, int currentlyWorkingPopulation, int population)
+        int spawnedHeroCount, int population, int idleWorkers)
     {
         this.countyID = countyID;
         this.gameObject = gameObject;
@@ -44,7 +57,7 @@ public class County
         //possibleBuildings = new List<GameObject>(); // This initializes the list. It is not in the constructor. 
         //currentBuildings = new List<GameObject>(); // This initializes the list. It is not in the constructor. 
         this.spawnedHeroCount = spawnedHeroCount;
-        this.currentlyWorkingPopulation = currentlyWorkingPopulation;
         this.population = population;
+        IdleWorkers = idleWorkers;
     }
 }

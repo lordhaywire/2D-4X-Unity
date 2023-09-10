@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Banker : MonoBehaviour
 {
     public static Banker Instance { get; private set; }
@@ -12,17 +13,37 @@ public class Banker : MonoBehaviour
         Instance = this;
     }
 
-    public bool CheckForWorkers(BuildingInfo buildingInfo)
+    public void CountIdleWorkers(County county)
+    {
+                // I don't think this is very efficient.
+        int idleWorkers = 0;
+
+        for (int i = 0; i < county.countyPopulation.Count; i++)
+        {
+            if (county.countyPopulation[i].nextBuilding == null)
+            {
+                idleWorkers++;
+            }
+        }
+
+        county.IdleWorkers = idleWorkers;
+    }
+
+    public bool CheckEnoughIdleWorkers(BuildingInfo buildingInfo)
+    {
+        return buildingInfo.county.IdleWorkers >= buildingInfo.CurrentWorkers;
+    }
+    public bool CheckForWorkersAssigned(BuildingInfo buildingInfo)
     {
         return buildingInfo.CurrentWorkers > 0;
     }
     public void ChargeForBuilding(Faction faction, BuildingInfo buildingInfo)
     {
-        faction.influence -= buildingInfo.influenceCost;
+        faction.Influence -= buildingInfo.influenceCost;
     }
     public bool CheckBuildingCost(Faction faction, BuildingInfo buildingInfo)
     {
-        return faction.influence >= buildingInfo.influenceCost;
+        return faction.Influence >= buildingInfo.influenceCost;
     }
 
     public bool CheckEnoughFood(Faction faction)

@@ -14,7 +14,7 @@ public class Faction
 
     [Header("Resources")]
     
-    public int influence;
+    [SerializeField] private int influence;
     public int money;
     public int food;
     public int scrap;

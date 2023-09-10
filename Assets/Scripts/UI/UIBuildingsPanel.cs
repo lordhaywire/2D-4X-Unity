@@ -53,7 +53,7 @@ public class UIBuildingsPanel : MonoBehaviour
                 uIBuildingButton.underConstructionGameObject.SetActive(false);
             }
 
-            Debug.Log(uIBuildingButton.actualBuilding.name);
+            //Debug.Log(uIBuildingButton.actualBuilding.name);
         }
     }
 

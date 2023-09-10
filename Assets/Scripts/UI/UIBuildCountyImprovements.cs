@@ -4,7 +4,7 @@ public class UIBuildCountyImprovements : MonoBehaviour
 {
     //[SerializeField] private Banker banker;
     [SerializeField] private GameObject notEnoughResourcesPanel;
-    [SerializeField] private GameObject notEnoughAssignedWorkersPanel;
+    //[SerializeField] private GameObject notEnoughAssignedWorkersPanel;
     [SerializeField] private GameObject areYouSurePanel;
     private Faction faction;
     private BuildingInfo buildingInfo;
@@ -27,40 +27,17 @@ public class UIBuildCountyImprovements : MonoBehaviour
     public void BuildButton()
     {
         buildingInfo = WorldMapLoad.Instance.currentlySelectedBuilding.GetComponent<BuildingInfo>();
-        if (Banker.Instance.CheckBuildingCost(faction, buildingInfo) == true)
+        if (Banker.Instance.CheckBuildingCost(faction, buildingInfo) == true
+            && Banker.Instance.CheckEnoughIdleWorkers(buildingInfo) == true
+            && Banker.Instance.CheckForWorkersAssigned(buildingInfo) == true)
         {
-            Debug.Log("There is enough influence.");
-            if (Banker.Instance.CheckForWorkers(buildingInfo) == true)
-            {
-                Debug.Log("You have enough workers.");
-                areYouSurePanel.SetActive(true);
-            }
-            else
-            {
-                Debug.Log("You don't have enough workers.");
-                notEnoughAssignedWorkersPanel.SetActive(true);
-            }
+            Debug.Log("There is enough influence, workers assigned, and idle workers.");
+            areYouSurePanel.SetActive(true);
         }
         else
         {
-            Debug.Log("There is not enough influence.");
+            Debug.Log("You don't have enough influence, workers or idle workers.");
             notEnoughResourcesPanel.SetActive(true);
         }
-
-        //notEnoughAssignedWorkersPanel.SetActive(true);
-        /*
-        if (UIBuildingChecker.Instance.enoughPopulation == false && enoughInfluence == true)
-        {
-            
-        }
-        else if(UIBuildingChecker.Instance.enoughPopulation == true && enoughInfluence == false)
-        {
-            
-        }
-        else if(UIBuildingChecker.Instance.enoughPopulation == true && enoughInfluence == true)
-        {
-            areYouSurePanel.SetActive(true);
-        }
-        */
     }
 }

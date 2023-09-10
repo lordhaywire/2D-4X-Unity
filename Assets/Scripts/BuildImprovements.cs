@@ -26,28 +26,18 @@ public class BuildImprovements : MonoBehaviour
 
         // The Banker removes the cost of building.
         Banker.Instance.ChargeForBuilding(faction, buildingInfo);
+        numberOfWorkers = buildingInfo.CurrentWorkers;
+        //buildingInfo.uIGameObject.GetComponent<UIBuildingButton>().underConstructionGameObject.SetActive(true);
 
-        if(faction.isPlayer == false)
-        {
-            // Diving the total population of the county by 2 (and because it is an int it always rounds down).
-            numberOfWorkers = county.population / 2;
-            if (numberOfWorkers > buildingInfo.maxWorkers)
-            {
-                numberOfWorkers = buildingInfo.maxWorkers;
-            }
-        }
-        else
-        {
-            numberOfWorkers = buildingInfo.CurrentWorkers;
-            //buildingInfo.uIGameObject.GetComponent<UIBuildingButton>().underConstructionGameObject.SetActive(true);
-        }
 
+        // Sets the next day jobs for each workers who isn't already working.
         for (int i = 0; i < numberOfWorkers; i++)
         {
-            if(county.countyPopulation[i].nextBuilding == null)
+            if (county.countyPopulation[i].nextBuilding == null)
             {
                 county.countyPopulation[i].nextActivity = AllText.Jobs.BUILDING;
                 county.countyPopulation[i].nextBuilding = building;
+
             }
             else
             {
@@ -55,6 +45,7 @@ public class BuildImprovements : MonoBehaviour
             }
         }
 
+        Banker.Instance.CountIdleWorkers(buildingInfo.county);
         buildingInfo.isBeingBuilt = true;
 
         // Moves the building to the current building list.

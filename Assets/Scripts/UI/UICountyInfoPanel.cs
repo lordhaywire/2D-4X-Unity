@@ -9,13 +9,51 @@ public class UICountyInfoPanel : MonoBehaviour
 
     public bool buildingsPanelExpanded;
 
-    public TextMeshProUGUI countyOwnerText;
-    public TextMeshProUGUI countyNameText;
-    public TextMeshProUGUI countyPopulationText;
+    [SerializeField] private TextMeshProUGUI countyOwnerText;
+    public string CountyOwnerText
+    {
+        get { return countyOwnerText.text; }
+        set 
+        { 
+            countyOwnerText.text = value;
+        }
+    }
+
+    [SerializeField] private TextMeshProUGUI countyNameText;
+    public string CountyNameText
+    {
+        get { return countyNameText.text; }
+        set
+        {
+            countyNameText.text = value;
+        }
+    }
+
+    [SerializeField] private TextMeshProUGUI countyPopulationNumberText;
+
+    public string CountyPopulationNumberText
+    {
+        get { return countyPopulationNumberText.text; }
+        set
+        {
+            countyPopulationNumberText.text = value;
+        }
+    }
+
+    [SerializeField] private TextMeshProUGUI countyIdleWorkersNumberText;
+    public string CountyIdleWorkersNumberText
+    {
+        get { return countyIdleWorkersNumberText.text; }
+        set
+        {
+            countyIdleWorkersNumberText.text = value;
+        }
+    }
     private void Awake()
     {
         Instance = this;
         buildingsPanelExpanded = false;
+
     }
 
     private void OnEnable()

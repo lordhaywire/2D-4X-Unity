@@ -25,34 +25,22 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
         TimeKeeper.Instance.PauseTime();
         UIBuildingsPanel.Instance.possibleBuildingDescriptionPanel.SetActive(false);
 
-        WorldMapLoad.Instance.currentBuildingDescriptionPanelExpanded = true;
-
-        //UICurrentBuildingsPanel.Instance.CurrentBuildingButtonPressed += PanelRefresh;
+        PanelRefresh();
     }
 
-    private void OnDisable()
-    {
-        TimeKeeper.Instance.UnpauseTime();
-
-        //UICurrentBuildingsPanel.Instance.CurrentBuildingButtonPressed -= PanelRefresh;
-    }
 
     private void PanelRefresh()
-    {
-        Debug.Log("UICurrentBuildingDescriptionPanel.cs PanelRefresh()");
-        /*
-        BuildingInfo currentBuildingInfo =
-            WorldMapLoad.Instance.counties[WorldMapLoad.Instance.CurrentlySelectedCounty.name]
-            .currentBuildings[UICurrentBuildingsPanel.Instance.CurrentBuildingNumber].GetComponent<BuildingInfo>();
-        
-        nameText.text = currentBuildingInfo.name;
-        descriptionText.text = currentBuildingInfo.description;
-        workCompletedText.text = currentBuildingInfo.workCompleted.ToString();
-        workCostText.text = currentBuildingInfo.workCost.ToString();
-        currentWorkersText.text = currentBuildingInfo.CurrentWorkers.ToString();
-        maxWorkersText.text = currentBuildingInfo.maxWorkers.ToString();
+    {   
+        BuildingInfo buildingInfo = WorldMapLoad.Instance.currentlySelectedBuilding.GetComponent<BuildingInfo>();
 
-        if(currentBuildingInfo.isBuilt == true)
+        nameText.text = buildingInfo.name;
+        descriptionText.text = buildingInfo.description;
+        workCompletedText.text = buildingInfo.workCompleted.ToString();
+        workCostText.text = buildingInfo.workCost.ToString();
+        currentWorkersText.text = buildingInfo.CurrentWorkers.ToString();
+        maxWorkersText.text = buildingInfo.maxWorkers.ToString();
+
+        if(buildingInfo.isBuilt == true)
         {
             workTillCompletedPanel.SetActive(false);
             employeesPanel.SetActive(false);
@@ -64,6 +52,10 @@ public class UICurrentBuildingDescriptionPanel : MonoBehaviour
             employeesPanel.SetActive(true);
             completedPanel.SetActive(false);
         }
-        */
+        
+    }
+    private void OnDisable()
+    {
+        TimeKeeper.Instance.UnpauseTime();
     }
 }

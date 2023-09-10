@@ -1,16 +1,20 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SelectCounty : MonoBehaviour, IPointerClickHandler
 {
     public static bool hasAnArmyBeenSelected;
-
+    private CountyInfo countyInfo;
     // Left Click
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             WorldMapLoad.Instance.CurrentlySelectedCounty = gameObject;
+            countyInfo = gameObject.GetComponent<CountyInfo>();
+
+            SubscribeToEvents();
 
             CloseDescriptionPanels();
 
@@ -55,6 +59,12 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
                 }
             }
         }
+    }
+
+    private void SubscribeToEvents()
+    {
+        Debug.Log("Subscribe To Events!");
+        countyInfo.county.IdleWorkersChanged += FillCountyInfoPanel;
     }
 
     private void TokenMoveToCounty()
@@ -130,19 +140,23 @@ public class SelectCounty : MonoBehaviour, IPointerClickHandler
 
     private void FillCountyInfoPanel()
     {
-        UICountyInfoPanel.Instance.countyOwnerText.text = "Owner: " + WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name;
-        UICountyInfoPanel.Instance.countyNameText.text = "County: " + name;
+        UICountyInfoPanel.Instance.CountyOwnerText = WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name;
+        
+        UICountyInfoPanel.Instance.CountyNameText = name;
 
         // This is just some temp bullshit to not allow you to look at counties you don't own.
         if (WorldMapLoad.Instance.playerFaction.factionNameAndColor.name ==
             WorldMapLoad.Instance.counties[name].faction.factionNameAndColor.name)
         {
-            UICountyInfoPanel.Instance.countyPopulationText.text =
-                "Population: " + WorldMapLoad.Instance.counties[name].population.ToString();
+            UICountyInfoPanel.Instance.CountyPopulationNumberText =
+                WorldMapLoad.Instance.counties[name].population.ToString();
+
+            UICountyInfoPanel.Instance.CountyIdleWorkersNumberText = WorldMapLoad.Instance.counties[name].IdleWorkers.ToString();
         }
         else
         {
-            UICountyInfoPanel.Instance.countyPopulationText.text = "Population: Unknown";
+            UICountyInfoPanel.Instance.CountyPopulationNumberText = "Unknown";
+            UICountyInfoPanel.Instance.CountyIdleWorkersNumberText = "Unknown";
         }
     }
 }
